@@ -8,7 +8,7 @@
 //	main.cpp
 
 
-#include "ActivityWin32.h"
+#include <windows/ActivityWin32.h>
 
 
 using namespace GLHL;
