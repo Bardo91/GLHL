@@ -2,58 +2,19 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2014-01-18											//
+//			Date:	2014-01-27											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
-//	WndWin32 window class that inherite from WindowGL
-
-#include "WndWin32.h"
+//	
 
 
-namespace GLHL {
+#include "WindowGLWin32.h"
+
+
+namespace GLHL{
 	//---------------------------------------------------------------------------------
-	LRESULT CALLBACK WndProc(	HWND _hWnd,			// Manejador para la ventana.
-								UINT _uMsg,			// Mensaje para la ventana.
-								WPARAM _wParam,		// Información adicional del mensaje.
-								LPARAM _lParam){		// Información adicional del mensaje.
-		/*switch (_uMsg) {			// Vamos aver que tipo de mensaje hemos recibido.
-		case WM_ACTIVATE:			// Si es un mensaje de activación de la ventana.
-			if(!HIWORD(_wParam))	// Vemos el estado de minimización, si es activamos la ventana y si no, la desactivamos.
-				active = TRUE;
-			else
-				active = FALSE;
-			return 0;
-		case WM_SYSCOMMAND:			// Si interceptamos una señal del sistema.
-			switch (_wParam) {
-			case SC_SCREENSAVE:		// Empieza el salvapantallas.
-			case SC_MONITORPOWER:	// El monitor se pone en powersave.
-				return 0;			// evitamos que ocurra.
-			}
-			break;
-		case WM_KEYDOWN:			// Si se presiona una tecla, ponemos su valor en el array a verdadero.
-			keys[_wParam] = TRUE;	
-			return 0;				// Acabamos.
-		case WM_KEYUP:				// Si se levanta una tecla ponemos su valor en el array a falso.
-			keys[_wParam] = FALSE;
-			return 0;
-		case WM_SIZE:				// Si se redimensiona la ventana
-			resizeViewport(LOWORD(_lParam), HIWORD(_lParam));	// Redimensionamos. Extraemos los parámetros LoWord = Width / HiWord = Height.
-			return 0;
-		}*/
-
-		return DefWindowProc(_hWnd, _uMsg, _wParam, _lParam);
-	}
-
-	//---------------------------------------------------------------------------------
-	WndWin32::WndWin32(){
-		hRC = NULL;	
-		hDC = NULL;	
-		hWnd = NULL;
-	}
-
-	//---------------------------------------------------------------------------------
-	GLboolean WndWin32::initWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag){
-		GLuint PixelFormat;				// Holds the results after searching for a Match.
+	WindowGLWin32::WindowGLWin32(){
+		int PixelFormat;				// Holds the results after searching for a Match.
 
 		WNDCLASSA wc;					// en esta variable se almacena la información de nuestra ventana.
 		DWORD dwExStyle;				// Estilo extendido de la ventana.
@@ -61,16 +22,15 @@ namespace GLHL {
 
 		RECT windowRect;
 		windowRect.left = (long) 0;
-		windowRect.right = (long) _width;
+		windowRect.right = (long) width;
 		windowRect.top = (long) 0;
-		windowRect.bottom = (long) _height;
+		windowRect.bottom = (long) height;
 
-		fullscreen = _fullscreenFlag;
 
 		// Configurar la clase de ventana.
 		hInstance = GetModuleHandle(NULL);				// Tomamos una instancia para nuestra ventana.
 		wc.style = CS_HREDRAW |CS_VREDRAW | CS_OWNDC;	// Los dos primeros fuerzan  a redibujar cuando la pantalla cambia de resolución, y la tercera crea un DC privado para la ventana, asi no se compartira el DC entre aplicaciones.
-		wc.lpfnWndProc = (WNDPROC) WndProc;				// Asignamos el WndProc que estara atento a los mensajes del programa.
+		// 666 TODO: wc.lpfnWndProc = (WNDPROC) WndProc;				// Asignamos el WndProc que estara atento a los mensajes del programa.
 		wc.cbClsExtra = 0;								// No extra windows data.
 		wc.cbWndExtra =0;								// No extra windows data.
 		wc.hInstance = hInstance;						// Guardamos la instancia de la ventana
@@ -83,7 +43,7 @@ namespace GLHL {
 		// Vamos a registar la ventana, si algo sale mal, saldrá un menu popup y al clickear ok se cerrara el programa
 		if(!RegisterClassA(&wc)){
 			MessageBoxA(NULL,"Failed To Register The Window Class.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;                           // Exit And Return FALSE
+			assert(false);
 		}
 
 		dwExStyle=WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;	// Window Extended Style
@@ -107,7 +67,7 @@ namespace GLHL {
 									NULL))){									// Ningun parámetro para WM_CREATE.
 			selfDestroy(); //Reset the display
 			MessageBoxA(NULL,"Window Creation Error.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;                           // Return FALSE
+			assert(false);
 		}
 
 		// el PIXELFORMATDESCRIPTOR le dice a windows como queremos mostrar los pixeles
@@ -117,7 +77,7 @@ namespace GLHL {
 			PFD_SUPPORT_OPENGL |				// el formato debe soportar opengl.
 			PFD_DOUBLEBUFFER,					// debe soportar doble buffering.
 			PFD_TYPE_RGBA,						// formato en RGBA.
-			_bits,								// selecciona el color del fondo.
+			bits,								// selecciona el color del fondo.
 			0, 0, 0, 0, 0, 0,					// Color bits ignored.
 			0,									// Sin buffer para alpha.
 			0,									// Shift Bit ignorado.
@@ -133,23 +93,23 @@ namespace GLHL {
 		if (!(hDC=GetDC(hWnd))){					// Did We Get A Device Context?
 			selfDestroy();                         // Reset The Display
 			MessageBoxA(NULL,"Can't Create A GL Device Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;							// Return FALSE
+			assert(false);							// Return FALSE
 		} if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd))){	// Did Windows Find A Matching Pixel Format?
 			selfDestroy();                         // Reset The Display
 			MessageBoxA(NULL,"Can't Find A Suitable PixelFormat.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;                           // Return FALSE
+			assert(false);                           // Return FALSE
 		} if(!SetPixelFormat(hDC,PixelFormat,&pfd)){// Are We Able To Set The Pixel Format?
 			selfDestroy();                         // Reset The Display
 			MessageBoxA(NULL,"Can't Set The PixelFormat.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;							// Return FALSE
+			assert(false);							// Return FALSE
 		} if (!(hRC=wglCreateContext(hDC))){		// Are We Able To Get A Rendering Context?
 			selfDestroy();							// Reset The Display
 			MessageBoxA(NULL,"Can't Create A GL Rendering Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;							// Return FALSE
+			assert(false);							// Return FALSE
 		} if(!wglMakeCurrent(hDC,hRC)){				// Try To Activate The Rendering Context
 			selfDestroy();                         // Reset The Display
 			MessageBoxA(NULL,"Can't Activate The GL Rendering Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-			return FALSE;                           // Return FALSE
+			assert(false);                           // Return FALSE
 		}
 
 		// Una vez que todo ha funcionado hasta aqui y hemos creado la ventana es hora de visualizarla, ponerla como activa, darle prioridad poniendola de tipo foreground y redimensionandola a los tamaños dados
@@ -157,15 +117,14 @@ namespace GLHL {
 		ShowWindow(hWnd, SW_SHOW);
 		SetForegroundWindow(hWnd);
 		SetFocus(hWnd);
-		resizeViewport(_width, _height);
-		
-		initGL();
 
-		return true;
 	}
+	//---------------------------------------------------------------------------------
 
-	//-------------------------------------------------------------------------------------------------
-	GLvoid WndWin32::selfDestroy(){
+	//---------------------------------------------------------------------------------
+
+	//---------------------------------------------------------------------------------
+	void WindowGLWin32::selfDestroy(){
 		if(hRC){ // Si tenemos un contexto de renderizado
 			if(!wglMakeCurrent(NULL,NULL)){ // Comprobamos si podemos librerar el Device context y el render context.
 				MessageBoxA(NULL,"Release Of DC And RC Failed.","SHUTDOWN ERROR",MB_OK | MB_ICONINFORMATION);
@@ -194,6 +153,8 @@ namespace GLHL {
 			hInstance=NULL;								// Set hInstance To NULL
 		}
 	}
+	//---------------------------------------------------------------------------------
 
-	//-------------------------------------------------------------------------------------------------
-}// namespace GLHL
+
+
+}	// namespace GLHL

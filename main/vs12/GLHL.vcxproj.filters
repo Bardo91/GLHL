@@ -13,39 +13,72 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{0e829bdf-7a5c-45de-9cdd-4f29f4a301d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{f2872a47-d586-4609-a517-bd92cc352f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\os_dep">
+      <UniqueIdentifier>{c2080480-3413-4eea-9689-2d306193e134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\os_dep\win32">
+      <UniqueIdentifier>{95d578c0-f412-442b-8c33-3919f2c4f5a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\os_dep">
+      <UniqueIdentifier>{b5bc121b-df84-4d6f-8b4b-95b7a6a3bd98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\os_dep\win32">
+      <UniqueIdentifier>{34cd2d43-7f53-4f79-b49a-67ad209d9219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\OpenGLExtensions">
+      <UniqueIdentifier>{3ba174a3-c033-4df9-b956-7061c332b68e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\os_dep\linux">
+      <UniqueIdentifier>{61796cc1-3263-4f9a-a10b-9e20deee084c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\os_dep\linux">
+      <UniqueIdentifier>{c525c566-fc73-4a7c-9053-e7e695784ca5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\core\ActivityGL.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\source\core\WindowGL.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\core\os_dep\win32\WindowGLWin32.h">
+      <Filter>Header Files\core\os_dep\win32</Filter>
     </ClInclude>
     <ClInclude Include="..\source\core\DriverGPU.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\core\windowGL.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\source\core\OpenGLExtensions\glext.h">
+      <Filter>Header Files\core\OpenGLExtensions</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\windows\ActivityWin32.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\source\core\OpenGLExtensions\wglext.h">
+      <Filter>Header Files\core\OpenGLExtensions</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\windows\WndWin32.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\source\core\ActivityGL.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\core\os_dep\win32\ActivityGLWin32.h">
+      <Filter>Header Files\core\os_dep\win32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\core\ActivityGL.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\source\core\WindowGL.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\core\os_dep\win32\WindowGLWin32.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\source\core\DriverGPU.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\core\windowGL.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\source\core\ActivityGL.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\windows\ActivityWin32.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\windows\WndWin32.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\source\core\os_dep\win32\ActivityGLWin32.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

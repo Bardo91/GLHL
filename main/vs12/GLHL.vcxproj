@@ -10,6 +10,22 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\core\ActivityGL.h" />
+    <ClInclude Include="..\source\core\DriverGPU.h" />
+    <ClInclude Include="..\source\core\OpenGLExtensions\glext.h" />
+    <ClInclude Include="..\source\core\OpenGLExtensions\wglext.h" />
+    <ClInclude Include="..\source\core\os_dep\win32\ActivityGLWin32.h" />
+    <ClInclude Include="..\source\core\os_dep\win32\WindowGLWin32.h" />
+    <ClInclude Include="..\source\core\WindowGL.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\core\ActivityGL.cpp" />
+    <ClCompile Include="..\source\core\DriverGPU.cpp" />
+    <ClCompile Include="..\source\core\os_dep\win32\ActivityGLWin32.cpp" />
+    <ClCompile Include="..\source\core\os_dep\win32\WindowGLWin32.cpp" />
+    <ClCompile Include="..\source\core\WindowGL.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{115BDFAE-CD5C-46D3-8E11-235411C6520D}</ProjectGuid>
     <RootNamespace>GLHL</RootNamespace>
@@ -63,20 +79,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\source\core\ActivityGL.h" />
-    <ClInclude Include="..\source\core\DriverGPU.h" />
-    <ClInclude Include="..\source\core\windowGL.h" />
-    <ClInclude Include="..\source\windows\ActivityWin32.h" />
-    <ClInclude Include="..\source\windows\WndWin32.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\source\core\ActivityGL.cpp" />
-    <ClCompile Include="..\source\core\DriverGPU.cpp" />
-    <ClCompile Include="..\source\core\windowGL.cpp" />
-    <ClCompile Include="..\source\windows\ActivityWin32.cpp" />
-    <ClCompile Include="..\source\windows\WndWin32.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
