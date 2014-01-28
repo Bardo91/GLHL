@@ -40,6 +40,9 @@
     <Filter Include="Source Files\core\os_dep\linux">
       <UniqueIdentifier>{c525c566-fc73-4a7c-9053-e7e695784ca5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\shaders">
+      <UniqueIdentifier>{919506d6-513e-4a84-b151-0fd17d5d7d80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\core\OpenGLExtensions\glext.h">
@@ -57,6 +60,9 @@
     <ClInclude Include="..\source\core\DriverGPU.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\core\os_dep\win32\OSHandleWin32.h">
+      <Filter>Header Files\core\os_dep\win32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\core\os_dep\win32\WindowGLWin32.cpp">
@@ -71,5 +77,16 @@
     <ClCompile Include="..\source\core\DriverGPU.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\core\os_dep\win32\OSHandleWin32.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\source\shaders\fTriangleShader.fragment">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="..\source\shaders\vTriangleShader.vertex">
+      <Filter>Source Files\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

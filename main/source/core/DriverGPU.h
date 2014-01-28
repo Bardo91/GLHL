@@ -74,7 +74,7 @@ namespace GLHL{
 		GLuint program;
 
 	public: // Draw
-		GLvoid drawOnBuffer(GLint _widt, GLint _height, HDC _hDC);
+		GLvoid drawOnBuffer(GLint _widt, GLint _height);
 	};
 
 } // namespace GLHL

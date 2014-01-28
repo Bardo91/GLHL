@@ -1,0 +1,5 @@
+attribute vec4 vPosition; 		\n
+void main() 					\n
+{ 								\n
+	gl_Position = vPosition; 	\n
+} 								\n

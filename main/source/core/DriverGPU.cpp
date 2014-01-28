@@ -163,7 +163,7 @@ namespace GLHL{
 		GLchar fShaderStr[] = 
 			 "void main() \n"
 			 "{ \n"
-			 " gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n"
+			 " gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0); \n"
 			 "} \n";
 
 		GLuint vertexShader;
@@ -219,7 +219,7 @@ namespace GLHL{
 	}
 	//---------------------------------------------------------------------------
 
-	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height, HDC _hDC){
+	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height){
 		GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
 								-0.5f, -0.5f, 0.0f,
 								0.5f, -0.5f, 0.0f};

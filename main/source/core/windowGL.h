@@ -23,7 +23,7 @@ namespace GLHL {
 		WindowGL();
 
 	protected:
-		int width, height;
+		int mWidth, mHeight;
 
 	};
 }	// namespace GLHL.

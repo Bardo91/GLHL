@@ -8,8 +8,8 @@
 //
 
 
-#ifndef _GLHL_WINDOWWIN32_H_
-#define _GLHL_WINDOWWIN32_H_
+#ifndef _GLHL_OSDEP_WIN32_WINDOWWIN32_H_
+#define _GLHL_OSDEP_WIN32_WINDOWWIN32_H_
 
 #include "../../WindowGL.h"
 
@@ -29,10 +29,10 @@ namespace GLHL{
 		bool selfDestroy();
 
 	private:
-		HGLRC hRC;					// Permanent Rendering Context.			(Conecta las llamadas de OpenGL con el Device Context)
-		HDC hDC;					// Window's device context.				(Conecta la ventana de contexto con el GDI-Graphic device Interface)
-		HINSTANCE hInstance;		// Window's instance of the program.	
-		HWND hWnd;					// Window's handle.						(Manejador de la ventana en windows)
+		HGLRC mHRC;					// Permanent Rendering Context.			(Conecta las llamadas de OpenGL con el Device Context)
+		HDC mHDC;					// Window's device context.				(Conecta la ventana de contexto con el GDI-Graphic device Interface)
+		HINSTANCE mHInstance;		// Window's instance of the program.	
+		HWND mHWnd;					// Window's handle.						(Manejador de la ventana en windows)
 
 	};
 
@@ -40,4 +40,4 @@ namespace GLHL{
 }	// namespace GLHL
 
 
-#endif	// _GLHL_WINDOWWIN32_H_
+#endif	// _GLHL_OSDEP_WIN32_WINDOWWIN32_H_
