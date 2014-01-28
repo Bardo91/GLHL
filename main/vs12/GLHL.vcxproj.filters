@@ -42,9 +42,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\core\DriverGPU.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\core\OpenGLExtensions\glext.h">
       <Filter>Header Files\core\OpenGLExtensions</Filter>
     </ClInclude>
@@ -57,15 +54,21 @@
     <ClInclude Include="..\source\core\os_dep\win32\WindowGLWin32.h">
       <Filter>Header Files\core\os_dep\win32</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\core\DriverGPU.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\core\DriverGPU.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\core\os_dep\win32\WindowGLWin32.cpp">
       <Filter>Source Files\core\os_dep\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\source\core\WindowGL.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\core\DriverGPU.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>

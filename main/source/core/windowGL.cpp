@@ -7,9 +7,28 @@
 //////////////////////////////////////////////////////////////////////////
 //	windowGL
 
+#include "WindowGL.h"
+
+#ifdef _WIN32
+	#include "os_dep/win32/WindowGLWin32.h"
+#elif defined(__linux__)
+	#include "os_dep/linux/WindowGLLinux.h"
+#endif
+
+
 namespace GLHL {
 	//---------------------------------------------------------------------------------
+	WindowGL* WindowGL::createWindow(int _width, int _height){
+		#ifdef _WIN32
+			return new WindowGLWin32(_width, _height);
+		#elif defined(__linux__)
+			return new WindowGLLinux(_width, _height);
+		#endif
+	}
+	//---------------------------------------------------------------------------------
+	WindowGL::WindowGL(){
 
+	}
 	//---------------------------------------------------------------------------------
 
 	//---------------------------------------------------------------------------------
