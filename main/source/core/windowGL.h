@@ -2,45 +2,38 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2014-01-27											//
+//			Date:	2014-01-28											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
-//	
+//	windowGL
+
 
 #ifndef _GLHL_WINDOWGL_H_
 #define _GLHL_WINDOWGL_H_
 
-#include <cassert>
+#include "os_dep\win32\WindowGLWin32.h"
 
-namespace GLHL{
-	// Abstact classs of windows
+namespace GLHL {
 	class WindowGL{
 	public:
-		static WindowGL* getWindow();		// Get Singletone.
+		WindowGL * createWindow();
 
 	public:
-		void onDraw();						// Draw gl buffer on current screen.
-
-	protected:	// Public interface.
-		WindowGL();							// Basic contructor
-
-		static WindowGL *window;			// Singleton
+		virtual void swapBuffers() = 0;
 
 	protected:
-		static int width, height;
-		static int bits;
-		static char* title;
-		static bool fullscreenFlag;
+		WindowGL();
 
-	private:
-		static void createWindow();
-		
-	}; //class windowGL
+	protected:
+		int width, height;
 
+	};
 
-} // namespace GLHL
+	inline WindowGL* WindowGL::createWindow(){
+		return new WindowGLWin32();
+	}
 
 
+}	// namespace GLHL.
 
-
-#endif // _GLHL_WINDOWHL_H_
+#endif	// _GLHL_WINDOWGL_H_

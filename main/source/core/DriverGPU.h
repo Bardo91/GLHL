@@ -24,10 +24,13 @@
 // en windows y en linux, para que sea comodo el traslado del código entre 
 // una plataforma y otra se ha escrito la siguiente macro.
 #ifdef _WIN32
-#define loadGlFunction( args ) wglGetProcAddress ( args )
-#endif
-#ifdef _linux
-#define loadGlFunction( args ) glXGetProcAddress ( (GLuint*)args )
+inline PROC loadGlFunction(const char* _strFun){
+	return wglGetProcAddress(_strFun);
+}
+#elif defined(__linux__)
+inline void* () loadGlFunction(const char* _strFun){
+	return glXGetProcAddress(reinterpret_cast<GLubyte *>(_strFun));
+}
 #endif
 //-------------------------------------------------------------------//
 
