@@ -174,45 +174,45 @@ namespace GLHL{
 		vertexShader = DriverGPU::loadShader(GL_VERTEX_SHADER, vShaderStr);
 		fragmentShader = DriverGPU::loadShader(GL_FRAGMENT_SHADER, fShaderStr);
 
-		// Create a program object to attach the shaders
-		program = DriverGPU::glCreateProgram();
+		// Create a mProgram object to attach the shaders
+		mProgram = DriverGPU::glCreateProgram();
 
-		if(!program) // Check error
+		if(!mProgram) // Check error
 			return FALSE;
 
 		// Attachs the shaders
-		DriverGPU::glAttachShader(program, vertexShader);
-		DriverGPU::glAttachShader(program, fragmentShader);
+		DriverGPU::glAttachShader(mProgram, vertexShader);
+		DriverGPU::glAttachShader(mProgram, fragmentShader);
 
 		// Bind vPosition to attribute 0 --> 666 TODO: only because this tutorial, do it generic...
-		DriverGPU::glBindAttribLocation(program, 0, "vPosition");
+		DriverGPU::glBindAttribLocation(mProgram, 0, "vPosition");
 
-		// Link the program
-		DriverGPU::glLinkProgram(program);
+		// Link the mProgram
+		DriverGPU::glLinkProgram(mProgram);
 
 		// Check link status
-		DriverGPU::glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
+		DriverGPU::glGetProgramiv(mProgram, GL_LINK_STATUS, &isLinked);
 
 		if(!isLinked){
 			GLint infoLen = 0;
 
-			DriverGPU::glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLen);
+			DriverGPU::glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &infoLen);
 			if(infoLen > 1){
 				char* infoLog = new char[infoLen];
 
-				DriverGPU::glGetProgramInfoLog(program, infoLen, NULL, infoLog);
+				DriverGPU::glGetProgramInfoLog(mProgram, infoLen, NULL, infoLog);
 				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 				assert(FALSE);
 
 				delete infoLog;
 			}
 
-			DriverGPU::glDeleteProgram(program);
+			DriverGPU::glDeleteProgram(mProgram);
 			return FALSE;
 
 		}
 
-		// 666 TODO: Habria que guardar ahora el programa en alguna variable de entrada, añadir variable de entrada etc...
+		// 666 TODO: Habria que guardar ahora el mPrograma en alguna variable de entrada, añadir variable de entrada etc...
 
 		return TRUE;
 
@@ -227,7 +227,7 @@ namespace GLHL{
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		GLHL::DriverGPU::glUseProgram(program);
+		GLHL::DriverGPU::glUseProgram(mProgram);
 
 		// Load vertex Data
 		GLHL::DriverGPU::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);

@@ -2,30 +2,33 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2014-01-28											//
+//			Date:	2014-01-30											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
-//	windowGL
+//	
 
+#ifndef _GLHL_CORE_FILEMANAGER_H_
+#define _GLHL_CORE_FILEMANAGER_H_
 
-#ifndef _GLHL_CORE_WINDOWGL_H_
-#define _GLHL_CORE_WINDOWGL_H_
+#include <string>
 
 namespace GLHL {
-	class WindowGL{
+	class FileManager{
 	public:
-		static WindowGL * createWindow(int _width, int _height);
+		static FileManager* createFileManager();
 
-	public:
-		virtual void swapBuffers() = 0;
+		virtual std::string loadTextFile(std::string& _filePath) = 0;
 
 	protected:
-		WindowGL();
+		FileManager();
 
 	protected:
-		int mWidth, mHeight;
 
-	};
-}	// namespace GLHL.
 
-#endif	// _GLHL_CORE_WINDOWGL_H_
+	};	// class FileManager
+
+
+}	// namespace GLHL
+
+
+#endif

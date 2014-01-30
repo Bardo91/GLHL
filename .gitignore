@@ -2,4 +2,6 @@
 
 /main/vs12/*.sdf
 
+/main/vs12/*.user
+
 /main/vs12/Debug

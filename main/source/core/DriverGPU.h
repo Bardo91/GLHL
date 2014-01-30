@@ -7,8 +7,8 @@
 //////////////////////////////////////////////////////////////////////////
 //	DriverGPU. Abstraction of GPU
 
-#ifndef _GLHL_DRIVERGPU_H_
-#define _GLHL_DRIVERGPU_H_
+#ifndef _GLHL_CORE_DRIVERGPU_H_
+#define _GLHL_CORE_DRIVERGPU_H_
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -70,8 +70,8 @@ namespace GLHL{
 		GLuint loadShader(GLenum _type, const char* _shaderSrc);
 
 	private:	// Shaders declaration.
-		GLuint vShader, gShader, fShader; // 666 TODO: maybe arent necessary
-		GLuint program;
+		GLuint mVertexShader, mGeometryShader, mFragmentShader; // 666 TODO: maybe arent necessary
+		GLuint mProgram;
 
 	public: // Draw
 		GLvoid drawOnBuffer(GLint _widt, GLint _height);
@@ -81,4 +81,4 @@ namespace GLHL{
 
 
 
-#endif //_GLHL_DRIVERGPU_H_
+#endif //_GLHL_CORE_DRIVERGPU_H_

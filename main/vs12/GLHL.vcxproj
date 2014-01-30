@@ -12,14 +12,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\core\DriverGPU.h" />
+    <ClInclude Include="..\source\core\FileManager.h" />
     <ClInclude Include="..\source\core\OpenGLExtensions\glext.h" />
     <ClInclude Include="..\source\core\OpenGLExtensions\wglext.h" />
+    <ClInclude Include="..\source\core\os_dep\win32\FileManagerWin32.h" />
     <ClInclude Include="..\source\core\os_dep\win32\OSHandleWin32.h" />
     <ClInclude Include="..\source\core\os_dep\win32\WindowGLWin32.h" />
     <ClInclude Include="..\source\core\WindowGL.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\core\DriverGPU.cpp" />
+    <ClCompile Include="..\source\core\FileManager.cpp" />
+    <ClCompile Include="..\source\core\os_dep\win32\FileManagerWin32.cpp" />
     <ClCompile Include="..\source\core\os_dep\win32\OSHandleWin32.cpp" />
     <ClCompile Include="..\source\core\os_dep\win32\WindowGLWin32.cpp" />
     <ClCompile Include="..\source\core\WindowGL.cpp" />

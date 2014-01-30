@@ -3,8 +3,12 @@
 
 #include "core/WindowGL.h"
 #include "core/DriverGPU.h"
-
+#include "core/FileManager.h"
 using namespace GLHL;
+
+#include <fstream>
+#include <string>
+
 
 int main(void){
 	MSG msg;				// Windows menssage Structure.
@@ -17,6 +21,30 @@ int main(void){
 
 	driver->initShaders();
 
+	FileManager* fileManager = FileManager::createFileManager();
+
+	//std::string vShader;
+	//const char* vShaderPath = "c:\a.txt";
+
+	//vShader = fileManager->loadTextFile(vShaderPath);
+	///
+
+	std::ifstream file("c:\a.txt", std::ifstream::in);
+	std::string source, line;
+
+	//file.open(_filePath.c_str(), ifstream::in);
+
+	if(!file.is_open())
+		return NULL;
+		
+	while( getline(file, line) ){
+		source += line += "\n";
+	}
+
+	file.close();
+
+
+	///
 	while(1){
 		if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
 			if(msg.message == WM_QUIT) // Es un mensaje de cerrar?
