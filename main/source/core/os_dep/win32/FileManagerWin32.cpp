@@ -11,6 +11,7 @@
 #include "FileManagerWin32.h"
 
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -23,16 +24,16 @@ namespace GLHL {
 	//---------------------------------------------------------------------------------
 	string FileManagerWin32::loadTextFile(string &_filePath){
 
-		ifstream file(_filePath.c_str());
+		ifstream file;
 		string source, line;
 
-		//file.open(_filePath.c_str(), ifstream::in);
+		file.open(_filePath.c_str(), ifstream::in);
 
 		if(!file.is_open())
 			return NULL;
 		
 		while( getline(file, line) ){
-			source += line += "\n";
+			source += line += "\n ";
 		}
 
 		file.close();

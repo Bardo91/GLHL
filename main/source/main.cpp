@@ -23,10 +23,12 @@ int main(void){
 
 	FileManager* fileManager = FileManager::createFileManager();
 
-	std::string vShader;
-	std::string vShaderPath = "c:\a.txt";
+	std::string vShader, fShader;
+	std::string vShaderPath = "../source/shaders/vTriangleShader.vertex";
+	std::string fShaderPath = "../source/shaders/fTriangleShader.fragment";
 
 	vShader = fileManager->loadTextFile(vShaderPath);
+	fShader = fileManager->loadTextFile(fShaderPath);
 	
 
 	while(1){
