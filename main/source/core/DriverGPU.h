@@ -16,6 +16,7 @@
 
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include <string>
 
 #include "OpenGLExtensions/glext.h"
 #include "OpenGLExtensions/wglext.h"
@@ -35,6 +36,8 @@ inline void* () loadGlFunction(const char* _strFun){
 //-------------------------------------------------------------------//
 
 namespace GLHL{
+	static enum eShaders {eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER};
+
 	class DriverGPU{	// Only one GPU driver is created
 	public:			
 		DriverGPU();				// Class constructor.
@@ -62,7 +65,7 @@ namespace GLHL{
 	
 
 	public:		// Public interface about shaders
-		GLboolean initShaders();
+		GLboolean initShaders(std::string _vSource, std::string _fSource);
 
 	private:	// Private members about shaders
 		GLboolean initDriver();

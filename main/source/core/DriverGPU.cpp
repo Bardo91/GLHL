@@ -152,27 +152,14 @@ namespace GLHL{
 			return shader;
 		}
 	//---------------------------------------------------------------------------
-	GLboolean DriverGPU::initShaders(){
-		GLchar vShaderStr[] = 
-			 "attribute vec4 vPosition; \n"
-			 "void main() \n"
-			 "{ \n"
-			 " gl_Position = vPosition; \n"
-			 "} \n";
-
-		GLchar fShaderStr[] = 
-			 "void main() \n"
-			 "{ \n"
-			 " gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0); \n"
-			 "} \n";
-
+	GLboolean DriverGPU::initShaders(std::string _vSource, std::string _fSource){
 		GLuint vertexShader;
 		GLuint fragmentShader;
 		GLint isLinked;
 
 		// Load vertex and fragment shader
-		vertexShader = DriverGPU::loadShader(GL_VERTEX_SHADER, vShaderStr);
-		fragmentShader = DriverGPU::loadShader(GL_FRAGMENT_SHADER, fShaderStr);
+		vertexShader = DriverGPU::loadShader(GL_VERTEX_SHADER, _vSource.c_str());
+		fragmentShader = DriverGPU::loadShader(GL_FRAGMENT_SHADER, _fSource.c_str());
 
 		// Create a mProgram object to attach the shaders
 		mProgram = DriverGPU::glCreateProgram();
@@ -217,6 +204,7 @@ namespace GLHL{
 		return TRUE;
 
 	}
+
 	//---------------------------------------------------------------------------
 
 	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height){

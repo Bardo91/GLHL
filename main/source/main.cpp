@@ -19,7 +19,7 @@ int main(void){
 
 	DriverGPU * driver = new DriverGPU;
 
-	driver->initShaders();
+	//driver->initShaders();
 
 	FileManager* fileManager = FileManager::createFileManager();
 
@@ -30,6 +30,10 @@ int main(void){
 	vShader = fileManager->loadTextFile(vShaderPath);
 	fShader = fileManager->loadTextFile(fShaderPath);
 	
+	//driver->compileShader(eShaders::eVertexShader, vShader);
+	//driver->compileShader(eShaders::eFragmentShader, fShader);
+
+	driver->initShaders(vShader, fShader);
 
 	while(1){
 		if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
