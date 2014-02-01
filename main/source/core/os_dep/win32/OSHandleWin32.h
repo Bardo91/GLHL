@@ -12,11 +12,12 @@
 
 #include <Windows.h>
 #include <gl/GL.h>
+#include <string>
 
 namespace GLHL {
 	class OSHandleWin32{	// This class will deal with all Windows OS interface, and messages.
 	public:
-		static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+		static LRESULT CALLBACK WndProc(HWND _hWnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam);
 
 		static HINSTANCE registerWindowClass();
 
