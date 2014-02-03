@@ -69,10 +69,7 @@
     <ClInclude Include="..\source\core\os_dep\win32\FileManagerWin32.h">
       <Filter>Header Files\core\os_dep\win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\core\os_dep\win32\NotifyDirCheck.h">
-      <Filter>Header Files\core\os_dep\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\core\os_dep\win32\FileInformation.h">
+    <ClInclude Include="..\source\core\os_dep\win32\DirectoryChangesNotifyManager.h">
       <Filter>Header Files\core\os_dep\win32</Filter>
     </ClInclude>
   </ItemGroup>
@@ -98,10 +95,7 @@
     <ClCompile Include="..\source\core\os_dep\win32\FileManagerWin32.cpp">
       <Filter>Source Files\core\os_dep\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\core\os_dep\win32\FileInformation.cpp">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\core\os_dep\win32\NotifyDirCheck.cpp">
+    <ClCompile Include="..\source\core\os_dep\win32\DirectoryChangesNotifyManager.cpp">
       <Filter>Source Files\core\os_dep\win32</Filter>
     </ClCompile>
   </ItemGroup>

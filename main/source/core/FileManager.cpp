@@ -22,7 +22,7 @@ namespace GLHL {
 	//---------------------------------------------------------------------------------
 	FileManager* FileManager::createFileManager(){
 		#ifdef _WIN32
-				return new FileManagerWin32();
+				return new GLHL_WIN32::FileManagerWin32();
 		#elif defined(__linux__)
 				return new FileManagerLinux();
 		#endif

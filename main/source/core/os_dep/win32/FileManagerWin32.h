@@ -13,15 +13,18 @@
 #include "../../FileManager.h"
 
 namespace GLHL {
-	class FileManagerWin32: public FileManager {
-	public:
-		FileManagerWin32();
+	namespace GLHL_WIN32{
+		class FileManagerWin32: public FileManager {
+		public:
+			FileManagerWin32();
 
-		std::string loadTextFile(std::string& _FilePath);
+			std::string loadTextFile(std::string& _FilePath);
 
-	private:
+		private:
 
-	};	// class FileManagerWin32
+		};	// class FileManagerWin32
+
+	}	//namespace GLHL_WIN32
 
 }	// namespace GLHL
 

@@ -20,7 +20,7 @@ namespace GLHL {
 	//---------------------------------------------------------------------------------
 	WindowGL* WindowGL::createWindow(int _width, int _height){
 		#ifdef _WIN32
-			return new WindowGLWin32(_width, _height);
+			return new GLHL_WIN32::WindowGLWin32(_width, _height);
 		#elif defined(__linux__)
 			return new WindowGLLinux(_width, _height);
 		#endif
