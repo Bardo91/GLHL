@@ -36,13 +36,38 @@ inline void* () loadGlFunction(const char* _strFun){
 //-------------------------------------------------------------------//
 
 namespace GLHL{
-	static enum eShaders {eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER};
+	enum eShaders {eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER};
 
 	class DriverGPU{	// Only one GPU driver is created
 	public:			
-		DriverGPU();				// Class constructor.
+		DriverGPU();				// Class constructor.	
 
-	public: // Public interface to OpenGL Extended libraries
+	private:	// Private members about shaders
+		GLboolean initDriver();
+
+	public:		// Public interface about shaders
+		GLboolean initShaders(std::string _vSource, std::string _fSource);	
+
+		//-------------------------------------------------------------
+		//	New public interface.
+		GLuint createProgram();
+		GLuint uploadShader(eShaders _shaderType, std::string _shaderSource, GLuint _program);
+		void bindAttribute(GLuint _program, GLuint _index, const GLchar* _name);
+		bool linkProgram(GLuint _program);
+
+
+	private:
+		GLuint loadShader(GLenum _type, const char* _shaderSrc);
+
+	private:	// Shaders declaration.
+		GLuint mVertexShader, mGeometryShader, mFragmentShader; // 666 TODO: maybe arent necessary
+		GLuint mProgram;
+
+	public: // Draw
+		GLvoid drawOnBuffer(GLint _widt, GLint _height);
+
+
+	private: // Public interface to OpenGL Extended libraries
 		// --> Shaders
 		PFNGLCREATESHADERPROC glCreateShader;
 		PFNGLSHADERSOURCEPROC glShaderSource;
@@ -62,22 +87,6 @@ namespace GLHL{
 		
 		PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
 		PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
-	
-
-	public:		// Public interface about shaders
-		GLboolean initShaders(std::string _vSource, std::string _fSource);
-
-	private:	// Private members about shaders
-		GLboolean initDriver();
-
-		GLuint loadShader(GLenum _type, const char* _shaderSrc);
-
-	private:	// Shaders declaration.
-		GLuint mVertexShader, mGeometryShader, mFragmentShader; // 666 TODO: maybe arent necessary
-		GLuint mProgram;
-
-	public: // Draw
-		GLvoid drawOnBuffer(GLint _widt, GLint _height);
 	};
 
 } // namespace GLHL

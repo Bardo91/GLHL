@@ -158,53 +158,104 @@ namespace GLHL{
 		GLint isLinked;
 
 		// Load vertex and fragment shader
-		vertexShader = DriverGPU::loadShader(GL_VERTEX_SHADER, _vSource.c_str());
-		fragmentShader = DriverGPU::loadShader(GL_FRAGMENT_SHADER, _fSource.c_str());
+		vertexShader = loadShader(GL_VERTEX_SHADER, _vSource.c_str());
+		fragmentShader = loadShader(GL_FRAGMENT_SHADER, _fSource.c_str());
 
 		// Create a mProgram object to attach the shaders
-		mProgram = DriverGPU::glCreateProgram();
+		mProgram = glCreateProgram();
 
 		if(!mProgram) // Check error
 			return FALSE;
 
 		// Attachs the shaders
-		DriverGPU::glAttachShader(mProgram, vertexShader);
-		DriverGPU::glAttachShader(mProgram, fragmentShader);
+		glAttachShader(mProgram, vertexShader);
+		glAttachShader(mProgram, fragmentShader);
 
 		// Bind vPosition to attribute 0 --> 666 TODO: only because this tutorial, do it generic...
-		DriverGPU::glBindAttribLocation(mProgram, 0, "vPosition");
+		glBindAttribLocation(mProgram, 0, "vPosition");
 
 		// Link the mProgram
-		DriverGPU::glLinkProgram(mProgram);
+		glLinkProgram(mProgram);
 
 		// Check link status
-		DriverGPU::glGetProgramiv(mProgram, GL_LINK_STATUS, &isLinked);
+		glGetProgramiv(mProgram, GL_LINK_STATUS, &isLinked);
 
 		if(!isLinked){
 			GLint infoLen = 0;
 
-			DriverGPU::glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &infoLen);
+			glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &infoLen);
 			if(infoLen > 1){
 				char* infoLog = new char[infoLen];
 
-				DriverGPU::glGetProgramInfoLog(mProgram, infoLen, NULL, infoLog);
+				glGetProgramInfoLog(mProgram, infoLen, NULL, infoLog);
 				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 				assert(FALSE);
 
 				delete infoLog;
 			}
 
-			DriverGPU::glDeleteProgram(mProgram);
+			glDeleteProgram(mProgram);
 			return FALSE;
 
 		}
-
-		// 666 TODO: Habria que guardar ahora el mPrograma en alguna variable de entrada, añadir variable de entrada etc...
 
 		return TRUE;
 
 	}
 
+	//---------------------------------------------------------------------------
+	GLuint DriverGPU::createProgram(){
+		GLuint program = glCreateProgram();
+
+		if(!program) // Check error
+			return FALSE;
+
+		return program;
+		
+	}
+	
+	//---------------------------------------------------------------------------
+	GLuint DriverGPU::uploadShader(eShaders _shaderType, std::string _shaderSource, GLuint _program){
+		GLuint shader = loadShader(_shaderType, _shaderSource.c_str());
+
+		glAttachShader(_program, shader);
+
+		return shader;
+
+	}
+
+	//---------------------------------------------------------------------------
+	void DriverGPU::bindAttribute(GLuint _program, GLuint _index, const GLchar* _name){
+		glBindAttribLocation(_program, _index, _name);
+
+	}
+	//---------------------------------------------------------------------------
+	bool DriverGPU::linkProgram(GLuint _program){
+		GLint isLinked;
+
+		// Link the mProgram
+		glLinkProgram(mProgram);
+
+		// Check link status
+		glGetProgramiv(mProgram, GL_LINK_STATUS, &isLinked);
+
+		if(!isLinked){
+			GLint infoLen = 0;
+
+			glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &infoLen);
+			if(infoLen > 1){
+				char* infoLog = new char[infoLen];
+
+				glGetProgramInfoLog(mProgram, infoLen, NULL, infoLog);
+				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
+				assert(FALSE);
+				delete infoLog;
+			}
+			glDeleteProgram(mProgram);
+			return FALSE;
+		}
+		return TRUE;
+	}
 	//---------------------------------------------------------------------------
 
 	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height){

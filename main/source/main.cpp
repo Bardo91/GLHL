@@ -23,17 +23,23 @@ int main(void){
 
 	FileManager* fileManager = FileManager::createFileManager();
 
-	std::string vShader, fShader;
+	std::string vShaderSrc, fShaderSrc;
 	std::string vShaderPath = "../source/shaders/vTriangleShader.vertex";
 	std::string fShaderPath = "../source/shaders/fTriangleShader.fragment";
 
-	vShader = fileManager->loadTextFile(vShaderPath);
-	fShader = fileManager->loadTextFile(fShaderPath);
+	vShaderSrc = fileManager->loadTextFile(vShaderPath);
+	fShaderSrc = fileManager->loadTextFile(fShaderPath);
 	
 	//driver->compileShader(eShaders::eVertexShader, vShader);
 	//driver->compileShader(eShaders::eFragmentShader, fShader);
 
-	driver->initShaders(vShader, fShader);
+	//driver->initShaders(vShaderSrc, fShaderSrc);
+	GLuint program = driver->createProgram();
+	GLuint vShader = driver->uploadShader(eShaders::eVertexShader, vShaderSrc, program);
+	GLuint fShader = driver->uploadShader(eShaders::eFragmentShader, fShaderSrc, program);
+	driver->bindAttribute(program, 0, "vPosition");
+	bool linked = driver->linkProgram(program);
+
 
 	while(1){
 		if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
