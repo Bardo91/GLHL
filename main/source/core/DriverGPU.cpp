@@ -151,57 +151,6 @@ namespace GLHL{
 
 			return shader;
 		}
-	//---------------------------------------------------------------------------
-	GLboolean DriverGPU::initShaders(std::string _vSource, std::string _fSource){
-		GLuint vertexShader;
-		GLuint fragmentShader;
-		GLint isLinked;
-
-		// Load vertex and fragment shader
-		vertexShader = loadShader(GL_VERTEX_SHADER, _vSource.c_str());
-		fragmentShader = loadShader(GL_FRAGMENT_SHADER, _fSource.c_str());
-
-		// Create a mProgram object to attach the shaders
-		mProgram = glCreateProgram();
-
-		if(!mProgram) // Check error
-			return FALSE;
-
-		// Attachs the shaders
-		glAttachShader(mProgram, vertexShader);
-		glAttachShader(mProgram, fragmentShader);
-
-		// Bind vPosition to attribute 0 --> 666 TODO: only because this tutorial, do it generic...
-		glBindAttribLocation(mProgram, 0, "vPosition");
-
-		// Link the mProgram
-		glLinkProgram(mProgram);
-
-		// Check link status
-		glGetProgramiv(mProgram, GL_LINK_STATUS, &isLinked);
-
-		if(!isLinked){
-			GLint infoLen = 0;
-
-			glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &infoLen);
-			if(infoLen > 1){
-				char* infoLog = new char[infoLen];
-
-				glGetProgramInfoLog(mProgram, infoLen, NULL, infoLog);
-				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
-				assert(FALSE);
-
-				delete infoLog;
-			}
-
-			glDeleteProgram(mProgram);
-			return FALSE;
-
-		}
-
-		return TRUE;
-
-	}
 
 	//---------------------------------------------------------------------------
 	GLuint DriverGPU::createProgram(){
@@ -216,9 +165,11 @@ namespace GLHL{
 	
 	//---------------------------------------------------------------------------
 	GLuint DriverGPU::uploadShader(eShaders _shaderType, std::string _shaderSource, GLuint _program){
+		
 		GLuint shader = loadShader(_shaderType, _shaderSource.c_str());
 
-		glAttachShader(_program, shader);
+		if(shader)
+			glAttachShader(_program, shader);
 
 		return shader;
 
@@ -234,31 +185,31 @@ namespace GLHL{
 		GLint isLinked;
 
 		// Link the mProgram
-		glLinkProgram(mProgram);
+		glLinkProgram(_program);
 
 		// Check link status
-		glGetProgramiv(mProgram, GL_LINK_STATUS, &isLinked);
+		glGetProgramiv(_program, GL_LINK_STATUS, &isLinked);
 
-		if(!isLinked){
+		if(isLinked == GL_FALSE){
 			GLint infoLen = 0;
 
-			glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &infoLen);
+			glGetProgramiv(_program, GL_INFO_LOG_LENGTH, &infoLen);
 			if(infoLen > 1){
 				char* infoLog = new char[infoLen];
 
-				glGetProgramInfoLog(mProgram, infoLen, NULL, infoLog);
+				glGetProgramInfoLog(_program, infoLen, NULL, infoLog);
 				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 				assert(FALSE);
 				delete infoLog;
 			}
-			glDeleteProgram(mProgram);
+			glDeleteProgram(_program);
 			return FALSE;
 		}
 		return TRUE;
 	}
 	//---------------------------------------------------------------------------
 
-	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height){
+	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height, GLuint _program){
 		GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
 								-0.5f, -0.5f, 0.0f,
 								0.5f, -0.5f, 0.0f};
@@ -266,7 +217,7 @@ namespace GLHL{
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		GLHL::DriverGPU::glUseProgram(mProgram);
+		GLHL::DriverGPU::glUseProgram(_program);
 
 		// Load vertex Data
 		GLHL::DriverGPU::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);

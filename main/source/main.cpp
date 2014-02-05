@@ -51,13 +51,13 @@ int main(void){
 			}
 		}
 
-		driver->drawOnBuffer(640, 480);
+		driver->drawOnBuffer(640, 480, program);
 
 		window->swapBuffers();
 		//window2->swapBuffers();
 	}
 
-	delete window;
+	delete window, driver;
 
 	return 0;
 }

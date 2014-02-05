@@ -45,9 +45,7 @@ namespace GLHL{
 	private:	// Private members about shaders
 		GLboolean initDriver();
 
-	public:		// Public interface about shaders
-		GLboolean initShaders(std::string _vSource, std::string _fSource);	
-
+	public:
 		//-------------------------------------------------------------
 		//	New public interface.
 		GLuint createProgram();
@@ -59,12 +57,8 @@ namespace GLHL{
 	private:
 		GLuint loadShader(GLenum _type, const char* _shaderSrc);
 
-	private:	// Shaders declaration.
-		GLuint mVertexShader, mGeometryShader, mFragmentShader; // 666 TODO: maybe arent necessary
-		GLuint mProgram;
-
 	public: // Draw
-		GLvoid drawOnBuffer(GLint _widt, GLint _height);
+		GLvoid drawOnBuffer(GLint _widt, GLint _height, GLuint _program);
 
 
 	private: // Public interface to OpenGL Extended libraries
