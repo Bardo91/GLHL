@@ -18,3 +18,6 @@
 /library/prj/vs13/*.suo
 /test/triangle/prj/vs13/*.sdf
 /test/triangle/prj/vs13/*.suo
+/test/loadTexture/prj/vs13/Debug
+/test/loadTexture/prj/vs13/*.sdf
+/test/loadTexture/prj/vs13/*.suo
