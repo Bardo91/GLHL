@@ -9,3 +9,6 @@
 /main/vs12/GLHL.vcxproj.user
 /main/vs12/Release
 /main/Release
+/library/vs13/Debug
+/library/vs13/*.sdf
+/library/vs13/*.suo

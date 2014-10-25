@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\shaders">
+      <UniqueIdentifier>{a34993e6-d840-4288-bd54-351fb2d94f00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{acf09929-309b-4d56-bf78-87cc3d77ce28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\glext">
+      <UniqueIdentifier>{a685738d-0b5c-4123-9aff-4a426f7e4155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\os_dep">
+      <UniqueIdentifier>{5ea851ea-a03f-43cd-bd23-d78296c0f61e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\os_dep\win32">
+      <UniqueIdentifier>{e6384fdb-389a-4532-87d5-13e8ab7671ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\os_dep\linux">
+      <UniqueIdentifier>{11e7ba12-080f-406c-9b55-43df648382a7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\core\OpenGLExtensions\glext.h">
+      <Filter>Source Files\core\glext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\core\OpenGLExtensions\wglext.h">
+      <Filter>Source Files\core\glext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\core\os_dep\win32\DirectoryChangesNotifyManager.h">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\core\os_dep\win32\OSHandleWin32.h">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\core\os_dep\win32\WindowGLWin32.h">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\core\DriverGPU.h">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\core\windowGL.h">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\core\os_dep\win32\DirectoryChangesNotifyManager.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\core\os_dep\win32\OSHandleWin32.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\core\os_dep\win32\WindowGLWin32.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\core\DriverGPU.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\core\windowGL.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\source\shaders\fTriangleShader.fragment">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="..\source\shaders\vTriangleShader.vertex">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
