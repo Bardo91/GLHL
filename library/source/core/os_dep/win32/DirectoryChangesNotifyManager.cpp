@@ -7,6 +7,8 @@
 //////////////////////////////////////////////////////////////////////////
 //
 
+#ifdef _WIN32
+
 #include "DirectoryChangesNotifyManager.h"
 
 namespace GLHL{
@@ -26,3 +28,5 @@ namespace GLHL{
 
 	}	// namespace GLHL_WIN32
 }	// namespace GLHL
+
+#endif

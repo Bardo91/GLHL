@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////
 //
 
+#ifdef _WIN32
 
 #ifndef _GLHL_CORE_OSDEP_WIN32_WINDOWWIN32_H_
 #define _GLHL_CORE_OSDEP_WIN32_WINDOWWIN32_H_
@@ -41,3 +42,5 @@ namespace GLHL{
 
 
 #endif	// _GLHL_CORE_OSDEP_WIN32_WINDOWWIN32_H_
+
+#endif

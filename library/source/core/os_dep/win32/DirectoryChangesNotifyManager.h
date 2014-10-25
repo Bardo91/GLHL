@@ -7,6 +7,8 @@
 //////////////////////////////////////////////////////////////////////////
 //
 
+#ifdef _WIN32
+
 #ifndef _GLHL_CORE_OSDEP_WIN32_DIRECTORYCHANGESNOTIFYMANAGER_H_
 #define _GLHL_CORE_OSDEP_WIN32_DIRECTORYCHANGESNOTIFYMANAGER_H_
 
@@ -27,3 +29,5 @@ namespace GLHL{
 }	// namespace GLHL
 
 #endif	// _GLHL_CORE_OSDEP_WIN32_DIRECTORYCHANGESNOTIFYMANAGER_H_
+
+#endif

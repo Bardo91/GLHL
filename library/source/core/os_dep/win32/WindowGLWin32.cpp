@@ -7,6 +7,8 @@
 //////////////////////////////////////////////////////////////////////////
 //
 
+#ifdef _WIN32
+
 #include "WindowGLWin32.h"
 #include "OSHandleWin32.h"
 
@@ -156,3 +158,5 @@ namespace GLHL {
 		}
 	}	// namespace GLHL_WIN32
 }	// namespace GLHL.
+
+#endif
