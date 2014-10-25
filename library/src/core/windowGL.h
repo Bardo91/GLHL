@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////
 //																		//
-//		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
+//		OpenGL Helper Libraries for Image Processing  (GLHL)			//
 //			Author: Pablo Ramón Soria									//
 //			Date:	2014-01-28											//
 //																		//
