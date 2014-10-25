@@ -1,14 +1,16 @@
 //// MAIN FILE TO TEST
 
 
-#include "core/WindowGL.h"
-#include "core/DriverGPU.h"
-#include "core/FileManager.h"
+#include <src/core/WindowGL.h>
+#include <src/core/DriverGPU.h>
+
 using namespace GLHL;
 
 #include <fstream>
 #include <string>
 
+
+using namespace std;
 
 int main(void){
 	MSG msg;				// Windows menssage Structure.
@@ -20,15 +22,12 @@ int main(void){
 	DriverGPU * driver = new DriverGPU;
 
 	//driver->initShaders();
+	ifstream vShaderPath, fShaderPath;
+	vShaderPath.open("../../../library/src/shaders/vTriangleShader.vertex");
+	fShaderPath.open("../../../library/src/shaders/fTriangleShader.fragment");
 
-	FileManager* fileManager = FileManager::createFileManager();
-
-	std::string vShaderSrc, fShaderSrc;
-	std::string vShaderPath = "../source/shaders/vTriangleShader.vertex";
-	std::string fShaderPath = "../source/shaders/fTriangleShader.fragment";
-
-	vShaderSrc = fileManager->loadTextFile(vShaderPath);
-	fShaderSrc = fileManager->loadTextFile(fShaderPath);
+	string vShaderSrc(istreambuf_iterator<char>(vShaderPath), (istreambuf_iterator<char>()));
+	string fShaderSrc(istreambuf_iterator<char>(fShaderPath), (istreambuf_iterator<char>()));
 	
 	//driver->compileShader(eShaders::eVertexShader, vShader);
 	//driver->compileShader(eShaders::eFragmentShader, fShader);

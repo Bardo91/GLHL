@@ -12,3 +12,9 @@
 /library/vs13/Debug
 /library/vs13/*.sdf
 /library/vs13/*.suo
+/test/triangle/prj/vs13/Debug
+/library/prj/vs13/Debug
+/library/prj/vs13/*.sdf
+/library/prj/vs13/*.suo
+/test/triangle/prj/vs13/*.sdf
+/test/triangle/prj/vs13/*.suo

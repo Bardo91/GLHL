@@ -64,24 +64,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\core\DriverGPU.h" />
-    <ClInclude Include="..\source\core\OpenGLExtensions\glext.h" />
-    <ClInclude Include="..\source\core\OpenGLExtensions\wglext.h" />
-    <ClInclude Include="..\source\core\os_dep\win32\DirectoryChangesNotifyManager.h" />
-    <ClInclude Include="..\source\core\os_dep\win32\OSHandleWin32.h" />
-    <ClInclude Include="..\source\core\os_dep\win32\WindowGLWin32.h" />
-    <ClInclude Include="..\source\core\windowGL.h" />
+    <ClInclude Include="..\..\src\core\DriverGPU.h" />
+    <ClInclude Include="..\..\src\core\OpenGLExtensions\glext.h" />
+    <ClInclude Include="..\..\src\core\OpenGLExtensions\wglext.h" />
+    <ClInclude Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.h" />
+    <ClInclude Include="..\..\src\core\os_dep\win32\OSHandleWin32.h" />
+    <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h" />
+    <ClInclude Include="..\..\src\core\windowGL.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\core\DriverGPU.cpp" />
-    <ClCompile Include="..\source\core\os_dep\win32\DirectoryChangesNotifyManager.cpp" />
-    <ClCompile Include="..\source\core\os_dep\win32\OSHandleWin32.cpp" />
-    <ClCompile Include="..\source\core\os_dep\win32\WindowGLWin32.cpp" />
-    <ClCompile Include="..\source\core\windowGL.cpp" />
+    <ClCompile Include="..\..\src\core\DriverGPU.cpp" />
+    <ClCompile Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.cpp" />
+    <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp" />
+    <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp" />
+    <ClCompile Include="..\..\src\core\windowGL.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\source\shaders\fTriangleShader.fragment" />
-    <None Include="..\source\shaders\vTriangleShader.vertex" />
+    <None Include="..\..\src\shaders\fTriangleShader.fragment" />
+    <None Include="..\..\src\shaders\vTriangleShader.vertex" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

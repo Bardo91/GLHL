@@ -29,50 +29,50 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\core\OpenGLExtensions\glext.h">
-      <Filter>Source Files\core\glext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\core\OpenGLExtensions\wglext.h">
-      <Filter>Source Files\core\glext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\core\os_dep\win32\DirectoryChangesNotifyManager.h">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\core\os_dep\win32\OSHandleWin32.h">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\core\os_dep\win32\WindowGLWin32.h">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\core\DriverGPU.h">
+    <ClInclude Include="..\..\src\core\DriverGPU.h">
       <Filter>Source Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\core\windowGL.h">
+    <ClInclude Include="..\..\src\core\windowGL.h">
       <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.h">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\os_dep\win32\OSHandleWin32.h">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\OpenGLExtensions\glext.h">
+      <Filter>Source Files\core\glext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\OpenGLExtensions\wglext.h">
+      <Filter>Source Files\core\glext</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\core\os_dep\win32\DirectoryChangesNotifyManager.cpp">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\core\os_dep\win32\OSHandleWin32.cpp">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\core\os_dep\win32\WindowGLWin32.cpp">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\core\DriverGPU.cpp">
+    <ClCompile Include="..\..\src\core\DriverGPU.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\core\windowGL.cpp">
+    <ClCompile Include="..\..\src\core\windowGL.cpp">
       <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp">
+      <Filter>Source Files\core\os_dep\win32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\source\shaders\fTriangleShader.fragment">
+    <None Include="..\..\src\shaders\fTriangleShader.fragment">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="..\source\shaders\vTriangleShader.vertex">
+    <None Include="..\..\src\shaders\vTriangleShader.vertex">
       <Filter>Source Files\shaders</Filter>
     </None>
   </ItemGroup>

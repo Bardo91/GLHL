@@ -20,7 +20,7 @@ namespace GLHL {
 		virtual void swapBuffers() = 0;
 
 	protected:
-		WindowGL();
+		WindowGL(){};
 
 	protected:
 		int mWidth, mHeight;
