@@ -23,8 +23,8 @@ int main(void){
 
 	//driver->initShaders();
 	ifstream vShaderPath, fShaderPath;
-	vShaderPath.open("../../../library/src/shaders/vTriangleShader.vertex");
-	fShaderPath.open("../../../library/src/shaders/fTriangleShader.fragment");
+	vShaderPath.open("../../../../library/src/shaders/vTriangleShader.vertex");
+	fShaderPath.open("../../../../library/src/shaders/fTriangleShader.fragment");
 
 	string vShaderSrc(istreambuf_iterator<char>(vShaderPath), (istreambuf_iterator<char>()));
 	string fShaderSrc(istreambuf_iterator<char>(fShaderPath), (istreambuf_iterator<char>()));
