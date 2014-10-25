@@ -7,15 +7,20 @@
 //////////////////////////////////////////////////////////////////////////
 //	
 
-
+#include "TextureLoader.h"
 
 namespace GLHL{
-	static class TextureLoader{
-		static unsigned load2dTexture(std::string _texturePath);
-		static unsigned override2dTexture(std::string _texturePath);
+	unsigned TextureLoader::load2dTexture(std::string _texturePath){
+		return SOIL_load_OGL_texture(	_texturePath.c_str(), 
+										SOIL_LOAD_AUTO, 
+										SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+	}
 
-	};
+	void TextureLoader::override2dTexture(std::string _texturePath, unsigned &_textureID){
+		_textureID = SOIL_load_OGL_texture(	_texturePath.c_str(),
+											SOIL_LOAD_AUTO,
+											_textureID,
+											SOIL_FLAG_DDS_LOAD_DIRECT);
+	}
 
 }	//	namespace GLHL
-
-#endif	//	_GLHL_CORE_TEXTURELOADER_H_
