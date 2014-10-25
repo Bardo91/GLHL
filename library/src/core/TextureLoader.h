@@ -15,8 +15,8 @@
 
 namespace GLHL{
 	static class TextureLoader{
-		static unsigned load2dTexture(std::string _texturePath);
-		static void override2dTexture(std::string _texturePath, unsigned &_textureID);
+		unsigned load2dTexture(std::string _texturePath);
+		void override2dTexture(std::string _texturePath, unsigned &_textureID);
 
 	};
 
