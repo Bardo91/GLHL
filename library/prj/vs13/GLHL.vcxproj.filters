@@ -50,6 +50,9 @@
     <ClInclude Include="..\..\src\core\OpenGLExtensions\wglext.h">
       <Filter>Source Files\core\glext</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\core\TextureLoader.h">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\DriverGPU.cpp">
@@ -66,6 +69,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp">
       <Filter>Source Files\core\os_dep\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\TextureLoader.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

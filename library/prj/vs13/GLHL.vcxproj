@@ -38,7 +38,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SOIL_DIR)\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -48,6 +51,9 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>libSOIL.a</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -70,6 +76,7 @@
     <ClInclude Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.h" />
     <ClInclude Include="..\..\src\core\os_dep\win32\OSHandleWin32.h" />
     <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h" />
+    <ClInclude Include="..\..\src\core\TextureLoader.h" />
     <ClInclude Include="..\..\src\core\windowGL.h" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +84,7 @@
     <ClCompile Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp" />
+    <ClCompile Include="..\..\src\core\TextureLoader.cpp" />
     <ClCompile Include="..\..\src\core\windowGL.cpp" />
   </ItemGroup>
   <ItemGroup>

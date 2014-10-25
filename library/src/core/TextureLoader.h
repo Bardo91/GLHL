@@ -14,9 +14,10 @@
 #include <SOIL.h>
 
 namespace GLHL{
-	static class TextureLoader{
-		unsigned load2dTexture(std::string _texturePath);
-		void override2dTexture(std::string _texturePath, unsigned &_textureID);
+	class TextureLoader{
+	public:
+		static unsigned load2dTexture(std::string _texturePath);
+		static void override2dTexture(std::string _texturePath, unsigned &_textureID);
 
 	};
 
