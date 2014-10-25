@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////////////////
 //	windowGL
 
-#include "WindowGL.h"
+#include "windowGL.h"
 
 #ifdef _WIN32
 	#include "os_dep/win32/WindowGLWin32.h"
