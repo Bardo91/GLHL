@@ -30,7 +30,6 @@ namespace GLHL{
 	private:
 		GLuint mShaderId = NULL;
 
-	private:
 		bool compileShader(eShaderType _type, const char* _shaderSrc);
 
 	};

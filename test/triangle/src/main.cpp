@@ -3,6 +3,8 @@
 
 #include <src/core/WindowGL.h>
 #include <src/core/DriverGPU.h>
+#include <src/core/Shader.h>
+#include <src/core/ShaderProgram.h>
 
 using namespace GLHL;
 
@@ -18,20 +20,16 @@ int main(void){
 
 	WindowGL * window = WindowGL::createWindow(640, 480);
 
-	DriverGPU * driver = new DriverGPU;
+	DriverGPU *driver = DriverGPU::get();
 
-	ifstream vShaderPath, fShaderPath;
-	vShaderPath.open("../../src/shaders/vTriangleShader.vertex");
-	fShaderPath.open("../../src/shaders/fTriangleShader.fragment");
+	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/vTriangleShader.vertex");
+	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/fTriangleShader.fragment");
 
-	string vShaderSrc(istreambuf_iterator<char>(vShaderPath), (istreambuf_iterator<char>()));
-	string fShaderSrc(istreambuf_iterator<char>(fShaderPath), (istreambuf_iterator<char>()));
-	
-	GLuint program = driver->createProgram();
-	GLuint vShader = driver->uploadShader(eShaders::eVertexShader, vShaderSrc, program);
-	GLuint fShader = driver->uploadShader(eShaders::eFragmentShader, fShaderSrc, program);
-	driver->bindAttribute(program, 0, "vPosition");
-	bool linked = driver->linkProgram(program);
+	ShaderProgram sProgram;
+	sProgram.attachShader(vShader);
+	sProgram.attachShader(fShader);
+	sProgram.bindAttribute(0, "vPosition");
+	sProgram.link();
 
 
 	while(1){
@@ -44,7 +42,7 @@ int main(void){
 			}
 		}
 
-		driver->drawOnBuffer(640, 480, program);
+		driver->drawOnBuffer(640, 480, sProgram);
 
 		window->swapBuffers();
 	}

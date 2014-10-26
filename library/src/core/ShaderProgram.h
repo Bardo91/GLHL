@@ -17,10 +17,12 @@
 #include <gl\GL.h>
 
 namespace GLHL{
+
 	class ShaderProgram{
 	public:
 		ShaderProgram();
 		
+		operator GLuint() const { return mProgramID; };;
 	public:
 		void attachShader(Shader _shader);
 		void bindAttribute(GLuint _index, const GLchar *_name);
