@@ -52,7 +52,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>libSOIL.a</AdditionalDependencies>
+      <AdditionalDependencies>SOIL.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,7 +84,6 @@
     <ClCompile Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp" />
-    <ClCompile Include="..\..\src\core\TextureLoader.cpp" />
     <ClCompile Include="..\..\src\core\windowGL.cpp" />
   </ItemGroup>
   <ItemGroup>

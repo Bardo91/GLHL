@@ -19,10 +19,7 @@ namespace GLHL{
 
 	//-----------------------------------------------------------------------------------------------------------------
 	void TextureLoader::override2dTexture(std::string _texturePath, unsigned &_textureID){
-		_textureID = SOIL_load_OGL_texture(	_texturePath.c_str(),
-											SOIL_LOAD_AUTO,
-											_textureID,
-											SOIL_FLAG_DDS_LOAD_DIRECT);
+
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------

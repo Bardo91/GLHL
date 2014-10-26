@@ -70,9 +70,6 @@
     <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp">
       <Filter>Source Files\core\os_dep\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\TextureLoader.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\shaders\fTriangleShader.fragment">

@@ -11,6 +11,8 @@
 using namespace GLHL;
 using namespace std;
 
+void drawImage(GLuint _texture);
+
 int main(void){
 	MSG msg;				// Windows menssage Structure.
 	BOOL done = FALSE;		// Variable to exit loop.
@@ -18,19 +20,6 @@ int main(void){
 	WindowGL * window = WindowGL::createWindow(640, 480);
 	
 	DriverGPU * driver = new DriverGPU;
-
-	ifstream vShaderPath, fShaderPath;
-	vShaderPath.open("../../../../library/src/shaders/vTriangleShader.vertex");
-	fShaderPath.open("../../../../library/src/shaders/fTriangleShader.fragment");
-
-	string vShaderSrc(istreambuf_iterator<char>(vShaderPath), (istreambuf_iterator<char>()));
-	string fShaderSrc(istreambuf_iterator<char>(fShaderPath), (istreambuf_iterator<char>()));
-	
-	GLuint program = driver->createProgram();
-	GLuint vShader = driver->uploadShader(eShaders::eVertexShader, vShaderSrc, program);
-	GLuint fShader = driver->uploadShader(eShaders::eFragmentShader, fShaderSrc, program);
-	driver->bindAttribute(program, 0, "vPosition");
-	bool linked = driver->linkProgram(program);
 
 	GLuint texture = TextureLoader::load2dTexture("C:\\Tulips.jpg");
 
@@ -43,8 +32,8 @@ int main(void){
 				DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 			}
 		}
-
-		driver->drawOnBuffer(640, 480, program);
+		
+		drawImage(texture);
 
 		window->swapBuffers();
 	}
@@ -52,4 +41,43 @@ int main(void){
 	delete window, driver;
 
 	return 0;
+}
+
+void drawImage(GLuint _texture) {
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0, 640, 0.0, 480, -1.0, 1.0);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+
+
+	glLoadIdentity();
+	glDisable(GL_LIGHTING);
+
+
+	glColor3f(1, 1, 1);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, _texture);
+
+
+	// Draw a textured quad
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(0, 0, 0);
+	glTexCoord2f(0, 1); glVertex3f(0, 480, 0);
+	glTexCoord2f(1, 1); glVertex3f(640, 480, 0);
+	glTexCoord2f(1, 0); glVertex3f(640, 0, 0);
+	glEnd();
+
+
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+
+	glMatrixMode(GL_MODELVIEW);
+
 }
