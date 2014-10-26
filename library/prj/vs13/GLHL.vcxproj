@@ -87,6 +87,7 @@
     <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp" />
     <ClCompile Include="..\..\src\core\Shader.cpp" />
+    <ClCompile Include="..\..\src\core\ShaderProgram.cpp" />
     <ClCompile Include="..\..\src\core\windowGL.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

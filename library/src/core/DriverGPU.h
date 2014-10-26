@@ -50,14 +50,6 @@ namespace GLHL{
 
 		static DriverGPU *mInstance;
 
-	public:
-		//-------------------------------------------------------------
-		//	New public interface.
-		GLuint createProgram();
-		GLuint uploadShader(eShaders _shaderType, std::string _shaderSource, GLuint _program);
-		void bindAttribute(GLuint _program, GLuint _index, const GLchar* _name);
-		bool linkProgram(GLuint _program);
-
 	public: // Draw
 		GLvoid drawOnBuffer(GLint _widt, GLint _height, GLuint _program);
 

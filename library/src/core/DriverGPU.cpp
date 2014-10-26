@@ -141,63 +141,7 @@ namespace GLHL{
 			
 		return true;
 	}
-	//---------------------------------------------------------------------------
 
-	//---------------------------------------------------------------------------
-	GLuint DriverGPU::createProgram(){
-		GLuint program = glCreateProgram();
-
-		if(!program) // Check error
-			return FALSE;
-
-		return program;
-		
-	}
-	
-	//---------------------------------------------------------------------------
-	GLuint DriverGPU::uploadShader(eShaders _shaderType, std::string _shaderSource, GLuint _program){
-		
-		GLuint shader = loadShader(_shaderType, _shaderSource.c_str());
-
-		if(shader)
-			glAttachShader(_program, shader);
-
-		return shader;
-
-	}
-
-	//---------------------------------------------------------------------------
-	void DriverGPU::bindAttribute(GLuint _program, GLuint _index, const GLchar* _name){
-		glBindAttribLocation(_program, _index, _name);
-
-	}
-	//---------------------------------------------------------------------------
-	bool DriverGPU::linkProgram(GLuint _program){
-		GLint isLinked;
-
-		// Link the mProgram
-		glLinkProgram(_program);
-
-		// Check link status
-		glGetProgramiv(_program, GL_LINK_STATUS, &isLinked);
-
-		if(isLinked == GL_FALSE){
-			GLint infoLen = 0;
-
-			glGetProgramiv(_program, GL_INFO_LOG_LENGTH, &infoLen);
-			if(infoLen > 1){
-				char* infoLog = new char[infoLen];
-
-				glGetProgramInfoLog(_program, infoLen, NULL, infoLog);
-				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
-				assert(FALSE);
-				delete infoLog;
-			}
-			glDeleteProgram(_program);
-			return FALSE;
-		}
-		return TRUE;
-	}
 	//---------------------------------------------------------------------------
 
 	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height, GLuint _program){

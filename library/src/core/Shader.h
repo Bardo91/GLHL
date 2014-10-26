@@ -25,6 +25,8 @@ namespace GLHL{
 	public:
 		Shader(eShaderType _type, std::string _shaderPath);
 
+		operator GLuint() const{ return mShaderId; };
+
 	private:
 		GLuint mShaderId = NULL;
 
