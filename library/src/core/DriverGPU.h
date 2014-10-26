@@ -36,8 +36,6 @@ inline void* () loadGlFunction(const char* _strFun){
 //-------------------------------------------------------------------//
 
 namespace GLHL{
-	enum eShaders {eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER};
-
 	class DriverGPU{	// Only one GPU driver is created
 	public:		// Singleton interface
 		static void  init();
@@ -60,15 +58,11 @@ namespace GLHL{
 		void bindAttribute(GLuint _program, GLuint _index, const GLchar* _name);
 		bool linkProgram(GLuint _program);
 
-
-	private:
-		GLuint loadShader(GLenum _type, const char* _shaderSrc);
-
 	public: // Draw
 		GLvoid drawOnBuffer(GLint _widt, GLint _height, GLuint _program);
 
 
-	private: // Public interface to OpenGL Extended libraries
+	public: // Public interface to OpenGL Extended libraries
 		// --> Shaders
 		PFNGLCREATESHADERPROC glCreateShader;
 		PFNGLSHADERSOURCEPROC glShaderSource;

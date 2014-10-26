@@ -142,47 +142,6 @@ namespace GLHL{
 		return true;
 	}
 	//---------------------------------------------------------------------------
-	//---------------------- SHADERS -------------------------------------------
-	//---------------------------------------------------------------------------
-	GLuint DriverGPU::loadShader(GLenum _type, const char* _shaderSrc){
-			// Externally, both shader and compiled shader are index to an internal reference.
-			GLuint shader;
-			GLint isShaderCompiled;
-
-			// Create the shader object
-			shader = DriverGPU::glCreateShader(_type);
-			if(!shader)
-				return 0; // Check if the shader was created properlly.
-
-			// Load the shader from the source.
-			DriverGPU::glShaderSource(shader, 1, &_shaderSrc, NULL);
-
-			// Compile the shader.
-			DriverGPU::glCompileShader(shader);
-
-			// Check if compiled properlly.
-			DriverGPU::glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
-
-			if(!isShaderCompiled){
-				GLint infoLen = 0;
-
-				DriverGPU::glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
-
-				if(infoLen > 1){
-					char* infoLog = new char[infoLen];
-
-					DriverGPU::glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
-					// infoLog got the error message and can be displayed. 666 TODO: generic display system.
-					assert(FALSE);
-
-					delete infoLog;
-				}
-				DriverGPU::glDeleteShader(shader);
-				return 0;
-			}
-
-			return shader;
-		}
 
 	//---------------------------------------------------------------------------
 	GLuint DriverGPU::createProgram(){

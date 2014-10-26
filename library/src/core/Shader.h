@@ -12,19 +12,24 @@
 #define _GLHL_CORE_SHADER_H_
 
 #include <string>
+#include <cassert>
+
+#include "DriverGPU.h"
 
 #include <gl\GL.h>
 
 namespace GLHL{
-	enum eShaders { eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER };
+	enum eShaderType { eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER };
 
 	class Shader{
 	public:
-		Shader(std::string _shaderPath);
-		~Shader();
+		Shader(eShaderType _type, std::string _shaderPath);
 
 	private:
-		bool mIsOpened = false;
+		GLuint mShaderId = NULL;
+
+	private:
+		bool compileShader(eShaderType _type, const char* _shaderSrc);
 
 	};
 
