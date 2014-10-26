@@ -66,10 +66,10 @@ namespace GLHL{
 					delete infoLog;
 				}
 				driver->glDeleteShader(mShaderId);
-				return 0;
+				return false;
 			}
 
-			return isShaderCompiled;
+			return isShaderCompiled == GL_TRUE ? true : false;
 		}
 	}
 

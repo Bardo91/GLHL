@@ -144,24 +144,5 @@ namespace GLHL{
 
 	//---------------------------------------------------------------------------
 
-	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height, GLuint _program){
-		GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
-								-0.5f, -0.5f, 0.0f,
-								0.5f, -0.5f, 0.0f};
-		glViewport(0, 0, _width, _height);
-
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		GLHL::DriverGPU::glUseProgram(_program);
-
-		// Load vertex Data
-		GLHL::DriverGPU::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-		GLHL::DriverGPU::glEnableVertexAttribArray(0);
-
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-	}
-
-	//---------------------------------------------------------------------------
-
 	//---------------------------------------------------------------------------
 } //namespace GLHL

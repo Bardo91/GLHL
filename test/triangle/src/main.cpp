@@ -14,6 +14,8 @@ using namespace GLHL;
 
 using namespace std;
 
+GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program);
+
 int main(void){
 	MSG msg;				// Windows menssage Structure.
 	BOOL done = FALSE;		// Variable to exit loop.
@@ -42,7 +44,7 @@ int main(void){
 			}
 		}
 
-		driver->drawOnBuffer(640, 480, sProgram);
+		drawOnBuffer(640, 480, sProgram);
 
 		window->swapBuffers();
 	}
@@ -50,4 +52,25 @@ int main(void){
 	delete window, driver;
 
 	return 0;
+}
+
+//---------------------------------------------------------------------------
+
+GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program){
+	GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f };
+	glViewport(0, 0, _width, _height);
+
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	DriverGPU* driver = DriverGPU::get();
+
+	driver->glUseProgram(_program);
+
+	// Load vertex Data
+	driver->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+	driver->glEnableVertexAttribArray(0);
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 }

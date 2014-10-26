@@ -50,10 +50,6 @@ namespace GLHL{
 
 		static DriverGPU *mInstance;
 
-	public: // Draw
-		GLvoid drawOnBuffer(GLint _widt, GLint _height, GLuint _program);
-
-
 	public: // Public interface to OpenGL Extended libraries
 		// --> Shaders
 		PFNGLCREATESHADERPROC glCreateShader;
