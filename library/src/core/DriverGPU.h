@@ -39,11 +39,18 @@ namespace GLHL{
 	enum eShaders {eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER};
 
 	class DriverGPU{	// Only one GPU driver is created
-	public:			
+	public:		// Singleton interface
+		static void  init();
+		static DriverGPU* get();
+		static void end();
+
+	protected:			
 		DriverGPU();				// Class constructor.	
 
 	private:	// Private members about shaders
 		GLboolean initDriver();
+
+		static DriverGPU *mInstance;
 
 	public:
 		//-------------------------------------------------------------
@@ -70,6 +77,7 @@ namespace GLHL{
 		PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
 		PFNGLDELETESHADERPROC glDeleteShader;
 		
+		// --> Programs
 		PFNGLCREATEPROGRAMPROC glCreateProgram;
 		PFNGLATTACHSHADERPROC glAttachShader;
 		PFNGLBINDATTRIBLOCATIONPROC glBindAttribLocation;
