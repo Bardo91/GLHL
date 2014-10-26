@@ -76,6 +76,8 @@
     <ClInclude Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.h" />
     <ClInclude Include="..\..\src\core\os_dep\win32\OSHandleWin32.h" />
     <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h" />
+    <ClInclude Include="..\..\src\core\Shader.h" />
+    <ClInclude Include="..\..\src\core\ShaderProgram.h" />
     <ClInclude Include="..\..\src\core\TextureLoader.h" />
     <ClInclude Include="..\..\src\core\windowGL.h" />
   </ItemGroup>
@@ -84,6 +86,7 @@
     <ClCompile Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp" />
+    <ClCompile Include="..\..\src\core\Shader.cpp" />
     <ClCompile Include="..\..\src\core\windowGL.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
