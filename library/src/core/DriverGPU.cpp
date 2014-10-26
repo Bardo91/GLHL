@@ -14,6 +14,37 @@
 
 namespace GLHL{
 	//---------------------------------------------------------------------------
+	//------------------------- Singleton Interface -----------------------------
+	//---------------------------------------------------------------------------
+
+	// Static initialization of DriverGPU's intance
+	DriverGPU* DriverGPU::mInstance = nullptr;
+
+	//---------------------------------------------------------------------------
+	void DriverGPU::init(){
+		if (mInstance == nullptr)
+			mInstance = new DriverGPU();
+
+	}
+
+	//---------------------------------------------------------------------------
+	DriverGPU* DriverGPU::get(){
+		if (mInstance == nullptr)
+			init();
+
+		return mInstance;
+
+	}
+
+	//---------------------------------------------------------------------------
+	void DriverGPU::end(){
+		if (nullptr != mInstance)
+			delete mInstance;
+	}
+
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
 	DriverGPU::DriverGPU(){
 		glCreateShader = nullptr;
 		glShaderSource = nullptr;
@@ -34,7 +65,8 @@ namespace GLHL{
 		glVertexAttribPointer = nullptr;
 		glEnableVertexAttribArray = nullptr;
 
-		initDriver();
+		if (!initDriver())
+			std::cerr << "Error could not load properly gl functions" << std::endl;
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	}
