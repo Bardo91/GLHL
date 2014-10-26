@@ -17,22 +17,16 @@ int main(void){
 	BOOL done = FALSE;		// Variable to exit loop.
 
 	WindowGL * window = WindowGL::createWindow(640, 480);
-	//WindowGL * window2 = WindowGL::createWindow(320, 480);
 
 	DriverGPU * driver = new DriverGPU;
 
-	//driver->initShaders();
 	ifstream vShaderPath, fShaderPath;
-	vShaderPath.open("../../../../library/src/shaders/vTriangleShader.vertex");
-	fShaderPath.open("../../../../library/src/shaders/fTriangleShader.fragment");
+	vShaderPath.open("../../src/shaders/vTriangleShader.vertex");
+	fShaderPath.open("../../src/shaders/fTriangleShader.fragment");
 
 	string vShaderSrc(istreambuf_iterator<char>(vShaderPath), (istreambuf_iterator<char>()));
 	string fShaderSrc(istreambuf_iterator<char>(fShaderPath), (istreambuf_iterator<char>()));
 	
-	//driver->compileShader(eShaders::eVertexShader, vShader);
-	//driver->compileShader(eShaders::eFragmentShader, fShader);
-
-	//driver->initShaders(vShaderSrc, fShaderSrc);
 	GLuint program = driver->createProgram();
 	GLuint vShader = driver->uploadShader(eShaders::eVertexShader, vShaderSrc, program);
 	GLuint fShader = driver->uploadShader(eShaders::eFragmentShader, fShaderSrc, program);
@@ -53,7 +47,6 @@ int main(void){
 		driver->drawOnBuffer(640, 480, program);
 
 		window->swapBuffers();
-		//window2->swapBuffers();
 	}
 
 	delete window, driver;

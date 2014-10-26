@@ -86,10 +86,6 @@
     <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp" />
     <ClCompile Include="..\..\src\core\windowGL.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\src\shaders\fTriangleShader.fragment" />
-    <None Include="..\..\src\shaders\vTriangleShader.vertex" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -9,9 +9,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\shaders">
-      <UniqueIdentifier>{a34993e6-d840-4288-bd54-351fb2d94f00}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\core">
       <UniqueIdentifier>{acf09929-309b-4d56-bf78-87cc3d77ce28}</UniqueIdentifier>
     </Filter>
@@ -70,13 +67,5 @@
     <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp">
       <Filter>Source Files\core\os_dep\win32</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\src\shaders\fTriangleShader.fragment">
-      <Filter>Source Files\shaders</Filter>
-    </None>
-    <None Include="..\..\src\shaders\vTriangleShader.vertex">
-      <Filter>Source Files\shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>
