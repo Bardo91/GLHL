@@ -65,6 +65,10 @@ namespace GLHL{
 		glVertexAttribPointer = nullptr;
 		glEnableVertexAttribArray = nullptr;
 
+		glGenBuffers = nullptr;
+		glBindBuffer = nullptr;
+		glBufferData = nullptr;
+
 		if (!initDriver())
 			std::cerr << "Error could not load properly gl functions" << std::endl;
 
@@ -139,6 +143,20 @@ namespace GLHL{
 		if(glEnableVertexAttribArray == nullptr)
 			return false;
 			
+		//---------------------------------------------------------------------------
+		glGenBuffers = (PFNGLGENBUFFERSPROC)loadGlFunction("glGenBuffers");
+		if (glGenBuffers == nullptr)
+			return false;
+
+		glBindBuffer = (PFNGLBINDBUFFERPROC)loadGlFunction("glBindBuffer");
+		if (glBindBuffer == nullptr)
+			return false;
+
+		glBufferData = (PFNGLBUFFERDATAPROC)loadGlFunction("glBufferData");
+		if (glBufferData == nullptr)
+			return false;
+
+		//---------------------------------------------------------------------------
 		return true;
 	}
 

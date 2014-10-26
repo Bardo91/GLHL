@@ -69,8 +69,15 @@ namespace GLHL{
 		PFNGLDELETEPROGRAMPROC glDeleteProgram;
 		PFNGLUSEPROGRAMPROC glUseProgram;
 		
+		// --> Vertex
 		PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
 		PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
+		
+		// --> Memory
+		PFNGLGENBUFFERSPROC glGenBuffers;	//	Create a buffer object
+		PFNGLBINDBUFFERPROC glBindBuffer;	//	Make buffer active
+		PFNGLBUFFERDATAPROC glBufferData;	//	Send data to buffer
+
 	};
 
 } // namespace GLHL
