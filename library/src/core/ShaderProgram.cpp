@@ -10,6 +10,8 @@
 
 #include "ShaderProgram.h"
 
+#include <iostream>
+
 namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
 	ShaderProgram::ShaderProgram(){
@@ -46,7 +48,8 @@ namespace GLHL{
 			if (infoLen > 1){
 				char* infoLog = new char[infoLen];
 
-				driver->glGetShaderInfoLog(mProgramID, infoLen, NULL, infoLog);
+				driver->glGetProgramInfoLog(mProgramID, infoLen, NULL, infoLog);
+				std::cout << infoLog << std::endl;
 				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 				assert(FALSE);
 				delete infoLog;

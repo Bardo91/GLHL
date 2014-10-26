@@ -23,3 +23,8 @@
 /test/loadTexture/prj/vs13/*.suo
 /test/loadTexture/prj/vs13/*.opensdf
 /library/prj/vs13/*.opensdf
+/test/sobel/prj/vs13/Debug
+/test/sobel/prj/vs13/*.opensdf
+/test/sobel/prj/vs13/*.sdf
+/test/sobel/prj/vs13/*.suo
+/test/sobel/prj/vs13/*.user
