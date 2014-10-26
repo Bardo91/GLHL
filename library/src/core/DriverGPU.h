@@ -59,6 +59,12 @@ namespace GLHL{
 		PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
 		PFNGLDELETESHADERPROC glDeleteShader;
 		
+		// --> Fragment Shader
+		PFNGLBINDFRAGDATALOCATIONPROC glBindFragDataLocation;
+
+		// --> Vertex Shader
+
+
 		// --> Programs
 		PFNGLCREATEPROGRAMPROC glCreateProgram;
 		PFNGLATTACHSHADERPROC glAttachShader;
@@ -68,6 +74,7 @@ namespace GLHL{
 		PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
 		PFNGLDELETEPROGRAMPROC glDeleteProgram;
 		PFNGLUSEPROGRAMPROC glUseProgram;
+		PFNGLGETATTRIBLOCATIONPROC glGetAttribLocation;
 		
 		// --> Vertex
 		PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;

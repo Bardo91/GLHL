@@ -53,6 +53,8 @@ namespace GLHL{
 		glGetShaderInfoLog = nullptr;
 		glDeleteShader = nullptr;
 
+		glBindFragDataLocation = nullptr;
+
 		glCreateProgram = nullptr;
 		glAttachShader = nullptr;
 		glBindAttribLocation = nullptr;
@@ -77,6 +79,7 @@ namespace GLHL{
 	//---------------------------------------------------------------------------
 	GLboolean DriverGPU::initDriver(){
 		//---------------------------------------------------------------------------
+		// --> Shaders
 		glCreateShader = (PFNGLCREATESHADERPROC) loadGlFunction("glCreateShader");
 		if(glCreateShader == nullptr)
 			return false;
@@ -102,6 +105,15 @@ namespace GLHL{
 			return false;
 
 		//---------------------------------------------------------------------------
+		// --> Fragment Shader
+		glBindFragDataLocation = (PFNGLBINDFRAGDATALOCATIONPROC)loadGlFunction("glBindFragDataLocation");
+		if (glBindFragDataLocation == nullptr)
+			return false;
+
+
+
+		//---------------------------------------------------------------------------
+		// --> Programs
 		glCreateProgram = (PFNGLCREATEPROGRAMPROC) loadGlFunction("glCreateProgram");
 		if(glCreateProgram == nullptr)
 			return false;
@@ -134,7 +146,12 @@ namespace GLHL{
 		if(glUseProgram == nullptr)
 			return false;
 		
+		glGetAttribLocation = (PFNGLGETATTRIBLOCATIONPROC)loadGlFunction("glGetAttribLocation");
+		if (glGetAttribLocation == nullptr)
+			return false;
+
 		//---------------------------------------------------------------------------
+		// --> Vertex
 		glVertexAttribPointer = (PFNGLVERTEXATTRIBPOINTERPROC) loadGlFunction("glVertexAttribPointer");
 		if(glVertexAttribPointer == nullptr)
 			return false;
@@ -144,6 +161,7 @@ namespace GLHL{
 			return false;
 			
 		//---------------------------------------------------------------------------
+		// --> Memory
 		glGenBuffers = (PFNGLGENBUFFERSPROC)loadGlFunction("glGenBuffers");
 		if (glGenBuffers == nullptr)
 			return false;

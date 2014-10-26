@@ -29,6 +29,8 @@ namespace GLHL{
 
 		bool link();
 
+		void use();
+
 	private:
 		GLuint mProgramID = NULL;
 
