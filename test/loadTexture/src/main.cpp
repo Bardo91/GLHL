@@ -19,7 +19,7 @@ int main(void){
 	
 	WindowGL * window = WindowGL::createWindow(640, 480);
 	
-	DriverGPU * driver = new DriverGPU;
+	DriverGPU * driver = DriverGPU::get();
 
 	GLuint texture = TextureLoader::load2dTexture("C:\\Tulips.jpg");
 
