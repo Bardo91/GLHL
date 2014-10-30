@@ -26,5 +26,8 @@
     <None Include="..\..\src\shaders\sobel_shader.fragment">
       <Filter>Source Files\shader</Filter>
     </None>
+    <None Include="..\..\src\shaders\preproc.fragment">
+      <Filter>Source Files\shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

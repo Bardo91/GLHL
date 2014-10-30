@@ -59,11 +59,25 @@ namespace GLHL{
 		PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
 		PFNGLDELETESHADERPROC glDeleteShader;
 		
+		PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
+		PFNGLUNIFORM1FPROC glUniform1f;
+		PFNGLUNIFORM2FPROC glUniform2f;
+		PFNGLUNIFORM3FPROC glUniform3f;
+		PFNGLUNIFORM4FPROC glUniform4f;
+		PFNGLUNIFORMMATRIX2FVPROC glUniformMatrix2fv;
+		PFNGLUNIFORMMATRIX3FVPROC glUniformMatrix3fv;
+		PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
+
 		// --> Fragment Shader
 		PFNGLBINDFRAGDATALOCATIONPROC glBindFragDataLocation;
 
 		// --> Vertex Shader
 
+
+		// --> Textures
+		PFNGLACTIVETEXTUREPROC glActiveTexture;
+		PFNGLBINDTEXTUREEXTPROC glBindTexture;
+		PFNGLBINDSAMPLERPROC glBindSampler;
 
 		// --> Programs
 		PFNGLCREATEPROGRAMPROC glCreateProgram;

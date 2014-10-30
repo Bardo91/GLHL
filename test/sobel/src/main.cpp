@@ -28,10 +28,11 @@ int main(void){
 	GLuint texture = TextureLoader::load2dTexture("C:\\Tulips.jpg");
 
 	// Create shaders and program
-	Shader fSobel(eShaderType::eFragmentShader, "../../src/shaders/sobel_shader.fragment");
-
+	//Shader fSobel(eShaderType::eFragmentShader, "../../src/shaders/sobel_shader.fragment");
+	Shader fSobel(eShaderType::eFragmentShader, "../../src/shaders/preproc.fragment");
 	ShaderProgram program;
 	program.attachShader(fSobel);
+
 
 	program.link();
 

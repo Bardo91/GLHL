@@ -14,6 +14,7 @@
     <ClCompile Include="..\..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\src\shaders\preproc.fragment" />
     <None Include="..\..\src\shaders\sobel_shader.fragment" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

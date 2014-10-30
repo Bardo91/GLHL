@@ -46,30 +46,39 @@ namespace GLHL{
 	//---------------------------------------------------------------------------
 	//---------------------------------------------------------------------------
 	DriverGPU::DriverGPU(){
-		glCreateShader = nullptr;
-		glShaderSource = nullptr;
-		glCompileShader = nullptr;
-		glGetShaderiv = nullptr;
-		glGetShaderInfoLog = nullptr;
-		glDeleteShader = nullptr;
+		glCreateShader				= nullptr;
+		glShaderSource				= nullptr;
+		glCompileShader				= nullptr;
+		glGetShaderiv				= nullptr;
+		glGetShaderInfoLog			= nullptr;
+		glDeleteShader				= nullptr;
 
-		glBindFragDataLocation = nullptr;
+		glGetUniformLocation		= nullptr;
+		glUniform1f					= nullptr;
+		glUniform2f					= nullptr;
+		glUniform3f					= nullptr;
+		glUniform4f					= nullptr;
+		glUniformMatrix2fv			= nullptr;
+		glUniformMatrix3fv			= nullptr;
+		glUniformMatrix4fv			= nullptr;
 
-		glCreateProgram = nullptr;
-		glAttachShader = nullptr;
-		glBindAttribLocation = nullptr;
-		glLinkProgram = nullptr;
-		glGetProgramiv = nullptr;
-		glGetProgramInfoLog = nullptr;
-		glDeleteProgram = nullptr;
-		glUseProgram = nullptr;
+		glBindFragDataLocation		= nullptr;
 
-		glVertexAttribPointer = nullptr;
-		glEnableVertexAttribArray = nullptr;
+		glCreateProgram				= nullptr;
+		glAttachShader				= nullptr;
+		glBindAttribLocation		= nullptr;
+		glLinkProgram				= nullptr;
+		glGetProgramiv				= nullptr;
+		glGetProgramInfoLog			= nullptr;
+		glDeleteProgram				= nullptr;
+		glUseProgram				= nullptr;
 
-		glGenBuffers = nullptr;
-		glBindBuffer = nullptr;
-		glBufferData = nullptr;
+		glVertexAttribPointer		= nullptr;
+		glEnableVertexAttribArray	= nullptr;
+
+		glGenBuffers				= nullptr;
+		glBindBuffer				= nullptr;
+		glBufferData				= nullptr;
 
 		if (!initDriver())
 			std::cerr << "Error could not load properly gl functions" << std::endl;
@@ -103,6 +112,39 @@ namespace GLHL{
 		glDeleteShader = (PFNGLDELETESHADERPROC) loadGlFunction("glDeleteShader");
 		if(glDeleteShader == nullptr)
 			return false;
+
+		glGetUniformLocation = (PFNGLGETUNIFORMLOCATIONPROC)loadGlFunction("glGetUniformLocation");
+		if (glGetUniformLocation == nullptr)
+			return false;
+
+		glUniform1f = (PFNGLUNIFORM1FPROC)loadGlFunction("glUniform1f");
+		if (glUniform1f == nullptr)
+			return false;
+
+		glUniform2f = (PFNGLUNIFORM2FPROC)loadGlFunction("glUniform2f");
+		if (glUniform2f == nullptr)
+			return false;
+
+		glUniform3f = (PFNGLUNIFORM3FPROC)loadGlFunction("glUniform3f");
+		if (glUniform3f == nullptr)
+			return false;
+
+		glUniform4f = (PFNGLUNIFORM4FPROC)loadGlFunction("glUniform4f");
+		if (glUniform4f == nullptr)
+			return false;
+
+		glUniformMatrix2fv = (PFNGLUNIFORMMATRIX2FVPROC)loadGlFunction("glUniformMatrix2fv");
+		if (glUniformMatrix2fv == nullptr)
+			return false;
+
+		glUniformMatrix3fv = (PFNGLUNIFORMMATRIX3FVPROC)loadGlFunction("glUniformMatrix3fv");
+		if (glUniformMatrix3fv == nullptr)
+			return false;
+
+		glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC)loadGlFunction("glUniformMatrix4fv");
+		if (glUniformMatrix4fv == nullptr)
+			return false;
+
 
 		//---------------------------------------------------------------------------
 		// --> Fragment Shader
