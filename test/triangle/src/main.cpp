@@ -31,6 +31,7 @@ int main(void){
 	sProgram.attachShader(vShader);
 	sProgram.attachShader(fShader);
 	sProgram.bindAttribute(0, "vPosition");
+	driver->glBindFragDataLocation(sProgram, 0, "outColor");
 	sProgram.link();
 
 

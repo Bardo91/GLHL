@@ -10,6 +10,7 @@
 #include "Shader.h"
 #include "DriverGPU.h"
 
+#include <iostream>
 #include <fstream>
 
 using namespace std;
@@ -60,6 +61,7 @@ namespace GLHL{
 					char* infoLog = new char[infoLen];
 
 					driver->glGetShaderInfoLog(mShaderId, infoLen, NULL, infoLog);
+					std::cout << infoLog << std::endl;
 					// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 					assert(FALSE);
 
