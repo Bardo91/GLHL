@@ -60,6 +60,8 @@ void drawImage(GLuint _texture, ShaderProgram _program) {
 	texLoc = driver->glGetUniformLocation(_program, "texture");
 	driver->glUniform1i(texLoc, 0);
 
+	_program.use();
+
 	//glEnable(GL_TEXTURE_2D);
 
 	//glBegin(GL_QUADS);
