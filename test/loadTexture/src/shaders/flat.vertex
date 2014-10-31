@@ -1,6 +1,7 @@
 #version 120
 
-void main(){
-	gl_Position = ftransform(); //Transform the vertex position
-	gl_TexCoord[0] = gl_MultiTexCoord0;
+attribute vec4 vPosition;
+void main()
+{
+	gl_Position = vPosition;
 }

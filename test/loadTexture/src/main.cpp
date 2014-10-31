@@ -55,12 +55,28 @@ int main(void){
 }
 
 void drawImage(GLuint _texture, ShaderProgram _program) {
+	GLfloat vVertices[] = { 0.0f, 0.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f };
+
+	glViewport(0, 0, 640, 480);
+
+	glClear(GL_COLOR_BUFFER_BIT);
+	
 	DriverGPU *driver = DriverGPU::get();
+
 	GLuint texLoc;
 	texLoc = driver->glGetUniformLocation(_program, "texture");
 	driver->glUniform1i(texLoc, 0);
 
 	_program.use();
+
+	driver->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+	driver->glEnableVertexAttribArray(0);
+
+	glDrawArrays(GL_QUADS, 0, 4);
+
 
 	//glEnable(GL_TEXTURE_2D);
 
