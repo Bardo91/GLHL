@@ -62,6 +62,34 @@ void drawImage(GLuint _texture, ShaderProgram _program) {
 	driver->glBindTexture(GL_TEXTURE_2D, _texture);
 	driver->glUniform1i(texLoc, 0);
 
+	glEnable(GL_TEXTURE_2D);
+
+	glBegin(GL_QUADS);
+
+	glVertex3f(-1.0f, -1.0f, 0.0f);
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glVertex3f(1.0f, -1.0f, 0.0f);
+
+	glEnd();
+
+	glColor3f(1.0, 1.0, 1.0);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, _texture);
+	glBegin(GL_QUADS);
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(-1.0f, -1.0f, 0.0f);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f(1.0f, -1.0f, 0.0f);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+
 
 	//glMatrixMode(GL_PROJECTION);
 	//glPushMatrix();
