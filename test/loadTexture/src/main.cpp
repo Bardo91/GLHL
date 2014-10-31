@@ -21,6 +21,10 @@ int main(void){
 
 	WindowGL * window = WindowGL::createWindow(640, 480);
 	
+	DriverGPU * driver = DriverGPU::get();
+
+	GLuint texture = TextureLoader::load2dTexture("C:\\Tulips.jpg");
+
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
 	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
 
@@ -29,10 +33,6 @@ int main(void){
 	program.attachShader(vShader);
 	program.attachShader(fShader);
 	program.link();
-
-	DriverGPU * driver = DriverGPU::get();
-
-	GLuint texture = TextureLoader::load2dTexture("C:\\Tulips.jpg");
 
 	while(1){
 		if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola

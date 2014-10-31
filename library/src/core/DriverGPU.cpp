@@ -46,6 +46,7 @@ namespace GLHL{
 	//---------------------------------------------------------------------------
 	//---------------------------------------------------------------------------
 	DriverGPU::DriverGPU(){
+		// --> Shaders
 		glCreateShader				= nullptr;
 		glShaderSource				= nullptr;
 		glCompileShader				= nullptr;
@@ -53,6 +54,7 @@ namespace GLHL{
 		glGetShaderInfoLog			= nullptr;
 		glDeleteShader				= nullptr;
 
+		// --> Vertex shader
 		glGetUniformLocation		= nullptr;
 		glUniform1f					= nullptr;
 		glUniform2f					= nullptr;
@@ -66,8 +68,15 @@ namespace GLHL{
 		glUniformMatrix3fv			= nullptr;
 		glUniformMatrix4fv			= nullptr;
 
+		// --> Fragment Shader
 		glBindFragDataLocation		= nullptr;
 
+		// --> Textures
+		glActiveTexture				= nullptr;
+		glBindTexture				= nullptr;
+		glBindSampler				= nullptr;
+
+		// --> Program
 		glCreateProgram				= nullptr;
 		glAttachShader				= nullptr;
 		glBindAttribLocation		= nullptr;
@@ -77,9 +86,11 @@ namespace GLHL{
 		glDeleteProgram				= nullptr;
 		glUseProgram				= nullptr;
 
+		// --> Vertex
 		glVertexAttribPointer		= nullptr;
 		glEnableVertexAttribArray	= nullptr;
 
+		// --> Memory
 		glGenBuffers				= nullptr;
 		glBindBuffer				= nullptr;
 		glBufferData				= nullptr;
@@ -173,6 +184,19 @@ namespace GLHL{
 			return false;
 
 
+		//---------------------------------------------------------------------------
+		// --> Textures
+		glActiveTexture = (PFNGLACTIVETEXTUREPROC)loadGlFunction("glActiveTexture");
+		if (glActiveTexture == nullptr)
+			return false;
+
+		glBindTexture = (PFNGLBINDTEXTUREEXTPROC)loadGlFunction("glBindTexture");
+		if (glBindTexture == nullptr)
+			return false;
+
+		glBindSampler = (PFNGLBINDSAMPLERPROC)loadGlFunction("glBindSampler");
+		if (glBindSampler == nullptr)
+			return false;
 
 		//---------------------------------------------------------------------------
 		// --> Programs

@@ -47,7 +47,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(GLHL_DIR);$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SOIL_DIR)\lib;C:\Programming\GLHL\test\triangle\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SOIL_DIR)\lib;C:\programming\GLHL\test\loadTexture\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
