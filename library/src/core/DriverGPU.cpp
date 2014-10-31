@@ -58,6 +58,10 @@ namespace GLHL{
 		glUniform2f					= nullptr;
 		glUniform3f					= nullptr;
 		glUniform4f					= nullptr;
+		glUniform1i					= nullptr;
+		glUniform2i					= nullptr;
+		glUniform3i					= nullptr;
+		glUniform4i					= nullptr;
 		glUniformMatrix2fv			= nullptr;
 		glUniformMatrix3fv			= nullptr;
 		glUniformMatrix4fv			= nullptr;
@@ -131,6 +135,22 @@ namespace GLHL{
 
 		glUniform4f = (PFNGLUNIFORM4FPROC)loadGlFunction("glUniform4f");
 		if (glUniform4f == nullptr)
+			return false;
+
+		glUniform1i = (PFNGLUNIFORM1IPROC)loadGlFunction("glUniform1i");
+		if (glUniform1i == nullptr)
+			return false;
+
+		glUniform2i = (PFNGLUNIFORM2IPROC)loadGlFunction("glUniform2i");
+		if (glUniform2i == nullptr)
+			return false;
+
+		glUniform3i = (PFNGLUNIFORM3IPROC)loadGlFunction("glUniform3i");
+		if (glUniform3i == nullptr)
+			return false;
+
+		glUniform4i = (PFNGLUNIFORM4IPROC)loadGlFunction("glUniform4i");
+		if (glUniform4i == nullptr)
 			return false;
 
 		glUniformMatrix2fv = (PFNGLUNIFORMMATRIX2FVPROC)loadGlFunction("glUniformMatrix2fv");
