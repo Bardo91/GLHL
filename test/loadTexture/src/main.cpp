@@ -55,11 +55,6 @@ int main(void){
 }
 
 void drawImage(GLuint _texture, ShaderProgram _program) {
-	GLfloat vVertices[] = { 0.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f };
-
 	glViewport(0, 0, 640, 480);
 
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -70,76 +65,18 @@ void drawImage(GLuint _texture, ShaderProgram _program) {
 	texLoc = driver->glGetUniformLocation(_program, "texture");
 	driver->glUniform1i(texLoc, 0);
 
+	glBegin(GL_QUADS);
+		glVertex3f(-1.0f, -1.0f, 0.0f);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(1.0f, -1.0f, 0.0f);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(1.0f, 1.0f, 0.0f);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(-1.0f, 1.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+	glEnd();
+
 	_program.use();
 
-	driver->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-	driver->glEnableVertexAttribArray(0);
-
 	glDrawArrays(GL_QUADS, 0, 4);
-
-
-	//glEnable(GL_TEXTURE_2D);
-
-	//glBegin(GL_QUADS);
-	//
-	//glVertex3f(-1.0f, -1.0f, 0.0f);
-	//glVertex3f(-1.0f, 1.0f, 0.0f);
-	//glVertex3f(1.0f, 1.0f, 0.0f);
-	//glVertex3f(1.0f, -1.0f, 0.0f);
-	//
-	//glEnd();
-	//
-	//glColor3f(1.0, 1.0, 1.0);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//
-	//glEnable(GL_TEXTURE_2D);
-	//glBindTexture(GL_TEXTURE_2D, _texture);
-	//glBegin(GL_QUADS);
-	//glTexCoord2d(0.0f, 0.0f);
-	//glVertex3f(-1.0f, -1.0f, 0.0f);
-	//glTexCoord2d(0.0f, 1.0f);
-	//glVertex3f(-1.0f, 1.0f, 0.0f);
-	//glTexCoord2d(1.0f, 1.0f);
-	//glVertex3f(1.0f, 1.0f, 0.0f);
-	//glTexCoord2d(1.0f, 0.0f);
-	//glVertex3f(1.0f, -1.0f, 0.0f);
-	//glEnd();
-	//glDisable(GL_TEXTURE_2D);
-	//
-
-	//glMatrixMode(GL_PROJECTION);
-	//glPushMatrix();
-	//glLoadIdentity();
-	//glOrtho(0.0, 640, 0.0, 480, -1.0, 1.0);
-	//glMatrixMode(GL_MODELVIEW);
-	//glPushMatrix();
-	//
-	//
-	//glLoadIdentity();
-	//glDisable(GL_LIGHTING);
-	//
-	//
-	//glColor3f(1, 1, 1);
-	//glEnable(GL_TEXTURE_2D);
-	//glBindTexture(GL_TEXTURE_2D, _texture);
-	//
-	//
-	//// Draw a textured quad
-	//glBegin(GL_QUADS);
-	//glTexCoord2f(0, 0); glVertex3f(0, 0, 0);
-	//glTexCoord2f(0, 1); glVertex3f(0, 480, 0);
-	//glTexCoord2f(1, 1); glVertex3f(640, 480, 0);
-	//glTexCoord2f(1, 0); glVertex3f(640, 0, 0);
-	//glEnd();
-	//
-	//
-	//glDisable(GL_TEXTURE_2D);
-	//glPopMatrix();
-	//
-	//
-	//glMatrixMode(GL_PROJECTION);
-	//glPopMatrix();
-	//
-	//glMatrixMode(GL_MODELVIEW);
-
 }
