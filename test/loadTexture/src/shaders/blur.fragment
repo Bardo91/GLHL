@@ -1,0 +1,22 @@
+sampler2D texture;
+varying vec2 vTexCoord;
+
+void main (void)  
+{  
+
+	float desp = 0.005;
+
+	vec4 c1 = texture2D(texture, vTexCoord + vec2(-desp,-desp)); 
+	vec4 c2 = texture2D(texture, vTexCoord + vec2(-desp,0.0)); 
+	vec4 c3 = texture2D(texture, vTexCoord + vec2(-desp,desp)); 
+	vec4 c4 = texture2D(texture, vTexCoord + vec2(0.0,-desp)); 
+	vec4 c5 = texture2D(texture, vTexCoord + vec2(0.0,0.0)); 
+	vec4 c6 = texture2D(texture, vTexCoord + vec2(0.0,desp)); 
+	vec4 c7 = texture2D(texture, vTexCoord + vec2(desp,-desp)); 
+	vec4 c8 = texture2D(texture, vTexCoord + vec2(desp,0.0)); 
+	vec4 c9 = texture2D(texture, vTexCoord + vec2(desp,desp)); 
+	
+	vec4 color = (c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9)/9;
+	gl_FragColor = color;
+}    
+
