@@ -29,13 +29,15 @@ int main(void){
 	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
 	Shader blurShader(eShaderType::eFragmentShader, "../../src/shaders/blur.fragment");
 	Shader segmentateShader(eShaderType::eFragmentShader, "../../src/shaders/segmentate.fragment");
+	Shader sobelShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
 
 	ShaderProgram program;
 
 	program.attachShader(vShader);
 	//program.attachShader(fShader);
 	//program.attachShader(blurShader);
-	program.attachShader(segmentateShader);
+	//program.attachShader(segmentateShader);
+	program.attachShader(sobelShader);
 	program.link();
 
 	while(1){
@@ -61,7 +63,7 @@ int main(void){
 void drawImage(GLuint _texture, ShaderProgram _program) {
 	glViewport(0, 0, 640, 480);
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
 	
 	DriverGPU *driver = DriverGPU::get();
 

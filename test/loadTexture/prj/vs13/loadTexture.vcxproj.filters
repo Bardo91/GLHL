@@ -35,5 +35,8 @@
     <None Include="..\..\src\shaders\segmentate.fragment">
       <Filter>Source Files\shaders</Filter>
     </None>
+    <None Include="..\..\src\shaders\sobel.fragment">
+      <Filter>Source Files\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
