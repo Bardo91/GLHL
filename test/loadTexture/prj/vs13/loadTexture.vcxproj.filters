@@ -32,5 +32,8 @@
     <None Include="..\..\src\shaders\blur.fragment">
       <Filter>Source Files\shaders</Filter>
     </None>
+    <None Include="..\..\src\shaders\segmentate.fragment">
+      <Filter>Source Files\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

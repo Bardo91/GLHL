@@ -17,6 +17,7 @@
     <None Include="..\..\src\shaders\blur.fragment" />
     <None Include="..\..\src\shaders\flat.fragment" />
     <None Include="..\..\src\shaders\flat.vertex" />
+    <None Include="..\..\src\shaders\segmentate.fragment" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0AC703FB-D966-4827-9543-6B209B812338}</ProjectGuid>

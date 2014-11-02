@@ -28,12 +28,14 @@ int main(void){
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
 	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
 	Shader blurShader(eShaderType::eFragmentShader, "../../src/shaders/blur.fragment");
+	Shader segmentateShader(eShaderType::eFragmentShader, "../../src/shaders/segmentate.fragment");
 
 	ShaderProgram program;
 
 	program.attachShader(vShader);
 	//program.attachShader(fShader);
-	program.attachShader(blurShader);
+	//program.attachShader(blurShader);
+	program.attachShader(segmentateShader);
 	program.link();
 
 	while(1){

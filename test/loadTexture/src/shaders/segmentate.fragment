@@ -1,0 +1,19 @@
+sampler2D texture;
+varying vec2 vTexCoord;
+
+void main (void)  
+{  
+	vec4 color = texture2D(texture, vTexCoord);
+
+	if(color.r > 0.5 && color.g < 0.5 && color.b < 0.5){
+		color = vec4(1.0,0.0,0.0,1.0);	
+	} else if(color.g > 0.5 && color.r < 0.5 && color.b < 0.5){
+		color = vec4(0.0,1.0,0.0,1.0);	
+	} else if(color.b > 0.5 && color.r < 0.5 && color.b < 0.5){
+		color = vec4(0.0,0.0,1.0,1.0);	
+	} else if(color.r > 0.5 && color.g > 0.5 && color.b < 0.5){
+		color = vec4(1.0,1.0,0.0,1.0);	
+	}
+
+	gl_FragColor = color;
+}    
