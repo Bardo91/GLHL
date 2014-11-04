@@ -85,4 +85,7 @@ void drawImage(GLuint _texture, ShaderProgram _program) {
 	_program.use();
 
 	glDrawArrays(GL_QUADS, 0, 4);
+
+
+	glFinish();
 }

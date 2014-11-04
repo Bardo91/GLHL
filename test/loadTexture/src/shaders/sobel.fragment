@@ -12,7 +12,7 @@ const mat3 sobelV = {	-1.0,0.0,1.0,
 
 void main (void)  
 {  
-	float desp = 0.005;
+	float desp = 0.001;
 
 	vec4 c1 = texture2D(texture, vTexCoord + vec2(-desp,-desp)); 
 	vec4 c2 = texture2D(texture, vTexCoord + vec2(-desp,0.0)); 
@@ -35,7 +35,7 @@ void main (void)
 	float Gx = 0.0;
 	for(int i = 0 ; i < 3 ; i ++){
 		for(int j = 0; j < 3 ; j ++){
-			Gx += rMat[i][j];
+			Gx += rMatH[i][j];
 		}
 	}
 
@@ -43,7 +43,7 @@ void main (void)
 	float Gy = 0.0;
 	for(int i = 0 ; i < 3 ; i ++){
 		for(int j = 0; j < 3 ; j ++){
-			Gy += rMat[i][j];
+			Gy += rMatV[i][j];
 		}
 	}
 
@@ -51,7 +51,7 @@ void main (void)
 	float rVal = sqrt(pow(Gx,2) + pow(Gy, 2));
 
 	vec4 color = vec4(0.0,0.0,0.0,1.0);
-	if(rVal > 11){
+	if(rVal > 0.3){
 		color = vec4(1.0,1.0,1.0,1.0);	
 	}
 	
