@@ -40,6 +40,12 @@ int main(void){
 	program.attachShader(sobelShader);
 	program.link();
 
+
+	const unsigned int w = 640;
+	const unsigned int h = 480;
+	unsigned char buf[w * h * 3];
+
+
 	while(1){
 		if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
 			if(msg.message == WM_QUIT) // Es un mensaje de cerrar?
@@ -51,6 +57,16 @@ int main(void){
 		}
 		
 		drawImage(texture, program);
+
+		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, &buf[0]);
+
+		int err = SOIL_save_image
+			(
+			"img.bmp",
+			SOIL_SAVE_TYPE_BMP,
+			w, h, 3,
+			&buf[0]
+			);
 
 		window->swapBuffers();
 	}
