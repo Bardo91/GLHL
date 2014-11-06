@@ -12,9 +12,6 @@
     <Filter Include="Source Files\core">
       <UniqueIdentifier>{acf09929-309b-4d56-bf78-87cc3d77ce28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\glext">
-      <UniqueIdentifier>{a685738d-0b5c-4123-9aff-4a426f7e4155}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\core\os_dep">
       <UniqueIdentifier>{5ea851ea-a03f-43cd-bd23-d78296c0f61e}</UniqueIdentifier>
     </Filter>
@@ -23,6 +20,12 @@
     </Filter>
     <Filter Include="Source Files\core\os_dep\linux">
       <UniqueIdentifier>{11e7ba12-080f-406c-9b55-43df648382a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\os_dep\win32\glew">
+      <UniqueIdentifier>{ff47e8a1-3f8a-44a5-a8f1-a82316d34134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\types">
+      <UniqueIdentifier>{110ee127-3248-4d5c-a088-6fdb797da47e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,12 +44,6 @@
     <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h">
       <Filter>Source Files\core\os_dep\win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\core\OpenGLExtensions\glext.h">
-      <Filter>Source Files\core\glext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\OpenGLExtensions\wglext.h">
-      <Filter>Source Files\core\glext</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\core\TextureLoader.h">
       <Filter>Source Files\core</Filter>
     </ClInclude>
@@ -55,6 +52,18 @@
     </ClInclude>
     <ClInclude Include="..\..\src\core\ShaderProgram.h">
       <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\os_dep\win32\glew\glew.h">
+      <Filter>Source Files\core\os_dep\win32\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\os_dep\win32\glew\glxew.h">
+      <Filter>Source Files\core\os_dep\win32\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\os_dep\win32\glew\wglew.h">
+      <Filter>Source Files\core\os_dep\win32\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\types\Types.h">
+      <Filter>Source Files\core\types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

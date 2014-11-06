@@ -12,29 +12,15 @@
 
 #ifdef _WIN32
 #include <Windows.h>
+#include "os_dep/win32/glew/glew.h"
 #endif
 
-#include <gl/GL.h>
-#include <gl/GLU.h>
+#include "types/Types.h"
+
 #include <string>
 
-#include "OpenGLExtensions/glext.h"
-#include "OpenGLExtensions/wglext.h"
 
-// La carga de funciones de expansión de OpenGl se hacen de forma diferente
-// en windows y en linux, para que sea comodo el traslado del código entre 
-// una plataforma y otra se ha escrito la siguiente macro.
-#ifdef _WIN32
-inline PROC loadGlFunction(const char* _strFun){
-	return wglGetProcAddress(_strFun);
-}
-#elif defined(__linux__)
-inline void* () loadGlFunction(const char* _strFun){
-	return glXGetProcAddress(reinterpret_cast<GLubyte *>(_strFun));
-}
-#endif
 //-------------------------------------------------------------------//
-
 namespace GLHL{
 	class DriverGPU{	// Only one GPU driver is created
 	public:		// Singleton interface
@@ -52,25 +38,41 @@ namespace GLHL{
 
 	public: // Public interface to OpenGL Extended libraries
 		// --> Shaders
-		PFNGLCREATESHADERPROC glCreateShader;
-		PFNGLSHADERSOURCEPROC glShaderSource;
-		PFNGLCOMPILESHADERPROC glCompileShader;
-		PFNGLGETSHADERIVPROC glGetShaderiv;
-		PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
-		PFNGLDELETESHADERPROC glDeleteShader;
+		GLuint glCreateShader(GLenum _shaderType);
+		void glShaderSource(GLuint _shader, GLsizei _count, const char **_string, const GLint *_length);
+		void glCompileShader(GLuint _shader);
+		void glGetShaderiv(GLuint _shader, GLenum _pname, GLint *_params);
+		void glGetShaderInfoLog(GLuint _shader, GLsizei _maxLength, GLsizei *_length, char *_infoLog);
+		void glDeleteShader(GLuint _shader);
 		
-		PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
-		PFNGLUNIFORM1FPROC glUniform1f;
-		PFNGLUNIFORM2FPROC glUniform2f;
-		PFNGLUNIFORM3FPROC glUniform3f;
-		PFNGLUNIFORM4FPROC glUniform4f;
-		PFNGLUNIFORM1IPROC glUniform1i;
-		PFNGLUNIFORM2IPROC glUniform2i;
-		PFNGLUNIFORM3IPROC glUniform3i;
-		PFNGLUNIFORM4IPROC glUniform4i;
-		PFNGLUNIFORMMATRIX2FVPROC glUniformMatrix2fv;
-		PFNGLUNIFORMMATRIX3FVPROC glUniformMatrix3fv;
-		PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
+		GLint glGetUniformLocation(GLuint _program, const char *_name);
+		void glUniform(GLint _location, GLuint _value);
+		void glUniform(GLint _location, vec2ui _vec);
+		void glUniform(GLint _location, vec3ui _vec);
+		void glUniform(GLint _location, vec4ui _vec);
+		void glUniform(GLint _location, mat2ui _mat);
+		void glUniform(GLint _location, mat3ui _mat);
+		void glUniform(GLint _location, mat4ui _mat);
+
+
+		void glUniform(GLint _location, GLint _value);
+		void glUniform(GLint _location, vec2i _vec);
+		void glUniform(GLint _location, vec3i _vec);
+		void glUniform(GLint _location, vec4i _vec);
+		void glUniform(GLint _location, mat2i _mat);
+		void glUniform(GLint _location, mat3i _mat);
+		void glUniform(GLint _location, mat4i _mat);
+
+
+		void glUniform(GLint _location, GLfloat _value);
+		void glUniform(GLint _location, vec2f _vec);
+		void glUniform(GLint _location, vec3f _vec);
+		void glUniform(GLint _location, vec4f _vec);
+		void glUniform(GLint _location, mat2f _mat);
+		void glUniform(GLint _location, mat3f _mat);
+		void glUniform(GLint _location, mat4f _mat);
+
+		
 
 		// --> Fragment Shader
 		PFNGLBINDFRAGDATALOCATIONPROC glBindFragDataLocation;

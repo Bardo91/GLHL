@@ -30,3 +30,4 @@
 /test/sobel/prj/vs13/*.user
 /test/loadTexture/prj/vs13/*.user
 /test/triangle/prj/vs13/triangle.opensdf
+/library/src/core/os_dep/win32/glew/bin/Release/Win32/*.exe
