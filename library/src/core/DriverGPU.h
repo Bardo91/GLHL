@@ -75,26 +75,26 @@ namespace GLHL{
 		
 
 		// --> Fragment Shader
-		PFNGLBINDFRAGDATALOCATIONPROC glBindFragDataLocation;
+		void glBindFragDataLocation(GLuint _program, GLuint _colorNumber, const char * _name);
 
 		// --> Vertex Shader
 
 
 		// --> Textures
-		PFNGLACTIVETEXTUREPROC glActiveTexture;
-		PFNGLBINDTEXTUREEXTPROC glBindTexture;
-		PFNGLBINDSAMPLERPROC glBindSampler;
+		void glActiveTexture(GLenum _texture);
+		void glBindTexture(GLenum _target, GLuint _texture);
+		void glBindSampler(GLuint _unit, GLuint _sampler);
 
 		// --> Programs
-		PFNGLCREATEPROGRAMPROC glCreateProgram;
-		PFNGLATTACHSHADERPROC glAttachShader;
-		PFNGLBINDATTRIBLOCATIONPROC glBindAttribLocation;
-		PFNGLLINKPROGRAMPROC glLinkProgram;
-		PFNGLGETPROGRAMIVPROC glGetProgramiv;
-		PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
-		PFNGLDELETEPROGRAMPROC glDeleteProgram;
-		PFNGLUSEPROGRAMPROC glUseProgram;
-		PFNGLGETATTRIBLOCATIONPROC glGetAttribLocation;
+		GLuint glCreateProgram();
+		void glAttachShader(GLuint _program, GLuint _shader);
+		void glBindAttribLocation(GLuint _program, GLuint _index, const GLchar * _name);
+		void glLinkProgram(GLuint _program);
+		void glGetProgramiv(GLuint _program, GLenum _pname, GLint *_params);
+		void glGetProgramInfoLog (GLuint _program, GLsizei _maxLength, GLsizei *_length, GLchar *_infoLog);
+		void glDeleteProgram(GLuint _program);
+		void glUseProgram(GLuint _program);
+		GLint glGetAttribLocation(GLuint _program, const GLchar * _name);
 		
 		// --> Vertex
 		PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
