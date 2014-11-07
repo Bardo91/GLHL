@@ -15,14 +15,14 @@ CXX_FLAGS 	= -std=c++11 -shared -O3 -Wall -Werror
 SRC_FILES 	:= $(shell find ./../../src/ -name '*.cpp')
 OBJ_FILES 	:= $(patsubst %.cpp, %.o, $(SRC_FILES))
 
-INCLUDE_DIR	:=
+INCLUDE_DIR	:=	-I/usr/include/SOIL
 LIB_DIR		:=
-DEPENDENCIES	:=
+DEPENDENCIES	:= -lSOIL
 
 
-all: rebuild
+all: rebuild run
 
-rebuild:
+rebuild: clean build
 
 clean:
 	rm -f $(OBJ_FILES)
