@@ -195,7 +195,7 @@ namespace GLHL{
 	}
 
 	GLint getAttribLocation(GLuint _program, const GLchar * _name){
-		glGetAttribLocation(_program, _name);
+		return glGetAttribLocation(_program, _name);
 	}
 
 	// --> Vertex
