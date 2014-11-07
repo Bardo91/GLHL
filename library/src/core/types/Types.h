@@ -17,13 +17,13 @@ namespace GLHL{
 	template<typename Type_, unsigned size_>
 	struct vec{
 		Type_ mData[size_];
-		typedef size_ mSize;
+		const unsigned mSize = size_;
 	};
 
 	template<typename Type_, unsigned size_>
 	struct mat{
 		Type_ mData[size_*size_];
-		typedef size_ mSize;
+		const unsigned mSize = size_;
 	};
 
 	// Definition

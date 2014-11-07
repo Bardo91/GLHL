@@ -42,8 +42,17 @@ namespace GLHL{
 			delete mInstance;
 	}
 
-
 	//---------------------------------------------------------------------------
-
+	// OpenGL interface
 	//---------------------------------------------------------------------------
+	// --> Shaders
+	GLuint createShader(GLenum _shaderType){
+		return glCreateShader(_shaderType);
+	}
+	void shaderSource(GLuint _shader, GLsizei _count, const char **_string, const GLint *_length);
+	void compileShader(GLuint _shader);
+	void getShaderiv(GLuint _shader, GLenum _pname, GLint *_params);
+	void getShaderInfoLog(GLuint _shader, GLsizei _maxLength, GLsizei *_length, char *_infoLog);
+	void deleteShader(GLuint _shader);
+
 } //namespace GLHL

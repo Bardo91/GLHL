@@ -38,72 +38,70 @@ namespace GLHL{
 
 	public: // Public interface to OpenGL Extended libraries
 		// --> Shaders
-		GLuint glCreateShader(GLenum _shaderType);
-		void glShaderSource(GLuint _shader, GLsizei _count, const char **_string, const GLint *_length);
-		void glCompileShader(GLuint _shader);
-		void glGetShaderiv(GLuint _shader, GLenum _pname, GLint *_params);
-		void glGetShaderInfoLog(GLuint _shader, GLsizei _maxLength, GLsizei *_length, char *_infoLog);
-		void glDeleteShader(GLuint _shader);
+		GLuint createShader(GLenum _shaderType);
+		void shaderSource(GLuint _shader, GLsizei _count, const char **_string, const GLint *_length);
+		void compileShader(GLuint _shader);
+		void getShaderiv(GLuint _shader, GLenum _pname, GLint *_params);
+		void getShaderInfoLog(GLuint _shader, GLsizei _maxLength, GLsizei *_length, char *_infoLog);
+		void deleteShader(GLuint _shader);
+
+		GLint getUniformLocation(GLuint _program, const char *_name);
+		void setUniform(GLint _location, GLuint _value);
+		void setUniform(GLint _location, vec2ui _vec);
+		void setUniform(GLint _location, vec3ui _vec);
+		void setUniform(GLint _location, vec4ui _vec);
+		void setUniform(GLint _location, mat2ui _mat);
+		void setUniform(GLint _location, mat3ui _mat);
+		void setUniform(GLint _location, mat4ui _mat);
 		
-		GLint glGetUniformLocation(GLuint _program, const char *_name);
-		void glUniform(GLint _location, GLuint _value);
-		void glUniform(GLint _location, vec2ui _vec);
-		void glUniform(GLint _location, vec3ui _vec);
-		void glUniform(GLint _location, vec4ui _vec);
-		void glUniform(GLint _location, mat2ui _mat);
-		void glUniform(GLint _location, mat3ui _mat);
-		void glUniform(GLint _location, mat4ui _mat);
-
-
-		void glUniform(GLint _location, GLint _value);
-		void glUniform(GLint _location, vec2i _vec);
-		void glUniform(GLint _location, vec3i _vec);
-		void glUniform(GLint _location, vec4i _vec);
-		void glUniform(GLint _location, mat2i _mat);
-		void glUniform(GLint _location, mat3i _mat);
-		void glUniform(GLint _location, mat4i _mat);
-
-
-		void glUniform(GLint _location, GLfloat _value);
-		void glUniform(GLint _location, vec2f _vec);
-		void glUniform(GLint _location, vec3f _vec);
-		void glUniform(GLint _location, vec4f _vec);
-		void glUniform(GLint _location, mat2f _mat);
-		void glUniform(GLint _location, mat3f _mat);
-		void glUniform(GLint _location, mat4f _mat);
+		void setUniform(GLint _location, GLint _value);
+		void setUniform(GLint _location, vec2i _vec);
+		void setUniform(GLint _location, vec3i _vec);
+		void setUniform(GLint _location, vec4i _vec);
+		void setUniform(GLint _location, mat2i _mat);
+		void setUniform(GLint _location, mat3i _mat);
+		void setUniform(GLint _location, mat4i _mat);
+		
+		void setUniform(GLint _location, GLfloat _value);
+		void setUniform(GLint _location, vec2f _vec);
+		void setUniform(GLint _location, vec3f _vec);
+		void setUniform(GLint _location, vec4f _vec);
+		void setUniform(GLint _location, mat2f _mat);
+		void setUniform(GLint _location, mat3f _mat);
+		void setUniform(GLint _location, mat4f _mat);
 
 		
 
 		// --> Fragment Shader
-		void glBindFragDataLocation(GLuint _program, GLuint _colorNumber, const char * _name);
+		void bindFragDataLocation(GLuint _program, GLuint _colorNumber, const char * _name);
 
 		// --> Vertex Shader
 
 
 		// --> Textures
-		void glActiveTexture(GLenum _texture);
-		void glBindTexture(GLenum _target, GLuint _texture);
-		void glBindSampler(GLuint _unit, GLuint _sampler);
+		void activeTexture(GLenum _texture);
+		void bindTexture(GLenum _target, GLuint _texture);
+		void bindSampler(GLuint _unit, GLuint _sampler);
 
 		// --> Programs
-		GLuint glCreateProgram();
-		void glAttachShader(GLuint _program, GLuint _shader);
-		void glBindAttribLocation(GLuint _program, GLuint _index, const GLchar * _name);
-		void glLinkProgram(GLuint _program);
-		void glGetProgramiv(GLuint _program, GLenum _pname, GLint *_params);
-		void glGetProgramInfoLog (GLuint _program, GLsizei _maxLength, GLsizei *_length, GLchar *_infoLog);
-		void glDeleteProgram(GLuint _program);
-		void glUseProgram(GLuint _program);
-		GLint glGetAttribLocation(GLuint _program, const GLchar * _name);
+		GLuint createProgram();
+		void attachShader(GLuint _program, GLuint _shader);
+		void bindAttribLocation(GLuint _program, GLuint _index, const GLchar * _name);
+		void linkProgram(GLuint _program);
+		void getProgramiv(GLuint _program, GLenum _pname, GLint *_params);
+		void getProgramInfoLog (GLuint _program, GLsizei _maxLength, GLsizei *_length, GLchar *_infoLog);
+		void deleteProgram(GLuint _program);
+		void useProgram(GLuint _program);
+		GLint getAttribLocation(GLuint _program, const GLchar * _name);
 		
 		// --> Vertex
-		PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
-		PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
+		void vertexAttribPointer(GLuint _index, GLint _size, GLenum _type, GLboolean _normalized, GLsizei _stride, const GLvoid * _pointer);
+		void enableVertexAttribArray(GLuint _index);
 		
 		// --> Memory
-		PFNGLGENBUFFERSPROC glGenBuffers;	//	Create a buffer object
-		PFNGLBINDBUFFERPROC glBindBuffer;	//	Make buffer active
-		PFNGLBUFFERDATAPROC glBufferData;	//	Send data to buffer
+		void genBuffers(GLsizei _n, GLuint * _buffers);//	Create a buffer object
+		void bindBuffer(GLenum _target, GLuint _buffer);	//	Make buffer active
+		void bufferData(GLenum _target, GLsizeiptr _size, const GLvoid * _data, GLenum _usage); //	Send data to buffer
 
 	};
 
