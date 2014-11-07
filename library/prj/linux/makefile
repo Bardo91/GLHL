@@ -10,29 +10,31 @@ APP_NAME 	= libGLHL.so
 
 
 CXX = g++
-CXX_FLAGS 	= -std=c++11 -shared -O3 -Wall -Werror
+CXX_FLAGS 	= -fPIC -std=c++11 -O3 -Wall -Werror -shared
 
 SRC_FILES 	:= $(shell find ./../../src/ -name '*.cpp')
 OBJ_FILES 	:= $(patsubst %.cpp, %.o, $(SRC_FILES))
 
-INCLUDE_DIR	:=	-I/usr/include/SOIL
+INCLUDE_DIR	:=	-I/usr/include/SOIL -I./
 LIB_DIR		:=
-DEPENDENCIES	:= -lSOIL
+DEPENDENCIES	:= -lSOIL -lX11 -lGL -lGLU -lGLEW
 
-
-all: rebuild run
+all: rebuild
 
 rebuild: clean build
 
 clean:
-	rm -f $(OBJ_FILES)
+	rm -f $(OBJ_FILES) libGLHL.so
 
 build:	$(OBJ_FILES)
-	$(CXX) $^ -o $(APP_NAME) $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES)
-
-run:
-
+	@echo "--------------------------------------"
+	$(CXX) $(CXX_FLAGS) -o $(APP_NAME) $^ $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES)
 
 %.o: %.cpp
-	echo "Compiling: " $^
-	$(CXX) $^ -o $@ $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES) $(CXX_FLAGS)
+	@echo "--------------------------------------"
+	@echo "Compiling: " $^
+	$(CXX) $(CXX_FLAGS) -c $^ -o $@ $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES)
+
+
+########## PHONY ##########
+.PHONY: all clean run

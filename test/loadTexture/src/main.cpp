@@ -9,6 +9,7 @@
 
 #include <fstream>
 #include <string>
+#include <iostream>
 
 using namespace GLHL;
 using namespace std;
@@ -16,8 +17,10 @@ using namespace std;
 void drawImage(GLuint _texture, ShaderProgram _program);
 
 int main(void){
+	#if defined(_WIN32)
 	MSG msg;				// Windows menssage Structure.
 	BOOL done = FALSE;		// Variable to exit loop.
+	#endif
 
 	WindowGL * window = WindowGL::createWindow(640, 480);
 	
@@ -48,6 +51,7 @@ int main(void){
 
 
 	while(1){
+		#if defined(_WIN32)
 		if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
 			if(msg.message == WM_QUIT) // Es un mensaje de cerrar?
 				done = TRUE;
@@ -56,7 +60,8 @@ int main(void){
 				DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 			}
 		}
-		
+		#endif
+
 		drawImage(texture, program);
 
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, &buf[0]);
@@ -68,11 +73,14 @@ int main(void){
 			w, h, 3,
 			&buf[0]
 			);
+		if(err < 0)
+			std::cout << "Error saving the image" << std::endl;
 
 		window->swapBuffers();
 	}
 
-	delete window, driver;
+	//	delete window; 	Class has no destructor, undefined behaviour
+	delete driver;
 
 	return 0;
 }
