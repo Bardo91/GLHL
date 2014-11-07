@@ -50,17 +50,11 @@ namespace GLHL{
 		void setUniform(GLint _location, vec2ui _vec);
 		void setUniform(GLint _location, vec3ui _vec);
 		void setUniform(GLint _location, vec4ui _vec);
-		void setUniform(GLint _location, mat2ui _mat);
-		void setUniform(GLint _location, mat3ui _mat);
-		void setUniform(GLint _location, mat4ui _mat);
 		
 		void setUniform(GLint _location, GLint _value);
 		void setUniform(GLint _location, vec2i _vec);
 		void setUniform(GLint _location, vec3i _vec);
 		void setUniform(GLint _location, vec4i _vec);
-		void setUniform(GLint _location, mat2i _mat);
-		void setUniform(GLint _location, mat3i _mat);
-		void setUniform(GLint _location, mat4i _mat);
 		
 		void setUniform(GLint _location, GLfloat _value);
 		void setUniform(GLint _location, vec2f _vec);
