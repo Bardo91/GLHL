@@ -26,9 +26,10 @@ int main(void){
 	GLuint texture = TextureLoader::load2dTexture("C:\\Tulips.jpg");
 
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
-	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
-	Shader blurShader(eShaderType::eFragmentShader, "../../src/shaders/blur.fragment");
-	Shader segmentateShader(eShaderType::eFragmentShader, "../../src/shaders/segmentate.fragment");
+	
+	//Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
+	//Shader blurShader(eShaderType::eFragmentShader, "../../src/shaders/blur.fragment");
+	//Shader segmentateShader(eShaderType::eFragmentShader, "../../src/shaders/segmentate.fragment");
 	Shader sobelShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
 
 	ShaderProgram program;

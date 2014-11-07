@@ -1,14 +1,13 @@
-sampler2D texture;
+uniform sampler2D texture;
 varying vec2 vTexCoord;
 
-
-const mat3 sobelH = {	1.0,2.0,1.0,
+mat3 sobelH  = mat3(	1.0,2.0,1.0,
 						0.0,0.0,0.0,
-						-1.0,-2.0,-1.0};
+						-1.0,-2.0,-1.0);
 
-const mat3 sobelV = {	-1.0,0.0,1.0,
+ mat3 sobelV  = mat3(	-1.0,0.0,1.0,
 						-2.0,0.0,2.0,
-						-1.0,0.0,1.0};
+						-1.0,0.0,1.0);
 
 void main (void)  
 {  
