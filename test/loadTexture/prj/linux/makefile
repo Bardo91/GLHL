@@ -22,6 +22,9 @@ DEPENDENCIES	:= -lSOIL -lGLHL -lX11 -lGL -lGLU -lGLEW
 
 all: rebuild
 
+run: 
+	./loadTexture
+
 rebuild: clean build
 
 clean:
@@ -29,7 +32,7 @@ clean:
 
 build:	$(OBJ_FILES)
 	@echo "----------------------------------------------"
-	$(CXX) -o $(APP_NAME) $^ 
+	$(CXX) -o $(APP_NAME) $^ $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES) 
 
 %.o: %.cpp
 	@echo "----------------------------------------------"

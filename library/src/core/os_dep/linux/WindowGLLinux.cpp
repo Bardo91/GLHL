@@ -73,6 +73,8 @@ namespace GLHL {
 			mGlc = glXCreateContext(mDpy, mVi, NULL, GL_TRUE);	// Last parameter set direct rendering direct
  			glXMakeCurrent(mDpy, mWin, mGlc);
 
+ 			glEnable(GL_DEPTH_TEST); 
+
 		}
 
 		//---------------------------------------------------------------------------------

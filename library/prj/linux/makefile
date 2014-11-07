@@ -23,6 +23,9 @@ all: rebuild
 
 rebuild: clean build
 
+move2system:
+	sudo mv libGLHL.so /usr/lib
+
 clean:
 	rm -f $(OBJ_FILES) libGLHL.so
 
