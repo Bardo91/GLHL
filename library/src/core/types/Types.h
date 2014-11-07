@@ -18,12 +18,16 @@ namespace GLHL{
 	struct vec{
 		Type_ mData[size_];
 		const unsigned mSize = size_;
+		
+		Type_& operator[](unsigned _i){ return mData[_i] };
 	};
 
 	template<typename Type_, unsigned size_>
 	struct mat{
 		Type_ mData[size_*size_];
 		const unsigned mSize = size_;
+
+		Type_& operator[](unsigned _i){ return mData[_i] };
 	};
 
 	// Definition

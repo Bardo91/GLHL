@@ -15,19 +15,19 @@
 namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
 	ShaderProgram::ShaderProgram(){
-		mProgramID = DriverGPU::get()->glCreateProgram();
+		mProgramID = DriverGPU::get()->createProgram();
 		assert(mProgramID);
 
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
 	void ShaderProgram::attachShader(Shader _shader){
-		DriverGPU::get()->glAttachShader(mProgramID, _shader);
+		DriverGPU::get()->attachShader(mProgramID, _shader);
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
 	void ShaderProgram::bindAttribute(GLuint _index, const GLchar* _name){
-		DriverGPU::get()->glBindAttribLocation(mProgramID, _index, _name);
+		DriverGPU::get()->bindAttribLocation(mProgramID, _index, _name);
 
 	}	
 	//-----------------------------------------------------------------------------------------------------------------
@@ -36,25 +36,25 @@ namespace GLHL{
 
 		DriverGPU *driver = DriverGPU::get();
 
-		driver->glLinkProgram(mProgramID);
+		driver->linkProgram(mProgramID);
 
-		driver->glGetProgramiv(mProgramID, GL_LINK_STATUS, &isLinked);
+		driver->getProgramiv(mProgramID, GL_LINK_STATUS, &isLinked);
 
 		if (GL_FALSE == isLinked){
 			GLint infoLen = 0;
 			
-			driver->glGetProgramiv(mProgramID, GL_INFO_LOG_LENGTH, &infoLen);
+			driver->getProgramiv(mProgramID, GL_INFO_LOG_LENGTH, &infoLen);
 			
 			if (infoLen > 1){
 				char* infoLog = new char[infoLen];
 
-				driver->glGetProgramInfoLog(mProgramID, infoLen, NULL, infoLog);
+				driver->getProgramInfoLog(mProgramID, infoLen, NULL, infoLog);
 				std::cout << infoLog << std::endl;
 				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 				assert(FALSE);
 				delete infoLog;
 			}
-			driver->glDeleteProgram(mProgramID);
+			driver->deleteProgram(mProgramID);
 
 			return false;
 		}
@@ -64,7 +64,7 @@ namespace GLHL{
 
 	//-----------------------------------------------------------------------------------------------------------------
 	void ShaderProgram::use(){
-		DriverGPU::get()->glUseProgram(mProgramID);
+		DriverGPU::get()->useProgram(mProgramID);
 
 	}
 
