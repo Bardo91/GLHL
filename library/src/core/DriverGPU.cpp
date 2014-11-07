@@ -22,8 +22,12 @@ namespace GLHL{
 
 	//---------------------------------------------------------------------------
 	void DriverGPU::init(){
-		if (mInstance == nullptr)
+		if (mInstance == nullptr){
 			mInstance = new DriverGPU();
+
+			GLenum res = glewInit();
+			assert(res == GLEW_OK);
+		}
 
 	}
 
@@ -137,34 +141,83 @@ namespace GLHL{
 
 
 	// --> Fragment Shader
-	void bindFragDataLocation(GLuint _program, GLuint _colorNumber, const char * _name);
+	void bindFragDataLocation(GLuint _program, GLuint _colorNumber, const char * _name){
+		glBindFragDataLocation(_program, _colorNumber, _name);
+	}
 
 	// --> Vertex Shader
 
 
 	// --> Textures
-	void activeTexture(GLenum _texture);
-	void bindTexture(GLenum _target, GLuint _texture);
-	void bindSampler(GLuint _unit, GLuint _sampler);
+	void activeTexture(GLenum _texture){
+		glActiveTexture(_texture);
+	}
+
+	void bindTexture(GLenum _target, GLuint _texture){
+		glBindTexture(_target, _texture);
+	}
+
+	void bindSampler(GLuint _unit, GLuint _sampler){
+		glBindSampler(_unit, _sampler);
+	}
 
 	// --> Programs
-	GLuint createProgram();
-	void attachShader(GLuint _program, GLuint _shader);
-	void bindAttribLocation(GLuint _program, GLuint _index, const GLchar * _name);
-	void linkProgram(GLuint _program);
-	void getProgramiv(GLuint _program, GLenum _pname, GLint *_params);
-	void getProgramInfoLog(GLuint _program, GLsizei _maxLength, GLsizei *_length, GLchar *_infoLog);
-	void deleteProgram(GLuint _program);
-	void useProgram(GLuint _program);
-	GLint getAttribLocation(GLuint _program, const GLchar * _name);
+	GLuint createProgram(){
+		return glCreateProgram();
+	}
+
+	void attachShader(GLuint _program, GLuint _shader){
+		glAttachShader(_program, _shader);
+	}
+
+	void bindAttribLocation(GLuint _program, GLuint _index, const GLchar * _name){
+		glBindAttribLocation(_program, _index, _name);
+	}
+
+	void linkProgram(GLuint _program){
+		glLinkProgram(_program);
+	}
+
+	void getProgramiv(GLuint _program, GLenum _pname, GLint *_params){
+		glGetProgramiv(_program, _pname, _params);
+	}
+
+	void getProgramInfoLog(GLuint _program, GLsizei _maxLength, GLsizei *_length, GLchar *_infoLog){
+		glGetProgramInfoLog(_program, _maxLength, _length, _infoLog);
+	}
+
+	void deleteProgram(GLuint _program){
+		glDeleteProgram(_program);
+	}
+
+	void useProgram(GLuint _program){
+		glUseProgram(_program);
+	}
+
+	GLint getAttribLocation(GLuint _program, const GLchar * _name){
+		glGetAttribLocation(_program, _name);
+	}
 
 	// --> Vertex
-	void vertexAttribPointer(GLuint _index, GLint _size, GLenum _type, GLboolean _normalized, GLsizei _stride, const GLvoid * _pointer);
-	void enableVertexAttribArray(GLuint _index);
+	void vertexAttribPointer(GLuint _index, GLint _size, GLenum _type, GLboolean _normalized, GLsizei _stride, const GLvoid * _pointer){
+		glVertexAttribPointer(_index, _size, _type, _normalized, _stride, _pointer);
+	}
+
+	void enableVertexAttribArray(GLuint _index){
+		glEnableVertexAttribArray(_index);
+	}
 
 	// --> Memory
-	void genBuffers(GLsizei _n, GLuint * _buffers);//	Create a buffer object
-	void bindBuffer(GLenum _target, GLuint _buffer);	//	Make buffer active
-	void bufferData(GLenum _target, GLsizeiptr _size, const GLvoid * _data, GLenum _usage); //	Send data to buffer
+	void genBuffers(GLsizei _n, GLuint * _buffers){
+		glGenBuffers(_n, _buffers);
+	}
+
+	void bindBuffer(GLenum _target, GLuint _buffer){
+		glBindBuffer(_target, _buffer);
+	}
+
+	void bufferData(GLenum _target, GLsizeiptr _size, const GLvoid * _data, GLenum _usage){
+		glBufferData(_target, _size, _data, _usage);
+	}
 
 } //namespace GLHL
