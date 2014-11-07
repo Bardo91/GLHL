@@ -19,6 +19,7 @@ namespace GLHL{
 		Type_ mData[size_];
 		const unsigned mSize = size_;
 		
+		operator Type_* (){ return mData; }
 		Type_& operator[](unsigned _i){ return mData[_i] };
 	};
 
@@ -27,6 +28,7 @@ namespace GLHL{
 		Type_ mData[size_*size_];
 		const unsigned mSize = size_;
 
+		operator Type_* (){ return mData; }
 		Type_& operator[](unsigned _i){ return mData[_i] };
 	};
 
