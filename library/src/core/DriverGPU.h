@@ -13,6 +13,7 @@
 #ifdef _WIN32
 #include <Windows.h>
 #include "os_dep/win32/glew/glew.h"
+#include <gl/GL.h>
 #endif
 
 #include "types/Types.h"
@@ -29,7 +30,7 @@ namespace GLHL{
 		static void end();
 
 	protected:			
-		DriverGPU();				// Class constructor.	
+		DriverGPU(){};				// Class constructor.	
 
 	private:	// Private members about shaders
 		GLboolean initDriver();

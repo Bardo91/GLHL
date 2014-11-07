@@ -84,8 +84,8 @@ void drawImage(GLuint _texture, ShaderProgram _program) {
 	DriverGPU *driver = DriverGPU::get();
 
 	GLuint texLoc;
-	texLoc = driver->glGetUniformLocation(_program, "texture");
-	driver->glUniform1i(texLoc, 0);
+	texLoc = driver->getUniformLocation(_program, "texture");
+	driver->setUniform(texLoc, 0);
 
 	glBegin(GL_QUADS);
 		glVertex3f(-1.0f, -1.0f, 0.0f);

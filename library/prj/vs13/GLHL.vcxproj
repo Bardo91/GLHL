@@ -40,7 +40,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SOIL_DIR)\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\programming\GLHL\library\src\core\os_dep\win32\glew\lib\Release\Win32;$(SOIL_DIR)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -52,7 +52,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SOIL.lib</AdditionalDependencies>
+      <AdditionalDependencies>SOIL.lib;glew32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
