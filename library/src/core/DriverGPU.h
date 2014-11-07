@@ -10,10 +10,13 @@
 #ifndef _GLHL_CORE_DRIVERGPU_H_
 #define _GLHL_CORE_DRIVERGPU_H_
 
-#ifdef _WIN32
+#if defined(_WIN32)
 #include <Windows.h>
 #include "os_dep/win32/glew/glew.h"
 #include <gl/GL.h>
+#endif
+#if defined(__linux__)
+#include <GL/glew.h>
 #endif
 
 #include "types/Types.h"

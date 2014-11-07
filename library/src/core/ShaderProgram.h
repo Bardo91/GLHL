@@ -14,8 +14,6 @@
 #include "DriverGPU.h"
 #include "Shader.h"
 
-#include <gl\GL.h>
-
 namespace GLHL{
 
 	class ShaderProgram{
@@ -32,7 +30,7 @@ namespace GLHL{
 		void use();
 
 	private:
-		GLuint mProgramID = NULL;
+		GLuint mProgramID = 0;
 
 	};
 

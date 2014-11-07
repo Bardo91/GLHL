@@ -39,7 +39,7 @@ namespace GLHL{
 			// Create the shader object
 			mShaderId = driver->createShader(_type);
 			if (!mShaderId){
-				mShaderId = NULL;
+				mShaderId = 0;
 				return false; // Check if the shader was created properlly.
 			}
 
@@ -63,7 +63,7 @@ namespace GLHL{
 					driver->getShaderInfoLog(mShaderId, infoLen, NULL, infoLog);
 					std::cout << infoLog << std::endl;
 					// infoLog got the error message and can be displayed. 666 TODO: generic display system.
-					assert(FALSE);
+					assert(false);
 
 					delete infoLog;
 				}

@@ -51,7 +51,7 @@ namespace GLHL{
 				driver->getProgramInfoLog(mProgramID, infoLen, NULL, infoLog);
 				std::cout << infoLog << std::endl;
 				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
-				assert(FALSE);
+				assert(false);
 				delete infoLog;
 			}
 			driver->deleteProgram(mProgramID);

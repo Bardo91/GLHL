@@ -16,7 +16,6 @@
 
 #include "DriverGPU.h"
 
-#include <gl\GL.h>
 
 namespace GLHL{
 	enum eShaderType { eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER };
@@ -28,7 +27,7 @@ namespace GLHL{
 		operator GLuint() const{ return mShaderId; };
 
 	private:
-		GLuint mShaderId = NULL;
+		GLuint mShaderId = 0;
 
 		bool compileShader(eShaderType _type, const char* _shaderSrc);
 

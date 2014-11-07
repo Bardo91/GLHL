@@ -20,7 +20,7 @@ namespace GLHL{
 		const unsigned mSize = size_;
 		
 		operator Type_* (){ return mData; }
-		Type_& operator[](unsigned _i){ return mData[_i] };
+		Type_& operator[](unsigned _i){ return mData[_i]; };
 	};
 
 	template<typename Type_, unsigned size_>
@@ -29,7 +29,7 @@ namespace GLHL{
 		const unsigned mSize = size_;
 
 		operator Type_* (){ return mData; }
-		Type_& operator[](unsigned _i){ return mData[_i] };
+		Type_& operator[](unsigned _i){ return mData[_i]; };
 	};
 
 	// Definition

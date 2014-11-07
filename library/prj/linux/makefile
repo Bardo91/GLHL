@@ -12,7 +12,7 @@ APP_NAME 	= libGLHL.so
 CXX = g++
 CXX_FLAGS 	= -std=c++11 -shared -O3 -Wall -Werror
 
-SRC_FILES 	:= $(shell find ./../source/ -name '*.cpp')
+SRC_FILES 	:= $(shell find ./../../src/ -name '*.cpp')
 OBJ_FILES 	:= $(patsubst %.cpp, %.o, $(SRC_FILES))
 
 INCLUDE_DIR	:=
@@ -20,7 +20,7 @@ LIB_DIR		:=
 DEPENDENCIES	:=
 
 
-all:
+all: rebuild
 
 rebuild:
 
@@ -34,4 +34,5 @@ run:
 
 
 %.o: %.cpp
+	echo "Compiling: " $^
 	$(CXX) $^ -o $@ $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES) $(CXX_FLAGS)
