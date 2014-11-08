@@ -88,5 +88,8 @@
     <ClCompile Include="..\..\src\core\ShaderProgram.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\core\TextureLoader.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
