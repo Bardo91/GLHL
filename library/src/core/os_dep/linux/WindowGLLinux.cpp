@@ -33,7 +33,6 @@ namespace GLHL {
 	        if(mXev.type == Expose) {
 	                XGetWindowAttributes(mDpy, mWin, &mGwa);
 	                glViewport(0, 0, mGwa.width, mGwa.height);
-	                glXSwapBuffers(mDpy, mWin);
 	        }
 	                
 	        else if(mXev.type == KeyPress) {
