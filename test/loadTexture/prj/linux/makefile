@@ -10,7 +10,7 @@ APP_NAME 	= loadTexture
 
 
 CXX = g++
-CXX_FLAGS 	= -std=c++11 -O3 -Wall -Werror
+CXX_FLAGS 	= -std=c++11 -O3 -Wall -Werror -g
 
 SRC_FILES 	:= $(shell find ./../../src/ -name '*.cpp')
 OBJ_FILES 	:= $(patsubst %.cpp, %.o, $(SRC_FILES))

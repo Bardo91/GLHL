@@ -1,4 +1,4 @@
-//// MAIN FILE TO TEST
+ //// MAIN FILE TO TEST
 
 
 #include <src/core/WindowGL.h>
@@ -21,22 +21,22 @@ int main(void){
 	
 	DriverGPU * driver = DriverGPU::get();
 
-	GLuint texture = TextureLoader::load2dTexture("C:\\Tulips.jpg");
+	GLuint texture = TextureLoader::load2dTexture("./Tulips.jpg");
 
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
 	
-	//Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
+	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
 	//Shader blurShader(eShaderType::eFragmentShader, "../../src/shaders/blur.fragment");
 	//Shader segmentateShader(eShaderType::eFragmentShader, "../../src/shaders/segmentate.fragment");
-	Shader sobelShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
+	//Shader sobelShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
 
 	ShaderProgram program;
 
 	program.attachShader(vShader);
-	//program.attachShader(fShader);
+	program.attachShader(fShader);
 	//program.attachShader(blurShader);
 	//program.attachShader(segmentateShader);
-	program.attachShader(sobelShader);
+	//program.attachShader(sobelShader);
 	program.link();
 
 
