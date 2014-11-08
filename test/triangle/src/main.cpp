@@ -58,7 +58,7 @@ GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program){
 
 	DriverGPU* driver = DriverGPU::get();
 
-	driver->useProgram(_program);
+	_program.use();
 
 	// Load vertex Data
 	driver->vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
