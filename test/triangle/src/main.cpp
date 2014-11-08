@@ -17,11 +17,6 @@ using namespace std;
 GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program);
 
 int main(void){
-	#if defined(_WIN32)
-	MSG msg;				// Windows menssage Structure.
-	BOOL done = FALSE;		// Variable to exit loop.
-	#endif
-
 	WindowGL * window = WindowGL::createWindow(640, 480);
 
 	DriverGPU *driver = DriverGPU::get();
@@ -38,16 +33,7 @@ int main(void){
 
 
 	while(1){
-		#if defined(_WIN32)
-		if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
-			if(msg.message == WM_QUIT) // Es un mensaje de cerrar?
-				done = TRUE;
-			else{
-				TranslateMessage(&msg); // Traducimos el mensaje
-				DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
-			}
-		}
-		#endif
+		//window->peekMessate();
 
 		drawOnBuffer(640, 480, sProgram);
 

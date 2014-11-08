@@ -23,7 +23,7 @@ DEPENDENCIES	:= -lSOIL -lGLHL -lX11 -lGL -lGLU -lGLEW
 all: rebuild
 
 run: 
-	./loadTexture
+	./$(APP_NAME)
 
 rebuild: clean build
 
