@@ -45,9 +45,8 @@ int main(void){
 	unsigned char buf[w * h * 3];
 
 
-	while(1){
-		window->peekMessage();
-
+	while(1){	
+		//window->peekMessage();
 		drawImage(texture, program);
 
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, &buf[0]);

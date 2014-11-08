@@ -31,16 +31,16 @@ namespace GLHL {
 			XNextEvent(mDpy, &mXev);
         
 	        if(mXev.type == Expose) {
-	                XGetWindowAttributes(mDpy, mWin, &mGwa);
-	                glViewport(0, 0, mGwa.width, mGwa.height);
+				XGetWindowAttributes(mDpy, mWin, &mGwa);
+				glViewport(0, 0, mGwa.width, mGwa.height);
 	        }
 	                
 	        else if(mXev.type == KeyPress) {
-	                glXMakeCurrent(mDpy, None, NULL);
-	                glXDestroyContext(mDpy, mGlc);
-	                XDestroyWindow(mDpy, mWin);
-	                XCloseDisplay(mDpy);
-	                exit(0);
+				glXMakeCurrent(mDpy, None, NULL);
+				glXDestroyContext(mDpy, mGlc);
+				XDestroyWindow(mDpy, mWin);
+				XCloseDisplay(mDpy);
+				exit(0);
 	        }
 		}
 
