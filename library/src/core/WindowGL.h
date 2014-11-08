@@ -17,6 +17,7 @@ namespace GLHL {
 		static WindowGL * createWindow(int _width, int _height);
 
 	public:
+		virtual void peekMessage() = 0;
 		virtual void swapBuffers() = 0;
 
 	protected:

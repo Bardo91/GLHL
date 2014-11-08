@@ -26,6 +26,21 @@ namespace GLHL {
 
 			initializeWindow();
 		}
+		
+		//---------------------------------------------------------------------------------
+		void WindowGLWin32::peekMessage(){
+			MSG msg;				// Windows menssage Structure.
+			BOOL done = FALSE;		// Variable to exit loop.
+			if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
+				if (msg.message == WM_QUIT) // Es un mensaje de cerrar?
+					done = TRUE;
+				else{
+					TranslateMessage(&msg); // Traducimos el mensaje
+					DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
+				}
+			}
+		}
+
 		//---------------------------------------------------------------------------------
 		void WindowGLWin32::swapBuffers(){
 			SwapBuffers(mHDC);		// Specific function of windows to swap the buffers between window buffer and GPU buffer

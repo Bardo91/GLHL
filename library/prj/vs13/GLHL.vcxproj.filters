@@ -65,6 +65,9 @@
     <ClInclude Include="..\..\src\core\types\Types.h">
       <Filter>Source Files\core\types</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\core\os_dep\linux\WindowGLLinux.h">
+      <Filter>Source Files\core\os_dep\linux</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\DriverGPU.cpp">
@@ -90,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\TextureLoader.cpp">
       <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\os_dep\linux\WindowGLLinux.cpp">
+      <Filter>Source Files\core\os_dep\linux</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

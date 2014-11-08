@@ -23,6 +23,7 @@ namespace GLHL{
 			WindowGLWin32(int _width, int _height);
 
 		public:
+			void peekMessage();
 			void swapBuffers();
 
 		private:
