@@ -54,7 +54,7 @@ GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program){
 		0.5f, -0.5f, 0.0f };
 	glViewport(0, 0, _width, _height);
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
 
 	DriverGPU* driver = DriverGPU::get();
 
