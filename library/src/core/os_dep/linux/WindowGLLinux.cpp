@@ -25,6 +25,26 @@ namespace GLHL {
 
 			initializeWindow();
 		}
+
+		//---------------------------------------------------------------------------------
+		void WindowGLLinux::peekMessage(){
+			XNextEvent(mDpy, &mXev);
+        
+	        if(mXev.type == Expose) {
+	                XGetWindowAttributes(mDpy, mWin, &mGwa);
+	                glViewport(0, 0, mGwa.width, mGwa.height);
+	                glXSwapBuffers(mDpy, mWin);
+	        }
+	                
+	        else if(mXev.type == KeyPress) {
+	                glXMakeCurrent(mDpy, None, NULL);
+	                glXDestroyContext(mDpy, mGlc);
+	                XDestroyWindow(mDpy, mWin);
+	                XCloseDisplay(mDpy);
+	                exit(0);
+	        }
+		}
+
 		//---------------------------------------------------------------------------------
 		void WindowGLLinux::swapBuffers(){
 			glXSwapBuffers(mDpy, mWin);

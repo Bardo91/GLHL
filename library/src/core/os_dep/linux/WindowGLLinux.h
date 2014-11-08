@@ -28,6 +28,7 @@ namespace GLHL{
 			WindowGLLinux(int _width, int _height);
 
 		public:
+			void peekMessage();
 			void swapBuffers();
 
 		private:
