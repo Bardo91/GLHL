@@ -1,37 +1,40 @@
 #################################################
 ##
-##	Test GLHL makefile
+##	GLHL makefile
 ##		Author: Pablo Ramon Soria
 ##		Date:	2014-10-25
 ##
 #################################################
 
-APP_NAME 	= libGLHL.so
+APP_NAME 	= triangle
 
 
 CXX = g++
-CXX_FLAGS 	= -std=c++11 -shared -O3 -Wall -Werror
+CXX_FLAGS 	= -std=c++11 -O3 -Wall -Werror
 
-SRC_FILES 	:= $(shell find ./../../source/ -name '*.cpp')
+SRC_FILES 	:= $(shell find ./../../src/ -name '*.cpp')
 OBJ_FILES 	:= $(patsubst %.cpp, %.o, $(SRC_FILES))
 
-INCLUDE_DIR	:=
-LIB_DIR		:=
-DEPENDENCIES	:=
+INCLUDE_DIR	:=	-I/usr/include/SOIL -I../../../../library
+LIB_DIR		:=	-L../../../../library/prj/linux
+DEPENDENCIES	:= -lSOIL -lGLHL -lX11 -lGL -lGLU -lGLEW
 
 
-all:
+all: rebuild
 
-rebuild:
+run: 
+	./loadTexture
+
+rebuild: clean build
 
 clean:
 	rm -f $(OBJ_FILES)
 
 build:	$(OBJ_FILES)
-	$(CXX) $^ -o $(APP_NAME) $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES)
-
-run:
-
+	@echo "----------------------------------------------"
+	$(CXX) -o $(APP_NAME) $^ $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES) 
 
 %.o: %.cpp
-	$(CXX) $^ -o $@ $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES) $(CXX_FLAGS)
+	@echo "----------------------------------------------"
+	echo "Compiling: " $^
+	$(CXX) $(CXX_FLAGS) -c $^ -o $@ $(INCLUDE_DIR) $(LIB_DIR) $(DEPENDENCIES) 

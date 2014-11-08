@@ -17,8 +17,10 @@ using namespace std;
 GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program);
 
 int main(void){
+	#if defined(_WIN32)
 	MSG msg;				// Windows menssage Structure.
 	BOOL done = FALSE;		// Variable to exit loop.
+	#endif
 
 	WindowGL * window = WindowGL::createWindow(640, 480);
 
@@ -31,11 +33,12 @@ int main(void){
 	sProgram.attachShader(vShader);
 	sProgram.attachShader(fShader);
 	sProgram.bindAttribute(0, "vPosition");
-	driver->glBindFragDataLocation(sProgram, 0, "outColor");
+	driver->bindFragDataLocation(sProgram, 0, "outColor");
 	sProgram.link();
 
 
 	while(1){
+		#if defined(_WIN32)
 		if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
 			if(msg.message == WM_QUIT) // Es un mensaje de cerrar?
 				done = TRUE;
@@ -44,13 +47,15 @@ int main(void){
 				DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 			}
 		}
+		#endif
 
 		drawOnBuffer(640, 480, sProgram);
 
 		window->swapBuffers();
 	}
 
-	delete window, driver;
+	//	delete window; 	Class has no destructor, undefined behaviour
+	delete driver;
 
 	return 0;
 }
@@ -67,11 +72,11 @@ GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program){
 
 	DriverGPU* driver = DriverGPU::get();
 
-	driver->glUseProgram(_program);
+	driver->useProgram(_program);
 
 	// Load vertex Data
-	driver->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-	driver->glEnableVertexAttribArray(0);
+	driver->vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+	driver->enableVertexAttribArray(0);
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
