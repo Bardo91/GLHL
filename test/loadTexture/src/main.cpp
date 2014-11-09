@@ -46,9 +46,10 @@ int main(void){
 
 
 	while(1){	
-		//window->peekMessage();
+		#if defined(_WIN32)
+		window->peekMessage();
 		drawImage(texture, program);
-
+		#endif
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, &buf[0]);
 
 		//int err = SOIL_save_image
