@@ -68,6 +68,9 @@
     <ClInclude Include="..\..\src\core\os_dep\linux\WindowGLLinux.h">
       <Filter>Source Files\core\os_dep\linux</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\core\FrameBuffer.h">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\DriverGPU.cpp">

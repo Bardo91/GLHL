@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\core\DriverGPU.h" />
+    <ClInclude Include="..\..\src\core\FrameBuffer.h" />
     <ClInclude Include="..\..\src\core\os_dep\linux\WindowGLLinux.h" />
     <ClInclude Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.h" />
     <ClInclude Include="..\..\src\core\os_dep\win32\glew\glew.h" />
