@@ -75,6 +75,16 @@ namespace GLHL{
 
 		// --> Vertex Shader
 
+		// --> Buffer Objects
+		const enum class eFrameType {	eRead = GL_READ_FRAMEBUFFER, 
+										eWrite = GL_DRAW_FRAMEBUFFER, 
+										eReadWrite = GL_FRAMEBUFFER };
+
+		void genFramebuffers(GLsizei _n, GLuint *ids);
+		GLuint genFramebuffer();
+		void bindFramebuffer(eFrameType _target, GLuint _framebuffer);
+		void deleteFramebuffers(GLsizei _n, GLuint *_framebuffers);
+		void deleteFramebuffers(GLuint _framebuffer);
 
 		// --> Textures
 		void activeTexture(GLenum _texture);
