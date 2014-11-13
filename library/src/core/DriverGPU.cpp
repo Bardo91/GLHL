@@ -145,8 +145,40 @@ namespace GLHL{
 		glBindFragDataLocation(_program, _colorNumber, _name);
 	}
 
+
 	// --> Vertex Shader
 
+	// --> Buffer Objects
+	void genFramebuffers(GLsizei _n, GLuint *_ids){
+		glGenFramebuffers(_n, _ids);
+	}
+	
+	GLuint genFramebuffer(){
+		GLuint fb;
+		glGenFramebuffers(1, &fb);
+
+		return fb;
+	}
+	
+	void bindFramebuffer(GLenum _target, GLuint _framebuffer){
+		glBindFramebuffer(_target, _framebuffer);
+	}
+	
+	void deleteFramebuffers(GLsizei _n, GLuint *_framebuffers){
+		glDeleteFramebuffers(_n, _framebuffers);
+	}
+	
+	void deleteFramebuffer(GLuint _framebuffer){
+		glDeleteFramebuffers(1, &_framebuffer);
+	}
+
+	void framebufferTexture(GLenum _target, GLenum _attachment, GLuint _texture, GLint _level){
+		glFramebufferTexture(_target, _attachment, _texture, _level);
+	}
+
+	void drawBuffers(GLsizei _n, const GLenum * _bufs){
+		glDrawBuffers(_n, _bufs);
+	}
 
 	// --> Textures
 	void DriverGPU::activeTexture(GLenum _texture){

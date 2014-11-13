@@ -2,7 +2,7 @@
 //																		//
 //		OpenGL Helper Libraries for Image Processing  (GLHL)			//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2014-01-17											//
+//			Date:	2014-11-11											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
 //	
@@ -11,17 +11,32 @@
 #define _GLHL_CORE_FRAMEBUFFER_H_
 
 #include "DriverGPU.h"
+#include "Texture.h"
+
+#include <vector>
 
 namespace GLHL{
+	const enum class eFrameBufferMode {	eRead = GL_READ_FRAMEBUFFER,
+										eWrite = GL_DRAW_FRAMEBUFFER,
+										eReadWrite = GL_FRAMEBUFFER	};
+
 	class FrameBuffer{
 	public:
 		FrameBuffer();
 		~FrameBuffer();
 
-		operator GLuint() const{ return mFrameBufferId; };
-	private:
+		operator GLuint() const{ return mBufferId; };
 
-		GLuint mFrameBufferId;
+		void attachTexture(Texture _tex);
+		void use();
+
+	private:
+		void bind();
+
+	private:
+		std::vector<std::pair<unsigned, Texture>> mAttachments;
+
+		GLuint mBufferId;
 	};
 }	//	namespace GLHL
 

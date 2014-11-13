@@ -81,12 +81,14 @@
     <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h" />
     <ClInclude Include="..\..\src\core\Shader.h" />
     <ClInclude Include="..\..\src\core\ShaderProgram.h" />
+    <ClInclude Include="..\..\src\core\Texture.h" />
     <ClInclude Include="..\..\src\core\TextureLoader.h" />
     <ClInclude Include="..\..\src\core\types\Types.h" />
     <ClInclude Include="..\..\src\core\windowGL.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\DriverGPU.cpp" />
+    <ClCompile Include="..\..\src\core\FrameBuffer.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\linux\WindowGLLinux.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.cpp" />
     <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp" />
