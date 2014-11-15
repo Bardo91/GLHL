@@ -36,11 +36,11 @@ namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
 	void Texture::saveTexture(std::string _fileName){
 		 
-		unsigned char *buffer = new unsigned char[mWidth * mHeight * mChannels];
-
-		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, GL_RGB, GL_UNSIGNED_BYTE, buffer);
-
-		SOIL_save_image("img.bmp", SOIL_SAVE_TYPE_BMP, mWidth, mHeight, mChannels, buffer);
+		//unsigned char *buffer = new unsigned char[mWidth * mHeight * mChannels];
+		//
+		//DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, GL_RGB, GL_UNSIGNED_BYTE, buffer);
+		//
+		//SOIL_save_image("img.bmp", SOIL_SAVE_TYPE_BMP, mWidth, mHeight, mChannels, buffer);
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------

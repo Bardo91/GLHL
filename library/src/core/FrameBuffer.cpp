@@ -48,7 +48,7 @@ namespace GLHL{
 	//--------------------------------------------------------------------------------------------------------------------
 	void FrameBuffer::use(){
 		GLuint *attachments = new GLuint[mAttachments.size()];
-		for (int i = 0; i < mAttachments.size(); i++){
+		for (unsigned i = 0; i < mAttachments.size(); i++){
 			attachments[i] = mAttachments[i].first;
 		}
 

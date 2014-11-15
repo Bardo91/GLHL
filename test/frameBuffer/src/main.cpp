@@ -6,6 +6,7 @@
 #include <src/core/TextureLoader.h>
 #include <src/core/ShaderProgram.h>
 #include <src/core/Shader.h>
+#include <src/core/Texture.h>
 
 #include <fstream>
 #include <string>
@@ -25,7 +26,8 @@ int main(void){
 	
 	DriverGPU * driver = DriverGPU::get();
 
-	GLuint texture = TextureLoader::load2dTexture("./Tulips.jpg");
+	//GLuint texture = TextureLoader::load2dTexture("./Tulips.jpg");
+	Texture tulipsTex("./Tulips.jpg");
 
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
 	
@@ -46,7 +48,7 @@ int main(void){
 	while(1){	
 		#if defined(_WIN32)
 		window->peekMessage();
-		drawImage(texture, program);
+		drawImage(tulipsTex, program);
 		#endif
 
 		window->swapBuffers();
