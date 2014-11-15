@@ -106,5 +106,8 @@
     <ClCompile Include="..\..\src\core\FrameBuffer.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\core\Texture.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

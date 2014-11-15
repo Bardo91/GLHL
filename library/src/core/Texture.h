@@ -13,6 +13,7 @@
 #include "DriverGPU.h"
 
 #include <string>
+#include <vector>
 
 namespace GLHL{
 	class Texture{
@@ -23,11 +24,16 @@ namespace GLHL{
 
 		operator GLuint() const { return mTexId; };
 
-		void use();
-
+		void saveTexture(std::string _fileName);
 
 	private:
+		void use();
+
 		GLuint mTexId;
+
+		unsigned mWidth, mHeight, mChannels;
+
+
 	};
 
 }	//	namespace GLHL

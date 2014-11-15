@@ -149,34 +149,34 @@ namespace GLHL{
 	// --> Vertex Shader
 
 	// --> Buffer Objects
-	void genFramebuffers(GLsizei _n, GLuint *_ids){
+	void DriverGPU::genFramebuffers(GLsizei _n, GLuint *_ids){
 		glGenFramebuffers(_n, _ids);
 	}
 	
-	GLuint genFramebuffer(){
+	GLuint DriverGPU::genFramebuffer(){
 		GLuint fb;
 		glGenFramebuffers(1, &fb);
 
 		return fb;
 	}
 	
-	void bindFramebuffer(GLenum _target, GLuint _framebuffer){
+	void DriverGPU::bindFramebuffer(GLenum _target, GLuint _framebuffer){
 		glBindFramebuffer(_target, _framebuffer);
 	}
 	
-	void deleteFramebuffers(GLsizei _n, GLuint *_framebuffers){
+	void DriverGPU::deleteFramebuffers(GLsizei _n, GLuint *_framebuffers){
 		glDeleteFramebuffers(_n, _framebuffers);
 	}
 	
-	void deleteFramebuffer(GLuint _framebuffer){
+	void DriverGPU::deleteFramebuffer(GLuint _framebuffer){
 		glDeleteFramebuffers(1, &_framebuffer);
 	}
 
-	void framebufferTexture(GLenum _target, GLenum _attachment, GLuint _texture, GLint _level){
+	void DriverGPU::framebufferTexture(GLenum _target, GLenum _attachment, GLuint _texture, GLint _level){
 		glFramebufferTexture(_target, _attachment, _texture, _level);
 	}
 
-	void drawBuffers(GLsizei _n, const GLenum * _bufs){
+	void DriverGPU::drawBuffers(GLsizei _n, const GLenum * _bufs){
 		glDrawBuffers(_n, _bufs);
 	}
 
@@ -191,6 +191,14 @@ namespace GLHL{
 
 	void DriverGPU::bindSampler(GLuint _unit, GLuint _sampler){
 		glBindSampler(_unit, _sampler);
+	}
+
+	void DriverGPU::genTextures(GLsizei _n, GLuint * _textures){
+		glGenTextures(_n, _textures);
+	}
+
+	void DriverGPU::deleteTextures(GLsizei _n, const GLuint * _textures){
+		glDeleteTextures(_n, _textures);
 	}
 
 	// --> Programs
@@ -251,5 +259,11 @@ namespace GLHL{
 	void DriverGPU::bufferData(GLenum _target, GLsizeiptr _size, const GLvoid * _data, GLenum _usage){
 		glBufferData(_target, _size, _data, _usage);
 	}
+
+	// --> Generic OpenGL
+	void DriverGPU::readPixels(GLint _x, GLint _y, GLsizei _width, GLsizei _height, GLenum _format, GLenum _type, GLvoid * _data){
+		glReadPixels(_x, _y, _width, _height, _format, _type, _data);
+	}
+
 
 } //namespace GLHL

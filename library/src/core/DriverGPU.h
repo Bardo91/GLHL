@@ -90,6 +90,9 @@ namespace GLHL{
 		void activeTexture(GLenum _texture);
 		void bindTexture(GLenum _target, GLuint _texture);
 		void bindSampler(GLuint _unit, GLuint _sampler);
+		void genTextures(GLsizei _n, GLuint * _textures);
+		void deleteTextures(GLsizei _n, const GLuint * _textures);
+
 
 		// --> Programs
 		GLuint createProgram();
@@ -110,6 +113,11 @@ namespace GLHL{
 		void genBuffers(GLsizei _n, GLuint * _buffers);//	Create a buffer object
 		void bindBuffer(GLenum _target, GLuint _buffer);	//	Make buffer active
 		void bufferData(GLenum _target, GLsizeiptr _size, const GLvoid * _data, GLenum _usage); //	Send data to buffer
+
+		// --> Generic OpenGL
+		void readPixels(GLint _x, GLint _y, GLsizei _width, GLsizei _height, GLenum _format, GLenum _type, GLvoid * _data);
+
+
 
 	};
 
