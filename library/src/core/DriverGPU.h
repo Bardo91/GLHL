@@ -92,6 +92,7 @@ namespace GLHL{
 		void bindSampler(GLuint _unit, GLuint _sampler);
 		void genTextures(GLsizei _n, GLuint * _textures);
 		void deleteTextures(GLsizei _n, const GLuint * _textures);
+		void texImage2D(GLenum _target, GLint _level, GLint _internalformat, GLsizei _width, GLsizei _height, GLint _border, GLenum _format, GLenum _type, const GLvoid * _data);
 
 
 		// --> Programs

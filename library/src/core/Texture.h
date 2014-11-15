@@ -16,9 +16,12 @@
 #include <vector>
 
 namespace GLHL{
+
+	enum class eTexType {eRGB = GL_RGB, eRGBA = GL_RGBA};
+
 	class Texture{
 	public:
-		Texture();
+		Texture(unsigned _width, unsigned _height, eTexType _type);
 		Texture(std::string _fileName);
 		~Texture();
 

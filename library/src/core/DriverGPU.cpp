@@ -201,6 +201,11 @@ namespace GLHL{
 		glDeleteTextures(_n, _textures);
 	}
 
+	void DriverGPU::texImage2D(GLenum _target, GLint _level, GLint _internalformat, GLsizei _width, GLsizei _height, GLint _border, GLenum _format, GLenum _type, const GLvoid * _data){
+		glTexImage2D(_target, _level, _internalformat, _width, _height, _border, _format, _type, _data);
+
+	}
+
 	// --> Programs
 	GLuint DriverGPU::createProgram(){
 		return glCreateProgram();

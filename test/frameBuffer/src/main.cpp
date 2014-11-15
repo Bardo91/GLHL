@@ -68,14 +68,17 @@ void drawImage(Texture _tex, ShaderProgram _program) {
 	
 	DriverGPU *driver = DriverGPU::get();
 
-	FrameBuffer frame;
-	Texture resTex;			// 666 create empty texture. Constructor not implemented
-	frame.attachTexture(resTex);
+	//FrameBuffer frame;
+	//Texture resTex(640, 480, eTexType::eRGB);			// 666 create empty texture. Constructor not implemented
+	//frame.attachTexture(resTex);
+
+
 
 	GLuint texLoc;
 	texLoc = driver->getUniformLocation(_program, "texture");
 	driver->setUniform(texLoc, 0);
 	
+	//frame.use();
 	_program.use();
 
 	glBegin(GL_QUADS);
