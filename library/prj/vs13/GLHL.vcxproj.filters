@@ -44,9 +44,6 @@
     <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h">
       <Filter>Source Files\core\os_dep\win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\core\TextureLoader.h">
-      <Filter>Source Files\core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\core\Shader.h">
       <Filter>Source Files\core</Filter>
     </ClInclude>
@@ -95,9 +92,6 @@
       <Filter>Source Files\core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\ShaderProgram.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\TextureLoader.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\os_dep\linux\WindowGLLinux.cpp">

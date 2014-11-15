@@ -82,7 +82,6 @@
     <ClInclude Include="..\..\src\core\Shader.h" />
     <ClInclude Include="..\..\src\core\ShaderProgram.h" />
     <ClInclude Include="..\..\src\core\Texture.h" />
-    <ClInclude Include="..\..\src\core\TextureLoader.h" />
     <ClInclude Include="..\..\src\core\types\Types.h" />
     <ClInclude Include="..\..\src\core\windowGL.h" />
   </ItemGroup>
@@ -96,7 +95,6 @@
     <ClCompile Include="..\..\src\core\Shader.cpp" />
     <ClCompile Include="..\..\src\core\ShaderProgram.cpp" />
     <ClCompile Include="..\..\src\core\Texture.cpp" />
-    <ClCompile Include="..\..\src\core\TextureLoader.cpp" />
     <ClCompile Include="..\..\src\core\windowGL.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
