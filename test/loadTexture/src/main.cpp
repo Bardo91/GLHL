@@ -3,9 +3,10 @@
 
 #include <src/core/WindowGL.h>
 #include <src/core/DriverGPU.h>
-#include <src/core/TextureLoader.h>
+
 #include <src/core/ShaderProgram.h>
 #include <src/core/Shader.h>
+#include <src/core/Texture.h>
 
 #include <fstream>
 #include <string>
@@ -14,14 +15,14 @@
 using namespace GLHL;
 using namespace std;
 
-void drawImage(GLuint _texture, ShaderProgram _program);
+void drawImage(const Texture &_texture, ShaderProgram _program);
 
 int main(void){
 	WindowGL * window = WindowGL::createWindow(640, 480);
 	
 	DriverGPU * driver = DriverGPU::get();
 
-	GLuint texture = TextureLoader::load2dTexture("./Tulips.jpg");
+	Texture texture("./Tulips.jpg");
 
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
 	
@@ -52,16 +53,6 @@ int main(void){
 		#endif
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, &buf[0]);
 
-		//int err = SOIL_save_image
-		//	(
-		//	"img.bmp",
-		//	SOIL_SAVE_TYPE_BMP,
-		//	w, h, 3,
-		//	&buf[0]
-		//	);
-		//if(err < 0)
-		//	std::cout << "Error saving the image" << std::endl;
-
 		window->swapBuffers();
 	}
 
@@ -71,7 +62,7 @@ int main(void){
 	return 0;
 }
 
-void drawImage(GLuint _texture, ShaderProgram _program) {
+void drawImage(const Texture &_texture, ShaderProgram _program) {
 	glViewport(0, 0, 640, 480);
 
 	//glClear(GL_COLOR_BUFFER_BIT);
