@@ -3,10 +3,11 @@
 
 #include <src/core/WindowGL.h>
 #include <src/core/DriverGPU.h>
-#include <src/core/TextureLoader.h>
 #include <src/core/ShaderProgram.h>
 #include <src/core/Shader.h>
 #include <src/core/Texture.h>
+#include <src/core/FrameBuffer.h>
+
 
 #include <fstream>
 #include <string>
@@ -15,7 +16,7 @@
 using namespace GLHL;
 using namespace std;
 
-void drawImage(GLuint _texture, ShaderProgram _program);
+void drawImage(Texture _tex, ShaderProgram _program);
 
 const unsigned int w = 640;
 const unsigned int h = 480;
@@ -60,12 +61,16 @@ int main(void){
 	return 0;
 }
 
-void drawImage(GLuint _texture, ShaderProgram _program) {
+void drawImage(Texture _tex, ShaderProgram _program) {
 	glViewport(0, 0, 640, 480);
 
 	//glClear(GL_COLOR_BUFFER_BIT);
 	
 	DriverGPU *driver = DriverGPU::get();
+
+	FrameBuffer frame;
+	Texture resTex;			// 666 create empty texture. Constructor not implemented
+	frame.attachTexture(resTex);
 
 	GLuint texLoc;
 	texLoc = driver->getUniformLocation(_program, "texture");

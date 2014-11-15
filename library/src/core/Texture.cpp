@@ -19,6 +19,7 @@ namespace GLHL{
 	// Public interface
 	Texture::Texture(){
 		DriverGPU::get()->genTextures(1, &mTexId);
+		// 666 allocate texture and so on...
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
