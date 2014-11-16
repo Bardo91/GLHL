@@ -172,6 +172,14 @@ namespace GLHL{
 		glDeleteFramebuffers(1, &_framebuffer);
 	}
 
+	void DriverGPU::blitFramebuffer(	GLint _srcX0, GLint _srcY0, GLint _srcX1, GLint _srcY1,
+										GLint _dstX0, GLint _dstY0, GLint _dstX1, GLint _dstY1,
+										GLbitfield _mask, GLenum _filter){
+		glBlitFramebuffer(	_srcX0, _srcY0, _srcX1, _srcY1,
+							_dstX0, _dstY0, _dstX1, _dstY1,
+							_mask, _filter);
+	}
+
 	void DriverGPU::framebufferTexture(GLenum _target, GLenum _attachment, GLuint _texture, GLint _level){
 		glFramebufferTexture(_target, _attachment, _texture, _level);
 	}
@@ -204,6 +212,10 @@ namespace GLHL{
 	void DriverGPU::texImage2D(GLenum _target, GLint _level, GLint _internalformat, GLsizei _width, GLsizei _height, GLint _border, GLenum _format, GLenum _type, const GLvoid * _data){
 		glTexImage2D(_target, _level, _internalformat, _width, _height, _border, _format, _type, _data);
 
+	}
+
+	void DriverGPU::getTexLevelParameteriv(GLenum _target, GLint _level, GLenum _pname, GLint * _params){
+		glGetTexLevelParameteriv(_target, _level, _pname, _params);
 	}
 
 	// --> Programs

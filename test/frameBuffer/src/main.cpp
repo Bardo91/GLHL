@@ -16,7 +16,7 @@
 using namespace GLHL;
 using namespace std;
 
-void drawImage(Texture _tex, ShaderProgram _program);
+void drawImage(const Texture &_texture, ShaderProgram _program);
 
 const unsigned int w = 640;
 const unsigned int h = 480;
@@ -27,7 +27,6 @@ int main(void){
 	
 	DriverGPU * driver = DriverGPU::get();
 
-	//GLuint texture = TextureLoader::load2dTexture("./Tulips.jpg");
 	Texture tulipsTex("./Tulips.jpg");
 
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
@@ -61,7 +60,7 @@ int main(void){
 	return 0;
 }
 
-void drawImage(Texture _tex, ShaderProgram _program) {
+void drawImage(const Texture &_texture, ShaderProgram _program) {
 	glViewport(0, 0, 640, 480);
 
 	//glClear(GL_COLOR_BUFFER_BIT);
@@ -98,4 +97,6 @@ void drawImage(Texture _tex, ShaderProgram _program) {
 
 
 	glFinish();
+	
+	//resTex.saveTexture("result.png");
 }

@@ -81,9 +81,10 @@ namespace GLHL{
 		void bindFramebuffer(GLenum _target, GLuint _framebuffer);
 		void deleteFramebuffers(GLsizei _n, GLuint *_framebuffers);
 		void deleteFramebuffer(GLuint _framebuffer);
-
+		void blitFramebuffer(	GLint _srcX0, GLint _srcY0, GLint _srcX1, GLint _srcY1,
+								GLint _dstX0, GLint _dstY0, GLint _dstX1, GLint _dstY1,
+								GLbitfield _mask, GLenum _filter);
 		void framebufferTexture(GLenum _target, GLenum _attachment, GLuint _texture, GLint _level);
-
 		void drawBuffers(GLsizei n, const GLenum * bufs);
 
 		// --> Textures
@@ -93,6 +94,7 @@ namespace GLHL{
 		void genTextures(GLsizei _n, GLuint * _textures);
 		void deleteTextures(GLsizei _n, const GLuint * _textures);
 		void texImage2D(GLenum _target, GLint _level, GLint _internalformat, GLsizei _width, GLsizei _height, GLint _border, GLenum _format, GLenum _type, const GLvoid * _data);
+		void getTexLevelParameteriv(GLenum _target, GLint _level, GLenum _pname, GLint * _params);
 
 
 		// --> Programs

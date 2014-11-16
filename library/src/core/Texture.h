@@ -31,10 +31,15 @@ namespace GLHL{
 
 	private:
 		void use();
+		GLint channels();
 
+	private:
 		GLuint mTexId;
 
-		unsigned mWidth, mHeight, mChannels;
+		GLint mWidth, mHeight, mChannels;
+		GLint mTexType;
+		
+		GLint mBufferSize;
 
 
 	};
