@@ -31,6 +31,8 @@ namespace GLHL{
 
 	private:
 		void bind();
+		void unbind();
+
 		GLint channels();
 
 	private:

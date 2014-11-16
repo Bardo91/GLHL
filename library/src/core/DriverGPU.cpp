@@ -184,9 +184,18 @@ namespace GLHL{
 		glFramebufferTexture(_target, _attachment, _texture, _level);
 	}
 
+	void DriverGPU::framebufferTexture2D(GLenum _target, GLenum _attachment, GLenum _textarget, GLuint _texture, GLint _level){
+		glFramebufferTexture2D(_target, _attachment, _textarget, _texture, _level);
+	}
+
 	void DriverGPU::drawBuffers(GLsizei _n, const GLenum * _bufs){
 		glDrawBuffers(_n, _bufs);
 	}
+
+	GLenum DriverGPU::checkFramebufferStatus(GLenum _target){
+		return glCheckFramebufferStatus(_target);
+	}
+
 
 	// --> Textures
 	void DriverGPU::activeTexture(GLenum _texture){
@@ -216,6 +225,10 @@ namespace GLHL{
 
 	void DriverGPU::getTexLevelParameteriv(GLenum _target, GLint _level, GLenum _pname, GLint * _params){
 		glGetTexLevelParameteriv(_target, _level, _pname, _params);
+	}
+
+	void DriverGPU::texParameteri(GLenum _target, GLenum _pname, GLint _param){
+		glTexParameteri(_target, _pname, _param);
 	}
 
 	// --> Programs
@@ -282,5 +295,33 @@ namespace GLHL{
 		glReadPixels(_x, _y, _width, _height, _format, _type, _data);
 	}
 
+	void DriverGPU::checkErrors(){
+		GLenum err = glGetError();
+		bool noError = true;
+        switch(err) {
+        case GL_INVALID_OPERATION:      
+			std::cerr << "INVALID_OPERATION" << std::endl;
+			noError = false;
+			break;
+        case GL_INVALID_ENUM:           
+			std::cerr << "INVALID_ENUM" << std::endl;
+			noError = false;
+			break;
+        case GL_INVALID_VALUE:          
+			std::cerr <<"INVALID_VALUE" << std::endl;
+			noError = false;
+			break;
+        case GL_OUT_OF_MEMORY:          
+			std::cerr << "OUT_OF_MEMORY" << std::endl;
+			noError = false;
+			break;
+        case GL_INVALID_FRAMEBUFFER_OPERATION:  
+			std::cerr << "INVALID_FRAMEBUFFER_OPERATION" << std::endl;
+			noError = false;
+			break;
+        }
+
+		assert(noError);
+	}
 
 } //namespace GLHL

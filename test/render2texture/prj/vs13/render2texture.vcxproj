@@ -14,10 +14,7 @@
     <ClCompile Include="..\..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\src\shaders\blur.fragment" />
-    <None Include="..\..\src\shaders\flat.fragment" />
     <None Include="..\..\src\shaders\flat.vertex" />
-    <None Include="..\..\src\shaders\segmentate.fragment" />
     <None Include="..\..\src\shaders\sobel.fragment" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -50,7 +47,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(GLHL_DIR);$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SOIL_DIR)\lib;C:\programming\GLHL\test\frameBuffer\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SOIL_DIR)\lib;C:\programming\GLHL\test\render2texture\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

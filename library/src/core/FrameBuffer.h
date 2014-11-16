@@ -32,6 +32,9 @@ namespace GLHL{
 
 	private:
 		void bind();
+		void unbind();
+
+		void checkErrors();
 
 	private:
 		std::vector<std::pair<unsigned, Texture>> mAttachments;
