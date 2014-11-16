@@ -30,8 +30,6 @@ int main(void){
 	Texture tulipsTex("./Tulips.jpg");
 
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
-	
-	
 	Shader sobelShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
 
 	ShaderProgram program;
@@ -67,9 +65,9 @@ void drawImage(const Texture &_texture, ShaderProgram _program) {
 	
 	DriverGPU *driver = DriverGPU::get();
 
-	//FrameBuffer frame;
-	//Texture resTex(640, 480, eTexType::eRGB);			// 666 create empty texture. Constructor not implemented
-	//frame.attachTexture(resTex);
+	FrameBuffer frame;
+	Texture resTex(640, 480, eTexType::eRGB);			// 666 create empty texture. Constructor not implemented
+	frame.attachTexture(resTex);
 
 
 
@@ -77,7 +75,7 @@ void drawImage(const Texture &_texture, ShaderProgram _program) {
 	texLoc = driver->getUniformLocation(_program, "texture");
 	driver->setUniform(texLoc, 0);
 	
-	//frame.use();
+	frame.use();
 	_program.use();
 
 	glBegin(GL_QUADS);

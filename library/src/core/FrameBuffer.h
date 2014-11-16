@@ -27,7 +27,7 @@ namespace GLHL{
 
 		operator GLuint() const{ return mBufferId; };
 
-		void attachTexture(Texture _tex);
+		void attachTexture(const Texture &_tex);
 		void use();
 
 	private:

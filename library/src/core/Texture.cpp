@@ -19,8 +19,8 @@ namespace GLHL{
 	// Public interface
 	Texture::Texture(unsigned _width, unsigned _height, eTexType _type): mWidth(_width), mHeight(_height), mTexType( (unsigned)_type) {
 		DriverGPU::get()->genTextures(1, &mTexId);
-		use();
-		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, (unsigned) _type, _width, _height, 0, (unsigned) _type, GL_UNSIGNED_BYTE, NULL);
+		bind();
+		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, (unsigned) _type, _width, _height, 0, (unsigned) _type, GL_UNSIGNED_BYTE, nullptr);
 		mChannels = channels();
 		mBufferSize = mWidth * mHeight * mChannels;
 	}
@@ -30,7 +30,7 @@ namespace GLHL{
 		mTexId = SOIL_load_OGL_texture(	_fileName.c_str(),
 										SOIL_LOAD_AUTO,
 										SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-		use();
+		bind();
 		DriverGPU::get()->getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &mWidth);
 		DriverGPU::get()->getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &mHeight);
 		DriverGPU::get()->getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_INTERNAL_FORMAT, &mTexType);
@@ -40,6 +40,7 @@ namespace GLHL{
 
 	//-----------------------------------------------------------------------------------------------------------------
 	Texture::~Texture(){
+		bind();
 		DriverGPU::get()->deleteTextures(1, &mTexId);
 	}
 
@@ -48,7 +49,7 @@ namespace GLHL{
 		 
 		unsigned char *buffer = new unsigned char[mBufferSize];
 		
-		use();
+		bind();
 		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, GL_RGB, GL_UNSIGNED_BYTE, buffer);
 
 		SOIL_save_image("img.bmp", SOIL_SAVE_TYPE_BMP, mWidth, mHeight, mChannels, buffer);
@@ -56,7 +57,7 @@ namespace GLHL{
 
 	//-----------------------------------------------------------------------------------------------------------------
 	// Private interface
-	void Texture::use(){
+	void Texture::bind(){
 		DriverGPU::get()->bindTexture(GL_TEXTURE_2D, mTexId);
 	}
 	

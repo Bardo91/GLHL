@@ -30,7 +30,7 @@ namespace GLHL{
 		void saveTexture(std::string _fileName);
 
 	private:
-		void use();
+		void bind();
 		GLint channels();
 
 	private:

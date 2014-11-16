@@ -27,7 +27,7 @@ namespace GLHL{
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------
-	void FrameBuffer::attachTexture(Texture _tex){
+	void FrameBuffer::attachTexture(const Texture &_tex){
 		assert(_tex != 0);
 		
 		unsigned attach = 0;
@@ -41,7 +41,7 @@ namespace GLHL{
 
 		bind();
 
-		DriverGPU::get()->framebufferTexture(GL_DRAW_FRAMEBUFFER, attach, _tex, 0);
+		DriverGPU::get()->framebufferTexture(GL_FRAMEBUFFER, attach, _tex, 0);
 
 	}
 
@@ -64,7 +64,7 @@ namespace GLHL{
 	//	Private Interface
 	//--------------------------------------------------------------------------------------------------------------------
 	void FrameBuffer::bind(){
-		DriverGPU::get()->bindFramebuffer(GL_DRAW_FRAMEBUFFER, mBufferId);
+		DriverGPU::get()->bindFramebuffer(GL_FRAMEBUFFER, mBufferId);
 
 	}
 
