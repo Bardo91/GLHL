@@ -16,7 +16,7 @@
 using namespace GLHL;
 using namespace std;
 
-void drawImage(const Texture &_texture, ShaderProgram _program);
+void drawImage(Texture &_texture, ShaderProgram _program);
 
 const unsigned int w = 640;
 const unsigned int h = 480;
@@ -58,24 +58,49 @@ int main(void){
 	return 0;
 }
 
-void drawImage(const Texture &_texture, ShaderProgram _program) {
+void drawImage(Texture &_texture, ShaderProgram _program) {
 	glViewport(0, 0, 640, 480);
 
 	//glClear(GL_COLOR_BUFFER_BIT);
 	
 	DriverGPU *driver = DriverGPU::get();
 
-	FrameBuffer frame;
-	Texture resTex(640, 480, eTexType::eRGB);			// 666 create empty texture. Constructor not implemented
-	frame.attachTexture(resTex);
+	//FrameBuffer frame;
+	//Texture resTex(640, 480, eTexType::eRGB);			// 666 create empty texture. Constructor not implemented
+	//frame.attachTexture(resTex);
 
+	
+	GLuint colorTex;
+	glGenTextures(1, &colorTex);
+	glBindTexture(GL_TEXTURE_2D, colorTex);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+		w, h,
+		0, GL_RGBA, GL_UNSIGNED_BYTE,
+		NULL);
 
+	//Texture colorTex(640, 480, eTexType::eRGBA);
+	//colorTex.bind();
 
+	GLuint fbo;
+	// create the framebuffer object
+	glGenFramebuffers(1, &fbo);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+
+	// attach color
+	glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, colorTex, 0);
+	
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+	GLenum e = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
+	if (e != GL_FRAMEBUFFER_COMPLETE)
+		printf("There is a problem with the FBO\n");
+
+	//--------------------------------------------
+	_texture.bind();
 	GLuint texLoc;
 	texLoc = driver->getUniformLocation(_program, "texture");
 	driver->setUniform(texLoc, 0);
 	
-	frame.use();
+	//frame.use();
 	_program.use();
 
 	glBegin(GL_QUADS);
@@ -95,6 +120,8 @@ void drawImage(const Texture &_texture, ShaderProgram _program) {
 
 
 	glFinish();
+	glDeleteTextures(1, &colorTex);
+	glDeleteFramebuffers(1, &fbo);
 	
-	//resTex.saveTexture("result.png");
+	//colorTex.saveTexture("result.png");
 }
