@@ -102,5 +102,5 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	//glDeleteTextures(1, &colorTex);
 	//glDeleteFramebuffers(1, &fbo);
 	
-	colorTex.saveTexture("C:/result.png");
+	colorTex.saveTexture("result.png");
 }
