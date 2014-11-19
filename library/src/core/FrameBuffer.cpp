@@ -37,7 +37,7 @@ namespace GLHL{
 			attach = mAttachments.back().first + 1;
 		}
 		
-		mAttachments.push_back(std::pair<unsigned, Texture>(attach, _tex));
+		mAttachments.push_back(std::pair<unsigned, const Texture &>(attach, _tex));
 		
 		
 		bind();

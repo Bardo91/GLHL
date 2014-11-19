@@ -51,6 +51,7 @@ namespace GLHL{
 	Texture::~Texture(){
 		bind();
 		DriverGPU::get()->deleteTextures(1, &mTexId);
+		mTexId = 0;
 		
 	}
 

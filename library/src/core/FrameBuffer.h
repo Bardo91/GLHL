@@ -36,7 +36,7 @@ namespace GLHL{
 		void checkErrors();
 
 	private:
-		std::vector<std::pair<unsigned, Texture>> mAttachments;
+		std::vector<std::pair<unsigned, const Texture &>> mAttachments;
 
 		GLuint mBufferId;
 	};

@@ -72,18 +72,7 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	
 	FrameBuffer fbo;
 	fbo.attachTexture(colorTex);
-
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
-	GLenum e = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
-	if (e != GL_FRAMEBUFFER_COMPLETE)
-		printf("There is a problem with the FBO\n");
-	//--------------------------------------------
-
-	
-	//FrameBuffer frame;
-	//frame.attachTexture(colorTex);
-	//fbo.use();
-	
+	fbo.use();
 
 	_texture.bind();
 	GLuint texLoc;
