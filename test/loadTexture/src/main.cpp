@@ -3,10 +3,11 @@
 
 #include <src/core/WindowGL.h>
 #include <src/core/DriverGPU.h>
-
 #include <src/core/ShaderProgram.h>
 #include <src/core/Shader.h>
 #include <src/core/Texture.h>
+
+#include <SOIL.h>
 
 #include <fstream>
 #include <string>
@@ -45,17 +46,20 @@ int main(void){
 	const unsigned int h = 480;
 	unsigned char buf[w * h * 3];
 
-
-	while(1){	
+	bool condition = false;
+	do{	
 		#if defined(_WIN32)
 		window->peekMessage();
 		drawImage(texture, program);
 		#endif
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, &buf[0]);
-
+		SOIL_save_image("result.png", SOIL_SAVE_TYPE_BMP, w, h, 3, buf);
 		window->swapBuffers();
-	}
+	} while (condition);
 
+	#ifdef _WIN32
+	system("PAUSE");
+	#endif
 	//	delete window; 	Class has no destructor, undefined behaviour
 	delete driver;
 
