@@ -28,11 +28,8 @@ namespace GLHL{
 		operator GLuint() const { return mTexId; };
 
 		void saveTexture(std::string _fileName);
-
-	private:
 		void bind();
-		void unbind();
-
+	private:
 		GLint channels();
 
 	private:

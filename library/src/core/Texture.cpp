@@ -22,12 +22,12 @@ namespace GLHL{
 		bind();
 		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, (unsigned) _type, _width, _height, 0, (unsigned) _type, GL_UNSIGNED_BYTE, nullptr);
 		
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-		unbind();
+		//unbind();
 
 		mChannels = channels();
 		mBufferSize = mWidth * mHeight * mChannels;
@@ -42,8 +42,7 @@ namespace GLHL{
 		DriverGPU::get()->getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &mWidth);
 		DriverGPU::get()->getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &mHeight);
 		DriverGPU::get()->getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_INTERNAL_FORMAT, &mTexType);
-		unbind();
-
+		
 		mChannels = channels();
 		mBufferSize = mWidth * mHeight * mChannels;
 	}
@@ -52,7 +51,7 @@ namespace GLHL{
 	Texture::~Texture(){
 		bind();
 		DriverGPU::get()->deleteTextures(1, &mTexId);
-		unbind();
+		
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
@@ -63,7 +62,6 @@ namespace GLHL{
 		bind();
 		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, GL_RGB, GL_UNSIGNED_BYTE, buffer);
 		SOIL_save_image("img.bmp", SOIL_SAVE_TYPE_BMP, mWidth, mHeight, mChannels, buffer);
-		unbind();
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
@@ -72,11 +70,6 @@ namespace GLHL{
 		DriverGPU::get()->bindTexture(GL_TEXTURE_2D, mTexId);
 	}
 	
-	//-----------------------------------------------------------------------------------------------------------------
-	void Texture::unbind(){
-		DriverGPU::get()->bindTexture(GL_TEXTURE_2D, 0);
-	}
-
 	//-----------------------------------------------------------------------------------------------------------------
 	GLint Texture::channels(){
 		unsigned channels = 0;

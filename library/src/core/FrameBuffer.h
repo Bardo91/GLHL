@@ -32,7 +32,6 @@ namespace GLHL{
 
 	private:
 		void bind();
-		void unbind();
 
 		void checkErrors();
 

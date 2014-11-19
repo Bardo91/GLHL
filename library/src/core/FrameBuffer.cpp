@@ -18,12 +18,11 @@ namespace GLHL{
 	FrameBuffer::FrameBuffer(){
 		mBufferId = DriverGPU::get()->genFramebuffer();
 		DriverGPU::get()->checkErrors();
-
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------
 	FrameBuffer::~FrameBuffer(){
-		DriverGPU::get()->deleteFramebuffers(1, &mBufferId);
+		//DriverGPU::get()->deleteFramebuffers(1, &mBufferId);
 
 	}
 
@@ -39,12 +38,13 @@ namespace GLHL{
 		}
 		
 		mAttachments.push_back(std::pair<unsigned, Texture>(attach, _tex));
-
+		
+		
 		bind();
 		// 666 TODO Texture may be not valid, may be binding the texture??
-		DriverGPU::get()->framebufferTexture2D(GL_DRAW_FRAMEBUFFER, attach, GL_TEXTURE_2D, _tex, 0);
+		attach = GL_COLOR_ATTACHMENT0;
+		DriverGPU::get()->framebufferTexture(GL_DRAW_FRAMEBUFFER, attach, _tex, 0);
 		DriverGPU::get()->checkErrors();
-		unbind();
 
 	}
 
@@ -59,7 +59,7 @@ namespace GLHL{
 		DriverGPU::get()->drawBuffers(mAttachments.size(), attachments);
 		DriverGPU::get()->checkErrors();
 		checkErrors();
-		unbind();
+		
 
 		delete attachments;
 	}
@@ -73,10 +73,7 @@ namespace GLHL{
 
 	}
 
-	void FrameBuffer::unbind(){
-		DriverGPU::get()->bindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
-	}
 
 	void FrameBuffer::checkErrors(){
 		bind();
@@ -108,7 +105,6 @@ namespace GLHL{
 		if (error != GL_FRAMEBUFFER_COMPLETE)
 			assert(false);	// Trouble with FBO
 		
-		unbind();
 	}
 
 

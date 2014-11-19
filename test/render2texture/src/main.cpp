@@ -64,43 +64,33 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	//glClear(GL_COLOR_BUFFER_BIT);
 	
 	DriverGPU *driver = DriverGPU::get();
-
-	//FrameBuffer frame;
-	//Texture resTex(640, 480, eTexType::eRGB);			// 666 create empty texture. Constructor not implemented
-	//frame.attachTexture(resTex);
-
 	
-	GLuint colorTex;
-	glGenTextures(1, &colorTex);
-	glBindTexture(GL_TEXTURE_2D, colorTex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-		w, h,
-		0, GL_RGBA, GL_UNSIGNED_BYTE,
-		NULL);
 
-	//Texture colorTex(640, 480, eTexType::eRGBA);
-	//colorTex.bind();
-
-	GLuint fbo;
-	// create the framebuffer object
-	glGenFramebuffers(1, &fbo);
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
-
-	// attach color
-	glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, colorTex, 0);
+	//--------------------------------------------
+	Texture colorTex(640, 480, eTexType::eRGBA);
 	
+	
+	FrameBuffer fbo;
+	fbo.attachTexture(colorTex);
+
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
 	GLenum e = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
 	if (e != GL_FRAMEBUFFER_COMPLETE)
 		printf("There is a problem with the FBO\n");
-
 	//--------------------------------------------
+
+	
+	//FrameBuffer frame;
+	//frame.attachTexture(colorTex);
+	//fbo.use();
+	
+
 	_texture.bind();
 	GLuint texLoc;
 	texLoc = driver->getUniformLocation(_program, "texture");
 	driver->setUniform(texLoc, 0);
 	
-	//frame.use();
+	
 	_program.use();
 
 	glBegin(GL_QUADS);
@@ -120,8 +110,8 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 
 
 	glFinish();
-	glDeleteTextures(1, &colorTex);
-	glDeleteFramebuffers(1, &fbo);
+	//glDeleteTextures(1, &colorTex);
+	//glDeleteFramebuffers(1, &fbo);
 	
-	//colorTex.saveTexture("result.png");
+	colorTex.saveTexture("C:/result.png");
 }
