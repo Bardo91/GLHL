@@ -69,7 +69,6 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	//--------------------------------------------
 	Texture colorTex(640, 480, eTexType::eRGBA);
 	
-	
 	FrameBuffer fbo;
 	fbo.attachTexture(colorTex);
 	fbo.use();
@@ -78,7 +77,6 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	GLuint texLoc;
 	texLoc = driver->getUniformLocation(_program, "texture");
 	driver->setUniform(texLoc, 0);
-	
 	
 	_program.use();
 
@@ -93,14 +91,11 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 		glTexCoord2f(0.0, 0.0);
 	glEnd();
 
-	
-
-	glDrawArrays(GL_QUADS, 0, 4);
-
-
-	glFinish();
-	//glDeleteTextures(1, &colorTex);
-	//glDeleteFramebuffers(1, &fbo);
+	//glDrawArrays(GL_QUADS, 0, 4);
+	glFlush();
 	
 	colorTex.saveTexture("result.png");
+	glFinish();
+
+	std::cout << "finished" << std::endl;
 }
