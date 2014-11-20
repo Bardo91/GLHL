@@ -32,6 +32,8 @@ namespace GLHL{
 	private:
 		GLint channels();
 
+		Texture(Texture &_tex);
+		Texture(const Texture &_tex);
 	private:
 		GLuint mTexId;
 

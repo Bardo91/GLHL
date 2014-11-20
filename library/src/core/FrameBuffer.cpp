@@ -22,7 +22,7 @@ namespace GLHL{
 
 	//--------------------------------------------------------------------------------------------------------------------
 	FrameBuffer::~FrameBuffer(){
-		//DriverGPU::get()->deleteFramebuffers(1, &mBufferId);
+		DriverGPU::get()->deleteFramebuffers(1, &mBufferId);
 
 	}
 
@@ -39,12 +39,10 @@ namespace GLHL{
 		
 		mAttachments.push_back(std::pair<unsigned, const Texture &>(attach, _tex));
 		
-		
 		bind();
-		// 666 TODO Texture may be not valid, may be binding the texture??
-		attach = GL_COLOR_ATTACHMENT0;
 		DriverGPU::get()->framebufferTexture(GL_DRAW_FRAMEBUFFER, attach, _tex, 0);
 		DriverGPU::get()->checkErrors();
+		checkErrors();
 
 	}
 
@@ -57,9 +55,7 @@ namespace GLHL{
 
 		bind();
 		DriverGPU::get()->drawBuffers(mAttachments.size(), attachments);
-		DriverGPU::get()->checkErrors();
-		checkErrors();
-		
+		DriverGPU::get()->checkErrors();		
 
 		delete attachments;
 	}
@@ -72,8 +68,6 @@ namespace GLHL{
 		DriverGPU::get()->bindFramebuffer(GL_DRAW_FRAMEBUFFER, mBufferId);
 
 	}
-
-
 
 	void FrameBuffer::checkErrors(){
 		bind();
