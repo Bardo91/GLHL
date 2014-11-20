@@ -8,7 +8,7 @@
 #include <src/core/Texture.h>
 #include <src/core/FrameBuffer.h>
 
-
+#include <SOIL.h>
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -20,9 +20,11 @@ void drawImage(Texture &_texture, ShaderProgram _program);
 
 const unsigned int w = 640;
 const unsigned int h = 480;
-unsigned char buf[w * h * 3];
+const unsigned int c = 4;
+std::vector<unsigned char> buf(w * h * c);
 
 int main(void){
+	
 	WindowGL * window = WindowGL::createWindow(640, 480);
 	
 	DriverGPU * driver = DriverGPU::get();
@@ -66,17 +68,42 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	DriverGPU *driver = DriverGPU::get();
 	
 
-	//--------------------------------------------
-	Texture colorTex(640, 480, eTexType::eRGBA);
-	
-	FrameBuffer fbo;
-	fbo.attachTexture(colorTex);
-	fbo.use();
+	GLuint colorTex, depthTex, fbo;
+	// create a RGBA color texture
+	glGenTextures(1, &colorTex);
+	glBindTexture(GL_TEXTURE_2D, colorTex);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 
-	_texture.bind();
-	GLuint texLoc;
-	texLoc = driver->getUniformLocation(_program, "texture");
-	driver->setUniform(texLoc, 0);
+	// create the framebuffer object
+	glGenFramebuffers(1, &fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+	// attach color
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, colorTex, 0);
+	
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+	GLenum e = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	if (e != GL_FRAMEBUFFER_COMPLETE)
+		printf("There is a problem with the FBO\n");
+
+	// bind the framebuffer as the output framebuffer
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+	// define the index array for the outputs
+	GLuint attachments[1] = { GL_COLOR_ATTACHMENT0};
+	glDrawBuffers(1, attachments);
+
+	//--------------------------------------------
+	//Texture colorTex(640, 480, eTexType::eRGBA);
+	//
+	//FrameBuffer fbo;
+	//fbo.attachTexture(colorTex);
+	//fbo.use();
+	//
+	//_texture.bind();
+	//GLuint texLoc;
+	//texLoc = driver->getUniformLocation(_program, "texture");
+	//driver->setUniform(texLoc, 0);
 	
 	_program.use();
 
@@ -94,8 +121,14 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	//glDrawArrays(GL_QUADS, 0, 4);
 	glFlush();
 	
-	colorTex.saveTexture("result.png");
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buf.data());
+	SOIL_save_image("result.bmp", SOIL_SAVE_TYPE_BMP, w, h, 4, buf.data());
+
+	//colorTex.saveTexture("result.png");
 	glFinish();
+	glDeleteTextures(1, &colorTex);
+	glDeleteFramebuffers(1, &fbo);
 
 	std::cout << "finished" << std::endl;
 }
