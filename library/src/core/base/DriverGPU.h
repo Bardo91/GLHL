@@ -35,12 +35,10 @@ namespace GLHL{
 	protected:			
 		DriverGPU(){};				// Class constructor.	
 
-	private:	// Private members about shaders
-		GLboolean initDriver();
-
+	private:	// Private members
 		static DriverGPU *mInstance;
 
-	public: // Public interface to OpenGL Extended libraries
+	public: // Public interface to OpenGL library
 		// --> Shaders
 		GLuint createShader(GLenum _shaderType);
 		void shaderSource(GLuint _shader, GLsizei _count, const char **_string, const GLint *_length);
