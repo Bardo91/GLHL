@@ -40,7 +40,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\programming\GLHL\library\src\core\os_dep\win32\glew\lib\Release\Win32;$(SOIL_DIR)\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\programming\GLHL\library\src\core\base\os_dep\win32\glew\lib\Release\Win32;$(SOIL_DIR)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -70,32 +70,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\core\DriverGPU.h" />
-    <ClInclude Include="..\..\src\core\FrameBuffer.h" />
-    <ClInclude Include="..\..\src\core\os_dep\linux\WindowGLLinux.h" />
-    <ClInclude Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.h" />
-    <ClInclude Include="..\..\src\core\os_dep\win32\glew\glew.h" />
-    <ClInclude Include="..\..\src\core\os_dep\win32\glew\glxew.h" />
-    <ClInclude Include="..\..\src\core\os_dep\win32\glew\wglew.h" />
-    <ClInclude Include="..\..\src\core\os_dep\win32\OSHandleWin32.h" />
-    <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h" />
-    <ClInclude Include="..\..\src\core\Shader.h" />
-    <ClInclude Include="..\..\src\core\ShaderProgram.h" />
-    <ClInclude Include="..\..\src\core\Texture.h" />
+    <ClInclude Include="..\..\src\core\base\DriverGPU.h" />
+    <ClInclude Include="..\..\src\core\base\FrameBuffer.h" />
+    <ClInclude Include="..\..\src\core\base\os_dep\linux\WindowGLLinux.h" />
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\DirectoryChangesNotifyManager.h" />
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\glew.h" />
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\glxew.h" />
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\wglew.h" />
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\OSHandleWin32.h" />
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\WindowGLWin32.h" />
+    <ClInclude Include="..\..\src\core\base\Texture.h" />
+    <ClInclude Include="..\..\src\core\base\WindowGL.h" />
+    <ClInclude Include="..\..\src\core\glsl\Shader.h" />
+    <ClInclude Include="..\..\src\core\glsl\ShaderProgram.h" />
     <ClInclude Include="..\..\src\core\types\Types.h" />
-    <ClInclude Include="..\..\src\core\windowGL.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\core\DriverGPU.cpp" />
-    <ClCompile Include="..\..\src\core\FrameBuffer.cpp" />
-    <ClCompile Include="..\..\src\core\os_dep\linux\WindowGLLinux.cpp" />
-    <ClCompile Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.cpp" />
-    <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp" />
-    <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp" />
-    <ClCompile Include="..\..\src\core\Shader.cpp" />
-    <ClCompile Include="..\..\src\core\ShaderProgram.cpp" />
-    <ClCompile Include="..\..\src\core\Texture.cpp" />
-    <ClCompile Include="..\..\src\core\windowGL.cpp" />
+    <ClCompile Include="..\..\src\core\base\DriverGPU.cpp" />
+    <ClCompile Include="..\..\src\core\base\FrameBuffer.cpp" />
+    <ClCompile Include="..\..\src\core\base\os_dep\linux\WindowGLLinux.cpp" />
+    <ClCompile Include="..\..\src\core\base\os_dep\win32\DirectoryChangesNotifyManager.cpp" />
+    <ClCompile Include="..\..\src\core\base\os_dep\win32\OSHandleWin32.cpp" />
+    <ClCompile Include="..\..\src\core\base\os_dep\win32\WindowGLWin32.cpp" />
+    <ClCompile Include="..\..\src\core\base\Texture.cpp" />
+    <ClCompile Include="..\..\src\core\base\WindowGL.cpp" />
+    <ClCompile Include="..\..\src\core\glsl\Shader.cpp" />
+    <ClCompile Include="..\..\src\core\glsl\ShaderProgram.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

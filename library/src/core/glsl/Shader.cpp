@@ -8,7 +8,6 @@
 //	
 
 #include "Shader.h"
-#include "DriverGPU.h"
 
 #include <iostream>
 #include <fstream>

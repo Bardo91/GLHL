@@ -14,7 +14,7 @@
 #include <string>
 #include <cassert>
 
-#include "DriverGPU.h"
+#include "../base/DriverGPU.h"
 
 
 namespace GLHL{

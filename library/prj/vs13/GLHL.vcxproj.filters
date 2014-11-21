@@ -12,96 +12,102 @@
     <Filter Include="Source Files\core">
       <UniqueIdentifier>{acf09929-309b-4d56-bf78-87cc3d77ce28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\os_dep">
-      <UniqueIdentifier>{5ea851ea-a03f-43cd-bd23-d78296c0f61e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\os_dep\win32">
-      <UniqueIdentifier>{e6384fdb-389a-4532-87d5-13e8ab7671ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\os_dep\linux">
-      <UniqueIdentifier>{11e7ba12-080f-406c-9b55-43df648382a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\os_dep\win32\glew">
-      <UniqueIdentifier>{ff47e8a1-3f8a-44a5-a8f1-a82316d34134}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\core\types">
       <UniqueIdentifier>{110ee127-3248-4d5c-a088-6fdb797da47e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\core\base">
+      <UniqueIdentifier>{c7bf33d8-769d-441f-87d5-e115a050a768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\glsl">
+      <UniqueIdentifier>{a7015f99-3edf-4a15-878f-0554ad0037f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\base\os_dep">
+      <UniqueIdentifier>{5ea851ea-a03f-43cd-bd23-d78296c0f61e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\base\os_dep\win32">
+      <UniqueIdentifier>{e6384fdb-389a-4532-87d5-13e8ab7671ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\base\os_dep\win32\glew">
+      <UniqueIdentifier>{ff47e8a1-3f8a-44a5-a8f1-a82316d34134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\base\os_dep\linux">
+      <UniqueIdentifier>{11e7ba12-080f-406c-9b55-43df648382a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\core\DriverGPU.h">
-      <Filter>Source Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\windowGL.h">
-      <Filter>Source Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.h">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\os_dep\win32\OSHandleWin32.h">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\os_dep\win32\WindowGLWin32.h">
-      <Filter>Source Files\core\os_dep\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\Shader.h">
-      <Filter>Source Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\ShaderProgram.h">
-      <Filter>Source Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\os_dep\win32\glew\glew.h">
-      <Filter>Source Files\core\os_dep\win32\glew</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\os_dep\win32\glew\glxew.h">
-      <Filter>Source Files\core\os_dep\win32\glew</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\os_dep\win32\glew\wglew.h">
-      <Filter>Source Files\core\os_dep\win32\glew</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\core\types\Types.h">
       <Filter>Source Files\core\types</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\core\os_dep\linux\WindowGLLinux.h">
-      <Filter>Source Files\core\os_dep\linux</Filter>
+    <ClInclude Include="..\..\src\core\base\DriverGPU.h">
+      <Filter>Source Files\core\base</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\core\FrameBuffer.h">
-      <Filter>Source Files\core</Filter>
+    <ClInclude Include="..\..\src\core\base\FrameBuffer.h">
+      <Filter>Source Files\core\base</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\core\Texture.h">
-      <Filter>Source Files\core</Filter>
+    <ClInclude Include="..\..\src\core\base\Texture.h">
+      <Filter>Source Files\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\base\WindowGL.h">
+      <Filter>Source Files\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\glsl\Shader.h">
+      <Filter>Source Files\core\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\glsl\ShaderProgram.h">
+      <Filter>Source Files\core\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\base\os_dep\linux\WindowGLLinux.h">
+      <Filter>Source Files\core\base\os_dep\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\glew.h">
+      <Filter>Source Files\core\base\os_dep\win32\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\glxew.h">
+      <Filter>Source Files\core\base\os_dep\win32\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\wglew.h">
+      <Filter>Source Files\core\base\os_dep\win32\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\DirectoryChangesNotifyManager.h">
+      <Filter>Source Files\core\base\os_dep\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\OSHandleWin32.h">
+      <Filter>Source Files\core\base\os_dep\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\base\os_dep\win32\WindowGLWin32.h">
+      <Filter>Source Files\core\base\os_dep\win32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\core\DriverGPU.cpp">
-      <Filter>Source Files\core</Filter>
+    <ClCompile Include="..\..\src\core\base\DriverGPU.cpp">
+      <Filter>Source Files\core\base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\windowGL.cpp">
-      <Filter>Source Files\core</Filter>
+    <ClCompile Include="..\..\src\core\base\FrameBuffer.cpp">
+      <Filter>Source Files\core\base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\os_dep\win32\DirectoryChangesNotifyManager.cpp">
-      <Filter>Source Files\core\os_dep\win32</Filter>
+    <ClCompile Include="..\..\src\core\base\Texture.cpp">
+      <Filter>Source Files\core\base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\os_dep\win32\OSHandleWin32.cpp">
-      <Filter>Source Files\core\os_dep\win32</Filter>
+    <ClCompile Include="..\..\src\core\base\WindowGL.cpp">
+      <Filter>Source Files\core\base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\os_dep\win32\WindowGLWin32.cpp">
-      <Filter>Source Files\core\os_dep\win32</Filter>
+    <ClCompile Include="..\..\src\core\glsl\Shader.cpp">
+      <Filter>Source Files\core\glsl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\Shader.cpp">
-      <Filter>Source Files\core</Filter>
+    <ClCompile Include="..\..\src\core\glsl\ShaderProgram.cpp">
+      <Filter>Source Files\core\glsl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\ShaderProgram.cpp">
-      <Filter>Source Files\core</Filter>
+    <ClCompile Include="..\..\src\core\base\os_dep\linux\WindowGLLinux.cpp">
+      <Filter>Source Files\core\base\os_dep\linux</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\os_dep\linux\WindowGLLinux.cpp">
-      <Filter>Source Files\core\os_dep\linux</Filter>
+    <ClCompile Include="..\..\src\core\base\os_dep\win32\DirectoryChangesNotifyManager.cpp">
+      <Filter>Source Files\core\base\os_dep\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\FrameBuffer.cpp">
-      <Filter>Source Files\core</Filter>
+    <ClCompile Include="..\..\src\core\base\os_dep\win32\OSHandleWin32.cpp">
+      <Filter>Source Files\core\base\os_dep\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\Texture.cpp">
-      <Filter>Source Files\core</Filter>
+    <ClCompile Include="..\..\src\core\base\os_dep\win32\WindowGLWin32.cpp">
+      <Filter>Source Files\core\base\os_dep\win32</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

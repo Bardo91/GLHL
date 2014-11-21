@@ -11,7 +11,7 @@
 #ifndef _GLHL_CORE_SHADER_PROGRAM_H_
 #define _GLHL_CORE_SHADER_PROGRAM_H_
 
-#include "DriverGPU.h"
+#include "../base/DriverGPU.h"
 #include "Shader.h"
 
 namespace GLHL{

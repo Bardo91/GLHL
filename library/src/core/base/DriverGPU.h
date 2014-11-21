@@ -19,7 +19,7 @@
 #include <GL/glew.h>
 #endif
 
-#include "types/Types.h"
+#include "../types/Types.h"
 
 #include <string>
 
