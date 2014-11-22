@@ -7,8 +7,8 @@
 //////////////////////////////////////////////////////////////////////////
 //	
 
-#ifndef _GLHL_CORE_TEXTURE_H_
-#define _GLHL_CORE_TEXTURE_H_
+#ifndef _GLHL_CORE_BASE_TEXTURE_H_
+#define _GLHL_CORE_BASE_TEXTURE_H_
 
 #include "DriverGPU.h"
 
@@ -33,7 +33,6 @@ namespace GLHL{
 		GLint channels();
 
 		Texture(Texture &_tex);
-		Texture(const Texture &_tex);
 	private:
 		GLuint mTexId;
 
@@ -48,4 +47,4 @@ namespace GLHL{
 }	//	namespace GLHL
 
 
-#endif	// _GLHL_CORE_TEXTURE_H_
+#endif	// _GLHL_CORE_BASE_TEXTURE_H_

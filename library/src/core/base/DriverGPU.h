@@ -7,8 +7,8 @@
 //////////////////////////////////////////////////////////////////////////
 //	DriverGPU. Abstraction of GPU
 
-#ifndef _GLHL_CORE_DRIVERGPU_H_
-#define _GLHL_CORE_DRIVERGPU_H_
+#ifndef _GLHL_CORE_BASE_DRIVERGPU_H_
+#define _GLHL_CORE_BASE_DRIVERGPU_H_
 
 #if defined(_WIN32)
 #include <Windows.h>
@@ -131,4 +131,4 @@ namespace GLHL{
 
 
 
-#endif //_GLHL_CORE_DRIVERGPU_H_
+#endif //_GLHL_CORE_BASE_DRIVERGPU_H_

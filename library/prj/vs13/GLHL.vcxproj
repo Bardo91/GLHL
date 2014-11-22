@@ -70,6 +70,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\core\base\Context.h" />
     <ClInclude Include="..\..\src\core\base\DriverGPU.h" />
     <ClInclude Include="..\..\src\core\base\FrameBuffer.h" />
     <ClInclude Include="..\..\src\core\base\os_dep\linux\WindowGLLinux.h" />

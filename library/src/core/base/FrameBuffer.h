@@ -7,8 +7,8 @@
 //////////////////////////////////////////////////////////////////////////
 //	
 
-#ifndef _GLHL_CORE_FRAMEBUFFER_H_
-#define _GLHL_CORE_FRAMEBUFFER_H_
+#ifndef _GLHL_CORE_BASE_FRAMEBUFFER_H_
+#define _GLHL_CORE_BASE_FRAMEBUFFER_H_
 
 #include "DriverGPU.h"
 #include "Texture.h"
@@ -42,4 +42,4 @@ namespace GLHL{
 	};
 }	//	namespace GLHL
 
-#endif	//	_GLHL_CORE_FRAMEBUFFER_H_
+#endif	//	_GLHL_CORE_BASE_FRAMEBUFFER_H_

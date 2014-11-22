@@ -8,8 +8,8 @@
 //	
 
 
-#ifndef _GLHL_CORE_SHADER_H_
-#define _GLHL_CORE_SHADER_H_
+#ifndef _GLHL_CORE_GLSL_SHADER_H_
+#define _GLHL_CORE_GLSL_SHADER_H_
 
 #include <string>
 #include <cassert>
@@ -36,4 +36,4 @@ namespace GLHL{
 }	//	namespace GLHL
 
 
-#endif
+#endif	_GLHL_CORE_GLSL_SHADER_H_

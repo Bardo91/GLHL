@@ -8,8 +8,8 @@
 //	windowGL
 
 
-#ifndef _GLHL_CORE_WINDOWGL_H_
-#define _GLHL_CORE_WINDOWGL_H_
+#ifndef _GLHL_CORE_BASE_WINDOWGL_H_
+#define _GLHL_CORE_BASE_WINDOWGL_H_
 
 namespace GLHL {
 	class WindowGL{
@@ -29,4 +29,4 @@ namespace GLHL {
 	};
 }	// namespace GLHL.
 
-#endif	// _GLHL_CORE_WINDOWGL_H_
+#endif	// _GLHL_CORE_BASE_WINDOWGL_H_

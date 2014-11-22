@@ -1,10 +1,10 @@
 //// MAIN FILE TO TEST
 
 
-#include <src/core/WindowGL.h>
-#include <src/core/DriverGPU.h>
-#include <src/core/Shader.h>
-#include <src/core/ShaderProgram.h>
+#include <src/core/base/WindowGL.h>
+#include <src/core/base/DriverGPU.h>
+#include <src/core/glsl/Shader.h>
+#include <src/core/glsl/ShaderProgram.h>
 
 using namespace GLHL;
 
@@ -14,9 +14,12 @@ using namespace GLHL;
 
 using namespace std;
 
-GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program);
+GLvoid drawOnBuffer(GLint _width, GLint _height, ShaderProgram _program);
 
 int main(void){
+	GLenum res = glewInit();
+	assert(res == GLEW_OK);
+	
 	WindowGL * window = WindowGL::createWindow(640, 480);
 
 	DriverGPU *driver = DriverGPU::get();
@@ -48,7 +51,7 @@ int main(void){
 
 //---------------------------------------------------------------------------
 
-GLvoid drawOnBuffer(GLint _width, GLint _height, GLuint _program){
+GLvoid drawOnBuffer(GLint _width, GLint _height, ShaderProgram _program){
 	GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
 		-0.5f, -0.5f, 0.0f,
 		0.5f, -0.5f, 0.0f };
