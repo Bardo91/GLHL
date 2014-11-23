@@ -22,7 +22,8 @@
 #include "../types/Types.h"
 
 #include <string>
-
+#include <vector>
+#include <thread>
 
 //-------------------------------------------------------------------//
 namespace GLHL{
@@ -37,6 +38,7 @@ namespace GLHL{
 
 	private:	// Private members
 		static DriverGPU *mInstance;
+		static std::vector<std::thread::id> mInitializedThreads;
 
 	public: // Public interface to OpenGL library
 		// --> Shaders
@@ -48,6 +50,26 @@ namespace GLHL{
 		void deleteShader(GLuint _shader);
 
 		GLint getUniformLocation(GLuint _program, const char *_name);
+
+		void setProgramUniform(GLint _location, GLint _program, GLuint _value);
+		void setProgramUniform(GLint _location, GLint _program, vec2ui _vec);
+		void setProgramUniform(GLint _location, GLint _program, vec3ui _vec);
+		void setProgramUniform(GLint _location, GLint _program, vec4ui _vec);
+				
+		void setProgramUniform(GLint _location, GLint _program, GLint _value);
+		void setProgramUniform(GLint _location, GLint _program, vec2i _vec);
+		void setProgramUniform(GLint _location, GLint _program, vec3i _vec);
+		void setProgramUniform(GLint _location, GLint _program, vec4i _vec);
+
+		void setProgramUniform(GLint _location, GLint _program, GLfloat _value);
+		void setProgramUniform(GLint _location, GLint _program, vec2f _vec);
+		void setProgramUniform(GLint _location, GLint _program, vec3f _vec);
+		void setProgramUniform(GLint _location, GLint _program, vec4f _vec);
+		void setProgramUniform(GLint _location, GLint _program, mat2f _mat);
+		void setProgramUniform(GLint _location, GLint _program, mat3f _mat);
+		void setProgramUniform(GLint _location, GLint _program, mat4f _mat);
+
+		
 		void setUniform(GLint _location, GLuint _value);
 		void setUniform(GLint _location, vec2ui _vec);
 		void setUniform(GLint _location, vec3ui _vec);

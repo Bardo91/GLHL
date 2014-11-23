@@ -11,6 +11,8 @@
 #ifndef _GLHL_CORE_BASE_WINDOWGL_H_
 #define _GLHL_CORE_BASE_WINDOWGL_H_
 
+#include <mutex>
+
 namespace GLHL {
 	class WindowGL{
 	public:
@@ -25,6 +27,9 @@ namespace GLHL {
 
 	protected:
 		int mWidth, mHeight;
+
+	private:
+		static std::mutex mMutex;
 
 	};
 }	// namespace GLHL.

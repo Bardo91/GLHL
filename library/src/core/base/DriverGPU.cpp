@@ -12,6 +12,7 @@
 #include <cassert>
 #include <iostream>
 
+using namespace std;
 namespace GLHL{
 	//---------------------------------------------------------------------------
 	//------------------------- Singleton Interface -----------------------------
@@ -19,22 +20,29 @@ namespace GLHL{
 
 	// Static initialization of DriverGPU's intance
 	DriverGPU* DriverGPU::mInstance = nullptr;
-
+	std::vector<std::thread::id> DriverGPU::mInitializedThreads;
 	//---------------------------------------------------------------------------
 	void DriverGPU::init(){
-		if (mInstance == nullptr){
-			mInstance = new DriverGPU();
-
-			GLenum res = glewInit();
-			assert(res == GLEW_OK);
-		}
-
+		GLenum res = glewInit();
+		assert(res == GLEW_OK);
+		cout << "init glew" << endl;
 	}
 
 	//---------------------------------------------------------------------------
 	DriverGPU* DriverGPU::get(){
 		if (mInstance == nullptr)
+			mInstance = new DriverGPU(); 
+		
+		bool isInit = false;
+		for (auto i : mInitializedThreads){
+			if (i == this_thread::get_id())
+				isInit = true;
+		}
+		
+		if (!isInit){
 			init();
+			mInitializedThreads.push_back(this_thread::get_id());
+		}
 
 		return mInstance;
 
@@ -76,6 +84,66 @@ namespace GLHL{
 
 	GLint DriverGPU::getUniformLocation(GLuint _program, const char *_name){
 		return glGetUniformLocation(_program, _name);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, GLuint _value){
+		glProgramUniform1ui(_location, _program, _value);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec2ui _vec){
+		glProgramUniform2uiv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec3ui _vec){
+		glProgramUniform3uiv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec4ui _vec){
+		glProgramUniform4uiv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, GLint _value){
+		glProgramUniform1i(_location, _program, _value);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec2i _vec){
+		glProgramUniform2iv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec3i _vec){
+		glProgramUniform3iv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec4i _vec){
+		glProgramUniform4iv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, GLfloat _value){
+		glProgramUniform1f(_location, _program, _value);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec2f _vec){
+		glProgramUniform2fv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec3f _vec){
+		glProgramUniform3fv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, vec4f _vec){
+		glProgramUniform4fv(_location, _program, _vec.mSize, _vec);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, mat2f _mat){
+		glProgramUniformMatrix2fv(_location, _program, _mat.mSize, false, _mat);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, mat3f _mat){
+		glProgramUniformMatrix3fv(_location, _program, _mat.mSize, false, _mat);
+	}
+
+	void DriverGPU::setProgramUniform(GLint _location, GLint _program, mat4f _mat){
+		glProgramUniformMatrix4fv(_location, _program, _mat.mSize, false, _mat);
 	}
 
 	void DriverGPU::setUniform(GLint _location, GLuint _value){
@@ -298,28 +366,28 @@ namespace GLHL{
 	void DriverGPU::checkErrors(){
 		GLenum err = glGetError();
 		bool noError = true;
-        switch(err) {
-        case GL_INVALID_OPERATION:      
+		switch(err) {
+		case GL_INVALID_OPERATION:      
 			std::cerr << "INVALID_OPERATION" << std::endl;
 			noError = false;
 			break;
-        case GL_INVALID_ENUM:           
+		case GL_INVALID_ENUM:           
 			std::cerr << "INVALID_ENUM" << std::endl;
 			noError = false;
 			break;
-        case GL_INVALID_VALUE:          
+		case GL_INVALID_VALUE:          
 			std::cerr <<"INVALID_VALUE" << std::endl;
 			noError = false;
 			break;
-        case GL_OUT_OF_MEMORY:          
+		case GL_OUT_OF_MEMORY:          
 			std::cerr << "OUT_OF_MEMORY" << std::endl;
 			noError = false;
 			break;
-        case GL_INVALID_FRAMEBUFFER_OPERATION:  
+		case GL_INVALID_FRAMEBUFFER_OPERATION:  
 			std::cerr << "INVALID_FRAMEBUFFER_OPERATION" << std::endl;
 			noError = false;
 			break;
-        }
+		}
 
 		assert(noError);
 	}

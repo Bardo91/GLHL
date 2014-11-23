@@ -40,7 +40,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(GLHL_DIR);$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Programming\GLHL\test\triangle\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Programming\GLHL\test\contextCreation\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
