@@ -56,7 +56,6 @@ void openGLThread(bool _draw, GLfloat _red){
 	sProgram.attachShader(fShader);
 	sProgram.bindAttribute(0, "vPosition");
 	
-	driver->bindFragDataLocation(sProgram, 0, "outColor");
 	sProgram.link();
 
 	while(running){

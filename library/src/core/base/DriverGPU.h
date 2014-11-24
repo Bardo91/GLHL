@@ -20,6 +20,7 @@
 #endif
 
 #include "../types/Types.h"
+#include "Context.h"
 
 #include <string>
 #include <vector>
@@ -39,6 +40,10 @@ namespace GLHL{
 	private:	// Private members
 		static DriverGPU *mInstance;
 		static std::vector<std::thread::id> mInitializedThreads;
+
+	public:		// Conext creation
+		template<class ContextTrait_>
+		static Context<ContextTrait_> createContext();
 
 	public: // Public interface to OpenGL library
 		// --> Shaders
