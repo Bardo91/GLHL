@@ -41,10 +41,6 @@ namespace GLHL{
 		static DriverGPU *mInstance;
 		static std::vector<std::thread::id> mInitializedThreads;
 
-	public:		// Conext creation
-		template<class ContextTrait_>
-		static Context<ContextTrait_> createContext();
-
 	public: // Public interface to OpenGL library
 		// --> Shaders
 		GLuint createShader(GLenum _shaderType);

@@ -7,25 +7,36 @@
 //////////////////////////////////////////////////////////////////////////
 //	
 
-#ifndef _GLHL_CORE_BASE_CONTEXT_H_
-#define _GLHL_CORE_BASE_CONTEXT_H_
+#ifndef _GLHL_CORE_BASE_CONTEXT_BASE_WIN32_H_
+#define _GLHL_CORE_BASE_CONTEXT_BASE_WIN32_H_
 
 #if defined (_WIN32)
-	#include "os_dep\win32\ContextBaseWin32.h"
-#endif
-#if defined (__linux__)
-	#include "os_dep\linux\ContextBaseLinux.h"
-#endif
 
+#include <Windows.h>
 
 namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
-	class Context: public ContextBase{
-	public:
+	namespace GLHL_WIN32{
+		class ContextBaseWin32{
+		public:
+			ContextBaseWin32();
+
+		private:
+			bool initContext();
+
+			bool selfDestroy();
+
+		private:
+			HGLRC		mHRC = NULL;
+			HDC			mHDC = NULL;
+			HINSTANCE	mHInstance = NULL;
+			HWND		mHWnd = NULL;
 
 
-	private:
+		};	//	class ContextBaseWin32
 
-	};	//	class Context
+	}
+	typedef GLHL_WIN32::ContextBaseWin32 ContextBase;
+#endif
 }	//	namespace GLHL
-#endif	//	_GLHL_CORE_BASE_CONTEXT_H_
+#endif	//	_GLHL_CORE_BASE_CONTEXT_BASE_WIN32_H_

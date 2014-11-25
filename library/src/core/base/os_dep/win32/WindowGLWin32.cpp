@@ -94,13 +94,13 @@ namespace GLHL {
 				PFD_SUPPORT_OPENGL |				// el formato debe soportar opengl.
 				PFD_DOUBLEBUFFER,					// debe soportar doble buffering.
 				PFD_TYPE_RGBA,						// formato en RGBA.
-				16, //_bits,								// selecciona el color del fondo.
+				32, //_bits,								// selecciona el color del fondo.
 				0, 0, 0, 0, 0, 0,					// Color bits ignored.
 				0,									// Sin buffer para alpha.
 				0,									// Shift Bit ignorado.
 				0,									// Sin buffer de acumulación.
 				0, 0, 0, 0,							// Bit de acumulación ignorado.
-				16,									// 16 bits para el Z-buffer  (buffer de profundidad).
+				24,									// 16 bits para el Z-buffer  (buffer de profundidad).
 				0,									// No stencil buffer.
 				0,									// No auxiliary buffer.
 				PFD_MAIN_PLANE,						// capa principal de dibujo.
