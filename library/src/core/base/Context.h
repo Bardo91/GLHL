@@ -22,7 +22,7 @@ namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
 	class Context: public ContextBase{
 	public:
-
+		Context(){}
 
 	private:
 

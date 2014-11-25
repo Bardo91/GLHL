@@ -27,7 +27,7 @@ int main(void){
 	
 	int command = 1;
 	thread t1(openGLThread, true, 0.5);
-	thread t2(openGLThread, true, 1);
+
 
 	do{
 		cin >> command;
@@ -43,7 +43,9 @@ int main(void){
 //---------------------------------------------------------------------------
 
 void openGLThread(bool _draw, GLfloat _red){
-	WindowGL * window = WindowGL::createWindow(640, 480);
+	//WindowGL * window = WindowGL::createWindow(640, 480);
+
+	Context context;
 
 	DriverGPU *driver = DriverGPU::get();
 
@@ -59,15 +61,12 @@ void openGLThread(bool _draw, GLfloat _red){
 	sProgram.link();
 
 	while(running){
-		window->peekMessage();
-		window->swapBuffers();
-
+		//window->peekMessage();
+		//window->swapBuffers();
 		if (_draw)
 			drawOnBuffer(640, 480, sProgram, _red);
 	}
 
-
-	delete window;
 	delete driver;
 }
 
