@@ -47,7 +47,27 @@ namespace GLHL{
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------
-	void FrameBuffer::use(){
+	void FrameBuffer::detachTexture(const Texture &_tex){
+		assert(_tex != 0);
+
+		unsigned attach = 0;
+		for (int i = 0; i < mAttachments.size(); ++i){
+			if (mAttachments[i].second == _tex){
+				attach == GL_COLOR_ATTACHMENT0 + i;
+			}
+		}
+		if (attach == 0)
+			return;
+
+		bind();
+		DriverGPU::get()->framebufferTexture(GL_DRAW_FRAMEBUFFER, attach, 0, 0);
+		DriverGPU::get()->checkErrors();
+		checkErrors();
+
+	}
+
+	//--------------------------------------------------------------------------------------------------------------------
+	void FrameBuffer::linkAttachments(){
 		GLuint *attachments = new GLuint[mAttachments.size()];
 		for (unsigned i = 0; i < mAttachments.size(); i++){
 			attachments[i] = mAttachments[i].first;
@@ -60,14 +80,20 @@ namespace GLHL{
 		delete attachments;
 	}
 
+	void FrameBuffer::bind(){
+		DriverGPU::get()->bindFramebuffer(GL_FRAMEBUFFER, mBufferId);
+
+	}
+
+	void FrameBuffer::unbind(){
+		DriverGPU::get()->bindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	}
 
 	//--------------------------------------------------------------------------------------------------------------------
 	//	Private Interface
 	//--------------------------------------------------------------------------------------------------------------------
-	void FrameBuffer::bind(){
-		DriverGPU::get()->bindFramebuffer(GL_DRAW_FRAMEBUFFER, mBufferId);
-
-	}
+	
 
 	void FrameBuffer::checkErrors(){
 		bind();

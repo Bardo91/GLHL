@@ -60,7 +60,7 @@ namespace GLHL{
 		 
 		unsigned char *buffer = new unsigned char[mBufferSize];
 		
-		bind();
+		unbind();
 		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 		SOIL_save_image(_fileName.c_str(), SOIL_SAVE_TYPE_BMP, mWidth, mHeight, mChannels, buffer);
 	}
@@ -69,6 +69,10 @@ namespace GLHL{
 	// Private interface
 	void Texture::bind(){
 		DriverGPU::get()->bindTexture(GL_TEXTURE_2D, mTexId);
+	}
+
+	void Texture::unbind(){
+		DriverGPU::get()->bindTexture(GL_TEXTURE_2D, 0);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------

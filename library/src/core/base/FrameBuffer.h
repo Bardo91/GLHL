@@ -28,10 +28,15 @@ namespace GLHL{
 		operator GLuint() const{ return mBufferId; };
 
 		void attachTexture(const Texture &_tex);
-		void use();
+		void linkAttachments();
+		
+		void detachTexture(const Texture &_tex);
+
+		void bind();
+		void unbind();
 
 	private:
-		void bind();
+		
 
 		void checkErrors();
 

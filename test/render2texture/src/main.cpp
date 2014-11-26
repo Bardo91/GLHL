@@ -23,6 +23,8 @@ const unsigned int h = 480;
 const unsigned int c = 4;
 std::vector<unsigned char> buf(w * h * c);
 
+void drawQuads();
+
 int main(void){
 	
 	WindowGL * window = WindowGL::createWindow(640, 480);
@@ -40,10 +42,6 @@ int main(void){
 	
 	program.attachShader(sobelShader);
 	program.link();
-
-
-	
-
 
 	while(1){	
 		#if defined(_WIN32)
@@ -75,24 +73,29 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	
 	_program.use();
 
-	glBegin(GL_QUADS);
-		glVertex3f(-1.0f, -1.0f, 0.0f);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(1.0f, -1.0f, 0.0f);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(1.0f, 1.0f, 0.0f);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(-1.0f, 1.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-	glEnd();
+	drawQuads();
 
 	glDrawArrays(GL_QUADS, 0, 4);
 	glFlush();
 	
-	
+	fbo.detachTexture(colorTex);
 	colorTex.saveTexture("result.bmp");
  
 	glFinish();
 
 	std::cout << "finished" << std::endl;
+}
+
+void drawQuads(){
+	glBegin(GL_QUADS);
+	glVertex3f(-1.0f, -1.0f, 0.0f);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(1.0f, -1.0f, 0.0f);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glTexCoord2f(0.0, 0.0);
+	glEnd();
+
 }

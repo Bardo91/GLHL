@@ -29,6 +29,7 @@ namespace GLHL{
 
 		void saveTexture(std::string _fileName);
 		void bind();
+		void unbind();
 	private:
 		GLint channels();
 
