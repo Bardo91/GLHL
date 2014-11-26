@@ -1,12 +1,13 @@
  //// MAIN FILE TO TEST
 
 
-#include <src/core/WindowGL.h>
-#include <src/core/DriverGPU.h>
-#include <src/core/ShaderProgram.h>
-#include <src/core/Shader.h>
-#include <src/core/Texture.h>
-#include <src/core/FrameBuffer.h>
+#include <src/core/base/WindowGL.h>
+#include <src/core/base/DriverGPU.h>
+#include <src/core/base/Texture.h>
+#include <src/core/base/FrameBuffer.h>
+
+#include <src/core/glsl/ShaderProgram.h>
+#include <src/core/glsl/Shader.h>
 
 #include <SOIL.h>
 #include <fstream>
