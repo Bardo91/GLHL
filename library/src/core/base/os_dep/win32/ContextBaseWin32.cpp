@@ -12,6 +12,8 @@
 
 #if defined (_WIN32)
 
+#include <cassert>
+
 namespace GLHL{
 	namespace GLHL_WIN32{
 		ContextBaseWin32::ContextBaseWin32(){
@@ -23,6 +25,14 @@ namespace GLHL{
 			initContext();
 		}
 
+		//---------------------------------------------------------------------------------
+		void ContextBaseWin32::makeCurrent(){
+			if (!wglMakeCurrent(mHDC, mHRC)){				// Try To Activate The Rendering Context
+				selfDestroy();                         // Reset The Display
+				MessageBoxA(NULL, "Can't Activate The GL Rendering Context.", "ERROR", MB_OK | MB_ICONEXCLAMATION);
+				assert(false);                           
+			}
+		}
 
 		//---------------------------------------------------------------------------------
 		bool ContextBaseWin32::initContext(){
@@ -33,7 +43,7 @@ namespace GLHL{
 
 			RECT windowRect;
 			windowRect.left = (long)0;
-			windowRect.right = (long)640;
+			windowRect.right = (long)640;	// Choose window size 666 TODO template?
 			windowRect.top = (long)0;
 			windowRect.bottom = (long)480;
 
@@ -101,11 +111,10 @@ namespace GLHL{
 				selfDestroy();							// Reset The Display
 				MessageBoxA(NULL, "Can't Create A GL Rendering Context.", "ERROR", MB_OK | MB_ICONEXCLAMATION);
 				return FALSE;							// Return FALSE
-			} if (!wglMakeCurrent(mHDC, mHRC)){				// Try To Activate The Rendering Context
-				selfDestroy();                         // Reset The Display
-				MessageBoxA(NULL, "Can't Activate The GL Rendering Context.", "ERROR", MB_OK | MB_ICONEXCLAMATION);
-				return FALSE;                           // Return FALSE
 			}
+
+			makeCurrent();
+
 			//ShowWindow(mHWnd, SW_SHOW);
 			//SetForegroundWindow(mHWnd);
 			//SetFocus(mHWnd);

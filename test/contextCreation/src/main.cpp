@@ -27,8 +27,8 @@ int main(void){
 	
 	int command = 1;
 	thread t1(openGLThread, true, 0.5);
-
-
+	thread t2(openGLThread, true, 1);
+	
 	do{
 		cin >> command;
 	} while (command != 0);
@@ -63,8 +63,8 @@ void openGLThread(bool _draw, GLfloat _red){
 	while(running){
 		//window->peekMessage();
 		//window->swapBuffers();
-		if (_draw)
-			drawOnBuffer(640, 480, sProgram, _red);
+		//if (_draw)
+		//	drawOnBuffer(640, 480, sProgram, _red);
 	}
 
 	delete driver;

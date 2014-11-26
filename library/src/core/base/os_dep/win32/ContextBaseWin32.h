@@ -20,7 +20,8 @@ namespace GLHL{
 		class ContextBaseWin32{
 		public:
 			ContextBaseWin32();
-
+			
+			void makeCurrent();
 		private:
 			bool initContext();
 
@@ -37,6 +38,8 @@ namespace GLHL{
 
 	}
 	typedef GLHL_WIN32::ContextBaseWin32 ContextBase;
-#endif
+
 }	//	namespace GLHL
+
+#endif	// _WIN32
 #endif	//	_GLHL_CORE_BASE_CONTEXT_BASE_WIN32_H_

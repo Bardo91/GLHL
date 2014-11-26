@@ -2,63 +2,34 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2014-01-28											//
+//			Date:	2014-22-26											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
 //
 
 #ifdef __linux__
 
-#include "WindowGLLinux.h"
-
-#include <iostream>
-#include <cassert>
+#include "ContextBaseLinux.h"
 
 namespace GLHL {
 	namespace GLHL_LINUX{
 		//---------------------------------------------------------------------------------
-		WindowGLLinux::WindowGLLinux(int _width, int _height){
-			mWidth = _width;
-			mHeight = _height;
-
+		ContextBaseLinux::ContextBaseLinux(){
 			initializeX();
 
 			initializeWindow();
 		}
 
 		//---------------------------------------------------------------------------------
-		void WindowGLLinux::peekMessage(){
-			XNextEvent(mDpy, &mXev);
-        
-	        if(mXev.type == Expose) {
-				XGetWindowAttributes(mDpy, mWin, &mGwa);
-				glViewport(0, 0, mGwa.width, mGwa.height);
-	        }
-	                
-	        else if(mXev.type == KeyPress) {
-				glXMakeCurrent(mDpy, None, NULL);
-				glXDestroyContext(mDpy, mGlc);
-				XDestroyWindow(mDpy, mWin);
-				XCloseDisplay(mDpy);
-				exit(0);
-	        }
-		}
-
-		//---------------------------------------------------------------------------------
-		void WindowGLLinux::swapBuffers(){
-			glXSwapBuffers(mDpy, mWin);
-		}
-
-		//---------------------------------------------------------------------------------
-		void WindowGLLinux::makeCurrent(){
+		void ContextBaseLinux::makeCurrent(){
 			glXMakeCurrent(mDpy, mWin, mGlc);
 		}
 
 		//---------------------------------------------------------------------------------
-		void WindowGLLinux::initializeX(){
-			 mDpy = XOpenDisplay(NULL);	// Null means that the graphical output will be send to this same computer.
- 	
- 			if(mDpy == NULL) {
+		void ContextBaseLinux::initializeX(){
+			mDpy = XOpenDisplay(NULL);	// Null means that the graphical output will be send to this same computer.
+
+			if (mDpy == NULL) {
 				std::cout << "cannot connect to X server" << std::endl;
 				assert(false);	// Cant connect to X server.
 			}
@@ -68,13 +39,13 @@ namespace GLHL {
 		}
 
 		//---------------------------------------------------------------------------------
-		void WindowGLLinux::initializeWindow(){
+		void ContextBaseLinux::initializeWindow(){
 			mVi = glXChooseVisual(mDpy, 0, mAtt);	// Select visual adapted to our needs ("mAtt").
 
-			if(mVi == NULL) {
+			if (mVi == NULL) {
 				std::cout << "No appropriate visual found" << std::endl;
 				assert(false);	//	No appropriate visual found.
-			} 
+			}
 			std::cout << "visual " << ((void *)mVi->visualid) << " selected" << std::endl;
 
 			// Create a colormap for the window.
@@ -85,10 +56,7 @@ namespace GLHL {
 			mSwa.event_mask = ExposureMask | KeyPressMask;
 
 			// Create a window with previous data.
-			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, CWColormap | CWEventMask, &mSwa);	
-
-			// Make the window apperas
-			XMapWindow(mDpy, mWin);
+			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, CWColormap | CWEventMask, &mSwa);
 
 			// Change window's name
 			XStoreName(mDpy, mWin, mWndName.c_str());
@@ -98,16 +66,18 @@ namespace GLHL {
 			
 			makeCurrent();
 
- 			glEnable(GL_DEPTH_TEST); 
+			glEnable(GL_DEPTH_TEST);
 
 		}
 
 		//---------------------------------------------------------------------------------
-		bool WindowGLLinux::selfDestroy(){
-			
+		bool ContextBaseLinux::selfDestroy(){
+
 			return true;
 		}
 	}	// namespace GLHL_LINUX
 }	// namespace GLHL.
 
-#endif
+
+
+#endif	//	__linux__

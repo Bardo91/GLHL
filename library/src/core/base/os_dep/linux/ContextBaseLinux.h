@@ -2,34 +2,22 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2014-01-28											//
+//			Date:	2014-22-26											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
 //
 
-#ifdef __linux__
+#if defined (__linux__)
 
-#ifndef _GLHL_CORE_BASE_OSDEP_LINUX_WINDOWLINUX_H_
-#define _GLHL_CORE_BASE_OSDEP_LINUX_WINDOWLINUX_H_
-
-#include "../../WindowGL.h"
-
-#include <GL/glew.h>
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <GL/glx.h>
-
-#include <string>
+#ifndef _GLHL_CORE_BASE_OSDEP_LINUX_CONTEXT_BASE_LINUX_H_
+#define _GLHL_CORE_BASE_OSDEP_LINUX_CONTEXT_BASE_LINUX_H_
 
 namespace GLHL{
+	//-----------------------------------------------------------------------------------------------------------------
 	namespace GLHL_LINUX{
-		class WindowGLLinux : public WindowGL{
+		class ContextBaseLinux{
 		public:
-			WindowGLLinux(int _width, int _height);
-
-		public:
-			void peekMessage();
-			void swapBuffers();
+			ContextBaseLinux();
 
 			void makeCurrent();
 		private:
@@ -53,11 +41,13 @@ namespace GLHL{
 			XWindowAttributes       mGwa;
 			XEvent                  mXev;
 
-		};
-	}	//namespace GLHL_LINUX
-}	// namespace GLHL
+		};	//	class ContextBaseLinux
 
+	}	// namespace GLHL_LINUX
 
-#endif	// _GLHL_CORE_OSDEP_LINUX_WINDOWLINUX_H_
+	typedef GLHL_LINUX::ContextBaseLinux ContextBase;
 
-#endif
+}	//	namespace GLHL
+
+#endif	//	_GLHL_CORE_BASE_OSDEP_LINUX_CONTEXT_BASE_LINUX_H_
+#endif	//	__linux__

@@ -12,6 +12,8 @@
 #include "WindowGLWin32.h"
 #include "OSHandleWin32.h"
 
+#include <cassert>
+
 namespace GLHL {
 	namespace GLHL_WIN32{
 		//---------------------------------------------------------------------------------
@@ -44,6 +46,15 @@ namespace GLHL {
 		//---------------------------------------------------------------------------------
 		void WindowGLWin32::swapBuffers(){
 			SwapBuffers(mHDC);		// Specific function of windows to swap the buffers between window buffer and GPU buffer
+		}
+
+		//---------------------------------------------------------------------------------
+		void WindowGLWin32::makeCurrent(){
+			if (!wglMakeCurrent(mHDC, mHRC)){				// Try To Activate The Rendering Context
+				selfDestroy();                         // Reset The Display
+				MessageBoxA(NULL, "Can't Activate The GL Rendering Context.", "ERROR", MB_OK | MB_ICONEXCLAMATION);
+				assert(false);                           // Return FALSE
+			}
 		}
 
 		//---------------------------------------------------------------------------------
@@ -123,11 +134,9 @@ namespace GLHL {
 				selfDestroy();							// Reset The Display
 				MessageBoxA(NULL,"Can't Create A GL Rendering Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 				return FALSE;							// Return FALSE
-			} if(!wglMakeCurrent(mHDC,mHRC)){				// Try To Activate The Rendering Context
-				selfDestroy();                         // Reset The Display
-				MessageBoxA(NULL,"Can't Activate The GL Rendering Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
-				return FALSE;                           // Return FALSE
-			}
+			} 
+
+			makeCurrent();
 
 			// Una vez que todo ha funcionado hasta aqui y hemos creado la ventana es hora de visualizarla, ponerla como activa, darle prioridad poniendola de tipo foreground y redimensionandola a los tamaños dados
 
