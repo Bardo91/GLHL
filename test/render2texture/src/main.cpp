@@ -9,7 +9,6 @@
 #include <src/core/glsl/ShaderProgram.h>
 #include <src/core/glsl/Shader.h>
 
-#include <SOIL.h>
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -72,7 +71,7 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	// create the framebuffer object
 	FrameBuffer fbo;
 	fbo.attachTexture(colorTex);
-	fbo.use();
+	fbo.linkAttachments();
 	
 	_program.use();
 
@@ -90,11 +89,9 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	glDrawArrays(GL_QUADS, 0, 4);
 	glFlush();
 	
-	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buf.data());
-	SOIL_save_image("result.bmp", SOIL_SAVE_TYPE_BMP, w, h, 4, buf.data());
-
-	//colorTex.saveTexture("result.png");
+	
+	colorTex.saveTexture("result.bmp");
+ 
 	glFinish();
 
 	std::cout << "finished" << std::endl;
