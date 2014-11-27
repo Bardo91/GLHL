@@ -26,6 +26,9 @@ namespace GLHL{
 			void peekMessage();
 			void swapBuffers();
 
+			void show();
+			void hide();
+
 			void makeCurrent();
 		private:
 			bool initializeWindow();

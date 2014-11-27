@@ -22,6 +22,9 @@ namespace GLHL {
 		virtual void peekMessage() = 0;
 		virtual void swapBuffers() = 0;
 
+		virtual void show() = 0;
+		virtual void hide() = 0;
+
 	protected:
 		WindowGL(){};
 

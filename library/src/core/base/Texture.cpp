@@ -22,14 +22,7 @@ namespace GLHL{
 		bind();
 		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, (unsigned) _type, _width, _height, 0, (unsigned) _type, GL_UNSIGNED_BYTE, nullptr);
 		
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-		//unbind();
-
-		mChannels = channels();
+		calcChannels();
 		mBufferSize = mWidth * mHeight * mChannels;
 	}
 
@@ -43,7 +36,7 @@ namespace GLHL{
 		DriverGPU::get()->getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &mHeight);
 		DriverGPU::get()->getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_INTERNAL_FORMAT, &mTexType);
 		
-		mChannels = channels();
+		calcChannels();
 		mBufferSize = mWidth * mHeight * mChannels;
 	}
 
@@ -61,7 +54,7 @@ namespace GLHL{
 		unsigned char *buffer = new unsigned char[mBufferSize];
 		
 		unbind();
-		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, mTexType, GL_UNSIGNED_BYTE, buffer);
 		SOIL_save_image(_fileName.c_str(), SOIL_SAVE_TYPE_BMP, mWidth, mHeight, mChannels, buffer);
 	}
 
@@ -76,23 +69,22 @@ namespace GLHL{
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------
-	GLint Texture::channels(){
-		unsigned channels = 0;
+	void Texture::calcChannels(){
 		switch (mTexType) {
 		case GL_RGB:
 		case GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE:
-			channels = 3;
+			mTexType = GL_RGB;
+			mChannels = 3;
 			break;
 		case GL_RGBA:
 		case GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE:
-			channels = 4;
+			mTexType = GL_RGBA;
+			mChannels = 4;
 			break;
 		default:
 			assert(false);
 			break;
 		}
-
-		return channels;
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------

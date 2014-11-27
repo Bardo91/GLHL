@@ -49,6 +49,17 @@ namespace GLHL {
 			glXSwapBuffers(mDpy, mWin);
 		}
 
+
+		//---------------------------------------------------------------------------------
+		void WindowGLLinux::show(){
+
+		}
+
+		//---------------------------------------------------------------------------------
+		void WindowGLLinux::hide(){
+
+		}
+
 		//---------------------------------------------------------------------------------
 		void WindowGLLinux::makeCurrent(){
 			glXMakeCurrent(mDpy, mWin, mGlc);

@@ -30,6 +30,9 @@ namespace GLHL{
 		public:
 			void peekMessage();
 			void swapBuffers();
+			
+			void show();
+			void hide();
 
 			void makeCurrent();
 		private:

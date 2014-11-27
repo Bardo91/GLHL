@@ -30,8 +30,14 @@ namespace GLHL{
 		void saveTexture(std::string _fileName);
 		void bind();
 		void unbind();
+
+	public:
+		unsigned width()	const { return mWidth; };
+		unsigned height()	const { return mHeight; };
+		unsigned channels()	const { return mChannels; };
+
 	private:
-		GLint channels();
+		void calcChannels();
 
 		Texture(Texture &_tex);
 	private:

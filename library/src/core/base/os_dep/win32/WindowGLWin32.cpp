@@ -49,6 +49,18 @@ namespace GLHL {
 		}
 
 		//---------------------------------------------------------------------------------
+		void WindowGLWin32::show(){
+			ShowWindow(mHWnd, SW_SHOW);
+			SetForegroundWindow(mHWnd);
+			SetFocus(mHWnd);
+		}
+
+		//---------------------------------------------------------------------------------
+		void WindowGLWin32::hide(){
+			ShowWindow(mHWnd, SW_HIDE);
+		}
+
+		//---------------------------------------------------------------------------------
 		void WindowGLWin32::makeCurrent(){
 			if (!wglMakeCurrent(mHDC, mHRC)){				// Try To Activate The Rendering Context
 				selfDestroy();                         // Reset The Display
@@ -140,9 +152,7 @@ namespace GLHL {
 
 			// Una vez que todo ha funcionado hasta aqui y hemos creado la ventana es hora de visualizarla, ponerla como activa, darle prioridad poniendola de tipo foreground y redimensionandola a los tamaños dados
 
-			ShowWindow(mHWnd, SW_SHOW);
-			SetForegroundWindow(mHWnd);
-			SetFocus(mHWnd);
+			show();
 
 			return true;
 		}
