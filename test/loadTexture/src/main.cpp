@@ -1,13 +1,11 @@
  //// MAIN FILE TO TEST
 
 
-#include <src/core/WindowGL.h>
-#include <src/core/DriverGPU.h>
-#include <src/core/ShaderProgram.h>
-#include <src/core/Shader.h>
-#include <src/core/Texture.h>
-
-#include <SOIL.h>
+#include <src/core/base/WindowGL.h>
+#include <src/core/base/DriverGPU.h>
+#include <src/core/base/Texture.h>
+#include <src/core/glsl/ShaderProgram.h>
+#include <src/core/glsl/Shader.h>
 
 #include <fstream>
 #include <string>
@@ -52,8 +50,10 @@ int main(void){
 		window->peekMessage();
 		drawImage(texture, program);
 		#endif
-		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, &buf[0]);
-		SOIL_save_image("result.png", SOIL_SAVE_TYPE_BMP, w, h, 3, buf);
+		//glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, &buf[0]);
+		//SOIL_save_image("result.png", SOIL_SAVE_TYPE_BMP, w, h, 3, buf);	
+
+		texture.saveTexture("result.bmp");
 		window->swapBuffers();
 	} while (condition);
 
