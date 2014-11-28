@@ -11,6 +11,8 @@
 
 #include "ContextBaseLinux.h"
 
+#include <iostream>
+
 namespace GLHL {
 	namespace GLHL_LINUX{
 		//---------------------------------------------------------------------------------
