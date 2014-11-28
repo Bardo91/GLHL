@@ -12,6 +12,13 @@
 #ifndef _GLHL_CORE_BASE_OSDEP_LINUX_CONTEXT_BASE_LINUX_H_
 #define _GLHL_CORE_BASE_OSDEP_LINUX_CONTEXT_BASE_LINUX_H_
 
+#include <GL/glew.h>
+#include <X11/X.h>
+#include <X11/Xlib.h>
+#include <GL/glx.h>
+
+#include <string>
+
 namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
 	namespace GLHL_LINUX{
