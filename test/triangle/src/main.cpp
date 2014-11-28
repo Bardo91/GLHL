@@ -17,9 +17,6 @@ using namespace std;
 GLvoid drawOnBuffer(GLint _width, GLint _height, ShaderProgram _program);
 
 int main(void){
-	GLenum res = glewInit();
-	assert(res == GLEW_OK);
-	
 	WindowGL * window = WindowGL::createWindow(640, 480);
 
 	DriverGPU *driver = DriverGPU::get();
