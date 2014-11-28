@@ -51,9 +51,9 @@ namespace GLHL{
 		assert(_tex != 0);
 
 		unsigned attach = 0;
-		for (int i = 0; i < mAttachments.size(); ++i){
+		for (unsigned i = 0; i < mAttachments.size(); ++i){
 			if (mAttachments[i].second == _tex){
-				attach == GL_COLOR_ATTACHMENT0 + i;
+				attach = GL_COLOR_ATTACHMENT0 + i;
 			}
 		}
 		if (attach == 0)

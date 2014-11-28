@@ -16,7 +16,7 @@
 #include <vector>
 
 namespace GLHL{
-	const enum class eFrameBufferMode {	eRead = GL_READ_FRAMEBUFFER,
+	enum eFrameBufferMode {	eRead = GL_READ_FRAMEBUFFER,
 										eWrite = GL_DRAW_FRAMEBUFFER,
 										eReadWrite = GL_FRAMEBUFFER	};
 
