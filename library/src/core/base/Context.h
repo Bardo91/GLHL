@@ -11,10 +11,10 @@
 #define _GLHL_CORE_BASE_CONTEXT_H_
 
 #if defined (_WIN32)
-	#include "os_dep\win32\ContextBaseWin32.h"
+	#include "os_dep/win32/ContextBaseWin32.h"
 #endif
 #if defined (__linux__)
-	#include "os_dep\linux\ContextBaseLinux.h"
+	#include "os_dep/linux/ContextBaseLinux.h"
 #endif
 
 
