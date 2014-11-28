@@ -18,6 +18,7 @@
 
 
 namespace GLHL{
+	// 666 TODO: safer way with enum class?
 	enum eShaderType { eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER };
 
 	class Shader{
@@ -36,4 +37,4 @@ namespace GLHL{
 }	//	namespace GLHL
 
 
-#endif	_GLHL_CORE_GLSL_SHADER_H_
+#endif	//_GLHL_CORE_GLSL_SHADER_H_
