@@ -1,6 +1,6 @@
 #################################################
 ##
-##	GLHL makefile
+##	GLHL linux  makefile
 ##		Author: Pablo Ramon Soria
 ##		Date:	2014-10-25
 ##
