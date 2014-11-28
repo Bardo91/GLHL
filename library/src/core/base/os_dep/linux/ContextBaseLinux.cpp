@@ -12,6 +12,7 @@
 #include "ContextBaseLinux.h"
 
 #include <iostream>
+#include <cassert>
 
 namespace GLHL {
 	namespace GLHL_LINUX{
