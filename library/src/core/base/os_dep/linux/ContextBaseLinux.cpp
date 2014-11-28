@@ -59,7 +59,8 @@ namespace GLHL {
 			mSwa.event_mask = ExposureMask | KeyPressMask;
 
 			// Create a window with previous data.
-			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, CWColormap | CWEventMask, &mSwa);
+			// 666 TODO: add somewhere the size of the context fbo
+			mWin = XCreateWindow(mDpy, mRoot, 0, 0, 640, 480, 0, mVi->depth, InputOutput, mVi->visual, CWColormap | CWEventMask, &mSwa);
 
 			// Change window's name
 			XStoreName(mDpy, mWin, mWndName.c_str());
