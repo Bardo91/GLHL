@@ -33,7 +33,9 @@ int main(void){
 
 
 	while(1){
-		//window->peekMessate();
+	#ifdef _WIN32
+		window->peekMessage();
+	#endif
 
 		drawOnBuffer(640, 480, sProgram);
 
