@@ -6,18 +6,29 @@
 ##
 #################################################
 
-APP_NAME 	= libGLHL.so
+release ?= false
 
+APP_NAME 		= libGLHL.so
 
 CXX = g++
-CXX_FLAGS 	= -fPIC -std=c++11 -O3 -Wall -Werror -shared
 
-SRC_FILES 	:= $(shell find ./../../src/ -name '*.cpp')
-OBJ_FILES 	:= $(patsubst %.cpp, %.o, $(SRC_FILES))
+CXX_FLAGS_BASE 		= -fPIC -std=c++11 -Wall -Werror -shared
+CXX_RELEASE_FLAGS 	= -O3
+CXX_DEBUG_FLAGS 	= -g
 
-INCLUDE_DIR	:=	-I/usr/include/SOIL -I./
-LIB_DIR		:=
-DEPENDENCIES	:= -lSOIL -lX11 -lGL -lGLU -lGLEW
+SRC_FILES 		:= $(shell find ./../../src/ -name '*.cpp')
+OBJ_FILES 		:= $(patsubst %.cpp, %.o, $(SRC_FILES))
+
+INCLUDE_DIR		=	-I/usr/include/SOIL -I./
+LIB_DIR			=
+DEPENDENCIES		= -lSOIL -lX11 -lGL -lGLU -lGLEW
+
+ifeq ($(release), false)
+	CXX_FLAGS = $(CXX_FLAGS_BASE) $(CXX_DEBUG_FLAGS)
+endif
+ifeq ($(release), true)
+	CXX_FLAGS = $(CXX_FLAGS_BASE) $(CXX_RELEASE_FLAGS)
+endif
 
 all: rebuild
 
