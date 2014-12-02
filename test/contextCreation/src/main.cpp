@@ -21,7 +21,7 @@ using namespace std;
 GLvoid drawOnBuffer(GLint _width, GLint _height, ShaderProgram _program, GLfloat _red);
 void openGLThread(bool _draw, GLfloat _red);
 
-volatile boolean running = true;
+volatile bool running = true;
 
 int main(void){
 	
