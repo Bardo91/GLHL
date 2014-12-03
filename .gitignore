@@ -1,3 +1,4 @@
+*.so
 *.suo
 *.sdf
 *.user
@@ -5,7 +6,8 @@
 *.exe
 *.o
 *~
-
+/test/triangle/prj/linux/triangle
+/test/textX11/prj/linux/textX11
 /main/vs12/Debug
 /main/vs12/Release
 /main/Release
@@ -14,7 +16,6 @@
 /library/prj/vs13/Debug
 /test/loadTexture/prj/vs13/Debug
 /test/sobel/prj/vs13/Debug
-
 /test/frameBuffer/prj/vs13/Debug
 /test/render2texture/prj/vs13/Debug
 /library/prj/vs13/Release
