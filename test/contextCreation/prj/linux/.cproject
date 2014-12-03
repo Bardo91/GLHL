@@ -25,9 +25,12 @@
 									<listOptionValue builtIn="false" value="/usr/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.8.2"/>
 									<listOptionValue builtIn="false" value="/home/bardo91/programming/GLHL/library"/>
+									<listOptionValue builtIn="false" value="/usr/include/i386-linux-gnu/c++/4.8"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.8"/>
 								</option>
-								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.948867591" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.948867591" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__linux__"/>
+									<listOptionValue builtIn="false" value="__cplusplus=201103L"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.284581663" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
@@ -36,9 +39,12 @@
 									<listOptionValue builtIn="false" value="/usr/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.8.2"/>
 									<listOptionValue builtIn="false" value="/home/bardo91/programming/GLHL/library"/>
+									<listOptionValue builtIn="false" value="/usr/include/i386-linux-gnu/c++/4.8"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.8"/>
 								</option>
-								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.682017725" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.682017725" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__linux__"/>
+									<listOptionValue builtIn="false" value="__cplusplus=201103L"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1805226726" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
@@ -47,9 +53,12 @@
 									<listOptionValue builtIn="false" value="/usr/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.8.2"/>
 									<listOptionValue builtIn="false" value="/home/bardo91/programming/GLHL/library"/>
+									<listOptionValue builtIn="false" value="/usr/include/i386-linux-gnu/c++/4.8"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.8"/>
 								</option>
-								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.682680510" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.682680510" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__linux__"/>
+									<listOptionValue builtIn="false" value="__cplusplus=201103L"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.221262155" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
