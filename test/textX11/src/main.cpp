@@ -46,43 +46,30 @@ int main(void) {
 	//GLXPixmap pixmap = glXCreatePixmap(display, configs[1], pixmap, nullptr);
 
 	// Creating Window
-	//int attribsWindow[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
-    //
-	//XVisualInfo *visual = glXChooseVisual(display, 0, attribsWindow);
-	//Window rootWnd = DefaultRootWindow(display);
-    //
-	//XSetWindowAttributes wndAttrib;
-	//wndAttrib.colormap = XCreateColormap(display, rootWnd, visual->visual, AllocNone);
-	//wndAttrib.event_mask = ExposureMask | KeyPressMask;
-    //
-	//Window window = XCreateWindow(	display,		// X display
-	//								rootWnd, 		// parent window
-	//								0, 0, 640,480,	// X, Y, width, and height,
-	//								0,				// Border width
-	//								visual->depth,  //32,				//depth
-	//								InputOutput,		// type
-	//								visual->visual,
-	//								CWColormap| CWEventMask,
-	//								&wndAttrib);
-    //
-    //
-	////XStoreName(display, window, "testing X11");
-	//XMapWindow(display, window);
-	//GLXContext context = glXCreateContext(display, visual, NULL, true);
-	//glXMakeCurrent(display, window, context);
+	int attribsWindow[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
 
-	const int attribList[] = {	GLX_DOUBLEBUFFER,
-								GLX_RED_SIZE, 8,
-								GLX_GREEN_SIZE, 8,
-								GLX_BLUE_SIZE, 8 };
-	int nElem;
-	int screen = 0;
+	XVisualInfo *visual = glXChooseVisual(display, 0, attribsWindow);
+	Window rootWnd = DefaultRootWindow(display);
 
-	GLXFBConfig *config = glXChooseFBConfig(display, screen, attribList, &nElem);
+	XSetWindowAttributes wndAttrib;
+	wndAttrib.colormap = XCreateColormap(display, rootWnd, visual->visual, AllocNone);
+	wndAttrib.event_mask = ExposureMask | KeyPressMask;
 
-	Window Xwindow = XCreateWindow(display, DefaultRootWindow(display), )
+	Window window = XCreateWindow(	display,		// X display
+									rootWnd, 		// parent window
+									0, 0, 640,480,	// X, Y, width, and height,
+									0,				// Border width
+									visual->depth,  //32,				//depth
+									InputOutput,		// type
+									visual->visual,
+									CWColormap| CWEventMask,
+									&wndAttrib);
 
-	GLXWindow window = glXCreateWindow(display, config[0], win, attribList);
+
+	//XStoreName(display, window, "testing X11");
+	XMapWindow(display, window);
+	GLXContext context = glXCreateContext(display, visual, NULL, true);
+	glXMakeCurrent(display, window, context);
 
 	// END
 	bool condition = true;
