@@ -22,16 +22,16 @@ int main(void) {
 
 	//queryEveryConfig(display);
 
-	const int attribsPbuffer[] = { GLX_DOUBLEBUFFER, 0, GLX_BUFFER_SIZE, 32,
+	int attribsPbuffer[] = { GLX_DOUBLEBUFFER, 0, GLX_BUFFER_SIZE, 32,
 	GLX_RED_SIZE, 8, GLX_BLUE_SIZE, 8, GLX_RED_SIZE, 8,
 	GLX_DRAWABLE_TYPE, GLX_PBUFFER, None };
 
-	GLXFBConfig *configsPbuffer = queryConfigAttb(display, attribsPbuffer);
+	GLXFBConfig *configs = queryConfigAttb(display, attribsPbuffer);
 
 	// Creating Pbuffer
-	GLXPbuffer pbuffer = glXCreatePbuffer(display, configsPbuffer[1], nullptr);
+	GLXPbuffer pbuffer = glXCreatePbuffer(display, configs[1], nullptr);
 
-	GLXContext contextpbuffer = glXCreateNewContext(display, configsPbuffer[1],
+	GLXContext contextpbuffer = glXCreateNewContext(display, configs[1],
 			GLX_RGBA_TYPE, NULL, true);
 
 	if (glXMakeContextCurrent(display, pbuffer, pbuffer, contextpbuffer)) {
@@ -40,9 +40,32 @@ int main(void) {
 	}
 
 	// Creating Pixmap
+	//XVisualInfo * visualInfo = glXChooseVisual(display, 0, attribsPbuffer);
+	//Pixmap pixmap = XCreatePixmap(display, 640, 640, 480, 32);
+	//GLXPixmap pixmap = glXCreatePixmap(display, configs[1], pixmap, nullptr);
 
 	// Creating Window
+	int attribsWindow[] = { GLX_DOUBLEBUFFER, 1, GLX_BUFFER_SIZE, 32,
+	GLX_RED_SIZE, 8, GLX_BLUE_SIZE, 8, GLX_RED_SIZE, 8,
+	GLX_DRAWABLE_TYPE, GLX_WINDOW, None };
 
+
+	XVisualInfo visual = glXChooseVisual(display, 0, attribsWindow);
+	Window rootWnd = XRootWindow(display, 0);
+	Window window = XCreateWindow(	display,		// X display
+									rootWnd, 		// parent window
+									0, 0, 640,480,	// X, Y, width, and height,
+									0,				// Border width
+									32,				//depth
+									InputOutput,		// type
+									visual.visual,
+									0,
+									attrib);
+
+
+	GLXWindow = glXCreateWindow(display, configWnd, window, attribsWindow);
+
+	// END
 	return 0;
 }
 
