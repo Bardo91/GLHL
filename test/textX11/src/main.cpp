@@ -16,67 +16,27 @@ GLXFBConfig* queryEveryConfig(Display *_display);
 GLXFBConfig* queryConfigAttb(Display *_display, const int * _attribs);
 
 int main(void) {
-	Display *display = XOpenDisplay(0);
+	Display *display = XOpenDisplay(NULL);
 	//int maxScreens = XScreenCount(display);
+	std::cout << "connected to X server" << std::endl;
+	static int visualAttribs[] = {None};
+    int numberOfFrameBufferConfigurations;
+    GLXFBConfig *fbConfigs = glXChooseFBConfig(display, DefaultScreen(display), visualAttribs, &numberOfFrameBufferConfigurations);
+    std::cout << "got fbconfigs" << std::endl;
+    int pBufferAttribs[] = { GLX_PBUFFER_WIDTH, 32, GLX_PBUFFER_HEIGHT, 32, None};
 
-	std::cout << "Querying FBconfig to create a pbuffer" << std::endl;
-
-	//queryEveryConfig(display);
-
-	//int attribsPbuffer[] = { GLX_DOUBLEBUFFER, 0, GLX_BUFFER_SIZE, 32,
-	//GLX_RED_SIZE, 8, GLX_BLUE_SIZE, 8, GLX_RED_SIZE, 8,
-	//GLX_DRAWABLE_TYPE, GLX_PBUFFER, None };
-
-	//GLXFBConfig *configs = queryConfigAttb(display, attribsPbuffer);
-
-	// Creating Pbuffer
-	//GLXPbuffer pbuffer = glXCreatePbuffer(display, configs[1], nullptr);
-    //
-	//GLXContext contextpbuffer = glXCreateNewContext(display, configs[1],
-	//		GLX_RGBA_TYPE, NULL, true);
-    //
-	//if (glXMakeContextCurrent(display, pbuffer, pbuffer, contextpbuffer)) {
-	//	std::cout << "Current context is a pbuffer" << std::endl;
-    //
-	//}
-
-	// Creating Pixmap
-	//XVisualInfo * visualInfo = glXChooseVisual(display, 0, attribsPbuffer);
-	//Pixmap pixmap = XCreatePixmap(display, 640, 640, 480, 32);
-	//GLXPixmap pixmap = glXCreatePixmap(display, configs[1], pixmap, nullptr);
-
-	// Creating Window
-	int attribsWindow[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
-
-	XVisualInfo *visual = glXChooseVisual(display, 0, attribsWindow);
-	Window rootWnd = DefaultRootWindow(display);
-
-	XSetWindowAttributes wndAttrib;
-	wndAttrib.colormap = XCreateColormap(display, rootWnd, visual->visual, AllocNone);
-	wndAttrib.event_mask = ExposureMask | KeyPressMask;
-
-	Window window = XCreateWindow(	display,		// X display
-									rootWnd, 		// parent window
-									0, 0, 640,480,	// X, Y, width, and height,
-									0,				// Border width
-									visual->depth,  //32,				//depth
-									InputOutput,		// type
-									visual->visual,
-									CWColormap| CWEventMask,
-									&wndAttrib);
-
-
-	//XStoreName(display, window, "testing X11");
-	XMapWindow(display, window);
-	GLXContext context = glXCreateContext(display, visual, NULL, true);
-	glXMakeCurrent(display, window, context);
-
-	// END
-	bool condition = true;
-
-	while(condition){
-
+    GLXContext openGLContext = glXCreateNewContext(display, fbConfigs[0], GLX_RGBA_TYPE, NULL, false);
+    std::cout << "created opengl context" << std::endl;
+    GLXPbuffer pbuffer = glXCreatePbuffer(display, fbConfigs[0], pBufferAttribs);
+	XFree(fbConfigs);
+	XSync(display, False);
+	if(!glXMakeContextCurrent(display, pbuffer, pbuffer, openGLContext)){
+		std::cout << "error with content creation";
+		return -1;
 	}
+	std::cout << "make context current" << std::endl;
+	glXMakeCurrent(display, pbuffer, openGLContext);
+	std::cout << "make context current?? twice??" << std::endl;
 
 	return 0;
 }
