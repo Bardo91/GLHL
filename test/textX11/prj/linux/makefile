@@ -6,18 +6,28 @@
 ##
 #################################################
 
-APP_NAME 	= textX11
+release ?= false
 
+APP_NAME 		= testX11
 
 CXX = g++
-CXX_FLAGS 	= -std=c++11 -Wall -Werror -g
+CXX_FLAGS_BASE 		= -std=c++11 -Wall -Werror
+CXX_RELEASE_FLAGS 	= -O3
+CXX_DEBUG_FLAGS 	= -g
 
-SRC_FILES 	:= $(shell find ./../../src/ -name '*.cpp')
-OBJ_FILES 	:= $(patsubst %.cpp, %.o, $(SRC_FILES))
+SRC_FILES 		:= $(shell find ./../../src/ -name '*.cpp')
+OBJ_FILES 		:= $(patsubst %.cpp, %.o, $(SRC_FILES))
 
-INCLUDE_DIR	:=	-I/usr/include/SOIL -I../../../../library
-LIB_DIR		:=	-L../../../../library/prj/linux
-DEPENDENCIES	:= -lSOIL -lGLHL -lX11 -lGL -lGLU -lGLEW
+INCLUDE_DIR		:=	-I/usr/include/SOIL -I../../../../library
+LIB_DIR			:=	-L../../../../library/prj/linux
+DEPENDENCIES		:= -lSOIL -lGLHL -lX11 -lGL -lGLU -lGLEW
+
+ifeq ($(release), false)
+	CXX_FLAGS = $(CXX_FLAGS_BASE) $(CXX_DEBUG_FLAGS)
+endif
+ifeq ($(release), true)
+	CXX_FLAGS = $(CXX_FLAGS_BASE) $(CXX_RELEASE_FLAGS)
+endif
 
 
 all: rebuild

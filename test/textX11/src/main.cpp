@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void showFBConfigs(GLXFBConfig *_configs, int _nElem);
+void showFBConfigs(Display *_display, GLXFBConfig *_configs, int _nElem);
 GLXFBConfig* queryEveryConfig(Display *_display);
 GLXFBConfig* queryConfigAttb(Display *_display, const int * _attribs);
 
@@ -20,14 +20,19 @@ int main(void) {
 	//int maxScreens = XScreenCount(display);
 	std::cout << "connected to X server" << std::endl;
 	static int visualAttribs[] = {None};
-    int numberOfFrameBufferConfigurations;
-    GLXFBConfig *fbConfigs = glXChooseFBConfig(display, DefaultScreen(display), visualAttribs, &numberOfFrameBufferConfigurations);
+    int nElems;
+    GLXFBConfig *fbConfigs = glXChooseFBConfig(display, DefaultScreen(display), visualAttribs, &nElems);
     std::cout << "got fbconfigs" << std::endl;
     int pBufferAttribs[] = { GLX_PBUFFER_WIDTH, 32, GLX_PBUFFER_HEIGHT, 32, None};
 
-    GLXContext openGLContext = glXCreateNewContext(display, fbConfigs[0], GLX_RGBA_TYPE, NULL, false);
+    showFBConfigs(display, fbConfigs, nElems);
+    std::cout << "Choose display:" << std::endl;
+    int index = -1;
+    std::cin >> index;
+
+    GLXContext openGLContext = glXCreateNewContext(display, fbConfigs[index], GLX_RGBA_TYPE, NULL, false);
     std::cout << "created opengl context" << std::endl;
-    GLXPbuffer pbuffer = glXCreatePbuffer(display, fbConfigs[0], pBufferAttribs);
+    GLXPbuffer pbuffer = glXCreatePbuffer(display, fbConfigs[index], pBufferAttribs);
 	XFree(fbConfigs);
 	XSync(display, False);
 	if(!glXMakeContextCurrent(display, pbuffer, pbuffer, openGLContext)){
@@ -35,8 +40,6 @@ int main(void) {
 		return -1;
 	}
 	std::cout << "make context current" << std::endl;
-	glXMakeCurrent(display, pbuffer, openGLContext);
-	std::cout << "make context current?? twice??" << std::endl;
 
 	return 0;
 }

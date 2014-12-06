@@ -28,7 +28,7 @@ int main(void){
 	sProgram.attachShader(vShader);
 	sProgram.attachShader(fShader);
 	sProgram.bindAttribute(0, "vPosition");
-	driver->bindFragDataLocation(sProgram, 0, "outColor");
+	//driver->bindFragDataLocation(sProgram, 0, "outColor");
 	sProgram.link();
 
 
