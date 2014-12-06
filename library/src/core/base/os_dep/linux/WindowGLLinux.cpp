@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
-//			Author: Pablo Ramón Soria									//
+//			Author: Pablo Ramï¿½n Soria									//
 //			Date:	2014-01-28											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
@@ -80,23 +80,29 @@ namespace GLHL {
 
 		//---------------------------------------------------------------------------------
 		void WindowGLLinux::initializeWindow(){
-			mVi = glXChooseVisual(mDpy, 0, mAtt);	// Select visual adapted to our needs ("mAtt").
+			GLint fbAtt[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
+			GLXFBConfig *fbConfigs;
+			int nConfigs;
 
-			if(mVi == NULL) {
+			fbConfigs = glXChooseFBConfig(mDpy, DefaultScreen(mDpy), fbAtt, &nConfigs);
+			assert(nConfigs != 0);	//	Error there aren't FBConfigs adapted to your needs.
+
+			XVisualInfo *visualInfo = glXGetVisualFromFBConfig(mDpy, fbConfigs[0]);
+
+			if(visualInfo == NULL) {
 				std::cout << "No appropriate visual found" << std::endl;
 				assert(false);	//	No appropriate visual found.
 			} 
-			std::cout << "visual " << ((void *)mVi->visualid) << " selected" << std::endl;
 
 			// Create a colormap for the window.
-			mCmap = XCreateColormap(mDpy, mRoot, mVi->visual, AllocNone);
+			mCmap = XCreateColormap(mDpy, mRoot, visualInfo->visual, AllocNone);
 
 			// Fill structure with window attributes.
 			mSwa.colormap = mCmap;
 			mSwa.event_mask = ExposureMask | KeyPressMask;
 
 			// Create a window with previous data.
-			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, CWColormap | CWEventMask, &mSwa);	
+			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, visualInfo->depth, InputOutput, visualInfo->visual, CWColormap | CWEventMask, &mSwa);
 
 			// Make the window apperas
 			XMapWindow(mDpy, mWin);
@@ -105,9 +111,10 @@ namespace GLHL {
 			XStoreName(mDpy, mWin, mWndName.c_str());
 
 			// Create the openGL context
-			mGlc = glXCreateContext(mDpy, mVi, NULL, GL_TRUE);	// Last parameter set direct rendering direct
-			
-			makeCurrent();
+			mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, GL_TRUE);
+
+			glXMakeCurrent(mDpy, mWin, mGlc);
+			//makeCurrent();
 
  			glEnable(GL_DEPTH_TEST); 
 

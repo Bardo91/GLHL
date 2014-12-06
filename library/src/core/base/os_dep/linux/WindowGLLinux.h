@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
-//			Author: Pablo Ramón Soria									//
+//			Author: Pablo Ramï¿½n Soria									//
 //			Date:	2014-01-28											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
@@ -47,8 +47,6 @@ namespace GLHL{
 
 			Display                 *mDpy;
 			Window                  mRoot;
-			GLint                   mAtt[5] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
-			XVisualInfo             *mVi;
 			Colormap                mCmap;
 			XSetWindowAttributes    mSwa;
 			Window                  mWin;
