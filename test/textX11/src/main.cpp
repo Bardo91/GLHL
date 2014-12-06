@@ -21,7 +21,7 @@ void createWindow2();
 
 int main(void) {
 	//createPbuffer();
-	createWindow();
+	createWindow2();
 	return 0;
 }
 
@@ -163,7 +163,6 @@ void createWindow(){
 void createWindow2(){
     Display              *dpy;
     Window                xWin;
-    XEvent                event;
     XVisualInfo          *vInfo;
     XSetWindowAttributes  swa;
     GLXFBConfig          *fbConfigs;
@@ -171,7 +170,6 @@ void createWindow2(){
     GLXWindow             glxWin;
     int                   swaMask;
     int                   numReturned;
-    int                   swapFlag = True;
 
     const int doubleBufferAttributes[] = {None};
 
@@ -186,12 +184,6 @@ void createWindow2(){
     ** buffered configuration first */
     fbConfigs = glXChooseFBConfig( dpy, DefaultScreen(dpy),
                                    doubleBufferAttributes, &numReturned );
-
-    if ( fbConfigs == NULL ) {  /* no double buffered configs available */
-      fbConfigs = glXChooseFBConfig( dpy, DefaultScreen(dpy),
-                                     singleBufferAttributess, &numReturned );
-      swapFlag = False;
-    }
 
     /* Create an X colormap and window with a visual matching the first
     ** returned framebuffer config */
@@ -218,7 +210,6 @@ void createWindow2(){
     
     /* Map the window to the screen, and wait for it to appear */
     XMapWindow( dpy, xWin );
-    XIfEvent( dpy, &event, WaitForNotify, (XPointer) xWin );
 
     /* Bind the GLX context to the Window */
     glXMakeContextCurrent( dpy, glxWin, glxWin, context );
