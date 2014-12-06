@@ -104,16 +104,19 @@ namespace GLHL {
 			// Create a window with previous data.
 			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, visualInfo->depth, InputOutput, visualInfo->visual, CWColormap | CWEventMask, &mSwa);
 
-			// Make the window apperas
-			XMapWindow(mDpy, mWin);
-
 			// Change window's name
 			XStoreName(mDpy, mWin, mWndName.c_str());
 
 			// Create the openGL context
 			mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, GL_TRUE);
 
-			glXMakeCurrent(mDpy, mWin, mGlc);
+			GLXWindow glxWin = glXCreateWindow( mDpy, fbConfigs[0], mWin, NULL );
+
+			// Make the window appears
+			XMapWindow(mDpy, mWin);
+
+			glXMakeContextCurrent(mDpy, glxWin, glxWin, mGlc);
+			//glXMakeCurrent(mDpy, mWin, mGlc);
 			//makeCurrent();
 
  			glEnable(GL_DEPTH_TEST); 
