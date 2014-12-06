@@ -130,15 +130,26 @@ void createWindow(){
 
 	std::cout << "Connected to X Server" << std::endl;
 
-	Window wnd = XCreateWindow(	display, 
-					DefaultRootWindow(display),
-					0, 0, 640, 480,
-					0,
-					depth,
-					InputOutput,
-					visual,
-					attMask,
-					att);
+	int screen = 0;
+	int depth = XDefaultDepth(display, screen);
+	Visual *visual = XDefaultVisual(display, screen);
+
+	unsigned long attMask = 0;
+	XSetWindowAttributes *att = new XSetWindowAttributes();
+
+	Window wnd = XCreateWindow(	display, 			// Connection to X server
+					DefaultRootWindow(display),	// Parent window
+					0, 0, 640, 480,			// x, y, width and height
+					0,				// Border width
+					depth,				// Wnd depth
+					InputOutput,			// Window class (inputonly or inputoutput)
+					visual,				// Visual type
+					attMask,			// Which att are defined
+					att);				// Strucure of attributes
+
+	std::cout << "Window created" << std::endl;
 
 
+	XDestroyWindow(display, wnd);
+	delete att;
 }
