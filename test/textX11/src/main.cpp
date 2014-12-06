@@ -1,3 +1,4 @@
+
 //// MAIN FILE TO TEST
 
 #include <fstream>
@@ -16,6 +17,7 @@ GLXFBConfig* queryEveryConfig(Display *_display);
 GLXFBConfig* queryConfigAttb(Display *_display, const int * _attribs);
 void createPbuffer();
 void createWindow();
+void createWindow2();
 
 int main(void) {
 	//createPbuffer();
@@ -156,3 +158,71 @@ void createWindow(){
 	XDestroyWindow(display, wnd);
 	delete att;
 }
+
+//---------------------------------------------------------------------------
+void createWindow2(){
+    Display              *dpy;
+    Window                xWin;
+    XEvent                event;
+    XVisualInfo          *vInfo;
+    XSetWindowAttributes  swa;
+    GLXFBConfig          *fbConfigs;
+    GLXContext            context;
+    GLXWindow             glxWin;
+    int                   swaMask;
+    int                   numReturned;
+    int                   swapFlag = True;
+
+    const int doubleBufferAttributes[] = {None};
+
+    /* Open a connection to the X server */
+    dpy = XOpenDisplay( NULL );
+    if ( dpy == NULL ) {
+        printf( "Unable to open a connection to the X server\n" );
+        exit( EXIT_FAILURE );
+    }
+
+    /* Request a suitable framebuffer configuration - try for a double 
+    ** buffered configuration first */
+    fbConfigs = glXChooseFBConfig( dpy, DefaultScreen(dpy),
+                                   doubleBufferAttributes, &numReturned );
+
+    if ( fbConfigs == NULL ) {  /* no double buffered configs available */
+      fbConfigs = glXChooseFBConfig( dpy, DefaultScreen(dpy),
+                                     singleBufferAttributess, &numReturned );
+      swapFlag = False;
+    }
+
+    /* Create an X colormap and window with a visual matching the first
+    ** returned framebuffer config */
+    vInfo = glXGetVisualFromFBConfig( dpy, fbConfigs[0] );
+
+    swa.border_pixel = 0;
+    swa.event_mask = StructureNotifyMask;
+    swa.colormap = XCreateColormap( dpy, RootWindow(dpy, vInfo->screen),
+                                    vInfo->visual, AllocNone );
+
+    swaMask = CWBorderPixel | CWColormap | CWEventMask;
+
+    xWin = XCreateWindow( dpy, RootWindow(dpy, vInfo->screen), 0, 0, 256, 256,
+                          0, vInfo->depth, InputOutput, vInfo->visual,
+                          swaMask, &swa );
+
+    /* Create a GLX context for OpenGL rendering */
+    context = glXCreateNewContext( dpy, fbConfigs[0], GLX_RGBA_TYPE,
+				 NULL, True );
+
+    /* Create a GLX window to associate the frame buffer configuration
+    ** with the created X window */
+    glxWin = glXCreateWindow( dpy, fbConfigs[0], xWin, NULL );
+    
+    /* Map the window to the screen, and wait for it to appear */
+    XMapWindow( dpy, xWin );
+    XIfEvent( dpy, &event, WaitForNotify, (XPointer) xWin );
+
+    /* Bind the GLX context to the Window */
+    glXMakeContextCurrent( dpy, glxWin, glxWin, context );
+
+ 
+}
+
