@@ -153,10 +153,6 @@ void createWindow(){
 	
 	std::cout << "Mapped window" << std::endl;
 
-	GLXContext context = glXCreateContext(display, wnd, NULL, true);
-
-	std::cout << "Context Created << std::endl;
-
 	XDestroyWindow(display, wnd);
 	delete att;
 }
