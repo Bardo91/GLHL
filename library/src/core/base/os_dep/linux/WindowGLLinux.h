@@ -12,8 +12,6 @@
 #ifndef _GLHL_CORE_BASE_OSDEP_LINUX_WINDOWLINUX_H_
 #define _GLHL_CORE_BASE_OSDEP_LINUX_WINDOWLINUX_H_
 
-#include "../../WindowGL.h"
-
 #include <GL/glew.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -42,8 +40,8 @@ namespace GLHL{
 			bool selfDestroy();
 
 		private:
-
-			std::string mWndName;
+			int mHeight, mWidth;
+			std::string mName;
 
 			Display                 *mDpy;
 			Window                  mRoot;
@@ -58,6 +56,7 @@ namespace GLHL{
 
 		};
 	}	//namespace GLHL_LINUX
+	typedef GLHL_LINUX::WindowGLLinux WindowGLBase;
 }	// namespace GLHL
 
 
