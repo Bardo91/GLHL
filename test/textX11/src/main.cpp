@@ -167,7 +167,7 @@ void createWindow2(){
     XSetWindowAttributes  swa;
     GLXFBConfig          *fbConfigs;
     GLXContext            context;
-    GLXWindow             glxWin;
+    //GLXWindow             glxWin;
     int                   swaMask;
     int                   numReturned;
 
@@ -206,13 +206,14 @@ void createWindow2(){
 
     /* Create a GLX window to associate the frame buffer configuration
     ** with the created X window */
-    glxWin = glXCreateWindow( dpy, fbConfigs[0], xWin, NULL );
+    //glxWin = glXCreateWindow( dpy, fbConfigs[0], xWin, NULL );
     
     /* Map the window to the screen, and wait for it to appear */
     XMapWindow( dpy, xWin );
 
     /* Bind the GLX context to the Window */
-    glXMakeContextCurrent( dpy, glxWin, glxWin, context );
+    //glXMakeContextCurrent( dpy, glxWin, glxWin, context );
+    glXMakeContextCurrent( dpy, xWin, xWin, context );
 
  
 }
