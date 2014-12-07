@@ -40,11 +40,12 @@ namespace GLHL{
 			bool selfDestroy();
 
 		private:
-
-			std::string mWndName;
+			int mWidth, mHeight;
+			std::string mName;
 
 			Display                 *mDpy;
 			Window                  mRoot;
+			XVisualInfo 		*mVi;
 			Colormap                mCmap;
 			XSetWindowAttributes    mSwa;
 			Window                  mWin;

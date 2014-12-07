@@ -17,7 +17,7 @@
 namespace GLHL {
 	namespace GLHL_LINUX{
 		//---------------------------------------------------------------------------------
-		WindowGLLinux::WindowGLLinux(std::string _name, int _width, int _height) : mWidth(_width), mHeigh(_height), mName(_name) {
+		WindowGLLinux::WindowGLLinux(std::string _name, int _width, int _height) : mWidth(_width), mHeight(_height), mName(_name) {
 			initializeWindow();
 		}
 
@@ -76,41 +76,41 @@ namespace GLHL {
 			fbConfigs = glXChooseFBConfig(mDpy, DefaultScreen(mDpy), fbAtt, &nConfigs);
 			assert(nConfigs != 0);	//	Error there aren't FBConfigs adapted to your needs.
 
-			XVisualInfo *visualInfo = glXGetVisualFromFBConfig(mDpy, fbConfigs[0]);
+			mVi = glXGetVisualFromFBConfig(mDpy, fbConfigs[0]);
 
-			if(visualInfo == NULL) {
+			if(mVi == NULL) {
 				std::cout << "No appropriate visual found" << std::endl;
 				assert(false);	//	No appropriate visual found.
 			} 
 
-			mRoot = RootWindow(dpy, visualInfo->screen);
+			mRoot = RootWindow(mDpy, mVi->screen);
 
 			// Create a colormap for the window.
-			mCmap = XCreateColormap(mDpy, mRoot, visualInfo->visual, AllocNone);
+			mCmap = XCreateColormap(mDpy, mRoot, mVi->visual, AllocNone);
 
 			// Fill structure with window attributes.
 			mSwa.colormap = mCmap;
-			mSwa.border_pixel = 0;
 			mSwa.event_mask = ExposureMask | KeyPressMask;
 			
-			int swaMask = CWBorderPixel | CWColormap | CWEventMask;
+			int swaMask = CWColormap | CWEventMask;
 
 			// Create a window with previous data.
-			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, visualInfo->depth, InputOutput, visualInfo->visual, swaMask, &mSwa);
-
+			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, swaMask, &mSwa);
+			
+			// Make the window appears
+			XMapWindow(mDpy, mWin);
+			
 			// Change window's name
-			XStoreName(mDpy, mWin, mWndName.c_str());
+			XStoreName(mDpy, mWin, mName.c_str());
 
 			// Create the openGL context
 			mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, GL_TRUE);
 
 			//GLXWindow glxWin = glXCreateWindow( mDpy, fbConfigs[0], mWin, NULL );
 
-			// Make the window appears
-			XMapWindow(mDpy, mWin);
-
-			glXMakeContextCurrent(mDpy, glxWin, glxWin, mGlc);
-			//glXMakeCurrent(mDpy, mWin, mGlc);
+			//glXMakeContextCurrent(mDpy, glxWin, glxWin, mGlc);
+			//glXMakeContextCurrent(mDpy, mWin, mWin, mGlc);
+			glXMakeCurrent(mDpy, mWin, mGlc);
 			//makeCurrent();
 
 

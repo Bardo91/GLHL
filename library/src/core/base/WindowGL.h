@@ -12,10 +12,10 @@
 #define _GLHL_CORE_BASE_WINDOWGL_H_
 
 #if defined(_WIN32)
-	#include "os_dep\win32\WindowGLWin32.h"
+	#include "os_dep/win32/WindowGLWin32.h"
 #endif
 #if defined(__linux__)
-	#include "os_dep\linux\WindowGLLinux.h"
+	#include "os_dep/linux/WindowGLLinux.h"
 #endif
 
 #include <string>
