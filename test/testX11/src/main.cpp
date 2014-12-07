@@ -6,6 +6,8 @@
 #include <iostream>
 #include <cassert>
 
+#if defined(__linux__)
+
 #include <GL/glx.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -218,3 +220,4 @@ void createWindow2(){
  
 }
 
+#endif	// __linux__
