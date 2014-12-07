@@ -104,15 +104,15 @@ namespace GLHL {
 			XStoreName(mDpy, mWin, mName.c_str());
 
 			// Create the openGL context
-			mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, GL_TRUE);
-
+			//mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, GL_TRUE);
+			mGlc = glxCreateContext(mDpy, mVi, NULL, GL_TRUE);
 			//GLXWindow glxWin = glXCreateWindow( mDpy, fbConfigs[0], mWin, NULL );
 
 			//glXMakeContextCurrent(mDpy, glxWin, glxWin, mGlc);
 			//glXMakeContextCurrent(mDpy, mWin, mWin, mGlc);
-			glXMakeCurrent(mDpy, mWin, mGlc);
-			//makeCurrent();
-
+			//glXMakeCurrent(mDpy, mWin, mGlc);
+			makeCurrent();
+			glEnable(GL_DEPTH_TEST); 
 
 		}
 
