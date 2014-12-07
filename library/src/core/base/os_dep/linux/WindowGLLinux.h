@@ -34,7 +34,6 @@ namespace GLHL{
 
 			void makeCurrent();
 		private:
-			void initializeX();
 			void initializeWindow();
 
 			bool selfDestroy();

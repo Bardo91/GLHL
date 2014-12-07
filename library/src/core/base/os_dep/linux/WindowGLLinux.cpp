@@ -22,8 +22,6 @@ namespace GLHL {
 			mHeight = _height;
 			mName = _name;
 
-			initializeX();
-
 			initializeWindow();
 		}
 
@@ -67,21 +65,13 @@ namespace GLHL {
 		}
 
 		//---------------------------------------------------------------------------------
-		void WindowGLLinux::initializeX(){
-			 mDpy = XOpenDisplay(NULL);	// Null means that the graphical output will be send to this same computer.
+		void WindowGLLinux::initializeWindow(){
+			mDpy = XOpenDisplay(NULL);	// Null means that the graphical output will be send to this same computer.
  	
  			if(mDpy == NULL) {
 				std::cout << "cannot connect to X server" << std::endl;
 				assert(false);	// Cant connect to X server.
 			}
-
-			mRoot = DefaultRootWindow(mDpy);	// Handle to the root window.
-
-		}
-
-		//---------------------------------------------------------------------------------
-		void WindowGLLinux::initializeWindow(){
-
 			// GLX 1.3 Visual info obtainance.
 			int nConfigs;
 			GLXFBConfig *fbConfigs = glXChooseFBConfig(mDpy, DefaultScreen(mDpy), mAtt, &nConfigs);
@@ -97,27 +87,32 @@ namespace GLHL {
 			} 
 			std::cout << "visual " << ((void *)mVi->visualid) << " selected" << std::endl;
 
-			// Create a colormap for the window.
-			mCmap = XCreateColormap(mDpy, mRoot, mVi->visual, AllocNone);
+			mRoot = RootWindow(mDpy, mVi->screen);
 
 			// Fill structure with window attributes.
-			mSwa.colormap = mCmap;
-			mSwa.event_mask = ExposureMask | KeyPressMask;
+			mSwa.border_pixel = 0;
+			mSwa.event_mask = StructureNotifyMask;
+			mSwa.colormap = XCreateColormap(mDpy, mRoot, mVi->visual, AllocNone);
+
+			int swaMask = CWBorderPixel | CWColormap | CWEventMask;
 
 			// Create a window with previous data.
-			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, CWColormap | CWEventMask, &mSwa);	
+			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, swaMask, &mSwa);	
+
+			// Create a GLX context for OpenGL rendering
+			mGlc = glXCreateNewContext( mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, True );
 
 			// Make the window apperas
 			XMapWindow(mDpy, mWin);
 
 			// Change window's name
-			XStoreName(mDpy, mWin, mName.c_str());
+			//XStoreName(mDpy, mWin, mName.c_str());
 
 			// Create the openGL context
 			//mGlc = glXCreateContext(mDpy, mVi, NULL, GL_TRUE);	// Last parameter set direct rendering direct
-			mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, true );
-			
-			makeCurrent();
+			//mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, true );
+			glXMakeContextCurrent( mDpy, mWin, mWin, mGlc );
+			//makeCurrent();
 
  			glEnable(GL_DEPTH_TEST); 
 
