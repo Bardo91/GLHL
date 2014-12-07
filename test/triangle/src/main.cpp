@@ -17,7 +17,7 @@ using namespace std;
 GLvoid drawOnBuffer(GLint _width, GLint _height, ShaderProgram _program);
 
 int main(void){
-	WindowGL window(640, 480);
+	WindowGL window("Triangle test", 640, 480);
 
 	DriverGPU *driver = DriverGPU::get();
 

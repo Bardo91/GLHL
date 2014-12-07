@@ -13,6 +13,7 @@
 #define _GLHL_CORE_OSDEP_WIN32_WINDOWWIN32_H_
 
 #include <Windows.h>
+#include <string>
 
 namespace GLHL{
 	namespace GLHL_WIN32{
@@ -35,6 +36,7 @@ namespace GLHL{
 
 		private:
 			int mWidth, mHeight;
+			std::string mName;
 
 			HGLRC mHRC;					// Permanent Rendering Context.			(Conecta las llamadas de OpenGL con el Device Context)
 			HDC mHDC;					// Window's device context.				(Conecta la ventana de contexto con el GDI-Graphic device Interface)

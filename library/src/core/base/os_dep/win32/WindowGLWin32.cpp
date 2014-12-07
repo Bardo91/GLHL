@@ -26,6 +26,8 @@ namespace GLHL {
 			mWidth = _width;
 			mHeight = _height;
 
+			mName = _name;
+
 			initializeWindow();
 		}
 		
@@ -94,7 +96,7 @@ namespace GLHL {
 
 			if(!(mHWnd = CreateWindowExA(dwExStyle,								// Estilo extendido para la ventana.
 										"OpenGL",								// Nombre de la clase de la ventana.
-										"OpenGl Window",						// Titulo de la ventana.
+										mName.c_str(),							// Titulo de la ventana.
 										WS_CLIPSIBLINGS |						// Propiedad necesaria para que OpenGL funcione adecuadamente
 										WS_CLIPCHILDREN |						// Propiedad necesaria para que OpenGL funcione adecuadamente
 										dwStyle,								// Estilo de la ventana

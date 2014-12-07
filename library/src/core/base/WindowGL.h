@@ -23,7 +23,7 @@
 namespace GLHL {
 	class WindowGL : public WindowGLBase{
 	public:
-		WindowGL(std::string _name, int _width, int _height) : WindowGLBase(std::string _name, _width, _height) {};
+		WindowGL(std::string _name, int _width, int _height) : WindowGLBase(_name, _width, _height) {};
 
 	};
 }	// namespace GLHL.
