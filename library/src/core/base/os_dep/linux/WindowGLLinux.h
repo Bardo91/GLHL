@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
-//			Author: Pablo Ramï¿½n Soria									//
+//			Author: Pablo Ramón Soria									//
 //			Date:	2014-01-28											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
@@ -11,6 +11,8 @@
 
 #ifndef _GLHL_CORE_BASE_OSDEP_LINUX_WINDOWLINUX_H_
 #define _GLHL_CORE_BASE_OSDEP_LINUX_WINDOWLINUX_H_
+
+#include "../../WindowGL.h"
 
 #include <GL/glew.h>
 #include <X11/X.h>
@@ -40,12 +42,13 @@ namespace GLHL{
 			bool selfDestroy();
 
 		private:
-			int mWidth, mHeight;
-			std::string mName;
+
+			std::string mWndName;
 
 			Display                 *mDpy;
 			Window                  mRoot;
-			XVisualInfo 		*mVi;
+			GLint                   mAtt[5] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
+			XVisualInfo             *mVi;
 			Colormap                mCmap;
 			XSetWindowAttributes    mSwa;
 			Window                  mWin;
@@ -55,8 +58,6 @@ namespace GLHL{
 
 		};
 	}	//namespace GLHL_LINUX
-
-	typedef GLHL_LINUX::WindowGLLinux WindowGLBase;
 }	// namespace GLHL
 
 

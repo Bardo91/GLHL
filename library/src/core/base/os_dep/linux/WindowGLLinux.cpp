@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
-//			Author: Pablo Ramï¿½n Soria									//
+//			Author: Pablo Ramón Soria									//
 //			Date:	2014-01-28											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
@@ -17,7 +17,13 @@
 namespace GLHL {
 	namespace GLHL_LINUX{
 		//---------------------------------------------------------------------------------
-		WindowGLLinux::WindowGLLinux(std::string _name, int _width, int _height) : mWidth(_width), mHeight(_height), mName(_name) {
+		WindowGLLinux::WindowGLLinux(std::string _name, int _width, int _height){
+			mWidth = _width;
+			mHeight = _height;
+			mName = _name;
+
+			initializeX();
+
 			initializeWindow();
 		}
 
@@ -61,29 +67,27 @@ namespace GLHL {
 		}
 
 		//---------------------------------------------------------------------------------
-		void WindowGLLinux::initializeWindow(){
-			mDpy = XOpenDisplay(NULL);	// Null means that the graphical output will be send to this same computer.
-
-			if(mDpy == NULL) {
+		void WindowGLLinux::initializeX(){
+			 mDpy = XOpenDisplay(NULL);	// Null means that the graphical output will be send to this same computer.
+ 	
+ 			if(mDpy == NULL) {
 				std::cout << "cannot connect to X server" << std::endl;
 				assert(false);	// Cant connect to X server.
 			}
-			
-			GLint fbAtt[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
-			GLXFBConfig *fbConfigs;
-			int nConfigs;
 
-			fbConfigs = glXChooseFBConfig(mDpy, DefaultScreen(mDpy), fbAtt, &nConfigs);
-			assert(nConfigs != 0);	//	Error there aren't FBConfigs adapted to your needs.
+			mRoot = DefaultRootWindow(mDpy);	// Handle to the root window.
 
-			mVi = glXGetVisualFromFBConfig(mDpy, fbConfigs[0]);
+		}
+
+		//---------------------------------------------------------------------------------
+		void WindowGLLinux::initializeWindow(){
+			mVi = glXChooseVisual(mDpy, 0, mAtt);	// Select visual adapted to our needs ("mAtt").
 
 			if(mVi == NULL) {
 				std::cout << "No appropriate visual found" << std::endl;
 				assert(false);	//	No appropriate visual found.
 			} 
-
-			mRoot = RootWindow(mDpy, mVi->screen);
+			std::cout << "visual " << ((void *)mVi->visualid) << " selected" << std::endl;
 
 			// Create a colormap for the window.
 			mCmap = XCreateColormap(mDpy, mRoot, mVi->visual, AllocNone);
@@ -91,28 +95,22 @@ namespace GLHL {
 			// Fill structure with window attributes.
 			mSwa.colormap = mCmap;
 			mSwa.event_mask = ExposureMask | KeyPressMask;
-			
-			int swaMask = CWColormap | CWEventMask;
 
 			// Create a window with previous data.
-			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, swaMask, &mSwa);
-			
-			// Make the window appears
+			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, mVi->depth, InputOutput, mVi->visual, CWColormap | CWEventMask, &mSwa);	
+
+			// Make the window apperas
 			XMapWindow(mDpy, mWin);
-			
+
 			// Change window's name
-			XStoreName(mDpy, mWin, mName.c_str());
+			XStoreName(mDpy, mWin, mWndName.c_str());
 
 			// Create the openGL context
-			//mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, GL_TRUE);
-			mGlc = glXCreateContext(mDpy, mVi, NULL, GL_TRUE);
-			//GLXWindow glxWin = glXCreateWindow( mDpy, fbConfigs[0], mWin, NULL );
-
-			//glXMakeContextCurrent(mDpy, glxWin, glxWin, mGlc);
-			//glXMakeContextCurrent(mDpy, mWin, mWin, mGlc);
-			//glXMakeCurrent(mDpy, mWin, mGlc);
+			mGlc = glXCreateContext(mDpy, mVi, NULL, GL_TRUE);	// Last parameter set direct rendering direct
+			
 			makeCurrent();
-			glEnable(GL_DEPTH_TEST); 
+
+ 			glEnable(GL_DEPTH_TEST); 
 
 		}
 
