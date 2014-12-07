@@ -12,8 +12,6 @@
 #ifndef _GLHL_CORE_BASE_OSDEP_LINUX_WINDOWLINUX_H_
 #define _GLHL_CORE_BASE_OSDEP_LINUX_WINDOWLINUX_H_
 
-#include "../../WindowGL.h"
-
 #include <GL/glew.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -23,7 +21,7 @@
 
 namespace GLHL{
 	namespace GLHL_LINUX{
-		class WindowGLLinux : public WindowGL{
+		class WindowGLLinux{
 		public:
 			WindowGLLinux(int _width, int _height);
 
@@ -56,6 +54,8 @@ namespace GLHL{
 
 		};
 	}	//namespace GLHL_LINUX
+
+	typedef GLHL_LINUX::WindowGLLinux WindowGLBase;
 }	// namespace GLHL
 
 

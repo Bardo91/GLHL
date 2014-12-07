@@ -11,28 +11,17 @@
 #ifndef _GLHL_CORE_BASE_WINDOWGL_H_
 #define _GLHL_CORE_BASE_WINDOWGL_H_
 
-#include <mutex>
+#if defined(_WIN32)
+	#include "os_dep\win32\WindowGLWin32.h"
+#endif
+#if defined(__linux__)
+	#include "os_dep\linux\WindowGLLinux.h"
+#endif
 
 namespace GLHL {
-	class WindowGL{
+	class WindowGL: WindowGLBase{
 	public:
-		static WindowGL * createWindow(int _width, int _height);
-
-	public:
-		virtual void peekMessage() = 0;
-		virtual void swapBuffers() = 0;
-
-		virtual void show() = 0;
-		virtual void hide() = 0;
-
-	protected:
-		WindowGL(){};
-
-	protected:
-		int mWidth, mHeight;
-
-	private:
-		static std::mutex mMutex;
+		WindowGL(int _width, int _height) : WindowGLBase(_width, _height) {};
 
 	};
 }	// namespace GLHL.
