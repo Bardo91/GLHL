@@ -114,7 +114,8 @@ namespace GLHL {
 			XStoreName(mDpy, mWin, mName.c_str());
 
 			// Create the openGL context
-			mGlc = glXCreateContext(mDpy, mVi, NULL, GL_TRUE);	// Last parameter set direct rendering direct
+			//mGlc = glXCreateContext(mDpy, mVi, NULL, GL_TRUE);	// Last parameter set direct rendering direct
+			mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, true );
 			
 			makeCurrent();
 
