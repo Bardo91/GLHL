@@ -17,7 +17,7 @@ using namespace std;
 GLvoid drawOnBuffer(GLint _width, GLint _height, ShaderProgram _program);
 
 int main(void){
-	WindowGL * window = WindowGL::createWindow(640, 480);
+	WindowGL window(640, 480);
 
 	DriverGPU *driver = DriverGPU::get();
 
@@ -34,12 +34,12 @@ int main(void){
 
 	while(1){
 	#ifdef _WIN32
-		window->peekMessage();
+		window.peekMessage();
 	#endif
 
 		drawOnBuffer(640, 480, sProgram);
 
-		window->swapBuffers();
+		window.swapBuffers();
 	}
 
 	//	delete window; 	Class has no destructor, undefined behaviour

@@ -98,7 +98,6 @@
     <ClCompile Include="..\..\src\core\base\os_dep\win32\OSHandleWin32.cpp" />
     <ClCompile Include="..\..\src\core\base\os_dep\win32\WindowGLWin32.cpp" />
     <ClCompile Include="..\..\src\core\base\Texture.cpp" />
-    <ClCompile Include="..\..\src\core\base\WindowGL.cpp" />
     <ClCompile Include="..\..\src\core\glsl\Shader.cpp" />
     <ClCompile Include="..\..\src\core\glsl\ShaderProgram.cpp" />
   </ItemGroup>

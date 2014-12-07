@@ -97,9 +97,6 @@
     <ClCompile Include="..\..\src\core\base\Texture.cpp">
       <Filter>Source Files\core\base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\base\WindowGL.cpp">
-      <Filter>Source Files\core\base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\core\glsl\Shader.cpp">
       <Filter>Source Files\core\glsl</Filter>
     </ClCompile>

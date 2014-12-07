@@ -19,9 +19,9 @@
 #endif
 
 namespace GLHL {
-	class WindowGL: WindowGLBase{
+	class WindowGL : public WindowGLBase{
 	public:
-		WindowGL(int _width, int _height) : WindowGLBase(_width, _height) {};
+		WindowGL(int _width, int _height): WindowGLBase(_width, _height) {};
 
 	};
 }	// namespace GLHL.
