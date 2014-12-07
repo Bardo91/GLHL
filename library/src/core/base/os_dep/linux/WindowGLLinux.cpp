@@ -105,7 +105,7 @@ namespace GLHL {
 
 			// Create the openGL context
 			//mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, GL_TRUE);
-			mGlc = glxCreateContext(mDpy, mVi, NULL, GL_TRUE);
+			mGlc = glXCreateContext(mDpy, mVi, NULL, GL_TRUE);
 			//GLXWindow glxWin = glXCreateWindow( mDpy, fbConfigs[0], mWin, NULL );
 
 			//glXMakeContextCurrent(mDpy, glxWin, glxWin, mGlc);
