@@ -45,7 +45,7 @@ namespace GLHL{
 
 			Display                 *mDpy;
 			Window                  mRoot;
-			GLint                   mAtt[5] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
+			GLint                   mAtt[6] = { GLX_DOUBLEBUFFER, 1, GLX_RGBA, GLX_DEPTH_SIZE, 24, None };	// Capabilities that the program needs
 			XVisualInfo             *mVi;
 			Colormap                mCmap;
 			XSetWindowAttributes    mSwa;

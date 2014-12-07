@@ -81,7 +81,15 @@ namespace GLHL {
 
 		//---------------------------------------------------------------------------------
 		void WindowGLLinux::initializeWindow(){
-			mVi = glXChooseVisual(mDpy, 0, mAtt);	// Select visual adapted to our needs ("mAtt").
+
+			// GLX 1.3 Visual info obtainance.
+			int nConfigs;
+			GLXFBConfig *fbConfigs = glXChooseFBConfig(mDpy, DefaultScreen(mDpy), mAtt, &nConfigs);
+			assert(nConfigs != 0);	// There aren't Frame Buffer configs adapted to your needs.
+			
+			mVi = glXGetVisualFromFBConfig( mDpy, fbConfigs[0] );	// Using the first fbconfig.
+		
+			//mVi = glXChooseVisual(mDpy, 0, mAtt);	// Select visual adapted to our needs ("mAtt").
 
 			if(mVi == NULL) {
 				std::cout << "No appropriate visual found" << std::endl;
