@@ -17,12 +17,7 @@
 namespace GLHL {
 	namespace GLHL_LINUX{
 		//---------------------------------------------------------------------------------
-		WindowGLLinux::WindowGLLinux(int _width, int _height){
-			mWidth = _width;
-			mHeight = _height;
-
-			initializeX();
-
+		WindowGLLinux::WindowGLLinux(std::string _name, int _width, int _height) : mWidth(_width), mHeigh(_height), mName(_name) {
 			initializeWindow();
 		}
 
@@ -66,20 +61,14 @@ namespace GLHL {
 		}
 
 		//---------------------------------------------------------------------------------
-		void WindowGLLinux::initializeX(){
-			 mDpy = XOpenDisplay(NULL);	// Null means that the graphical output will be send to this same computer.
- 	
- 			if(mDpy == NULL) {
+		void WindowGLLinux::initializeWindow(){
+			mDpy = XOpenDisplay(NULL);	// Null means that the graphical output will be send to this same computer.
+
+			if(mDpy == NULL) {
 				std::cout << "cannot connect to X server" << std::endl;
 				assert(false);	// Cant connect to X server.
 			}
-
-			mRoot = DefaultRootWindow(mDpy);	// Handle to the root window.
-
-		}
-
-		//---------------------------------------------------------------------------------
-		void WindowGLLinux::initializeWindow(){
+			
 			GLint fbAtt[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };	// Capabilities that the program needs
 			GLXFBConfig *fbConfigs;
 			int nConfigs;
@@ -94,15 +83,20 @@ namespace GLHL {
 				assert(false);	//	No appropriate visual found.
 			} 
 
+			mRoot = RootWindow(dpy, visualInfo->screen);
+
 			// Create a colormap for the window.
 			mCmap = XCreateColormap(mDpy, mRoot, visualInfo->visual, AllocNone);
 
 			// Fill structure with window attributes.
 			mSwa.colormap = mCmap;
+			mSwa.border_pixel = 0;
 			mSwa.event_mask = ExposureMask | KeyPressMask;
+			
+			int swaMask = CWBorderPixel | CWColormap | CWEventMask;
 
 			// Create a window with previous data.
-			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, visualInfo->depth, InputOutput, visualInfo->visual, CWColormap | CWEventMask, &mSwa);
+			mWin = XCreateWindow(mDpy, mRoot, 0, 0, mWidth, mHeight, 0, visualInfo->depth, InputOutput, visualInfo->visual, swaMask, &mSwa);
 
 			// Change window's name
 			XStoreName(mDpy, mWin, mWndName.c_str());
@@ -110,7 +104,7 @@ namespace GLHL {
 			// Create the openGL context
 			mGlc = glXCreateNewContext(mDpy, fbConfigs[0], GLX_RGBA_TYPE, NULL, GL_TRUE);
 
-			GLXWindow glxWin = glXCreateWindow( mDpy, fbConfigs[0], mWin, NULL );
+			//GLXWindow glxWin = glXCreateWindow( mDpy, fbConfigs[0], mWin, NULL );
 
 			// Make the window appears
 			XMapWindow(mDpy, mWin);
@@ -119,7 +113,6 @@ namespace GLHL {
 			//glXMakeCurrent(mDpy, mWin, mGlc);
 			//makeCurrent();
 
- 			glEnable(GL_DEPTH_TEST); 
 
 		}
 

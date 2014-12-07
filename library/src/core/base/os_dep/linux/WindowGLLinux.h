@@ -23,7 +23,7 @@ namespace GLHL{
 	namespace GLHL_LINUX{
 		class WindowGLLinux{
 		public:
-			WindowGLLinux(int _width, int _height);
+			WindowGLLinux(std::string _name, int _width, int _height);
 
 		public:
 			void peekMessage();
@@ -41,7 +41,7 @@ namespace GLHL{
 
 		private:
 
-			std::string mWndName = "Test";
+			std::string mWndName;
 
 			Display                 *mDpy;
 			Window                  mRoot;

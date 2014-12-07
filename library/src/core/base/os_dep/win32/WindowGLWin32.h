@@ -18,7 +18,7 @@ namespace GLHL{
 	namespace GLHL_WIN32{
 		class WindowGLWin32 {
 		public:
-			WindowGLWin32(int _width, int _height);
+			WindowGLWin32(std::string _name, int _width, int _height);
 
 		public:
 			void peekMessage();

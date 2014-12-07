@@ -18,10 +18,12 @@
 	#include "os_dep\linux\WindowGLLinux.h"
 #endif
 
+#include <string>
+
 namespace GLHL {
 	class WindowGL : public WindowGLBase{
 	public:
-		WindowGL(int _width, int _height): WindowGLBase(_width, _height) {};
+		WindowGL(std::string _name, int _width, int _height) : WindowGLBase(std::string _name, _width, _height) {};
 
 	};
 }	// namespace GLHL.

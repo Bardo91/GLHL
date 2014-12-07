@@ -17,7 +17,7 @@
 namespace GLHL {
 	namespace GLHL_WIN32{
 		//---------------------------------------------------------------------------------
-		WindowGLWin32::WindowGLWin32(int _width, int _height){
+		WindowGLWin32::WindowGLWin32(std::string _name, int _width, int _height){
 			mHDC = NULL;
 			mHInstance = NULL;
 			mHRC = NULL;
