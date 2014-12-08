@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-namespace BOViL {
+namespace GLHL {
 	class STime {
 	public:
 		// --- Singleton life cycle ---
@@ -67,6 +67,6 @@ namespace BOViL {
 	#endif 
 	}
 
-}        // namespace BOViL
+}        // namespace GLHL
 
 #endif // _GLHL_CORE_UTILS_TIME_TIME_H_
