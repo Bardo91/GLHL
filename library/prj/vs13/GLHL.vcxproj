@@ -87,6 +87,7 @@
     <ClInclude Include="..\..\src\core\glsl\Shader.h" />
     <ClInclude Include="..\..\src\core\glsl\ShaderProgram.h" />
     <ClInclude Include="..\..\src\core\types\Types.h" />
+    <ClInclude Include="..\..\src\core\utils\time\time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\base\DriverGPU.cpp" />
@@ -100,6 +101,7 @@
     <ClCompile Include="..\..\src\core\base\Texture.cpp" />
     <ClCompile Include="..\..\src\core\glsl\Shader.cpp" />
     <ClCompile Include="..\..\src\core\glsl\ShaderProgram.cpp" />
+    <ClCompile Include="..\..\src\core\utils\time\time.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,6 +33,12 @@
     <Filter Include="Source Files\core\base\os_dep\linux">
       <UniqueIdentifier>{11e7ba12-080f-406c-9b55-43df648382a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\core\utils">
+      <UniqueIdentifier>{9150e946-01c8-4f7e-95d8-50621581fa1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\utils\time">
+      <UniqueIdentifier>{cd743f64-2e6e-4568-88ff-0cb394dc918b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\core\types\Types.h">
@@ -86,6 +92,9 @@
     <ClInclude Include="..\..\src\core\base\os_dep\linux\ContextBaseLinux.h">
       <Filter>Source Files\core\base\os_dep\linux</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\core\utils\time\time.h">
+      <Filter>Source Files\core\utils\time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\base\DriverGPU.cpp">
@@ -120,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\base\os_dep\linux\ContextBaseLinux.cpp">
       <Filter>Source Files\core\base\os_dep\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\utils\time\time.cpp">
+      <Filter>Source Files\core\utils\time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
