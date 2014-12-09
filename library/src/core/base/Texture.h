@@ -22,6 +22,7 @@ namespace GLHL{
 	class Texture{
 	public:
 		Texture(unsigned _width, unsigned _height, eTexType _type);
+		Texture(unsigned _width, unsigned _height, eTexType _type, unsigned char *data);
 		Texture(std::string _fileName);
 		~Texture();
 

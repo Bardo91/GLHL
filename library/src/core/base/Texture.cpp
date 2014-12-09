@@ -27,6 +27,16 @@ namespace GLHL{
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
+	Texture::Texture(unsigned _width, unsigned _height, eTexType _type, unsigned char *data) : mWidth(_width), mHeight(_height), mTexType((unsigned)_type) {
+		DriverGPU::get()->genTextures(1, &mTexId);
+		bind();
+		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, (unsigned)_type, _width, _height, 0, (unsigned)_type, GL_UNSIGNED_BYTE, data);
+
+		calcChannels();
+		mBufferSize = mWidth * mHeight * mChannels;
+	}
+
+	//-----------------------------------------------------------------------------------------------------------------
 	Texture::Texture(std::string _fileName){
 		mTexId = SOIL_load_OGL_texture(	_fileName.c_str(),
 										SOIL_LOAD_AUTO,
