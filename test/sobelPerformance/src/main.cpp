@@ -17,8 +17,8 @@
 using namespace GLHL;
 using namespace std;
 
-void sobelCPU();
-void sobelGLHL();
+void sobelCPU(double &_loadTime, double &_computeTime);
+void sobelGLHL(double &_loadTime, double &_transferTime, double &_computeTime);
 void drawImage(const Texture &_texture, ShaderProgram _program);
 void drawQuad();
 
@@ -31,12 +31,37 @@ int main(void){
 	std::cout << "\t Height = 768" << std::endl;
 	std::cout << "\t Channels = 1" << std::endl;
 
-	
-	sobelCPU();
-	
-	sobelGLHL();
+	const int REPETITIONS = 50;
+	double loadTime = 0, computeTime = 0, transferTime = 0;
 
+	for (int i = 0; i < REPETITIONS; i++){
+		sobelCPU(loadTime, computeTime);
+	}
 	
+	loadTime /= REPETITIONS;
+	computeTime /= REPETITIONS;
+
+	std::cout << "SOIL's image load spent: " << loadTime << std::endl;
+	std::cout << "CPU spent: " << computeTime << std::endl;
+
+
+	loadTime = 0; 
+	computeTime = 0;
+	WindowGL window("Sobel Performance", 1024, 768);
+	window.hide();
+
+	for (int i = 0; i < REPETITIONS; i++){
+		sobelGLHL(loadTime, transferTime, computeTime);
+	}
+
+	loadTime /= REPETITIONS;
+	computeTime /= REPETITIONS;
+	transferTime /= REPETITIONS;
+
+	std::cout << "SOIL's image load: " << loadTime << std::endl;
+	std::cout << "Image transfer to GPU spent: " << transferTime << std::endl;
+	std::cout << "GPU spent: " << computeTime << std::endl;
+
 	#ifdef _WIN32
 	system("PAUSE");
 	#endif
@@ -44,7 +69,7 @@ int main(void){
 	return 0;
 }
 
-void sobelCPU(){		// Dont see >.<. Embarrassing code
+void sobelCPU(double &_loadTime, double &_computeTime){		// Dont see >.<. Embarrassing code
 	int width;
 	int height;
 	int channels;
@@ -107,13 +132,14 @@ void sobelCPU(){		// Dont see >.<. Embarrassing code
 	}
 
 	double t3 = time->getTime();
-	std::cout << "SOIL's image load spent: " << t2 - t1 << std::endl;
-	std::cout << "CPU spent: " << t3 - t2 << std::endl;
+	_loadTime += t2 - t1;
+	_computeTime += t3 - t2;
+	
+	//std::cout << "SOIL's image load spent: " << t2 - t1 << std::endl;
+	//std::cout << "CPU spent: " << t3 - t2 << std::endl;
 }
 
-void sobelGLHL(){
-	WindowGL window("Sobel Performance", 1024, 768);
-	//window.hide();
+void sobelGLHL(double &_loadTime, double &_transferTime, double &_computeTime){
 	DriverGPU * driver = DriverGPU::get();
 
 	int width;
@@ -131,23 +157,25 @@ void sobelGLHL(){
 
 	STime *time = STime::get();
 	double t1 = time->getTime();
-	//unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, SOIL_LOAD_AUTO);
-	//Texture texture(1024,768, eTexType::eRGB, image);
-	Texture texture("./Tulips.jpg");
-	
+	unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, SOIL_LOAD_AUTO);
+
 	double t2 = time->getTime();
-	drawImage(texture, program);
-		
+	Texture texture(1024,768, eTexType::eRGB, image);
+
 	double t3 = time->getTime();
+	drawImage(texture, program);
 
-	std::cout << "SOIL's image load and upload to GPU spent: " << t2 - t1 << std::endl;
-	std::cout << "GPU spent: " << t3 - t2 << std::endl;
+	double t4 = time->getTime();
 
-	window.swapBuffers();
+	_loadTime += t2 - t1;
+	_transferTime += t3 - t2;
+	_computeTime += t4 - t3;
+
+	//std::cout << "SOIL's image load: " << t2 - t1 << std::endl;
+	//std::cout << "Image transfer to GPU spent: " << t3 - t2 << std::endl;
+	//std::cout << "GPU spent: " << t4 - t3 << std::endl;
+
 	texture.saveTexture("result.bmp");
-
-
-	delete driver;
 
 }
 

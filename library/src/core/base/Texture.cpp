@@ -30,6 +30,10 @@ namespace GLHL{
 	Texture::Texture(unsigned _width, unsigned _height, eTexType _type, unsigned char *data) : mWidth(_width), mHeight(_height), mTexType((unsigned)_type) {
 		DriverGPU::get()->genTextures(1, &mTexId);
 		bind();
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, (unsigned)_type, _width, _height, 0, (unsigned)_type, GL_UNSIGNED_BYTE, data);
 
 		calcChannels();
