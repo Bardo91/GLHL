@@ -63,15 +63,15 @@ void sobelCPU(){		// Dont see >.<. Embarrassing code
 
 	for (int i = 1; i < width - 1; i++){
 		for (int j = 1; j < height - 1; j++){
-			char c1 = image[(i - 1)*height + j - 1];
-			char c2 = image[(i - 1)*height + j];
-			char c3 = image[(i - 1)*height + j + 1];
-			char c4 = image[(i)*height + j - 1];
-			char c5 = image[(i)*height + j];
-			char c6 = image[(i)*height + j + 1];
-			char c7 = image[(i + 1)*height + j - 1];
-			char c8 = image[(i + 1)*height + j];
-			char c9 = image[(i + 1)*height + j + 1];
+			unsigned char c1 = image[(i - 1)*height + j - 1];
+			unsigned char c2 = image[(i - 1)*height + j];
+			unsigned char c3 = image[(i - 1)*height + j + 1];
+			unsigned char c4 = image[(i)*height + j - 1];
+			unsigned char c5 = image[(i)*height + j];
+			unsigned char c6 = image[(i)*height + j + 1];
+			unsigned char c7 = image[(i + 1)*height + j - 1];
+			unsigned char c8 = image[(i + 1)*height + j];
+			unsigned char c9 = image[(i + 1)*height + j + 1];
 
 			int Gx =	sobelH[0] * c1 +
 						sobelH[1] * c2 + 
@@ -116,7 +116,9 @@ void sobelGLHL(){
 	//window.hide();
 	DriverGPU * driver = DriverGPU::get();
 
-	
+	int width;
+	int height;
+	int channels;
 
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
 	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
@@ -129,8 +131,9 @@ void sobelGLHL(){
 
 	STime *time = STime::get();
 	double t1 = time->getTime();
+	//unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, SOIL_LOAD_AUTO);
+	//Texture texture(1024,768, eTexType::eRGB, image);
 	Texture texture("./Tulips.jpg");
-
 	
 	double t2 = time->getTime();
 	drawImage(texture, program);
