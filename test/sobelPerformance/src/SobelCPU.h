@@ -8,22 +8,29 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Sobel CPU
 
+#include <array>
 #include <cstdint>
 #include <math.h>
 
+std::array<int8_t, 9> sobelH = {	1, 2, 1, 
+									0, 0, 0, 
+									-1, -2, -1 };
+std::array<int8_t, 9> sobelV = {	-1, 0, 1, 
+									-2, 0, 2, 
+									-1, 0, 1 };
+
 class SobelCPU{
 public:
-	double processImage(unsigned _width, unsigned _height, std::uint8_t *_image);
+	void processImage(unsigned _width, unsigned _height, std::uint8_t *_image);
 
 private:
-	const std::int8_t sobelH[9] = { 1.0, 2.0, 1.0, 0.0, 0.0, 0.0, -1.0, -2.0, -1.0 };
-	const std::int8_t sobelV[9] = { -1.0, 0.0, 1.0, -2.0, 0.0, 2.0, -1.0, 0.0, 1.0 };
+	
 
 };
 
-inline double SobelCPU::processImage(unsigned _width, unsigned _height, std::uint8_t *_image){
-	for (int i = 1; i < _width - 1; i++){
-		for (int j = 1; j < _height - 1; j++){
+inline void SobelCPU::processImage(unsigned _width, unsigned _height, std::uint8_t *_image){
+	for (unsigned i = 1; i < _width - 1; i++){
+		for (unsigned j = 1; j < _height - 1; j++){
 			unsigned char c1 = _image[(i - 1)*_height + j - 1];
 			unsigned char c2 = _image[(i - 1)*_height + j];
 			unsigned char c3 = _image[(i - 1)*_height + j + 1];
