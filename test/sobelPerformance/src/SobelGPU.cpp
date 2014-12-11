@@ -17,8 +17,7 @@ using namespace GLHL;
 //---------------------------------------------------------------------------------------------------------------------
 SobelGPU::SobelGPU(unsigned _width, unsigned _height): mWindow("Test Sobel", _width, _height){
 	mWindow.hide();
-	DriverGPU * driver = DriverGPU::get();
-
+	
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
 	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
 
