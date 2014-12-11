@@ -1,12 +1,7 @@
  //// MAIN FILE TO TEST
 
-
-#include <src/core/base/WindowGL.h>
-#include <src/core/base/DriverGPU.h>
-#include <src/core/base/Texture.h>
-#include <src/core/glsl/ShaderProgram.h>
-#include <src/core/glsl/Shader.h>
 #include <src/core/utils/time/time.h>
+#include "SobelCPU.h"
 
 #include <fstream>
 #include <string>
@@ -17,25 +12,34 @@
 using namespace GLHL;
 using namespace std;
 
-void sobelCPU(double &_loadTime, double &_computeTime);
-void sobelGLHL(double &_loadTime, double &_transferTime, double &_computeTime);
 void drawImage(const Texture &_texture, ShaderProgram _program);
 void drawQuad();
+
+const int REPETITIONS = 50;
 
 int main(void){
 
 	STime::init();
+	STime *time = STime::get();
 
 	std::cout << "Image characteristics: " << std::endl;
 	std::cout << "\t Width = 1024" << std::endl;
 	std::cout << "\t Height = 768" << std::endl;
 	std::cout << "\t Channels = 1" << std::endl;
 
-	const int REPETITIONS = 50;
+	int width, height, channels;
 	double loadTime = 0, computeTime = 0, transferTime = 0;
 
+		
+	SobelCPU sobelCPU;
 	for (int i = 0; i < REPETITIONS; i++){
-		sobelCPU(loadTime, computeTime);
+		double t1 = time->getTime();
+		unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, 1);
+		double t2 = time->getTime();
+		sobelCPU.processImage(width, height, image);
+		double t3 = time->getTime();
+		loadTime += t2 - t1;
+		computeTime = t3 - t2;
 	}
 	
 	loadTime /= REPETITIONS;
@@ -74,62 +78,7 @@ void sobelCPU(double &_loadTime, double &_computeTime){		// Dont see >.<. Embarr
 	int height;
 	int channels;
 
-	STime *time = STime::get();
-
-	double t1 = time->getTime();
-	unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, 1);
-	double t2 = time->getTime();
 	
-
-	
-	char sobelH[] = { 1.0, 2.0, 1.0, 0.0, 0.0, 0.0, -1.0, -2.0, -1.0 };
-	char sobelV[] = { -1.0, 0.0, 1.0, -2.0, 0.0, 2.0, -1.0, 0.0, 1.0 };
-
-
-	for (int i = 1; i < width - 1; i++){
-		for (int j = 1; j < height - 1; j++){
-			unsigned char c1 = image[(i - 1)*height + j - 1];
-			unsigned char c2 = image[(i - 1)*height + j];
-			unsigned char c3 = image[(i - 1)*height + j + 1];
-			unsigned char c4 = image[(i)*height + j - 1];
-			unsigned char c5 = image[(i)*height + j];
-			unsigned char c6 = image[(i)*height + j + 1];
-			unsigned char c7 = image[(i + 1)*height + j - 1];
-			unsigned char c8 = image[(i + 1)*height + j];
-			unsigned char c9 = image[(i + 1)*height + j + 1];
-
-			int Gx =	sobelH[0] * c1 +
-						sobelH[1] * c2 + 
-						sobelH[2] * c3 + 
-						sobelH[3] * c4 + 
-						sobelH[4] * c5 + 
-						sobelH[5] * c6 +
-						sobelH[6] * c7 +
-						sobelH[7] * c8 + 
-						sobelH[8] * c9 ;
-
-			int Gy =	sobelV[0] * c1 +
-						sobelV[1] * c2 +
-						sobelV[2] * c3 +
-						sobelV[3] * c4 +
-						sobelV[4] * c5 +
-						sobelV[5] * c6 +
-						sobelV[6] * c7 +
-						sobelV[7] * c8 +
-						sobelV[8] * c9;
-
-
-
-			double val = sqrt(Gx*Gx + Gy*Gy);
-
-			if (val > 0.3 * 255)
-				image[i*height + j] = 1;
-			else
-				image[i*height + j] = 0;
-
-
-		}
-	}
 
 	double t3 = time->getTime();
 	_loadTime += t2 - t1;
