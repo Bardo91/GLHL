@@ -82,6 +82,7 @@
     <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\wglew.h" />
     <ClInclude Include="..\..\src\core\base\os_dep\win32\OSHandleWin32.h" />
     <ClInclude Include="..\..\src\core\base\os_dep\win32\WindowGLWin32.h" />
+    <ClInclude Include="..\..\src\core\base\PixelBufferGL.h" />
     <ClInclude Include="..\..\src\core\base\Texture.h" />
     <ClInclude Include="..\..\src\core\base\WindowGL.h" />
     <ClInclude Include="..\..\src\core\glsl\Shader.h" />
