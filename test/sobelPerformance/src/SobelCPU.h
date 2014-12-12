@@ -21,14 +21,14 @@ std::array<int8_t, 9> sobelV = {	-1, 0, 1,
 
 class SobelCPU{
 public:
-	void processImage(unsigned _width, unsigned _height, std::uint8_t *_image);
+	void processImage(const unsigned &_width, const unsigned &_height, std::uint8_t *_image);
 
 private:
 	
 
 };
 
-inline void SobelCPU::processImage(unsigned _width, unsigned _height, std::uint8_t *_image){
+inline void SobelCPU::processImage(const unsigned &_width, const unsigned &_height, std::uint8_t *_image){
 	for (unsigned i = 1; i < _width - 1; i++){
 		for (unsigned j = 1; j < _height - 1; j++){
 			unsigned char c1 = _image[(i - 1)*_height + j - 1];

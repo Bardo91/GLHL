@@ -57,8 +57,8 @@ int main(void){
 		double t2 = time->getTime(); 
 		GpuTime gpuTime = sobelGPU.process(width, height, image);
 		loadTime += t2 - t1;
-		transferTime = gpuTime.mTransferTime;
-		computeTime = gpuTime.mComputeTime;
+		transferTime += gpuTime.mTransferTime;
+		computeTime += gpuTime.mComputeTime;
 	}
 
 	loadTime /= REPETITIONS;
