@@ -58,10 +58,11 @@ GpuTime SobelGPU::process(unsigned _width, unsigned _height, unsigned char *_ima
 	glEnd();
 
 	glDrawArrays(GL_QUADS, 0, 4);
-
-	mWindow.swapBuffers();
 	glFinish();
 	double t3 = sTime->getTime();
+
+	mWindow.swapBuffers();
+	
 
 	GpuTime gpuTime( t2 - t1, t3 - t1 );
 	return gpuTime;
