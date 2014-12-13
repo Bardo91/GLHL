@@ -11,7 +11,7 @@ release ?= false
 APP_NAME 		= triangle
 
 CXX = g++
-CXX_FLAGS_BASE 		= -std=c++11 -Wall -Werror -g
+CXX_FLAGS_BASE 		= -std=c++11 -Wall -Werror
 CXX_RELEASE_FLAGS 	= -O3 -g
 CXX_DEBUG_FLAGS 	= -g
 
