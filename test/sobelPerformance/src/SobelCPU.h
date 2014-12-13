@@ -21,25 +21,26 @@ std::array<int8_t, 9> sobelV = {	-1, 0, 1,
 
 class SobelCPU{
 public:
-	void processImage(const unsigned &_width, const unsigned &_height, std::uint8_t *_image);
+	void processImage(const unsigned &_width, const unsigned &_height, const std::uint8_t *_image, std::uint8_t *_res);
 
 private:
 	
 
 };
 
-inline void SobelCPU::processImage(const unsigned &_width, const unsigned &_height, std::uint8_t *_image){
-	for (unsigned i = 1; i < _width - 1; i++){
-		for (unsigned j = 1; j < _height - 1; j++){
-			unsigned char c1 = _image[(i - 1)*_height + j - 1];
-			unsigned char c2 = _image[(i - 1)*_height + j];
-			unsigned char c3 = _image[(i - 1)*_height + j + 1];
-			unsigned char c4 = _image[(i)*_height + j - 1];
-			unsigned char c5 = _image[(i)*_height + j];
-			unsigned char c6 = _image[(i)*_height + j + 1];
-			unsigned char c7 = _image[(i + 1)*_height + j - 1];
-			unsigned char c8 = _image[(i + 1)*_height + j];
-			unsigned char c9 = _image[(i + 1)*_height + j + 1];
+inline void SobelCPU::processImage(const unsigned &_width, const unsigned &_height, const std::uint8_t *_image, std::uint8_t *_res){
+	// 666 TODO: only 1 channel
+	for (unsigned i = 1; i < _height - 1; i++){
+		for (unsigned j = 1; j < _width - 1; j++){
+			unsigned char c1 = _image[((i - 1)*_width)*3	+ (j - 1)*3 + 0];
+			unsigned char c2 = _image[((i - 1)*_width)*3	+ (j	)*3 + 0];
+			unsigned char c3 = _image[((i - 1)*_width)*3	+ (j + 1)*3 + 0];
+			unsigned char c4 = _image[((i	)*_width)*3		+ (j - 1)*3 + 0];
+			unsigned char c5 = _image[((i	)*_width)*3		+ (j	)*3 + 0];
+			unsigned char c6 = _image[((i	)*_width)*3		+ (j + 1)*3 + 0];
+			unsigned char c7 = _image[((i + 1)*_width)*3	+ (j - 1)*3 + 0];
+			unsigned char c8 = _image[((i + 1)*_width)*3	+ (j	)*3 + 0];
+			unsigned char c9 = _image[((i + 1)*_width)*3	+ (j + 1)*3 + 0];
 
 			int Gx = sobelH[0] * c1 +
 				sobelH[1] * c2 +
@@ -65,11 +66,16 @@ inline void SobelCPU::processImage(const unsigned &_width, const unsigned &_heig
 
 			double val = sqrt( double(Gx*Gx + Gy*Gy));
 
-			if (val > 0.3 * 255)
-				_image[i*_height + j] = 1;
-			else
-				_image[i*_height + j] = 0;
-
+			if (val > 0.3 * 255){
+				_res[((i)*_width) * 3 + j*3 + 0] = 255;
+				_res[((i)*_width) * 3 + j*3 + 1] = 255;
+				_res[((i)*_width) * 3 + j*3 + 2] = 255;
+			}
+			else{
+				_res[((i)*_width) * 3 + j*3 + 0] = 0;
+				_res[((i)*_width) * 3 + j*3 + 1] = 0;
+				_res[((i)*_width) * 3 + j*3 + 2] = 0;
+			}
 
 		}
 	}

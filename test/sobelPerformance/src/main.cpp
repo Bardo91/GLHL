@@ -13,7 +13,7 @@
 using namespace GLHL;
 using namespace std;
 
-const int REPETITIONS = 50;
+const int REPETITIONS = 1;
 
 int main(void){
 	STime::init();
@@ -31,12 +31,14 @@ int main(void){
 	SobelCPU sobelCPU;
 	for (int i = 0; i < REPETITIONS; i++){
 		double t1 = time->getTime();
-		unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, 1);
+		unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, SOIL_LOAD_AUTO);
+		unsigned char *res = new unsigned char[1024 * 768 * 3];
 		double t2 = time->getTime();
-		sobelCPU.processImage(width, height, image);
+		sobelCPU.processImage(width, height, image, res);
 		double t3 = time->getTime();
 		loadTime += t2 - t1;
 		computeTime += t3 - t2;
+		SOIL_save_image("ResultCPU.bmp", SOIL_SAVE_TYPE_BMP, width, height, channels, res);
 	}
 	
 	loadTime /= REPETITIONS;
