@@ -50,7 +50,7 @@ namespace GLHL{
 		void getShaderInfoLog(GLuint _shader, GLsizei _maxLength, GLsizei *_length, char *_infoLog);
 		void deleteShader(GLuint _shader);
 
-		GLint getUniformLocation(GLuint _program, const char *_name);
+		GLuint getUniformLocation(GLuint _program, const char *_name);
 
 		void setProgramUniform(GLint _location, GLint _program, GLuint _value);
 		void setProgramUniform(GLint _location, GLint _program, vec2ui _vec);

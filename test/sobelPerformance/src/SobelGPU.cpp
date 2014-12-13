@@ -40,11 +40,15 @@ GpuTime SobelGPU::process(unsigned _width, unsigned _height, unsigned char *_ima
 
 	//glClear(GL_COLOR_BUFFER_BIT);
 
-	GLuint texLoc;
+	mProgram.use();
+
+	GLuint texLoc; //, vOff, hOff;
 	texLoc = driver->getUniformLocation(mProgram, "texture");
 	driver->setUniform(texLoc, 0);
-
-	mProgram.use();
+	//vOff = driver->getUniformLocation(mProgram, "vOff");
+	//driver->setUniform(vOff, 1.0f / _height);
+	//hOff = driver->getUniformLocation(mProgram, "hOff");
+	//driver->setUniform(hOff, 1.0f / _width);
 
 	glBegin(GL_QUADS);
 	glVertex3f(-1.0f, -1.0f, 0.0f);

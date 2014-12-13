@@ -82,8 +82,10 @@ namespace GLHL{
 		glDeleteShader(_shader);
 	}
 
-	GLint DriverGPU::getUniformLocation(GLuint _program, const char *_name){
-		return glGetUniformLocation(_program, _name);
+	GLuint DriverGPU::getUniformLocation(GLuint _program, const char *_name){
+		GLuint loc = glGetUniformLocation(_program, _name);
+		assert(loc != -1);	// Could not find uniform name.
+		return loc;
 	}
 
 	void DriverGPU::setProgramUniform(GLint _location, GLint _program, GLuint _value){
