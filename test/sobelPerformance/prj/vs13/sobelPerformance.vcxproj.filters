@@ -32,6 +32,9 @@
     <None Include="..\..\src\shaders\sobel.fragment">
       <Filter>Source Files\shaders</Filter>
     </None>
+    <None Include="..\..\src\shaders\sobelUp.fragment">
+      <Filter>Source Files\shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\SobelCPU.h">

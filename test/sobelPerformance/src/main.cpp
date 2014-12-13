@@ -52,7 +52,7 @@ int main(void){
 	loadTime = 0; 
 	computeTime = 0;
 	SobelGPU sobelGPU(1024, 768);
-	//sobelGPU.showWnd();
+	sobelGPU.showWnd();
 	for (int i = 0; i < REPETITIONS; i++){
 		double t1 = time->getTime();
 		unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, SOIL_LOAD_AUTO);
