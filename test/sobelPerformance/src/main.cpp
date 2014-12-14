@@ -42,6 +42,8 @@ int main(int _argc, char **_argv){
 	cout << "\t Height = " << height << endl;
 	cout << "\t Channels = " << channels << endl;
 
+	cout << "SOIL's image load spent: " << loadTime << endl;
+
 	// Performance test using CPU (Simple SOBEL)
 	SobelCPU sobelCPU;
 	for (int i = 0; i < REPETITIONS; i++){
@@ -54,8 +56,7 @@ int main(int _argc, char **_argv){
 	
 	loadTime /= REPETITIONS;
 	computeTime /= REPETITIONS;
-
-	cout << "SOIL's image load spent: " << loadTime << endl;
+	
 	cout << "CPU spent: " << computeTime << endl;
 
 
@@ -73,7 +74,6 @@ int main(int _argc, char **_argv){
 	computeTime /= REPETITIONS;
 	transferTime /= REPETITIONS;
 
-	cout << "SOIL's image load: " << loadTime << endl;
 	cout << "Image transfer to GPU spent: " << transferTime <<endl;
 	cout << "GPU spent: " << computeTime << endl;
 
