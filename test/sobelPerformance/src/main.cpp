@@ -27,7 +27,7 @@ int main(int _argc, char **_argv){
 	}
 	
 	int width, height, channels;
-	double loadTime = 0, computeTime = 0, transferTime = 0;
+	double computeTime = 0, transferTime = 0;
 
 	STime::init();
 	STime *time = STime::get();
