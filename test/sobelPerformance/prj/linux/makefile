@@ -7,6 +7,7 @@
 #################################################
 
 release ?= false
+IMG_PATH ?= 
 
 APP_NAME 		= SobelPerformance
 
@@ -33,7 +34,7 @@ endif
 all: rebuild
 
 run: 
-	./$(APP_NAME)
+	./$(APP_NAME) IMG_PATH
 
 rebuild: clean build
 

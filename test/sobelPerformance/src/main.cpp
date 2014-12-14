@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <map>
 
 #include <SOIL.h>
 
@@ -15,14 +16,23 @@ using namespace std;
 
 const int REPETITIONS = 1;
 
-int main(void){
+map<string, string> parseArgs(int _argc, char** _argv);
+
+int main(int _argc, char **_argv){
+	map<string, string> hashMap = parseArgs(_argc, _argv);
+
+	string imgPath = hashMap["IMG_PATH"];
+	if (imgPath.compare("") == 0){
+		imgPath = "./Tulips.jpg";
+	}
+
 	STime::init();
 	STime *time = STime::get();
 
-	std::cout << "Image characteristics: " << std::endl;
-	std::cout << "\t Width = 1024" << std::endl;
-	std::cout << "\t Height = 768" << std::endl;
-	std::cout << "\t Channels = 1" << std::endl;
+	cout << "Image characteristics: " << endl;
+	cout << "\t Width = 1024" << endl;
+	cout << "\t Height = 768" << endl;
+	cout << "\t Channels = 1" << endl;
 
 	int width, height, channels;
 	double loadTime = 0, computeTime = 0, transferTime = 0;
@@ -31,7 +41,7 @@ int main(void){
 	SobelCPU sobelCPU;
 	for (int i = 0; i < REPETITIONS; i++){
 		double t1 = time->getTime();
-		unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, SOIL_LOAD_AUTO);
+		unsigned char *image = SOIL_load_image(imgPath.c_str(), &width, &height, &channels, SOIL_LOAD_AUTO);
 		unsigned char *res = new unsigned char[1024 * 768 * 3];
 		double t2 = time->getTime();
 		sobelCPU.processImage(width, height, image, res);
@@ -44,8 +54,8 @@ int main(void){
 	loadTime /= REPETITIONS;
 	computeTime /= REPETITIONS;
 
-	std::cout << "SOIL's image load spent: " << loadTime << std::endl;
-	std::cout << "CPU spent: " << computeTime << std::endl;
+	cout << "SOIL's image load spent: " << loadTime << endl;
+	cout << "CPU spent: " << computeTime << endl;
 
 
 	// Performance test using GPU (Simple SOBEL)
@@ -55,7 +65,7 @@ int main(void){
 	sobelGPU.showWnd();
 	for (int i = 0; i < REPETITIONS; i++){
 		double t1 = time->getTime();
-		unsigned char *image = SOIL_load_image("./Tulips.jpg", &width, &height, &channels, SOIL_LOAD_AUTO);
+		unsigned char *image = SOIL_load_image(imgPath.c_str(), &width, &height, &channels, SOIL_LOAD_AUTO);
 		double t2 = time->getTime(); 
 		GpuTime gpuTime = sobelGPU.process(width, height, image);
 		loadTime += t2 - t1;
@@ -67,13 +77,28 @@ int main(void){
 	computeTime /= REPETITIONS;
 	transferTime /= REPETITIONS;
 
-	std::cout << "SOIL's image load: " << loadTime << std::endl;
-	std::cout << "Image transfer to GPU spent: " << transferTime << std::endl;
-	std::cout << "GPU spent: " << computeTime << std::endl;
+	cout << "SOIL's image load: " << loadTime << endl;
+	cout << "Image transfer to GPU spent: " << transferTime <<endl;
+	cout << "GPU spent: " << computeTime << endl;
 
 	#ifdef _WIN32
 	system("PAUSE");
 	#endif
 
 	return 0;
+}
+
+
+
+std::map<std::string, std::string> parseArgs(int _argc, char** _argv){
+	std::map<std::string, std::string> hashMap;
+	for (int i = 1; i < _argc; i++){
+		std::string arg(_argv[i]);
+		size_t next = arg.find_first_of('=');
+		std::string type = arg.substr(0, next);
+		arg = arg.substr(next + 1, arg.size());
+		hashMap[type] = arg;
+		std::cout << "Detected argument: " << type << " - With value: " << arg << std::endl;
+	}
+	return hashMap;
 }
