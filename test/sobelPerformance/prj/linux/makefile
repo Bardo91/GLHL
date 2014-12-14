@@ -8,7 +8,7 @@
 
 release ?= false
 
-APP_NAME 		= triangle
+APP_NAME 		= SobelPerformance
 
 CXX = g++
 CXX_FLAGS_BASE 		= -std=c++11 -Wall -Werror
