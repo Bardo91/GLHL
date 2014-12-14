@@ -25,7 +25,7 @@ int main(int _argc, char **_argv){
 	if (imgPath.compare("") == 0){
 		imgPath = "./Tulips.jpg";
 	}
-	
+
 	int width, height, channels;
 	double computeTime = 0, transferTime = 0;
 

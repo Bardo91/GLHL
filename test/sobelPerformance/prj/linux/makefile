@@ -34,7 +34,7 @@ endif
 all: rebuild
 
 run: 
-	./$(APP_NAME) IMG_PATH
+	./$(APP_NAME) IMG_PATH=$(IMG_PATH)
 
 rebuild: clean build
 
