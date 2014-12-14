@@ -42,7 +42,7 @@ int main(int _argc, char **_argv){
 	cout << "\t Height = " << height << endl;
 	cout << "\t Channels = " << channels << endl;
 
-	cout << "SOIL's image load spent: " << loadTime << endl;
+	cout << "SOIL's image load spent: " << t2 - t1 << endl;
 
 	// Performance test using CPU (Simple SOBEL)
 	SobelCPU sobelCPU;
@@ -54,7 +54,6 @@ int main(int _argc, char **_argv){
 		SOIL_save_image("ResultCPU.bmp", SOIL_SAVE_TYPE_BMP, width, height, channels, res);
 	}
 	
-	loadTime /= REPETITIONS;
 	computeTime /= REPETITIONS;
 	
 	cout << "CPU spent: " << computeTime << endl;
@@ -70,7 +69,6 @@ int main(int _argc, char **_argv){
 		computeTime += gpuTime.mComputeTime;
 	}
 
-	loadTime /= REPETITIONS;
 	computeTime /= REPETITIONS;
 	transferTime /= REPETITIONS;
 
