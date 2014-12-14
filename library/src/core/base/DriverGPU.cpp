@@ -83,7 +83,7 @@ namespace GLHL{
 	}
 
 	GLuint DriverGPU::getUniformLocation(GLuint _program, const char *_name){
-		GLuint loc = glGetUniformLocation(_program, _name);
+		GLint loc = glGetUniformLocation(_program, _name);
 		assert(loc != -1);	// Could not find uniform name.
 		return loc;
 	}
