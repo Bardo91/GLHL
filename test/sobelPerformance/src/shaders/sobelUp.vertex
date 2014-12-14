@@ -12,7 +12,7 @@ void main()
 	gl_Position = ftransform();
 
 	// transform texcoord	
-	vec2 texcoord = vec2(gl_TextureMatrix[0] * gl_MultiTexCoord0);
+	vec2 texcoord =  gl_MultiTexCoord0.xy;
 
 	// get texcoords
 	texcoord00 = texcoord + vec2(-hOff, -vOff);

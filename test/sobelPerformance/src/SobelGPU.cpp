@@ -53,18 +53,19 @@ GpuTime SobelGPU::process(unsigned _width, unsigned _height, unsigned char *_ima
 	hOff = driver->getUniformLocation(mProgram, "hOff");
 	driver->setUniform(hOff, 1.0f / _width);
 
-	glBegin(GL_QUADS);
-	glVertex3f(-1.0f, -1.0f, 0.0f);
-	glTexCoord2f(1.0, 0.0);
-	glVertex3f(1.0f, -1.0f, 0.0f);
-	glTexCoord2f(1.0, 1.0);
-	glVertex3f(1.0f, 1.0f, 0.0f);
-	glTexCoord2f(0.0, 1.0);
-	glVertex3f(-1.0f, 1.0f, 0.0f);
-	glTexCoord2f(0.0, 0.0);
+	glBegin(GL_TRIANGLES);
+	// First triangle
+	glVertex2f(-1.0f, -1.0f); glTexCoord2f(1.0, 1.0);
+	glVertex2f(1.0f, -1.0f); glTexCoord2f(1.0, 0.0); 
+	glVertex2f(1.0f, 1.0f); glTexCoord2f(0.0, 1.0);
+	// Second triangle
+	glVertex2f(-1.0f, -1.0f); glTexCoord2f(0.0, 0.0);
+	glVertex2f(-1.0f, 1.0f); glTexCoord2f(1.0, 0.0);
+	glVertex2f(1.0f, 1.0f); glTexCoord2f(0.0, 1.0);
+	
 	glEnd();
 
-	glDrawArrays(GL_QUADS, 0, 4);
+	//glDrawArrays(GL_QUADS, 0, 4);
 	glFinish();
 	double t3 = sTime->getTime();
 
