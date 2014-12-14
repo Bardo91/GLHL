@@ -18,8 +18,11 @@ using namespace GLHL;
 SobelGPU::SobelGPU(unsigned _width, unsigned _height): mWindow("Test Sobel", _width, _height){
 	mWindow.hide();
 	
-	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
-	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
+	//Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
+	//Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
+
+	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/sobelUp.vertex");
+	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobelUp.fragment");
 
 	mProgram.attachShader(vShader);
 	mProgram.attachShader(fShader);
@@ -42,13 +45,13 @@ GpuTime SobelGPU::process(unsigned _width, unsigned _height, unsigned char *_ima
 
 	mProgram.use();
 
-	GLuint texLoc; //, vOff, hOff;
+	GLuint texLoc, vOff, hOff;
 	texLoc = driver->getUniformLocation(mProgram, "texture");
 	driver->setUniform(texLoc, 0);
-	//vOff = driver->getUniformLocation(mProgram, "vOff");
-	//driver->setUniform(vOff, 1.0f / _height);
-	//hOff = driver->getUniformLocation(mProgram, "hOff");
-	//driver->setUniform(hOff, 1.0f / _width);
+	vOff = driver->getUniformLocation(mProgram, "vOff");
+	driver->setUniform(vOff, 1.0f / _height);
+	hOff = driver->getUniformLocation(mProgram, "hOff");
+	driver->setUniform(hOff, 1.0f / _width);
 
 	glBegin(GL_QUADS);
 	glVertex3f(-1.0f, -1.0f, 0.0f);

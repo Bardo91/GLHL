@@ -18,6 +18,7 @@
     <None Include="..\..\src\shaders\flat.vertex" />
     <None Include="..\..\src\shaders\sobel.fragment" />
     <None Include="..\..\src\shaders\sobelUp.fragment" />
+    <None Include="..\..\src\shaders\sobelUp.vertex" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\SobelGPU.h" />
