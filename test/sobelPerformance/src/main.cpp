@@ -61,7 +61,7 @@ int main(int _argc, char **_argv){
 
 	// Performance test using GPU (Simple SOBEL)
 	computeTime = 0;
-	SobelGPU sobelGPU(1024, 768);
+	SobelGPU sobelGPU(width, height);
 	sobelGPU.showWnd();
 	for (int i = 0; i < REPETITIONS; i++){
 		GpuTime gpuTime = sobelGPU.process(width, height, image);
