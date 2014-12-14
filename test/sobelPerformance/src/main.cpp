@@ -25,29 +25,30 @@ int main(int _argc, char **_argv){
 	if (imgPath.compare("") == 0){
 		imgPath = "./Tulips.jpg";
 	}
+	
+	int width, height, channels;
+	double loadTime = 0, computeTime = 0, transferTime = 0;
 
 	STime::init();
 	STime *time = STime::get();
 
-	cout << "Image characteristics: " << endl;
-	cout << "\t Width = 1024" << endl;
-	cout << "\t Height = 768" << endl;
-	cout << "\t Channels = 1" << endl;
+	double t1 = time->getTime();
+	unsigned char *image = SOIL_load_image(imgPath.c_str(), &width, &height, &channels, SOIL_LOAD_AUTO);
+	unsigned char *res = new unsigned char[width * height * channels];
+	double t2 = time->getTime();
 
-	int width, height, channels;
-	double loadTime = 0, computeTime = 0, transferTime = 0;
+	cout << "Image characteristics: " << endl;
+	cout << "\t Width = " << width << endl;
+	cout << "\t Height = " << height << endl;
+	cout << "\t Channels = " << channels << endl;
 
 	// Performance test using CPU (Simple SOBEL)
 	SobelCPU sobelCPU;
 	for (int i = 0; i < REPETITIONS; i++){
 		double t1 = time->getTime();
-		unsigned char *image = SOIL_load_image(imgPath.c_str(), &width, &height, &channels, SOIL_LOAD_AUTO);
-		unsigned char *res = new unsigned char[1024 * 768 * 3];
-		double t2 = time->getTime();
 		sobelCPU.processImage(width, height, image, res);
-		double t3 = time->getTime();
-		loadTime += t2 - t1;
-		computeTime += t3 - t2;
+		double t2 = time->getTime();
+		computeTime += t2 - t1;
 		SOIL_save_image("ResultCPU.bmp", SOIL_SAVE_TYPE_BMP, width, height, channels, res);
 	}
 	
@@ -59,16 +60,11 @@ int main(int _argc, char **_argv){
 
 
 	// Performance test using GPU (Simple SOBEL)
-	loadTime = 0; 
 	computeTime = 0;
 	SobelGPU sobelGPU(1024, 768);
 	sobelGPU.showWnd();
 	for (int i = 0; i < REPETITIONS; i++){
-		double t1 = time->getTime();
-		unsigned char *image = SOIL_load_image(imgPath.c_str(), &width, &height, &channels, SOIL_LOAD_AUTO);
-		double t2 = time->getTime(); 
 		GpuTime gpuTime = sobelGPU.process(width, height, image);
-		loadTime += t2 - t1;
 		transferTime += gpuTime.mTransferTime;
 		computeTime += gpuTime.mComputeTime;
 	}
