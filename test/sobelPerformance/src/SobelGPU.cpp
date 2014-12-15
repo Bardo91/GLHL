@@ -55,14 +55,18 @@ GpuTime SobelGPU::process(unsigned _width, unsigned _height, unsigned char *_ima
 
 	glBegin(GL_TRIANGLES);
 	// First triangle
-	glVertex2f(-1.0f, -1.0f); glTexCoord2f(1.0, 1.0);
-	glVertex2f(1.0f, -1.0f); glTexCoord2f(1.0, 0.0); 
-	glVertex2f(1.0f, 1.0f); glTexCoord2f(0.0, 1.0);
+	glTexCoord2f(1, 1);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glTexCoord2f(0, 1);
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glTexCoord2f(0, 0);
+	glVertex3f(-1.0f, -1.0f, 0.0f);
 	// Second triangle
-	glVertex2f(-1.0f, -1.0f); glTexCoord2f(0.0, 0.0);
-	glVertex2f(-1.0f, 1.0f); glTexCoord2f(1.0, 0.0);
-	glVertex2f(1.0f, 1.0f); glTexCoord2f(0.0, 1.0);
-	
+	glTexCoord2f(1, 0);
+	glVertex3f(1.0f, -1.0f, 0.0f);	glTexCoord2f(1, 1);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glTexCoord2f(0, 0);
+	glVertex3f(-1.0f, -1.0f, 0.0f);
 	glEnd();
 
 	//glDrawArrays(GL_QUADS, 0, 4);
