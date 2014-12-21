@@ -21,13 +21,24 @@
     <ClCompile Include="..\..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Robot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\src\shaders\fTriangleShader.fragment">
+    <None Include="..\..\src\shaders\particlefilter.fragment">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="..\..\src\shaders\vTriangleShader.vertex">
+    <None Include="..\..\src\shaders\quad.vertex">
       <Filter>Source Files\shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\Robot.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ParticleFilter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
