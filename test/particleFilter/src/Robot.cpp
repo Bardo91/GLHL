@@ -42,7 +42,7 @@ void Robot::move(const double & _turn, const double & _forward) {
 
 //---------------------------------------------------------------------------------------------------------------------
 double Robot::gaussian(const double & _nu, const double & _sigma, const double & _x) {
-	return exp(-(pow(_nu - mPosition.x, 2)) / (pow(_sigma,2)) / 2.0) / sqrt(2.0 * 3.1416 * (pow(_sigma, 2)));
+	return exp(-(pow(_nu - _x, 2)) / (pow(_sigma,2)) / 2.0) / sqrt(2.0 * 3.1416 * (pow(_sigma, 2)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,6 +52,8 @@ double Robot::measurementProb(std::array<double, 4> _measurement) {
 		double dist = sqrt(pow(mPosition.x - LAND_MARKS[i][0], 2) + pow(mPosition.y - LAND_MARKS[i][1], 2));
 		prob *= gaussian(dist, mNoises.sense, _measurement[i]);
 	}
+
+	return prob;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

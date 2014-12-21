@@ -38,8 +38,8 @@ int main(void){
 	//driver->bindFragDataLocation(sProgram, 0, "outColor");
 	sProgram.link();
 
-
-	while(1){
+	bool condition = true;
+	while(condition){
 	#ifdef _WIN32
 		window.peekMessage();
 	#endif

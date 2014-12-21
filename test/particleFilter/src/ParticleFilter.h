@@ -27,12 +27,13 @@ private:
 
 
 // Particle filter class
+template<Particle ParticleType_>
 class ParticleFilterCPU {
 public:
-	ParticleFilterCPU(unsigned _nuParticles) :mNuParticles(_nuParticles), mParticles(_nuParticles) {};
+	ParticleFilterCPU(unsigned _nuParticles) :mNuParticles(_nuParticles) {};
 	void step();
 	unsigned nuParticles() const { return mNuParticles; };
-	std::vector<Particle> particles() const{ return mParticles; };
+	std::vector<ParticleType_> particles() const{ return mParticles; };
 
 private:
 	void simulate();
@@ -41,7 +42,7 @@ private:
 
 private:
 	unsigned mNuParticles;
-	std::vector<Particle> mParticles;
+	std::vector<ParticleType_> mParticles;
 
 };	// class ParticleFilterCPU
 

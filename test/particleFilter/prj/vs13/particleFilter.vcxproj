@@ -40,13 +40,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(GLHL_DIR);$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Programming\GLHL\test\triangle\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\programming\GLHL\test\particleFilter\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -69,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\ParticleFilter.cpp" />
     <ClCompile Include="..\..\src\Robot.cpp" />
   </ItemGroup>
   <ItemGroup>
