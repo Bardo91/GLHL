@@ -29,7 +29,9 @@ private:
 // Particle filter class
 class ParticleFilterCPU {
 public:
+	ParticleFilterCPU(unsigned _nuParticles) :mNuParticles(_nuParticles), mParticles(_nuParticles) {};
 	void step();
+	unsigned nuParticles() const { return mNuParticles; };
 	std::vector<Particle> particles() const{ return mParticles; };
 
 private:
@@ -38,7 +40,7 @@ private:
 	void resample();
 
 private:
-	unsigned mNoParticles;
+	unsigned mNuParticles;
 	std::vector<Particle> mParticles;
 
 };	// class ParticleFilterCPU

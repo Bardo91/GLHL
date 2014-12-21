@@ -31,5 +31,5 @@ void ParticleFilterCPU::calcWeigh() {
 
 
 void ParticleFilterCPU::resample() {
-
+	std::vector<Particle> newParticles(mNuParticles);
 }
