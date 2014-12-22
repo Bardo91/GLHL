@@ -15,7 +15,7 @@
 #include "ParticleFilterCPU.h"
 #include "Robot.h"
 
-class ParticleRobot : private Particle {
+class ParticleRobot : public Particle {
 public:
 	ParticleRobot() :mRobot() { mRobot.setNoise(0.05, 0.05, 5.0); };
 	void simulate() { mRobot.move(0.1, 5.0); };
@@ -34,6 +34,9 @@ int main(void){
 	ParticleFilterCPU<ParticleRobot> filter(1000);
 	filter.init();
 
+	for (unsigned i = 0; i < 10; i++){
+		filter.step();
+	}
 
 
 }
