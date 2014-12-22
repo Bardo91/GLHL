@@ -7,33 +7,44 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ParticleFilter class
 
-#include "ParticleFilter.h"
-template<Particle ParticleType_>
+//---------------------------------------------------------------------------------------------------------------------
+template<typename ParticleType_>
 void ParticleFilterCPU<ParticleType_>::step() {
 	simulate();
 	calcWeigh();
 	resample();
 }
 
-template<Particle ParticleType_>
+//---------------------------------------------------------------------------------------------------------------------
+template<typename ParticleType_>
+void ParticleFilterCPU<ParticleType_>::init(){
+	for (unsigned i = 0; i < mNuParticles; i++){
+		mParticles.push_back(ParticleType_());
+	}
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename ParticleType_>
 void ParticleFilterCPU<ParticleType_>::simulate() {
 	for (unsigned i = 0; i < mNuParticles; i ++) {
 		mParticles[i].simulate();
 	}
 }
 
-template<Particle ParticleType_>
+//---------------------------------------------------------------------------------------------------------------------
+template<typename ParticleType_>
 void ParticleFilterCPU<ParticleType_>::calcWeigh() {
 	for (unsigned i = 0; i < mNuParticles; i++) {
 		mParticles[i].calcWeigh();
 	}
 }
 
-template<Particle ParticleType_>
+//---------------------------------------------------------------------------------------------------------------------
+template<typename ParticleType_>
 void ParticleFilterCPU<ParticleType_>::resample() {
 	std::vector<ParticleType_> newParticles;
 	double beta = 0.0;
-	unsigned index = unsigned(rand() * mNuParticles);
+	unsigned index = unsigned(double(rand()) / RAND_MAX * mNuParticles);
 	double maxWeigh = 0.0;
 
 	for (unsigned i = 0; i < mNuParticles; i++) {
@@ -42,11 +53,13 @@ void ParticleFilterCPU<ParticleType_>::resample() {
 	}
 
 	for (unsigned i = 0; i < mNuParticles; i++) {
-		beta += rand() * 2.0 * maxWeigh;
+		beta += double(rand()) / RAND_MAX * 2.0 * maxWeigh;
 		while (beta > mParticles[index].weigh()) {
 			beta -= mParticles[index].weigh();
 			index = (index + 1) % mNuParticles;
 		}
 		newParticles.push_back(mParticles[index]);
 	}
+	
+	mParticles = newParticles;
 }

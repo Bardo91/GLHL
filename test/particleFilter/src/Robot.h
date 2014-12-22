@@ -14,11 +14,12 @@
 
 #include <array>
 #include <random>
+#include <ctime>
 
 const double LAND_MARKS[4][2] = { {20.0,20.0}, {80.0,80.0}, {20.0,80.0}, {80.0,20.0} };
 const double WORLD_SIZE = 100.0;
 
-double gauss(const double & _nu, const double & _sigma) {
+inline double gauss(const double & _nu, const double & _sigma) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 
@@ -34,12 +35,12 @@ public:
 	std::array<double, 4> sense();
 	void move(const double & _turn, const double & _forward);
 
-private:
+public:
 	double gaussian(const double & _mu, const double & _sigma, const double & _x);
 	double measurementProb(std::array<double, 4> _measurement);
 	
 private:
-	struct Position { double x = rand() * WORLD_SIZE, y = rand() * WORLD_SIZE, ori = rand() * 2.0 * 3.1416; } mPosition;
+	struct Position { double x = double(rand()) / RAND_MAX * WORLD_SIZE, y = double(rand()) / RAND_MAX * WORLD_SIZE, ori = double(rand()) / RAND_MAX * 2.0 * 3.1416; } mPosition;
 	struct Noises { double forward = 0.0, turn = 0.0, sense = 0.0; } mNoises;
 	
 

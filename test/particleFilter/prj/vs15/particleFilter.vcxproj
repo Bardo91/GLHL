@@ -70,15 +70,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
-    <ClCompile Include="..\..\src\ParticleFilter.cpp" />
     <ClCompile Include="..\..\src\Robot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\src\ParticleFilterCPU.inl" />
     <None Include="..\..\src\shaders\particlefilter.fragment" />
     <None Include="..\..\src\shaders\quad.vertex" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\ParticleFilter.h" />
+    <ClInclude Include="..\..\src\ParticleFilterCPU.h" />
     <ClInclude Include="..\..\src\Robot.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

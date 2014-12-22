@@ -21,17 +21,20 @@ public:
 
 	double weigh() const { return mWeigh; };
 	
-private:
+protected:
 	double mWeigh;
 };	//	 class Particle
 
 
 // Particle filter class
-template<Particle ParticleType_>
+template<typename ParticleType_>
 class ParticleFilterCPU {
 public:
 	ParticleFilterCPU(unsigned _nuParticles) :mNuParticles(_nuParticles) {};
+	
+	void init();
 	void step();
+	
 	unsigned nuParticles() const { return mNuParticles; };
 	std::vector<ParticleType_> particles() const{ return mParticles; };
 
@@ -45,6 +48,8 @@ private:
 	std::vector<ParticleType_> mParticles;
 
 };	// class ParticleFilterCPU
+
+#include "ParticleFilterCPU.inl"
 
 #endif	//	_GLHL_TEST_PARTICLE_FILTER_H_
 
