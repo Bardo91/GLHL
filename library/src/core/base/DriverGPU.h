@@ -97,6 +97,14 @@ namespace GLHL{
 		// --> Vertex Shader
 
 		// --> Buffer Objects
+		void genBuffers(const GLsizei _size, GLuint *_buffers);
+		GLuint genBuffer();
+		void bindBuffer(GLenum _target, GLuint _buffer);
+		void deleteBuffers(const GLsizei _size, GLuint *_buffers);
+		void deleteBuffer(GLuint &_buffer);
+		void bufferData(GLenum _target, GLsizeiptr _size, const void *_data, enum _usage);
+
+
 		void genFramebuffers(GLsizei _n, GLuint *_ids);
 		GLuint genFramebuffer();
 		void bindFramebuffer(GLenum _target, GLuint _framebuffer);

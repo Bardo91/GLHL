@@ -219,6 +219,35 @@ namespace GLHL{
 	// --> Vertex Shader
 
 	// --> Buffer Objects
+	void  DriverGPU::genBuffers(const GLsizei _size, GLuint *_buffers){
+		glGenBuffers(_size, _buffers);
+	}
+
+	GLuint DriverGPU::genBuffer(){
+		GLuint buffer;
+		glGenBuffers(1, &buffer);
+
+		assert(buffer != 0);	// Could not create buffer.
+
+		return buffer;
+	}
+
+	void  DriverGPU::bindBuffer(GLenum _target, GLuint _buffer){
+		glBindBuffer(_target, _buffer);
+	}
+
+	void  DriverGPU::deleteBuffers(const GLsizei _size, GLuint *_buffers){
+		glDeleteBuffers(_size, _buffers);
+	}
+
+	void  DriverGPU::deleteBuffer(GLuint &_buffer){
+		glDeleteBuffers(1, &_buffer);
+	}
+
+	void bufferData(GLenum _target, GLsizeiptr _size, const void *_data, GLenum _usage){
+		glBufferData(_target, _size, _data, _usage);
+	}
+
 	void DriverGPU::genFramebuffers(GLsizei _n, GLuint *_ids){
 		glGenFramebuffers(_n, _ids);
 	}
@@ -226,6 +255,8 @@ namespace GLHL{
 	GLuint DriverGPU::genFramebuffer(){
 		GLuint fb;
 		glGenFramebuffers(1, &fb);
+
+		assert(fb != 0);	// Could not create frame buffer.
 
 		return fb;
 	}
