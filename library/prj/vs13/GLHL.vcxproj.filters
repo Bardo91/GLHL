@@ -95,6 +95,9 @@
     <ClInclude Include="..\..\src\core\utils\time\time.h">
       <Filter>Source Files\core\utils\time</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\core\base\BufferObject.h">
+      <Filter>Source Files\core\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\base\DriverGPU.cpp">
