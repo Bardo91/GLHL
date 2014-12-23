@@ -32,8 +32,10 @@ class Robot {
 public:
 	void set(const double &_x, const double & _y, const double & _ori);
 	void setNoise(const double & _forward, const double & _turn, const double & _sense) { mNoises.forward = _forward; mNoises.turn = _turn; mNoises.sense = _sense; };
-	std::array<double, 4> sense();
+	const std::array<double, 4> sense();
 	void move(const double & _turn, const double & _forward);
+
+	std::array<double, 3> position() const;
 
 public:
 	double gaussian(const double & _mu, const double & _sigma, const double & _x);

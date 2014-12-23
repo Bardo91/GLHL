@@ -17,7 +17,7 @@ void Robot::set(const double & _x, const double & _y, const double & _ori){
 
 }
 //---------------------------------------------------------------------------------------------------------------------
-std::array<double, 4> Robot::sense(){
+const std::array<double, 4> Robot::sense(){
 	std::array<double, 4> z;
 	for (int i = 0; i < 4; i++) {
 		double dist = sqrt(pow(mPosition.x - LAND_MARKS[i][0], 2) + pow(mPosition.y - LAND_MARKS[i][1], 2));
@@ -37,6 +37,12 @@ void Robot::move(const double & _turn, const double & _forward) {
 	mPosition.y += sin(mPosition.ori)*dist;
 	mPosition.x = fmod(mPosition.x, WORLD_SIZE);
 	mPosition.y = fmod(mPosition.y, WORLD_SIZE);
+
+}
+//---------------------------------------------------------------------------------------------------------------------
+std::array<double, 3> Robot::position() const{
+	std::array<double, 3> pos = { mPosition.x, mPosition.y, mPosition.ori };
+	return pos;
 
 }
 
