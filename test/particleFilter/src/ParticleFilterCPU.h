@@ -5,11 +5,11 @@
 //			Date:	2014-Dec-21
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ParticleFilter class
+// ParticleFilterCPU class
 
 
-#ifndef _GLHL_TEST_PARTICLE_FILTER_H_
-#define _GLHL_TEST_PARTICLE_FILTER_H_
+#ifndef _GLHL_TEST_PARTICLE_FILTER_CPU_H_
+#define _GLHL_TEST_PARTICLE_FILTER_CPU_H_
 
 #include <vector>
 
@@ -51,5 +51,5 @@ private:
 
 #include "ParticleFilterCPU.inl"
 
-#endif	//	_GLHL_TEST_PARTICLE_FILTER_H_
+#endif	//	_GLHL_TEST_PARTICLE_FILTER_CPU_H_
 
