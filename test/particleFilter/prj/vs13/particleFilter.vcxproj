@@ -74,11 +74,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\ParticleFilterCPU.inl" />
+    <None Include="..\..\src\ParticleFilterGPU.inl" />
     <None Include="..\..\src\shaders\particlefilter.fragment" />
     <None Include="..\..\src\shaders\quad.vertex" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ParticleFilterCPU.h" />
+    <ClInclude Include="..\..\src\ParticleFilterGPU.h" />
     <ClInclude Include="..\..\src\Robot.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

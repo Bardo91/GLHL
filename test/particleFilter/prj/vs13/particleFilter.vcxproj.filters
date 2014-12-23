@@ -35,12 +35,18 @@
     <None Include="..\..\src\ParticleFilterCPU.inl">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\..\src\ParticleFilterGPU.inl">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Robot.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ParticleFilterCPU.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ParticleFilterGPU.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
