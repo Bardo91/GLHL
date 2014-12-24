@@ -244,7 +244,7 @@ namespace GLHL{
 		glDeleteBuffers(1, &_buffer);
 	}
 
-	void bufferData(GLenum _target, GLsizeiptr _size, const void *_data, GLenum _usage){
+	void DriverGPU::bufferData(GLenum _target, GLsizeiptr _size, const void *_data, GLenum _usage){
 		glBufferData(_target, _size, _data, _usage);
 	}
 

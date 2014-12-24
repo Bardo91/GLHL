@@ -137,7 +137,7 @@
       <Filter>Source Files\core\utils\time</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\base\BufferObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\core\base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

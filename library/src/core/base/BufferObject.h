@@ -17,6 +17,7 @@
 class BufferObject{
 public:
 	BufferObject(unsigned _size);
+	BufferObject(unsigned _size, std::uint8_t *_bytes);
 	~BufferObject();
 
 	operator GLuint() const{ return mBufferId; };
