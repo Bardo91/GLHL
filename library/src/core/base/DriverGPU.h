@@ -102,7 +102,7 @@ namespace GLHL{
 		void bindBuffer(GLenum _target, GLuint _buffer);
 		void deleteBuffers(const GLsizei _size, GLuint *_buffers);
 		void deleteBuffer(GLuint &_buffer);
-		void bufferData(GLenum _target, GLsizeiptr _size, const void *_data, enum _usage);
+		void bufferData(GLenum _target, GLsizeiptr _size, const void *_data, GLenum _usage);
 
 
 		void genFramebuffers(GLsizei _n, GLuint *_ids);
@@ -145,11 +145,6 @@ namespace GLHL{
 		void vertexAttribPointer(GLuint _index, GLint _size, GLenum _type, GLboolean _normalized, GLsizei _stride, const GLvoid * _pointer);
 		void enableVertexAttribArray(GLuint _index);
 		
-		// --> Memory
-		void genBuffers(GLsizei _n, GLuint * _buffers);//	Create a buffer object
-		void bindBuffer(GLenum _target, GLuint _buffer);	//	Make buffer active
-		void bufferData(GLenum _target, GLsizeiptr _size, const GLvoid * _data, GLenum _usage); //	Send data to buffer
-
 		// --> Generic OpenGL
 		void readPixels(GLint _x, GLint _y, GLsizei _width, GLsizei _height, GLenum _format, GLenum _type, GLvoid * _data);
 

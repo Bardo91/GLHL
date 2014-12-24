@@ -378,19 +378,6 @@ namespace GLHL{
 		glEnableVertexAttribArray(_index);
 	}
 
-	// --> Memory
-	void DriverGPU::genBuffers(GLsizei _n, GLuint * _buffers){
-		glGenBuffers(_n, _buffers);
-	}
-
-	void DriverGPU::bindBuffer(GLenum _target, GLuint _buffer){
-		glBindBuffer(_target, _buffer);
-	}
-
-	void DriverGPU::bufferData(GLenum _target, GLsizeiptr _size, const GLvoid * _data, GLenum _usage){
-		glBufferData(_target, _size, _data, _usage);
-	}
-
 	// --> Generic OpenGL
 	void DriverGPU::readPixels(GLint _x, GLint _y, GLsizei _width, GLsizei _height, GLenum _format, GLenum _type, GLvoid * _data){
 		glReadPixels(_x, _y, _width, _height, _format, _type, _data);

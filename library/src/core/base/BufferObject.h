@@ -2,7 +2,7 @@
 //																		//
 //		OpenGL Helper Libraries for Image Processing  (GLHL)			//
 //			Author: Pablo Ramon Soria									//
-//			Date:	2014-01-17											//
+//			Date:	2014-12-24											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
 //	BufferObject class
@@ -12,19 +12,20 @@
 #define _GLHL_CORE_BASE_BUFFER_OBJECT_H_
 
 #include "DriverGPU.h"
+#include <cstdint>
 
 class BufferObject{
 public:
-	BufferObject();
+	BufferObject(unsigned _size);
 	~BufferObject();
 
 	operator GLuint() const{ return mBufferId; };
 
-	void write(/*unit*/);
-	void write(/*mani units*/);
+	void write(const unsigned _pos, std::uint8_t _byte);
+	void write(const unsigned _pos, const unsigned _size, std::uint8_t *_bytes);
 
-	unit read(/*position*/);
-	unit* read(/*size, offset...*/);
+	std::uint8_t read(const unsigned _pos);
+	void read(const unsigned _pos, const unsigned _size, std::uint8_t *_bytes);
 
 private:
 	GLuint mBufferId;
