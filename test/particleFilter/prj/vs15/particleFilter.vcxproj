@@ -75,9 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\ParticleFilterCPU.inl" />
-    <None Include="..\..\src\shaders\initParticles.fragment" />
     <None Include="..\..\src\shaders\particle.vertex" />
-    <None Include="..\..\src\shaders\stepParticles.fragment" />
+    <None Include="..\..\src\shaders\particleFilterShaderTemplate.fragment" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ParticleFilterCPU.h" />

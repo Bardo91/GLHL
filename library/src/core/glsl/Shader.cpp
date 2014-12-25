@@ -19,12 +19,13 @@ namespace GLHL{
 	Shader::Shader(eShaderType _type, string _shaderPath){
 		ifstream shaderFile(_shaderPath);
 
-		if (shaderFile.is_open()){
-			string shaderSrc(istreambuf_iterator<char>(shaderFile), (istreambuf_iterator<char>()));
+		assert(shaderFile.is_open());
 
-			compileShader(_type, shaderSrc.c_str());
+		string shaderSrc(istreambuf_iterator<char>(shaderFile), (istreambuf_iterator<char>()));
+		compileShader(_type, shaderSrc.c_str());
 
-		}
+		
+		
 	}
 
 	//-------------------------------------------------------------

@@ -32,13 +32,10 @@
     <None Include="..\..\src\ParticleFilterCPU.inl">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\..\src\shaders\initParticles.fragment">
-      <Filter>Source Files\shaders</Filter>
-    </None>
-    <None Include="..\..\src\shaders\stepParticles.fragment">
-      <Filter>Source Files\shaders</Filter>
-    </None>
     <None Include="..\..\src\shaders\particle.vertex">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="..\..\src\shaders\particleFilterShaderTemplate.fragment">
       <Filter>Source Files\shaders</Filter>
     </None>
   </ItemGroup>

@@ -1,3 +1,5 @@
+#version 120
+
 uniform float seed;
 uniform bool init = false;
 
@@ -5,14 +7,17 @@ void initParticle();
 void stepParticle();
 
 void main() {
-	init ? initParticle() : stepParticle;
+	if(init)
+		initParticle();
+	else
+		stepParticle();
 
 }
 
 
 
 void initParticle(){
-
+	gl_FragColor = seed*vec4(gl_PointCoord.xy, 0.0, 1.0); 
 
 }
 

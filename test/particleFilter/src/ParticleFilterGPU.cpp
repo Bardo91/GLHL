@@ -17,7 +17,7 @@ using namespace GLHL;
 ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particleShaderPath) :
 						mFrontTexture(_nuParticles, 1, eTexType::eRGBA),
 						mBackTexture(_nuParticles, 1, eTexType::eRGBA),
-						mVertexShaderDummy(eShaderType::eVertexShader,"shader/particle.vertex"),
+						mVertexShaderDummy(eShaderType::eVertexShader,"../../src/shaders/particle.vertex"),
 						mFragmentShader(eShaderType::eFragmentShader, _particleShaderPath)
 						{
 
@@ -29,7 +29,7 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particl
 	mFBO.linkAttachments();
 	
 	/*Init program*/
-	mProgram.attachShader(mFragmentShader);
+	mProgram.attachShader(mVertexShaderDummy);
 	mProgram.attachShader(mFragmentShader);
 
 	mProgram.link();
@@ -47,14 +47,13 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particl
 
 //---------------------------------------------------------------------------------------------------------------------
 void ParticleFilterGPU::step() {
-	glBegin(GL_LINE);		// 666 TODO: create a method in DriverGPU to draw lines, triangles... with and without textures
-	glVertex2f(0.0f, 0.0f);
-	glTexCoord2f(0.0, 0.0);
-	glVertex2f(1.0f, 0.0f);
-	glTexCoord2f(0.0, 0.0);
-	glEnd();
+	DriverGPU *driver = DriverGPU::get();
 
 	mProgram.use();
+
+	driver->drawLine2f	(	std::array<vec2f, 2> { {	vec2f(-1.0f, 0.0f),
+														vec2f(1.0f, 0.0f)}} );	
+	glFinish();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

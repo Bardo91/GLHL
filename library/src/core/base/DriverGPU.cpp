@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////arrat
 //																		//
 //		OpenGL Helper Libraries for Image Processing  (GLHL)			//
-//			Author: Pablo Ramón Soria									//
+//			Author: Pablo Ramon Soria									//
 //			Date:	2014-01-17											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
@@ -382,6 +382,7 @@ namespace GLHL{
 
 	// --> Draw methods
 	void DriverGPU::drawLine2f(std::array<vec2f, 2> _points) {
+		// 666 TODO glBegin is not an efficient way to  push primitives to GPU. CodeXL recomend VBOs for large amounts of data
 		glBegin(GL_LINE);
 		glVertex2f(_points[0][0], _points[0][1]);
 		glVertex2f(_points[1][0], _points[1][1]);

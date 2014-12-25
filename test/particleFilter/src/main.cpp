@@ -93,5 +93,11 @@ void particleFilterCPU() {
 void particleFilterGPU() {
 	Context context;
 
-	ParticleFilterGPU pfGPU(1000, "shader/particleFilterTemplate.fragment");
+
+	// 666 TODO Relative path to vertex shader?
+	ParticleFilterGPU pfGPU(1000, "../../src/shaders/particleFilterShaderTemplate.fragment");
+
+	for (unsigned i = 0; i < 10; i++) {
+		pfGPU.step();
+	}
 }
