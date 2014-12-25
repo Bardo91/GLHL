@@ -15,21 +15,29 @@
 namespace GLHL{
 	// Templates
 	template<typename Type_, unsigned size_>
-	struct vec{
-		Type_ mData[size_];
-		const unsigned mSize = size_;
-		
+	struct vec{		
 		operator Type_* (){ return mData; }
 		Type_& operator[](unsigned _i){ return mData[_i]; };
+		vec& operator=(const vec &_vec) { for (unsigned i = 0; i < size_; i++) { mData[i] = _vec[i]; } };
+
+		unsigned size() { return mSize; };
+
+	private:
+		Type_ mData[size_];
+		const unsigned mSize = size_;
 	};
 
 	template<typename Type_, unsigned size_>
 	struct mat{
-		Type_ mData[size_*size_];
-		const unsigned mSize = size_;
-
 		operator Type_* (){ return mData; }
 		Type_& operator[](unsigned _i){ return mData[_i]; };
+		mat& operator=(const mat &_mat) { for (unsigned i = 0; i < size_; i++) { mData[i] = _mat[i]; } };
+
+		unsigned size() { return mSize; };
+
+	private:
+		Type_ mData[size_*size_];
+		const unsigned mSize = size_;
 	};
 
 	// Definition
