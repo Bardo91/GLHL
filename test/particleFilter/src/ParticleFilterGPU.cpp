@@ -14,29 +14,35 @@
 using namespace GLHL;
 
 //---------------------------------------------------------------------------------------------------------------------
-ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles): mFrontTexture(_nuParticles, 1, eTexType::eRGBA), mBackTexture(_nuParticles, 1, eTexType::eRGBA) {
+ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particleShaderPath) :
+						mFrontTexture(_nuParticles, 1, eTexType::eRGBA),
+						mBackTexture(_nuParticles, 1, eTexType::eRGBA),
+						mVertexShaderDummy(eShaderType::eVertexShader,"shader/particle.vertex"),
+						mFragmentShader(eShaderType::eFragmentShader, _particleShaderPath)
+						{
+
 	DriverGPU *driver = DriverGPU::get();
 	
 	mFBO.attachTexture(mFrontTexture);
 	mFBO.attachTexture(mBackTexture);
 
 	mFBO.linkAttachments();
-
-	/*Program & shaders initialization*/
-
-	//mSeed = driver->getUniformLocation(mStepProgram, "seed");
 	
 	/*Init program*/
-	Shader initShaderVertex(eShaderType::eVertexShader, "shader/initParticles.fragment");
-	ShaderProgram initProgram;
+	mProgram.attachShader(mFragmentShader);
+	mProgram.attachShader(mFragmentShader);
 
-	initProgram.attachShader(initShaderVertex);
-	//initProgram.attachShader(initShaderFragment);
+	mProgram.link();
 
-	initProgram.link();
-
-	GLuint seed = driver->getUniformLocation(initProgram, "seed");
+	GLuint initLoc = driver->getUniformLocation(mProgram, "init");
+	driver->setUniform(initLoc, true);
+	mSeed = driver->getUniformLocation(mProgram, "seed");
 	driver->setUniform(mSeed, unsigned(time(NULL)));
+
+	mProgram.use();
+	/* 666 TODO draw line to exe shader*/
+
+	
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,7 +54,7 @@ void ParticleFilterGPU::step() {
 	glTexCoord2f(0.0, 0.0);
 	glEnd();
 
-	mStepProgram.use();
+	mProgram.use();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

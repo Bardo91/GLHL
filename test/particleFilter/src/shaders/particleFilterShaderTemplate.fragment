@@ -1,0 +1,22 @@
+uniform float seed;
+uniform bool init = false;
+
+void initParticle();
+void stepParticle();
+
+void main() {
+	init ? initParticle() : stepParticle;
+
+}
+
+
+
+void initParticle(){
+
+
+}
+
+
+void stepParticle(){
+
+}

@@ -93,5 +93,5 @@ void particleFilterCPU() {
 void particleFilterGPU() {
 	Context context;
 
-	ParticleFilterGPU pfGPU(1000);
+	ParticleFilterGPU pfGPU(1000, "shader/particleFilterTemplate.fragment");
 }

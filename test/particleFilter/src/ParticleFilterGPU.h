@@ -21,7 +21,7 @@
 // Particle filter class
 class ParticleFilterGPU {
 public:
-	ParticleFilterGPU(unsigned _nuParticles);
+	ParticleFilterGPU(unsigned _nuParticles, std::string _particleShaderPath);
 
 	void step(/*_realParticle*/);
 
@@ -36,8 +36,8 @@ private:
 
 	GLuint mSeed;
 
-	//GLHL::Shader mVertexShaderDummy, mStepShader;
-	GLHL::ShaderProgram mStepProgram;
+	GLHL::Shader mVertexShaderDummy, mFragmentShader;
+	GLHL::ShaderProgram mProgram;
 
 };	// class ParticleFilterCPU
 
