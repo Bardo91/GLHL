@@ -12,20 +12,48 @@
 #ifndef _GLHL_CORE_TYPES_h_
 #define _GLHL_CORE_TYPES_h_
 
+#include <stdarg.h>
+#include <cassert>
 namespace GLHL{
-	// Templates
+	// Template vec
 	template<typename Type_, unsigned size_>
-	struct vec{		
+	struct vecBase{		
 		operator Type_* (){ return mData; }
-		vec& operator=(const vec &_vec) { for (unsigned i = 0; i < size_; i++) { mData[i] = _vec[i]; } };
+		vecBase& operator=(const vecBase &_vec){ for (unsigned i = 0; i < size_; i++) { mData[i] = _vec[i]; } };
 
 		unsigned size() { return mSize; };
 
-	private:
+	protected:
 		Type_ mData[size_];
 		const unsigned mSize = size_;
+
+	protected:
+		vecBase(){ };
+	};
+	
+	template<typename Type_, unsigned size_>
+	struct vec: public vecBase<Type_, size_>{ };
+
+	// Template Specialization
+	template<typename Type_>
+	struct vec<Type_, 2> : public vecBase<Type_, 2>{
+		vec(Type_ _x0, Type_ _x1){ mData[0] = _x0; mData[1] = _x1; };
 	};
 
+	template<typename Type_>
+	struct vec<Type_, 3> : public vecBase<Type_, 3>{
+		vec(Type_ _x0, Type_ _x1, Type_ _x2){ mData[0] = _x0; mData[1] = _x1;  mData[2] = _x2; };
+	};
+
+
+	template<typename Type_>
+	struct vec<Type_, 4> : public vecBase<Type_, 4>{
+		vec(Type_ _x0, Type_ _x1, Type_ _x2, Type_ _x3){ mData[0] = _x0; mData[1] = _x1;  mData[2] = _x2;  mData[3] = _x3; };
+	};
+
+
+	//---------------------------------------------------------------------------------------------------------
+	// Template mat
 	template<typename Type_, unsigned size_>
 	struct mat{
 		operator Type_* (){ return mData; }

@@ -22,9 +22,11 @@
 #include "../types/Types.h"
 #include "Context.h"
 
+#include <array>
 #include <string>
-#include <vector>
 #include <thread>
+#include <vector>
+
 
 //-------------------------------------------------------------------//
 namespace GLHL{
@@ -148,20 +150,18 @@ namespace GLHL{
 		
 		// --> Draw methods
 		void drawLine2f(std::array<vec2f, 2> _points);
-		void drawTriangle2f(std::array<vec2f, 3> _points);
-		void drawQuad2f(std::array<vec2f, 4> _points);
+		void drawTriangle2f(std::array<vec3f, 3> _points);
+		void drawQuad2f(std::array<vec4f, 4> _points);
 
-		void drawLineTextured2f();
-		void drawTriangleTextured2f();
-		void drawQuadTextured2f();
+		void drawTriangleTextured2f(std::array<vec3f, 3> _points, std::array<vec2f, 3> _texPoints);
+		void drawQuadTextured2f(std::array<vec4f, 4> _points, std::array<vec2f, 4> _texPoints);
 
-		void drawLine3f();
-		void drawTriangle3f();
-		void drawQuad3f();
+		void drawLine3f(std::array<vec2f, 2> _points);
+		void drawTriangle3f(std::array<vec3f, 3> _points);
+		void drawQuad3f(std::array<vec4f, 4> _points);
 
-		void drawLineTextured3f();
-		void drawTriangleTextured3f();
-		void drawQuadTextured3f();
+		void drawTriangleTextured3f(std::array<vec3f, 3> _points, std::array<vec3f, 3> _texPoints);
+		void drawQuadTextured3f(std::array<vec4f, 4> _points, std::array<vec4f, 4> _texPoints);
 
 
 		// --> Generic OpenGL

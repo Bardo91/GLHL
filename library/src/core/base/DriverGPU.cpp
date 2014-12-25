@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////arrat
 //																		//
 //		OpenGL Helper Libraries for Image Processing  (GLHL)			//
 //			Author: Pablo Ramón Soria									//
@@ -11,7 +11,6 @@
 
 #include "../types/Types.h"
 
-#include <array>
 #include <cassert>
 #include <iostream>
 
