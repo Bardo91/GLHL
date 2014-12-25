@@ -18,28 +18,26 @@
 #include <src/core/glsl/Shader.h>
 #include <src/core/glsl/ShaderProgram.h>
 
-using namespace GLHL;
-
 // Particle filter class
 class ParticleFilterGPU {
 public:
 	ParticleFilterGPU(unsigned _nuParticles);
 
-	void init();
 	void step(/*_realParticle*/);
 
 private:
 	void swapFBO();
 
 private:
-	FrameBuffer mFBO;
-	Texture mFrontTexture, mBackTexture;
+	GLHL::FrameBuffer mFBO;
+	GLHL::Texture mFrontTexture, mBackTexture;
 
 	bool currentTexture;
 
-	Shader mVertexShaderDummy, mInitShader, mStepShader;
-	ShaderProgram mInitProgram, mStepShader;
+	GLuint mSeed;
 
+	//GLHL::Shader mVertexShaderDummy, mStepShader;
+	GLHL::ShaderProgram mStepProgram;
 
 };	// class ParticleFilterCPU
 
