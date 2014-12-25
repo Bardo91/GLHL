@@ -53,17 +53,19 @@ GpuTime SobelGPU::process(unsigned _width, unsigned _height, unsigned char *_ima
 	hOff = driver->getUniformLocation(mProgram, "hOff");
 	driver->setUniform(hOff, 1.0f / _width);
 
-	glBegin(GL_TRIANGLES);
-	// First triangle
-	vec3i testvec(1, 2, 4);
+	
+	
+	driver->drawQuadTextured3f(	std::array < vec3f, 4 > {{	vec3f(1.0f, 1.0f, 0.0f),
+															vec3f(-1.0f, 1.0f, 0.0f),
+															vec3f(-1.0f, -1.0f, 0.0f),
+															vec3f(1.0f, -1.0f, 0.0f)}},
+								std::array < vec2f, 4 > {{	vec2f(1.0f, 1.0f),
+															vec2f(0.0f, 1.0f),
+															vec2f(0.0f, 0.0f),
+															vec2f(1.0f, 0.0f)}});
 
-	//driver->drawTriangleTextured3f(	std::array < vec3f, 3 > {{	vec3f(1.0f, 1.0f, 0.0f),
-	//															vec3f(-1.0f, 1.0f, 0.0f),
-	//															vec3f(-1.0f, -1.0f, 0.0f) }},
-	//								std::array < vec3f, 3 > {{ vec3f(-1.0f, -1.0f, 0.0f),
-	//															vec3f(1.0f, 1.0f, 0.0f),
-	//															vec3f(-1.0f, -1.0f, 0.0f) }});
-
+	//glBegin(GL_TRIANGLES);
+	//// First triangle
 	//glTexCoord2f(1, 1);
 	//glVertex3f(1.0f, 1.0f, 0.0f);
 	//glTexCoord2f(0, 1);
@@ -72,7 +74,7 @@ GpuTime SobelGPU::process(unsigned _width, unsigned _height, unsigned char *_ima
 	//glVertex3f(-1.0f, -1.0f, 0.0f);
 	//// Second triangle
 	//glTexCoord2f(1, 0);
-	//glVertex3f(-1.0f, -1.0f, 0.0f);	//glTexCoord2f(1, 1);
+	//glVertex3f(1.0f, -1.0f, 0.0f);	//glTexCoord2f(1, 1);
 	//glVertex3f(1.0f, 1.0f, 0.0f);
 	//glTexCoord2f(0, 0);
 	//glVertex3f(-1.0f, -1.0f, 0.0f);
