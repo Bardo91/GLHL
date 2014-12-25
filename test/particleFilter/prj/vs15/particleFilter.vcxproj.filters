@@ -24,19 +24,22 @@
     <ClCompile Include="..\..\src\Robot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ParticleFilterGPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\src\shaders\particlefilter.fragment">
-      <Filter>Source Files\shaders</Filter>
-    </None>
     <None Include="..\..\src\shaders\quad.vertex">
       <Filter>Source Files\shaders</Filter>
     </None>
     <None Include="..\..\src\ParticleFilterCPU.inl">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\..\src\ParticleFilterGPU.cpp">
-      <Filter>Source Files</Filter>
+    <None Include="..\..\src\shaders\initParticles.fragment">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="..\..\src\shaders\stepParticles.fragment">
+      <Filter>Source Files\shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -70,13 +70,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\ParticleFilterGPU.cpp" />
     <ClCompile Include="..\..\src\Robot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\ParticleFilterCPU.inl" />
-    <None Include="..\..\src\ParticleFilterGPU.cpp" />
-    <None Include="..\..\src\shaders\particlefilter.fragment" />
+    <None Include="..\..\src\shaders\initParticles.fragment" />
     <None Include="..\..\src\shaders\quad.vertex" />
+    <None Include="..\..\src\shaders\stepParticles.fragment" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ParticleFilterCPU.h" />

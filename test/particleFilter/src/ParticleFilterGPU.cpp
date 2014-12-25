@@ -24,7 +24,7 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles): mFrontTexture(_nuPa
 
 	/*Program & shaders initialization*/
 
-	mSeed = driver->getUniformLocation(mStepProgram, "seed");
+	//mSeed = driver->getUniformLocation(mStepProgram, "seed");
 	
 	/*Init program*/
 	Shader initShaderVertex(eShaderType::eVertexShader, "shader/initParticles.fragment");
