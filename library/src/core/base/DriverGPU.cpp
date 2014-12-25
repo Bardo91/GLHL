@@ -9,6 +9,9 @@
 
 #include "DriverGPU.h"
 
+#include "../types/Types.h"
+
+#include <array>
 #include <cassert>
 #include <iostream>
 
@@ -376,6 +379,143 @@ namespace GLHL{
 
 	void DriverGPU::enableVertexAttribArray(GLuint _index){
 		glEnableVertexAttribArray(_index);
+	}
+
+	// --> Draw methods
+	void drawLine2f(std::array<vec2f, 2> _points) {
+		glBegin(GL_LINE);
+		glVertex2f(_points[0][0], 0.0f);
+		glVertex2f(1.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawTriangle2f(std::array<vec2f, 3> _points) {
+		glBegin(GL_TRIANGLES);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawQuad2f(std::array<vec2f, 4> _points) {
+		glBegin(GL_TRIANGLES);
+		// First Triangle
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+
+		// Second Triangle
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawLineTextured2f() {
+		glBegin(GL_LINE);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(1.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawTriangleTextured2f(){
+		glBegin(GL_TRIANGLES);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawQuadTextured2f() {
+		glBegin(GL_TRIANGLES);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+
+		// Second Triangle
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glEnd();
+	}
+
+
+	void drawLine3f() {
+		glBegin(GL_LINE);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(1.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawTriangle3f() {
+		glBegin(GL_TRIANGLES);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawQuad3f() {
+		glBegin(GL_TRIANGLES);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+
+		// Second Triangle
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawLineTextured3f() {
+		glBegin(GL_LINE);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(1.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawTriangleTextured3f() {
+		glBegin(GL_TRIANGLES);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glEnd();
+	}
+
+	void drawQuadTextured3f() {
+		glBegin(GL_TRIANGLES);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+
+		// Second Triangle
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(0.0f, 0.0f);
+		glEnd();
 	}
 
 	// --> Generic OpenGL

@@ -52,6 +52,7 @@ namespace GLHL{
 
 		GLuint getUniformLocation(GLuint _program, const char *_name);
 
+
 		void setProgramUniform(GLint _location, GLint _program, GLuint _value);
 		void setProgramUniform(GLint _location, GLint _program, vec2ui _vec);
 		void setProgramUniform(GLint _location, GLint _program, vec3ui _vec);
@@ -145,6 +146,24 @@ namespace GLHL{
 		void vertexAttribPointer(GLuint _index, GLint _size, GLenum _type, GLboolean _normalized, GLsizei _stride, const GLvoid * _pointer);
 		void enableVertexAttribArray(GLuint _index);
 		
+		// --> Draw methods
+		void drawLine2f(std::array<vec2f, 2> _points);
+		void drawTriangle2f(std::array<vec2f, 3> _points);
+		void drawQuad2f(std::array<vec2f, 4> _points);
+
+		void drawLineTextured2f();
+		void drawTriangleTextured2f();
+		void drawQuadTextured2f();
+
+		void drawLine3f();
+		void drawTriangle3f();
+		void drawQuad3f();
+
+		void drawLineTextured3f();
+		void drawTriangleTextured3f();
+		void drawQuadTextured3f();
+
+
 		// --> Generic OpenGL
 		void readPixels(GLint _x, GLint _y, GLsizei _width, GLsizei _height, GLenum _format, GLenum _type, GLvoid * _data);
 
