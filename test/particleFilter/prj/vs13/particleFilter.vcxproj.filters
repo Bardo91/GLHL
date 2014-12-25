@@ -24,6 +24,9 @@
     <ClCompile Include="..\..\src\Robot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ParticleFilterGPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\shaders\particlefilter.fragment">
@@ -33,9 +36,6 @@
       <Filter>Source Files\shaders</Filter>
     </None>
     <None Include="..\..\src\ParticleFilterCPU.inl">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\..\src\ParticleFilterGPU.inl">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

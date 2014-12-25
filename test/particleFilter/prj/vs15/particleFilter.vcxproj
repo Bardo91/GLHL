@@ -40,7 +40,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(GLHL_DIR);$(IncludePath)</IncludePath>
-    <LibraryPath>C:\programming\GLHL\test\particleFilter\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\programming\GLHL\test\particleFilter\prj\vs15\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -74,11 +74,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\ParticleFilterCPU.inl" />
+    <None Include="..\..\src\ParticleFilterGPU.cpp" />
     <None Include="..\..\src\shaders\particlefilter.fragment" />
     <None Include="..\..\src\shaders\quad.vertex" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ParticleFilterCPU.h" />
+    <ClInclude Include="..\..\src\ParticleFilterGPU.h" />
     <ClInclude Include="..\..\src\Robot.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

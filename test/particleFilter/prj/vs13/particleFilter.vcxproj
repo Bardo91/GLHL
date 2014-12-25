@@ -70,11 +70,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\ParticleFilterGPU.cpp" />
     <ClCompile Include="..\..\src\Robot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\ParticleFilterCPU.inl" />
-    <None Include="..\..\src\ParticleFilterGPU.inl" />
     <None Include="..\..\src\shaders\particlefilter.fragment" />
     <None Include="..\..\src\shaders\quad.vertex" />
   </ItemGroup>
