@@ -384,137 +384,123 @@ namespace GLHL{
 	// --> Draw methods
 	void drawLine2f(std::array<vec2f, 2> _points) {
 		glBegin(GL_LINE);
-		glVertex2f(_points[0][0], 0.0f);
-		glVertex2f(1.0f, 0.0f);
+		glVertex2f(_points[0][0], _points[0][1]);
+		glVertex2f(_points[1][0], _points[1][1]);
 		glEnd();
 	}
 
 	void drawTriangle2f(std::array<vec2f, 3> _points) {
 		glBegin(GL_TRIANGLES);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
+		glVertex2f(_points[0][0],_points[0][1]);
+		glVertex2f(_points[1][0],_points[1][1]);
+		glVertex2f(_points[2][0],_points[2][1]);
 		glEnd();
 	}
 
 	void drawQuad2f(std::array<vec2f, 4> _points) {
 		glBegin(GL_TRIANGLES);
 		// First Triangle
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
+		glVertex2f(_points[0][0],_points[0][1]);
+		glVertex2f(_points[1][0],_points[1][1]);
+		glVertex2f(_points[2][0],_points[2][1]);
 
 		// Second Triangle
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
+		glVertex2f(_points[0][0],_points[0][1]);
+		glVertex2f(_points[2][0],_points[2][1]);
+		glVertex2f(_points[3][0],_points[3][1]);
 		glEnd();
 	}
 
-	void drawLineTextured2f() {
+	void drawTriangleTextured2f(std::array<vec2f, 3> _points, std::array<vec2f, 3> _texPoints){
+		glBegin(GL_TRIANGLES);
+		glTexCoord2f(_texPoints[0][0], _texPoints[0][1]);
+		glVertex2f(_points[0][0], _points[0][1]);
+
+		glTexCoord2f(_texPoints[1][0], _texPoints[1][1]);
+		glVertex2f(_points[1][0], _points[1][1]);
+
+		glTexCoord2f(_texPoints[2][0], _texPoints[2][1]);
+		glVertex2f(_points[2][0], _points[2][1]);
+		glEnd();
+	}
+
+	void drawQuadTextured2f(std::array<vec2f, 4> _points, std::array<vec2f, 4> _texPoints) {
+		glBegin(GL_TRIANGLES);
+		// First Triangle
+		glTexCoord2f(_texPoints[0][0], _texPoints[0][1]);
+		glVertex2f(_points[0][0], _points[0][1]);
+		glTexCoord2f(_texPoints[1][0], _texPoints[1][1]);
+		glVertex2f(_points[1][0], _points[1][1]);
+		glTexCoord2f(_texPoints[2][0], _texPoints[2][1]);
+		glVertex2f(_points[2][0], _points[2][1]);
+
+		// Second Triangle
+		glTexCoord2f(_texPoints[0][0], _texPoints[0][1]);
+		glVertex2f(_points[0][0], _points[0][1]);
+		glTexCoord2f(_texPoints[2][0], _texPoints[2][1]);
+		glVertex2f(_points[2][0], _points[2][1]);
+		glTexCoord2f(_texPoints[3][0], _texPoints[3][1]);
+		glVertex2f(_points[3][0], _points[3][1]);
+		glEnd();
+	}
+
+
+	void drawLine3f(std::array<vec3f, 2> _points) {
 		glBegin(GL_LINE);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(1.0f, 0.0f);
+		glVertex3f(_points[0][0], _points[0][1], _points[0][2]);
+		glVertex3f(_points[1][0], _points[1][1], _points[1][2]);
 		glEnd();
 	}
 
-	void drawTriangleTextured2f(){
+	void drawTriangle3f(std::array<vec3f, 3> _points) {
 		glBegin(GL_TRIANGLES);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
+		glVertex3f(_points[0][0], _points[0][1], _points[0][2]);
+		glVertex3f(_points[1][0], _points[1][1], _points[1][2]);
+		glVertex3f(_points[2][0], _points[2][1], _points[2][2]);
 		glEnd();
 	}
 
-	void drawQuadTextured2f() {
+	void drawQuad3f(std::array<vec3f, 4> _points) {
 		glBegin(GL_TRIANGLES);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
+		glVertex3f(_points[0][0], _points[0][1], _points[0][2]);
+		glVertex3f(_points[1][0], _points[1][1], _points[1][2]);
+		glVertex3f(_points[2][0], _points[2][1], _points[2][2]);
 
 		// Second Triangle
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
+		glVertex3f(_points[0][0], _points[0][1], _points[0][2]);
+		glVertex3f(_points[2][0], _points[2][1], _points[2][2]);
+		glVertex3f(_points[3][0], _points[3][1], _points[3][2]);
 		glEnd();
 	}
 
-
-	void drawLine3f() {
-		glBegin(GL_LINE);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(1.0f, 0.0f);
-		glEnd();
-	}
-
-	void drawTriangle3f() {
+	void drawTriangleTextured3f(std::array<vec3f, 3> _points, std::array<vec3f, 3> _texPoints) {
 		glBegin(GL_TRIANGLES);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
+		glTexCoord3f(_points[0][0], _points[0][1], _points[0][2]);
+		glVertex3f(_texPoints[0][0], _texPoints[0][1], _texPoints[0][2]);
+		glTexCoord3f(_points[1][0], _points[1][1], _points[1][2]);
+		glVertex3f(_texPoints[1][0], _texPoints[1][1], _texPoints[1][2]);
+		glTexCoord3f(_points[2][0], _points[2][1], _points[2][2]);
+		glVertex3f(_texPoints[2][0], _points[2][1], _texPoints[2][2]);
 		glEnd();
 	}
 
-	void drawQuad3f() {
+	void drawQuadTextured3f(std::array<vec3f, 4> _points, std::array<vec3f, 4> _texPoints) {
 		glBegin(GL_TRIANGLES);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
+		// First Triangle;
+		glTexCoord3f(_points[0][0], _points[0][1], _points[0][2]);
+		glVertex3f(_texPoints[0][0], _texPoints[0][1], _texPoints[0][2]);
+		glTexCoord3f(_points[1][0], _points[1][1], _points[1][2]);
+		glVertex3f(_texPoints[1][0], _texPoints[1][1], _texPoints[1][2]);
+		glTexCoord3f(_points[2][0], _points[2][1], _points[2][2]);
+		glVertex3f(_texPoints[2][0], _points[2][1], _texPoints[2][2]);
 
 		// Second Triangle
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-		glEnd();
-	}
-
-	void drawLineTextured3f() {
-		glBegin(GL_LINE);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(1.0f, 0.0f);
-		glEnd();
-	}
-
-	void drawTriangleTextured3f() {
-		glBegin(GL_TRIANGLES);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glEnd();
-	}
-
-	void drawQuadTextured3f() {
-		glBegin(GL_TRIANGLES);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-
-		// Second Triangle
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(0.0f, 0.0f);
+		glTexCoord3f(_points[0][0], _points[0][1], _points[0][2]);
+		glVertex3f(_texPoints[0][0], _texPoints[0][1], _texPoints[0][2]);
+		glTexCoord3f(_points[2][0], _points[2][1], _points[2][2]);
+		glVertex3f(_texPoints[2][0], _texPoints[2][1], _texPoints[2][2]);
+		glTexCoord3f(_points[3][0], _points[3][1], _points[3][2]);
+		glVertex3f(_texPoints[3][0], _points[3][1], _texPoints[3][2]);
 		glEnd();
 	}
 
