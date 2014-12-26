@@ -8,7 +8,9 @@
 
 #include <src/core/glsl/ShaderProgram.h>
 #include <src/core/glsl/Shader.h>
+#include <src/core/types/Types.h>
 
+#include <array>
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -72,7 +74,8 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	
 	_program.use();
 
-	drawQuads();
+	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
 
 	glDrawArrays(GL_QUADS, 0, 4);
 	glFlush();
