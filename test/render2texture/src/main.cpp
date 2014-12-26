@@ -77,7 +77,6 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
 
-	glDrawArrays(GL_QUADS, 0, 4);
 	glFlush();
 	
 	//fbo.detachTexture(colorTex);
@@ -86,18 +85,4 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	glFinish();
 
 	std::cout << "finished" << std::endl;
-}
-
-void drawQuads(){
-	glBegin(GL_QUADS);
-	glVertex3f(-1.0f, -1.0f, 0.0f);
-	glTexCoord2f(1.0, 0.0);
-	glVertex3f(1.0f, -1.0f, 0.0f);
-	glTexCoord2f(1.0, 1.0);
-	glVertex3f(1.0f, 1.0f, 0.0f);
-	glTexCoord2f(0.0, 1.0);
-	glVertex3f(-1.0f, 1.0f, 0.0f);
-	glTexCoord2f(0.0, 0.0);
-	glEnd();
-
 }
