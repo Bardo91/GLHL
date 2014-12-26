@@ -47,24 +47,26 @@ namespace GLHL{
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------
-	void FrameBuffer::detachTexture(const Texture &_tex){
-		assert(_tex != 0);
-
-		unsigned attach = 0;
-		for (unsigned i = 0; i < mAttachments.size(); ++i){
-			if (mAttachments[i].second == _tex){
-				attach = GL_COLOR_ATTACHMENT0 + i;
-			}
-		}
-		if (attach == 0)
-			return;
-
-		bind();
-		DriverGPU::get()->framebufferTexture(GL_DRAW_FRAMEBUFFER, attach, 0, 0);
-		DriverGPU::get()->checkErrors();
-		checkErrors();
-
-	}
+	//	666 TODO: generate errors
+	//void FrameBuffer::detachTexture(const Texture &_tex){
+	//	assert(_tex != 0);
+	//
+	//	unsigned attach = 0;
+	//	for (unsigned i = 0; i < mAttachments.size(); ++i){
+	//		if (mAttachments[i].second == _tex){
+	//			attach = GL_COLOR_ATTACHMENT0 + i;
+	//			break;
+	//		}
+	//	}
+	//	if (attach == 0)
+	//		return;
+	//
+	//	bind();
+	//	DriverGPU::get()->framebufferTexture(GL_DRAW_FRAMEBUFFER, attach, 0, 0);
+	//	DriverGPU::get()->checkErrors();
+	//	checkErrors();
+	//
+	//}
 
 	//--------------------------------------------------------------------------------------------------------------------
 	void FrameBuffer::linkAttachments(){

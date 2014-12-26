@@ -17,8 +17,8 @@
 
 namespace GLHL{
 	enum eFrameBufferMode {	eRead = GL_READ_FRAMEBUFFER,
-										eWrite = GL_DRAW_FRAMEBUFFER,
-										eReadWrite = GL_FRAMEBUFFER	};
+							eWrite = GL_DRAW_FRAMEBUFFER,
+							eReadWrite = GL_FRAMEBUFFER	};
 
 	class FrameBuffer{
 	public:
@@ -30,7 +30,7 @@ namespace GLHL{
 		void attachTexture(const Texture &_tex);
 		void linkAttachments();
 		
-		void detachTexture(const Texture &_tex);
+		//void detachTexture(const Texture &_tex); 666 TODO: generate errors
 
 		void bind();
 		void unbind();

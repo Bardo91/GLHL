@@ -26,8 +26,7 @@ std::vector<unsigned char> buf(w * h * c);
 void drawQuads();
 
 int main(void){
-	
-	WindowGL * window = WindowGL::createWindow(640, 480);
+	WindowGL window("render2texture", 640, 480);
 	
 	DriverGPU * driver = DriverGPU::get();
 
@@ -45,11 +44,11 @@ int main(void){
 
 	while(1){	
 		#if defined(_WIN32)
-		window->peekMessage();
+		window.peekMessage();
 		drawImage(tulipsTex, program);
 		#endif
 
-		window->swapBuffers();
+		window.swapBuffers();
 	}
 
 	//	delete window; 	Class has no destructor, undefined behaviour
@@ -78,7 +77,7 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	glDrawArrays(GL_QUADS, 0, 4);
 	glFlush();
 	
-	fbo.detachTexture(colorTex);
+	//fbo.detachTexture(colorTex);
 	colorTex.saveTexture("result.bmp");
  
 	glFinish();
