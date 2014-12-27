@@ -29,16 +29,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\src\shaders\quad.vertex">
-      <Filter>Source Files\shaders</Filter>
-    </None>
     <None Include="..\..\src\ParticleFilterCPU.inl">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\..\src\shaders\initParticles.fragment">
+    <None Include="..\..\src\shaders\particle.vertex">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="..\..\src\shaders\stepParticles.fragment">
+    <None Include="..\..\src\shaders\particleFilterShaderTemplate.fragment">
       <Filter>Source Files\shaders</Filter>
     </None>
   </ItemGroup>

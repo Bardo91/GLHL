@@ -15,16 +15,17 @@ using namespace GLHL;
 
 //---------------------------------------------------------------------------------------------------------------------
 ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particleShaderPath) :
-						mFrontTexture(_nuParticles, 1, eTexType::eRGBA),
-						mBackTexture(_nuParticles, 1, eTexType::eRGBA),
+						mFrontTexture(40, 25, eTexType::eRGBA),
+						mBackTexture(40, 25, eTexType::eRGBA),
 						mVertexShaderDummy(eShaderType::eVertexShader,"../../src/shaders/particle.vertex"),
-						mFragmentShader(eShaderType::eFragmentShader, _particleShaderPath)
-						{
+						mFragmentShader(eShaderType::eFragmentShader, _particleShaderPath) {
+
+	_nuParticles;
 
 	DriverGPU *driver = DriverGPU::get();
 	
 	mFBO.attachTexture(mFrontTexture);
-	mFBO.attachTexture(mBackTexture);
+	//mFBO.attachTexture(mBackTexture);
 
 	mFBO.linkAttachments();
 	
@@ -34,13 +35,19 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particl
 
 	mProgram.link();
 
+	mProgram.use();
+
 	GLuint initLoc = driver->getUniformLocation(mProgram, "init");
 	driver->setUniform(initLoc, true);
 	mSeed = driver->getUniformLocation(mProgram, "seed");
-	driver->setUniform(mSeed, unsigned(time(NULL)));
+	driver->setUniform(mSeed, float(rand())/RAND_MAX);
 
 	mProgram.use();
 	/* 666 TODO draw line to exe shader*/
+	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
+
+	glFlush();
 
 	
 }
@@ -51,8 +58,9 @@ void ParticleFilterGPU::step() {
 
 	mProgram.use();
 
-	driver->drawLine2f	(	std::array<vec2f, 2> { {	vec2f(-1.0f, 0.0f),
-														vec2f(1.0f, 0.0f)}} );	
+	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
+
 	glFinish();
 }
 
