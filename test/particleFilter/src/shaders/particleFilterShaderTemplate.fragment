@@ -1,13 +1,73 @@
 #version 120
 
-uniform float seed;
-uniform bool init = false;
+const highp float PI = 3.14159265359;
 
-void initParticle();
-void stepParticle();
+const float WORLD_SIZE = 100;
+const vec2 LAND_MARKS[4] = vec2[4](	vec2(20.0, 20.0),
+									vec2(80.0, 80.0),
+									vec2(20.0, 80.0),
+									vec2(80.0, 20.0));
+
+const float doubleSigmaOri = 0.1;
+const float doubleSigmaForward = 0.2;
+
+uniform float seed;
+uniform bool init;
+uniform vec2 movement;
 
 // ---------------- Noise ------------------------
-float hash( vec2 p );
+float hash(vec2 p) {
+	float h = dot(p,vec2(127.1,311.7))*seed;	
+    return fract(sin(h)*43758.5453123);
+}
+
+// ---------- Particle Filter pipeline -----------
+void initParticle(){
+	// This functions initialize data on framebuffer
+
+	gl_FragColor = vec4(hash(gl_FragCoord.xy), hash(gl_FragCoord.xy), 0.0, 1.0);
+
+}
+
+void simulate(){
+	// This method simulate a step in the particle.
+
+	// 666 Generalize simulation. Now is for robot's case
+	vec4 robotData = gl_FragColor;
+
+	vec2 robotPos = vec2(robotData.r*WORLD_SIZE, robotData.g*WORLD_SIZE);
+	float robotOri = robotData.b*2*PI;
+	
+	// Calc orientation.
+	robotOri = robotOri + movement.y + hash(gl_FragCoord.xy)*doubleSigmaOri - doubleSigmaOri/2;
+	robotOri = mod(robotOri, 2*PI);
+
+	// Calc position
+	float dist = movement.x + hash(gl_FragCoord.xy)*doubleSigmaForward - doubleSigmaForward/2;
+
+	robotPos.x += cos(robotOri)*dist;
+	robotPos.y += sin(robotOri)*dist;
+
+	robotPos = mod(robotPos, WORLD_SIZE);
+
+	// Store into texture
+	gl_FragColor = vec4(robotPos/WORLD_SIZE, robotOri/2/PI, 1.0);
+}
+
+void calcWeigh(){
+
+}
+
+void resample(){
+
+
+}
+
+void stepParticle(){
+	simulate();
+	calcWeigh();
+	resample();
+}
 
 // ---------------- main ------------------------
 void main() {
@@ -18,21 +78,3 @@ void main() {
 
 }
 
-
-
-void initParticle(){
-	//gl_FragColor = vec4(gl_FragCoord.xy, 0.0, 1.0); 
-	gl_FragColor = vec4(hash(gl_FragCoord.xy), hash(gl_PointCoord.xy), 0.0, 1.0); 
-
-}
-
-
-void stepParticle(){
-
-}
-
-// ---------------- Noise ------------------------
-float hash(vec2 p) {
-	float h = dot(p,vec2(127.1,311.7))*seed;	
-    return fract(sin(h)*43758.5453123);
-}

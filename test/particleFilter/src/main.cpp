@@ -25,6 +25,7 @@ public:
 	void calcWeigh(Particle &_realParticle) { mWeigh = mRobot.measurementProb(static_cast<ParticleRobot &>(_realParticle).sense()); };
 
 	std::array<double, 3> position() { return mRobot.position(); };
+
 private:
 	std::array<double, 4> sense() { return mRobot.sense(); };
 	
@@ -97,7 +98,7 @@ void particleFilterGPU() {
 	// 666 TODO Relative path to vertex shader?
 	ParticleFilterGPU pfGPU(1000, "../../src/shaders/particleFilterShaderTemplate.fragment");
 
-	//for (unsigned i = 0; i < 10; i++) {
-	//	pfGPU.step();
-	//}
+	for (unsigned i = 0; i < 10; i++) {
+		pfGPU.step();
+	}
 }

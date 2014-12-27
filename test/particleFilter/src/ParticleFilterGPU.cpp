@@ -5,7 +5,7 @@
 //			Date:	2014-Dec-21
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ParticleFilterGPU class
+// ParticleFilterGPU class currently Robot class
 
 #include "ParticleFilterGPU.h"
 
@@ -47,6 +47,8 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particl
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
 
+	driver->setUniform(initLoc, false);
+
 	glFlush();
 
 	
@@ -57,6 +59,12 @@ void ParticleFilterGPU::step() {
 	DriverGPU *driver = DriverGPU::get();
 
 	mProgram.use();
+
+	// Update simulation parameters
+	GLuint movLoc = driver->getUniformLocation(mProgram, "movement");
+	driver->setUniform(movLoc, vec2f(0.1f, 0.05f));
+
+	driver->setUniform(mSeed, float(rand()) / RAND_MAX);
 
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
