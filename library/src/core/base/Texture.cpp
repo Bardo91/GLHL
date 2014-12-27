@@ -20,9 +20,10 @@ namespace GLHL{
 	Texture::Texture(unsigned _width, unsigned _height, eTexType _type): mWidth(_width), mHeight(_height), mTexType( (unsigned)_type) {
 		DriverGPU::get()->genTextures(1, &mTexId);
 		bind();
-		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, (unsigned) _type, _width, _height, 0, (unsigned) _type, GL_UNSIGNED_BYTE, nullptr);
-		
 		calcChannels();
+		
+		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, mTexType, _width, _height, 0, mChannelsGL, mChannelTypeGL, nullptr);
+		
 		mBufferSize = mWidth * mHeight * mChannels;
 	}
 
@@ -30,13 +31,14 @@ namespace GLHL{
 	Texture::Texture(unsigned _width, unsigned _height, eTexType _type, unsigned char *data) : mWidth(_width), mHeight(_height), mTexType((unsigned)_type) {
 		DriverGPU::get()->genTextures(1, &mTexId);
 		bind();
+
+		calcChannels();
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, (unsigned)_type, _width, _height, 0, (unsigned)_type, GL_UNSIGNED_BYTE, data);
+		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, mTexType, _width, _height, 0, mChannelsGL, mChannelTypeGL, data);
 
-		calcChannels();
 		mBufferSize = mWidth * mHeight * mChannels;
 	}
 
@@ -85,17 +87,34 @@ namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
 	void Texture::calcChannels(){
 		switch (mTexType) {
-		case GL_RGB:
-		case GL_RGB32F:
+		// RGB
+		case GL_RGB8:
 		case GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE:
 			mTexType = GL_RGB;
+			mChannelsGL = GL_RGB;
 			mChannels = 3;
+			mChannelTypeGL = GL_UNSIGNED_BYTE;
 			break;
-		case GL_RGBA:
-		case GL_RGBA32F:
+		case GL_RGB32F:
+			mTexType = GL_RGB;
+			mChannelsGL = GL_RGB;
+			mChannels = 3;
+			mChannelTypeGL = GL_FLOAT;
+			break;
+
+		// RGBA
+		case GL_RGBA8:
 		case GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE:
 			mTexType = GL_RGBA;
+			mChannelsGL = GL_RGBA;
 			mChannels = 4;
+			mChannelTypeGL = GL_UNSIGNED_BYTE;
+			break;
+		case GL_RGBA32F:
+			mTexType = GL_RGBA;
+			mChannelsGL = GL_RGBA;
+			mChannels = 4;
+			mChannelTypeGL = GL_FLOAT;
 			break;
 		default:
 			assert(false);

@@ -45,6 +45,9 @@ namespace GLHL{
 		GLuint mTexId;
 
 		GLint mWidth, mHeight, mChannels;
+
+		GLint mChannelTypeGL;
+		GLint mChannelsGL;
 		GLint mTexType;
 		
 		GLint mBufferSize;
