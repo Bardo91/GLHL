@@ -15,8 +15,8 @@ using namespace GLHL;
 
 //---------------------------------------------------------------------------------------------------------------------
 ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particleShaderPath) :
-						mFrontTexture(40, 25, eTexType::eRGBA),
-						mBackTexture(40, 25, eTexType::eRGBA),
+						mFrontTexture(40, 25, eTexType::eRGBA32F),
+						mBackTexture(40, 25, eTexType::eRGBA32F),
 						mVertexShaderDummy(eShaderType::eVertexShader,"../../src/shaders/particle.vertex"),
 						mFragmentShader(eShaderType::eFragmentShader, _particleShaderPath) {
 

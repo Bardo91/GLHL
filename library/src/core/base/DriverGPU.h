@@ -107,7 +107,7 @@ namespace GLHL{
 		void deleteBuffer(GLuint &_buffer);
 		void bufferData(GLenum _target, GLsizeiptr _size, const void *_data, GLenum _usage);
 
-
+		// --> Frame Buffer Objects
 		void genFramebuffers(GLsizei _n, GLuint *_ids);
 		GLuint genFramebuffer();
 		void bindFramebuffer(GLenum _target, GLuint _framebuffer);

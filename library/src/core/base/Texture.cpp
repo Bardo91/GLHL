@@ -86,11 +86,13 @@ namespace GLHL{
 	void Texture::calcChannels(){
 		switch (mTexType) {
 		case GL_RGB:
+		case GL_RGB32F:
 		case GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE:
 			mTexType = GL_RGB;
 			mChannels = 3;
 			break;
 		case GL_RGBA:
+		case GL_RGBA32F:
 		case GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE:
 			mTexType = GL_RGBA;
 			mChannels = 4;

@@ -31,7 +31,6 @@ void initParticle(){
 
 void simulate(){
 	// This method simulate a step in the particle.
-
 	// 666 Generalize simulation. Now is for robot's case
 	vec4 robotData = gl_FragColor;
 
