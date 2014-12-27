@@ -5,8 +5,11 @@ uniform bool init = false;
 
 void initParticle();
 void stepParticle();
-float random(vec2 co);
 
+// ---------------- Noise ------------------------
+float hash( vec2 p );
+
+// ---------------- main ------------------------
 void main() {
 	if(init)
 		initParticle();
@@ -18,8 +21,8 @@ void main() {
 
 
 void initParticle(){
-	//gl_FragColor = vec4(gl_PointCoord.xy, 0.0, 1.0); 
-	gl_FragColor = vec4(sin(gl_FragCoord.x), sin(gl_FragCoord.y), seed, 1.0); 
+	//gl_FragColor = vec4(gl_FragCoord.xy, 0.0, 1.0); 
+	gl_FragColor = vec4(hash(gl_FragCoord.xy), hash(gl_PointCoord.xy), 0.0, 1.0); 
 
 }
 
@@ -28,11 +31,8 @@ void stepParticle(){
 
 }
 
-float random(vec2 co){
-	float a = 12.9898;
-	float b = 78.233;
-	float c = 43758.5453;
-	float dt= dot(co.xy ,vec2(a,b));
-	float sn= mod(dt,3.14);
-	return fract(sin(sn) * c);
+// ---------------- Noise ------------------------
+float hash(vec2 p) {
+	float h = dot(p,vec2(127.1,311.7))*seed;	
+    return fract(sin(h)*43758.5453123);
 }

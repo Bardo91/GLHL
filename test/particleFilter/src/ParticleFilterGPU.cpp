@@ -43,7 +43,7 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particl
 	driver->setUniform(mSeed, float(rand())/RAND_MAX);
 
 	mProgram.use();
-	/* 666 TODO draw line to exe shader*/
+	
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
 
