@@ -90,13 +90,13 @@ namespace GLHL{
 		// RGB
 		case GL_RGB8:
 		case GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE:
-			mTexType = GL_RGB;
+			mTexType = GL_RGB8;
 			mChannelsGL = GL_RGB;
 			mChannels = 3;
 			mChannelTypeGL = GL_UNSIGNED_BYTE;
 			break;
 		case GL_RGB32F:
-			mTexType = GL_RGB;
+			mTexType = GL_RGB32F;
 			mChannelsGL = GL_RGB;
 			mChannels = 3;
 			mChannelTypeGL = GL_FLOAT;
@@ -105,13 +105,13 @@ namespace GLHL{
 		// RGBA
 		case GL_RGBA8:
 		case GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE:
-			mTexType = GL_RGBA;
+			mTexType = GL_RGBA8;
 			mChannelsGL = GL_RGBA;
 			mChannels = 4;
 			mChannelTypeGL = GL_UNSIGNED_BYTE;
 			break;
 		case GL_RGBA32F:
-			mTexType = GL_RGBA;
+			mTexType = GL_RGBA32F;
 			mChannelsGL = GL_RGBA;
 			mChannels = 4;
 			mChannelTypeGL = GL_FLOAT;
