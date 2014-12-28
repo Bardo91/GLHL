@@ -17,7 +17,7 @@
 
 namespace GLHL{
 
-	enum class eTexType { eRGB = GL_RGB, eRGB32F = GL_RGB32F, eRGBA = GL_RGBA, eRGBA32F = GL_RGBA32F };
+	enum class eTexType { eRGB8 = GL_RGB8, eRGB32F = GL_RGB32F, eRGBA8 = GL_RGBA8, eRGBA32F = GL_RGBA32F };
 
 	class Texture{
 	public:
