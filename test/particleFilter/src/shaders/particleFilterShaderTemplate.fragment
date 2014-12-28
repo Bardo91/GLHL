@@ -1,5 +1,9 @@
 #version 120
 
+varying vec2 texCoord;
+uniform sampler2D lastSimulation;
+
+// --- Variables related to algorithm
 const highp float PI = 3.14159265359;
 
 const float WORLD_SIZE = 100;
@@ -32,25 +36,27 @@ void initParticle(){
 void simulate(){
 	// This method simulate a step in the particle.
 	// 666 Generalize simulation. Now is for robot's case
-	vec4 robotData = gl_FragColor;
 
-	vec2 robotPos = vec2(robotData.r*WORLD_SIZE, robotData.g*WORLD_SIZE);
-	float robotOri = robotData.b*2*PI;
+	vec4 robotData = texture2D(lastSimulation, texCoord, 0);
+	gl_FragColor = robotData;
+
+	//vec2 robotPos = vec2(robotData.r*WORLD_SIZE, robotData.g*WORLD_SIZE);
+	//float robotOri = robotData.b*2*PI;
 	
-	// Calc orientation.
-	robotOri = robotOri + movement.y + hash(gl_FragCoord.xy)*doubleSigmaOri - doubleSigmaOri/2;
-	robotOri = mod(robotOri, 2*PI);
-
-	// Calc position
-	float dist = movement.x + hash(gl_FragCoord.xy)*doubleSigmaForward - doubleSigmaForward/2;
-
-	robotPos.x += cos(robotOri)*dist;
-	robotPos.y += sin(robotOri)*dist;
-
-	robotPos = mod(robotPos, WORLD_SIZE);
+	//// Calc orientation.
+	//robotOri = robotOri + movement.y + hash(gl_FragCoord.xy)*doubleSigmaOri - doubleSigmaOri/2;
+	//robotOri = mod(robotOri, 2*PI);
+	//
+	//// Calc position
+	//float dist = movement.x + hash(gl_FragCoord.xy)*doubleSigmaForward - doubleSigmaForward/2;
+	//
+	//robotPos.x += cos(robotOri)*dist;
+	//robotPos.y += sin(robotOri)*dist;
+	//
+	//robotPos = mod(robotPos, WORLD_SIZE);
 
 	// Store into texture
-	gl_FragColor = vec4(robotPos/WORLD_SIZE, robotOri/2/PI, 1.0);
+	//gl_FragColor = vec4(robotPos/WORLD_SIZE, robotOri/2/PI, 1.0);
 }
 
 void calcWeigh(){

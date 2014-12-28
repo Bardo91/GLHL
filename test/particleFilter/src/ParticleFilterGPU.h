@@ -29,8 +29,14 @@ private:
 	void swapFBO();
 
 private:
+	void initFBO();
+	void initProgram();
+
+	void initFilter();
+
+private:
 	GLHL::FrameBuffer mFBO;
-	GLHL::Texture mFrontTexture, mBackTexture;
+	GLHL::Texture mComputeTexture, mStoreTexture;
 
 	bool currentTexture;
 
