@@ -21,7 +21,8 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particl
 						mFragmentShader(eShaderType::eFragmentShader, _particleShaderPath) {
 
 	_nuParticles;
-	
+
+	glViewport(0, 0, 40, 25);
 	initFBO();
 	
 	initProgram();
@@ -90,8 +91,8 @@ void ParticleFilterGPU::initFilter(){
 
 	mProgram.use();
 
-	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 0.5f)}},
-								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
+	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
 
 	driver->setUniform(initLoc, false);
 
