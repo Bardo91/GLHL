@@ -37,8 +37,8 @@ void simulate(){
 	// This method simulate a step in the particle.
 	// 666 Generalize simulation. Now is for robot's case
 
-	vec4 robotData = texture2D(lastSimulation, texCoord, 0);
-	gl_FragColor = robotData;
+	vec4 robotData = texture2D(lastSimulation, texCoord);
+	gl_FragColor = vec4(texCoord.xy, robotData.r, 1.0);
 
 	//vec2 robotPos = vec2(robotData.r*WORLD_SIZE, robotData.g*WORLD_SIZE);
 	//float robotOri = robotData.b*2*PI;
