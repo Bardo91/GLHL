@@ -17,13 +17,11 @@ namespace GLHL{
 	//--------------------------------------------------------------------------------------------------------------------
 	FrameBuffer::FrameBuffer(){
 		mBufferId = DriverGPU::get()->genFramebuffer();
-		DriverGPU::get()->checkErrors();
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------
 	FrameBuffer::~FrameBuffer(){
 		DriverGPU::get()->deleteFramebuffers(1, &mBufferId);
-
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------
@@ -40,7 +38,7 @@ namespace GLHL{
 		mAttachments.push_back(std::pair<unsigned, const Texture &>(attach, _tex));
 		
 		bind();
-		DriverGPU::get()->framebufferTexture(GL_DRAW_FRAMEBUFFER, attach, _tex, 0);
+		DriverGPU::get()->framebufferTexture(GL_FRAMEBUFFER, attach, _tex, 0);
 		DriverGPU::get()->checkErrors();
 		checkErrors();
 
@@ -100,7 +98,7 @@ namespace GLHL{
 	void FrameBuffer::checkErrors(){
 		bind();
 
-		GLenum error = DriverGPU::get()->checkFramebufferStatus(GL_DRAW_FRAMEBUFFER);
+		GLenum error = DriverGPU::get()->checkFramebufferStatus(GL_FRAMEBUFFER);
 		switch (error) {
 		case GL_FRAMEBUFFER_UNDEFINED:
 			printf("FBO Undefined\n");
