@@ -24,6 +24,11 @@ namespace GLHL{
 		
 		DriverGPU::get()->texImage2D(GL_TEXTURE_2D, 0, mTexType, _width, _height, 0, mChannelsGL, mChannelTypeGL, nullptr);
 		
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
 		mBufferSize = mWidth * mHeight * mChannels;
 	}
 
