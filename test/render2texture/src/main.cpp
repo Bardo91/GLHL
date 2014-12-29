@@ -65,7 +65,7 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	DriverGPU *driver = DriverGPU::get();
 	
 	// create a RGBA color texture
-	Texture colorTex(640, 480, eTexType::eRGBA8);
+	Texture colorTex(640, 480, eTexType::eRGB8);
 
 	// create the framebuffer object
 	FrameBuffer fbo;
