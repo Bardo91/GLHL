@@ -18,7 +18,7 @@ void drawImage(const Texture &_texture, ShaderProgram _program);
 void drawQuad();
 
 int main(void){
-	WindowGL * window = WindowGL::createWindow(640, 480);
+	WindowGL window("Texture loader", 640, 480);
 	
 	DriverGPU * driver = DriverGPU::get();
 
@@ -36,16 +36,16 @@ int main(void){
 	bool condition = false;
 	do{	
 		#if defined(_WIN32)
-		window->peekMessage();
+		window.peekMessage();
 		drawImage(texture, program);
 		#endif
 		texture.saveTexture("result.bmp");
-		window->swapBuffers();
+		window.swapBuffers();
 		
 	} while (condition);
 
 
-	window->hide();
+	window.hide();
 
 	#ifdef _WIN32
 	system("PAUSE");
