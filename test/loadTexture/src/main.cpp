@@ -63,11 +63,11 @@ void drawImage(ShaderProgram _program) {
 
 	GLuint texLoc1;
 	texLoc1 = driver->getUniformLocation(_program, "texture1");
-	driver->setUniform(texLoc1, 0);
+	driver->setUniform(texLoc1, texture1);
 	
 	GLuint texLoc2;
 	texLoc2 = driver->getUniformLocation(_program, "texture2");
-	driver->setUniform(texLoc2, 1);
+	driver->setUniform(texLoc2, texture2);
 
 	_program.use();
 
