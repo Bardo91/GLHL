@@ -76,15 +76,17 @@ namespace GLHL{
 		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxUnits);
 		
 		// Get an empty unit slot
-		for (GLuint unit = GL_TEXTURE0; unit <= maxUnits + 1; unit++){
-			if (std::find(sTexUnitUsed.begin(), sTexUnitUsed.end(), unit) != sTexUnitUsed.end()){
-				sTexUnitUsed.push_back(unit);
-				mTexUnit = unit;
-				break;
+		if (mTexUnit == 0){
+			for (GLuint unit = GL_TEXTURE0; unit <= GL_TEXTURE0 + maxUnits + 1; unit++){
+				if (std::find(sTexUnitUsed.begin(), sTexUnitUsed.end(), unit) == sTexUnitUsed.end()){
+					sTexUnitUsed.push_back(unit);
+					mTexUnit = unit;
+					break;
+				}
 			}
+			assert(mTexUnit != maxUnits + 1);
 		}
-
-		assert(mTexUnit = maxUnits + 1);
+		
 
 		// Bind texture to it
 		driver->activeTexture(mTexUnit);

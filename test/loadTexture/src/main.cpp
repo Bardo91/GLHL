@@ -14,7 +14,7 @@
 using namespace GLHL;
 using namespace std;
 
-void drawImage(const Texture &_texture, ShaderProgram _program);
+void drawImage(ShaderProgram _program);
 void drawQuad();
 
 int main(void){
@@ -22,10 +22,8 @@ int main(void){
 	
 	DriverGPU * driver = DriverGPU::get();
 
-	Texture texture("./Tulips.jpg");
-
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
-	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
+	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
 
 	ShaderProgram program;
 
@@ -37,9 +35,8 @@ int main(void){
 	do{	
 		#if defined(_WIN32)
 		window.peekMessage();
-		drawImage(texture, program);
+		drawImage(program);
 		#endif
-		texture.saveTexture("result.bmp");
 		window.swapBuffers();
 		
 	} while (condition);
@@ -56,17 +53,22 @@ int main(void){
 	return 0;
 }
 
-void drawImage(const Texture &_texture, ShaderProgram _program) {
+void drawImage(ShaderProgram _program) {
 	glViewport(0, 0, 640, 480);
 
 	//glClear(GL_COLOR_BUFFER_BIT);
-	
+	Texture texture1("./Tulips.jpg");
+	//Texture texture2("./Koala.jpg");
 	DriverGPU *driver = DriverGPU::get();
 
-	GLuint texLoc;
-	texLoc = driver->getUniformLocation(_program, "texture");
-	driver->setUniform(texLoc, 0);
+	GLuint texLoc1;
+	texLoc1 = driver->getUniformLocation(_program, "texture1");
+	driver->setUniform(texLoc1, 0);
 	
+	//GLuint texLoc2;
+	//texLoc2 = driver->getUniformLocation(_program, "texture2");
+	//driver->setUniform(texLoc2, 1);
+
 	_program.use();
 
 	drawQuad();
