@@ -71,12 +71,12 @@ namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
 	void Texture::bind(){
 		DriverGPU *driver = DriverGPU::get();
-
-		int maxUnits;	// 666 TODO: performance analysis of calling this every time.
-		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxUnits);
 		
 		// Get an empty unit slot
 		if (mTexUnit == 0){
+			int maxUnits;	// 666 TODO: performance analysis of calling this every time.
+			glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxUnits);
+
 			for (GLuint unit = GL_TEXTURE0; unit <= GL_TEXTURE0 + maxUnits + 1; unit++){
 				if (std::find(sTexUnitUsed.begin(), sTexUnitUsed.end(), unit) == sTexUnitUsed.end()){
 					sTexUnitUsed.push_back(unit);
@@ -106,7 +106,7 @@ namespace GLHL{
 	void Texture::attachToUniform(GLuint _program, std::string _name){
 		DriverGPU *driver = DriverGPU::get();
 		GLuint loc = driver->getUniformLocation(_program, _name.c_str());
-		driver->setUniform(loc, mTexUnit);
+		driver->setUniform(loc, mTexUnit - GL_TEXTURE0);
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
