@@ -41,12 +41,11 @@ void ParticleFilterGPU::step() {
 	//GLuint movLoc = driver->getUniformLocation(mProgram, "movement");
 	//driver->setUniform(movLoc, vec2f(0.1f, 0.05f));
 	//
-	//driver->setUniform(mSeed, float(rand()) / RAND_MAX);
-	//GLuint storedDataLoc = driver->getUniformLocation(mProgram, "lastSimulation");
-	//driver->setUniform(storedDataLoc, mStoreTexture);
+	
+	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
 
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
-								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
+								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
 
 	glFlush();
 
