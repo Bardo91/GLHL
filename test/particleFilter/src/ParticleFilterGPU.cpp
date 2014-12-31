@@ -45,8 +45,23 @@ void ParticleFilterGPU::step() {
 	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
 
 	// Calculate next step.
+	// Simulate
+	GLuint stateLoc = driver->getUniformLocation(mProgram, "gState");
+	driver->setUniform(stateLoc, 1);
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
+
+
+	// Weigh calculus
+	driver->setUniform(stateLoc, 2);
+	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
+
+	// Resample
+	driver->setUniform(stateLoc, 3);
+	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
+
 
 	glFlush();
 
@@ -83,9 +98,9 @@ void ParticleFilterGPU::initProgram(){
 void ParticleFilterGPU::initFilter(){
 	DriverGPU *driver = DriverGPU::get();
 
-	GLuint initLoc = driver->getUniformLocation(mProgram, "init");
-	driver->setUniform(initLoc, true);
-	mSeed = driver->getUniformLocation(mProgram, "seed");
+	GLuint initLoc = driver->getUniformLocation(mProgram, "gState");
+	driver->setUniform(initLoc, 0);
+	mSeed = driver->getUniformLocation(mProgram, "gSeed");
 	driver->setUniform(mSeed, float(rand()) / RAND_MAX);
 
 	mProgram.use();
