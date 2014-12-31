@@ -74,6 +74,8 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	
 	_program.use();
 
+	_texture.attachToUniform(_program, "texture");
+
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f), vec2f(0.0f, 0.0f)}});
 
