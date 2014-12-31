@@ -37,13 +37,14 @@ void ParticleFilterGPU::step() {
 
 	mProgram.use();
 
-	// Update simulation parameters
-	//GLuint movLoc = driver->getUniformLocation(mProgram, "movement");
-	//driver->setUniform(movLoc, vec2f(0.1f, 0.05f));
-	//
+	// Update simulation parameters.
+	GLuint movLoc = driver->getUniformLocation(mProgram, "movement");
+	driver->setUniform(movLoc, vec2f(0.1f, 0.05f));
 	
+	// Load previous state and attach it to an uniform.
 	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
 
+	// Calculate next step.
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
 
