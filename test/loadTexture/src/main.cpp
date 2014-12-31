@@ -14,18 +14,16 @@
 using namespace GLHL;
 using namespace std;
 
-void drawImage(const Texture &_texture, ShaderProgram _program);
+void drawImage(ShaderProgram _program);
 void drawQuad();
 
 int main(void){
-	WindowGL * window = WindowGL::createWindow(640, 480);
+	WindowGL window("Texture loader", 640, 480);
 	
 	DriverGPU * driver = DriverGPU::get();
 
-	Texture texture("./Tulips.jpg");
-
 	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
-	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
+	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
 
 	ShaderProgram program;
 
@@ -33,19 +31,18 @@ int main(void){
 	program.attachShader(fShader);
 	program.link();
 
-	bool condition = false;
+	bool condition = true;
 	do{	
 		#if defined(_WIN32)
-		window->peekMessage();
-		drawImage(texture, program);
+		window.peekMessage();
+		drawImage(program);
 		#endif
-		texture.saveTexture("result.bmp");
-		window->swapBuffers();
+		window.swapBuffers();
 		
 	} while (condition);
 
 
-	window->hide();
+	window.hide();
 
 	#ifdef _WIN32
 	system("PAUSE");
@@ -56,25 +53,26 @@ int main(void){
 	return 0;
 }
 
-void drawImage(const Texture &_texture, ShaderProgram _program) {
+void drawImage(ShaderProgram _program) {
 	glViewport(0, 0, 640, 480);
 
 	//glClear(GL_COLOR_BUFFER_BIT);
-	
+	Texture texture1("./Tulips.jpg");
+	Texture texture2("./Koala.jpg");
+	Texture texture3("./Penguins.jpg");
 	DriverGPU *driver = DriverGPU::get();
 
-	GLuint texLoc;
-	texLoc = driver->getUniformLocation(_program, "texture");
-	driver->setUniform(texLoc, 0);
-	
+	texture1.attachToUniform(_program, "texture1");
+	texture2.attachToUniform(_program, "texture2");
+	texture3.attachToUniform(_program, "texture3");
+
+
+
 	_program.use();
 
 	drawQuad();
 
-	
-
 	glDrawArrays(GL_QUADS, 0, 4);
-
 
 	glFinish();
 }

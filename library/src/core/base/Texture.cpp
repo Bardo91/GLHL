@@ -16,8 +16,12 @@
 
 namespace GLHL{
 	//-----------------------------------------------------------------------------------------------------------------
+	// Static Data initialization
+	std::vector<GLuint> Texture::sTexUnitUsed;
+
+	//-----------------------------------------------------------------------------------------------------------------
 	// Public interface
-	Texture::Texture(unsigned _width, unsigned _height, eTexType _type): mWidth(_width), mHeight(_height), mTexType( (unsigned)_type) {
+	Texture::Texture(unsigned _width, unsigned _height, eTexType _type): mWidth(_width), mHeight(_height), mTexType( (unsigned)_type), mTexUnit(0) {	
 		DriverGPU::get()->genTextures(1, &mTexId);
 		bind();
 		calcChannels();
@@ -35,7 +39,7 @@ namespace GLHL{
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
-	Texture::Texture(unsigned _width, unsigned _height, eTexType _type, unsigned char *data) : mWidth(_width), mHeight(_height), mTexType((unsigned)_type) {
+	Texture::Texture(unsigned _width, unsigned _height, eTexType _type, unsigned char *data) : mWidth(_width), mHeight(_height), mTexType((unsigned)_type), mTexUnit(0) {
 		DriverGPU::get()->genTextures(1, &mTexId);
 		bind();
 
@@ -50,7 +54,7 @@ namespace GLHL{
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
-	Texture::Texture(std::string _fileName){
+	Texture::Texture(std::string _fileName): mTexUnit(0){
 		mTexId = SOIL_load_OGL_texture(	_fileName.c_str(),
 										SOIL_LOAD_AUTO,
 										SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
@@ -67,31 +71,65 @@ namespace GLHL{
 	Texture::~Texture(){
 		bind();
 		DriverGPU::get()->deleteTextures(1, &mTexId);
-		mTexId = 0;
+		unbind();
+
+	}
+
+	//-----------------------------------------------------------------------------------------------------------------
+	void Texture::bind(){
+		DriverGPU *driver = DriverGPU::get();
 		
+		// Get an empty unit slot
+		if (mTexUnit == 0){
+			int maxUnits;	// 666 TODO: performance analysis of calling this every time.
+			glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxUnits);
+
+			for (GLuint unit = GL_TEXTURE0; unit <= GL_TEXTURE0 + maxUnits + 1; unit++){
+				if (std::find(sTexUnitUsed.begin(), sTexUnitUsed.end(), unit) == sTexUnitUsed.end()){
+					sTexUnitUsed.push_back(unit);
+					mTexUnit = unit;
+					break;
+				}
+			}
+			assert(mTexUnit != maxUnits + 1);
+		}
+		
+
+		// Bind texture to it
+		driver->activeTexture(mTexUnit);
+		driver->bindTexture(GL_TEXTURE_2D, mTexId);
+	}
+
+	void Texture::unbind(){
+		DriverGPU *driver = DriverGPU::get();
+
+		driver->activeTexture(mTexUnit);
+		driver->bindTexture(GL_TEXTURE_2D, 0);
+		sTexUnitUsed.erase(std::find(sTexUnitUsed.begin(), sTexUnitUsed.end(), mTexUnit));
+		mTexUnit = 0;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	void Texture::attachToUniform(GLuint _program, std::string _name){
+		bind();
+		DriverGPU *driver = DriverGPU::get();
+		GLuint loc = driver->getUniformLocation(_program, _name.c_str());
+		driver->setUniform(loc, mTexUnit - GL_TEXTURE0);
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------
 	void Texture::saveTexture(std::string _fileName){
-		 
+
 		unsigned char *buffer = new unsigned char[mBufferSize];
-		
+
 		unbind();
 		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, mTexType, GL_UNSIGNED_BYTE, buffer);
 		SOIL_save_image(_fileName.c_str(), SOIL_SAVE_TYPE_BMP, mWidth, mHeight, mChannels, buffer);
 	}
 
+
 	//-----------------------------------------------------------------------------------------------------------------
 	// Private interface
-	void Texture::bind(){
-		DriverGPU::get()->bindTexture(GL_TEXTURE_2D, mTexId);
-	}
-
-	void Texture::unbind(){
-		DriverGPU::get()->bindTexture(GL_TEXTURE_2D, 0);
-	}
-	
-	//-----------------------------------------------------------------------------------------------------------------
 	void Texture::calcChannels(){
 		switch (mTexType) {
 		// RGB
