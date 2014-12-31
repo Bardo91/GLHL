@@ -104,6 +104,7 @@ namespace GLHL{
 	
 	//-----------------------------------------------------------------------------------------------------------------
 	void Texture::attachToUniform(GLuint _program, std::string _name){
+		bind();
 		DriverGPU *driver = DriverGPU::get();
 		GLuint loc = driver->getUniformLocation(_program, _name.c_str());
 		driver->setUniform(loc, mTexUnit - GL_TEXTURE0);

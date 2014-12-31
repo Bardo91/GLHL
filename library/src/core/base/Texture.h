@@ -52,7 +52,7 @@ namespace GLHL{
 		Texture(Texture &_tex);
 	private:
 		GLuint mTexId;
-		GLuint mTexUnit;
+		GLint mTexUnit;
 
 		GLint mWidth, mHeight, mChannels;
 

@@ -59,24 +59,12 @@ void drawImage(ShaderProgram _program) {
 	//glClear(GL_COLOR_BUFFER_BIT);
 	Texture texture1("./Tulips.jpg");
 	Texture texture2("./Koala.jpg");
+	Texture texture3("./Penguins.jpg");
 	DriverGPU *driver = DriverGPU::get();
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture1);
-	
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, texture2);
-
-	//texture1.attachToUniform(_program, "texture1");
-	//texture2.attachToUniform(_program, "texture2");
-
-	GLuint texLoc1;
-	texLoc1 = driver->getUniformLocation(_program, "texture1");
-	driver->setUniform(texLoc1, 0);
-	
-	GLuint texLoc2;
-	texLoc2 = driver->getUniformLocation(_program, "texture2");
-	driver->setUniform(texLoc2, 1);
+	texture1.attachToUniform(_program, "texture1");
+	texture2.attachToUniform(_program, "texture2");
+	texture3.attachToUniform(_program, "texture3");
 
 
 
