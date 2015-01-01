@@ -15,7 +15,7 @@ const vec2 LAND_MARKS[4] = vec2[4](	vec2(20.0, 20.0),
 const float doubleSigmaOri = 0.1;
 const float doubleSigmaForward = 0.2;
 
-uniform float gSeed;
+uniform vec3 gSeed;
 uniform int gState;
 uniform vec2 movement;
 
@@ -56,8 +56,8 @@ void main() {
 void initParticles(){
 	// This functions initialize data on framebuffer
 
-	gl_FragColor = vec4(snoise(gl_FragCoord.xy), snoise(gl_FragCoord.xy), 0.0, 1.0);
-
+	//gl_FragColor = vec4(snoise(gl_FragCoord.xy*gSeed.x), snoise(gl_FragCoord.xy*gSeed.y), snoise(gl_FragCoord.xy*gSeed.z), 1.0);
+	gl_FragColor = vec4(snoise(gl_FragCoord.xy), snoise(gl_FragCoord.xy), gSeed.z, 1.0);
 }
 
 void simulateAndWeigh(){
@@ -98,7 +98,7 @@ void simulateAndWeigh(){
 	}
 
 	// Store into texture
-	gl_FragColor = vec4(robotPos/WORLD_SIZE, robotOri/2/PI, prob);
+	gl_FragColor = vec4(robotPos/WORLD_SIZE, robotOri/2/PI, prob+1.0);
 
 }
 

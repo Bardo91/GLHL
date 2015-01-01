@@ -98,10 +98,9 @@ void ParticleFilterGPU::initFilter(){
 
 	GLuint initLoc = driver->getUniformLocation(mProgram, "gState");
 	driver->setUniform(initLoc, 0);
-	//mSeed = driver->getUniformLocation(mProgram, "gSeed");
-	driver->setUniform(mSeed, float(rand()) / RAND_MAX);
-
-	mProgram.use();
+	mSeed = driver->getUniformLocation(mProgram, "gSeed");
+	vec3f seeds(float(rand()) / RAND_MAX, float(rand()) / RAND_MAX, float(rand()) / RAND_MAX);
+	driver->setUniform(mSeed, seeds);
 
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
