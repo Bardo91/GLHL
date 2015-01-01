@@ -32,7 +32,7 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particl
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ParticleFilterGPU::step() {
+void ParticleFilterGPU::step(vec4f _sense) {
 	DriverGPU *driver = DriverGPU::get();
 
 	mProgram.use();
@@ -54,6 +54,9 @@ void ParticleFilterGPU::step() {
 
 	// Weigh calculus
 	driver->setUniform(stateLoc, 2);
+	GLuint measurementLoc = driver->getUniformLocation(mProgram, "measurementReal");
+	driver->setUniform(measurementLoc, _sense);
+
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
 

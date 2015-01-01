@@ -14,6 +14,7 @@
 #include <vector>
 #include <src/core/base/FrameBuffer.h>
 #include <src/core/base/Texture.h>
+#include <src/core/types/Types.h>
 
 #include <src/core/glsl/Shader.h>
 #include <src/core/glsl/ShaderProgram.h>
@@ -23,7 +24,7 @@ class ParticleFilterGPU {
 public:
 	ParticleFilterGPU(unsigned _nuParticles, std::string _particleShaderPath);
 
-	void step(/*_realParticle*/);
+	void step(GLHL::vec4f _sense);
 
 private:
 	void swapFBO();

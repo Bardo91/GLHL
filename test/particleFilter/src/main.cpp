@@ -95,10 +95,14 @@ void particleFilterGPU() {
 	srand(unsigned(time(NULL)));
 	Context context;
 
+
+	Robot robot;
+	robot;
 	// 666 TODO Relative path to vertex shader?
 	ParticleFilterGPU pfGPU(1000, "../../src/shaders/particleFilterShaderTemplate.fragment");
 
 	for (unsigned i = 0; i < 10; i++) {
-		pfGPU.step();
+		std::array<double, 4> measure = robot.sense();
+		pfGPU.step(vec4f(float(measure[0]), float(measure[1]), float(measure[2]), float(measure[4])));
 	}
 }
