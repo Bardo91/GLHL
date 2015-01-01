@@ -97,7 +97,8 @@ void particleFilterGPU() {
 
 
 	Robot robot;
-	robot;
+	robot.setNoise(0.05, 0.05, 5.0);
+
 	// 666 TODO Relative path to vertex shader?
 	ParticleFilterGPU pfGPU(1000, "../../src/shaders/particleFilterShaderTemplate.fragment");
 

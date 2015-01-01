@@ -21,10 +21,21 @@ uniform vec2 movement;
 
 uniform vec4 measurementReal;
 
+
+// Declarations
+// Particle filter process
 void initParticles();
-void simulate();
-void calcWeigh();
+void simulateAndWeigh();
 void resample();
+
+
+// Noise functions
+vec3 mod289(vec3 _x);
+vec2 mod289(vec2 _x);
+vec3 permute(vec3 _x);
+float snoise(vec2 _v);
+float gauss(float _m, float _sigma);
+float gaussian(float _nu, float _sigma, float _x);
 
 //------------------------------------------------
 // ---------------- main -------------------------
@@ -33,10 +44,8 @@ void main() {
 	if(gState == 0)
 		initParticles();
 	else if(gState == 1)
-		simulate();
+		simulateAndWeigh();
 	else if(gState == 2)
-		calcWeigh();
-	else if(gState == 3)
 		resample();
 }
 
@@ -47,11 +56,11 @@ void main() {
 void initParticles(){
 	// This functions initialize data on framebuffer
 
-	gl_FragColor = vec4(hash(gl_FragCoord.xy), hash(gl_FragCoord.xy), 0.0, 1.0);
+	gl_FragColor = vec4(snoise(gl_FragCoord.xy), snoise(gl_FragCoord.xy), 0.0, 1.0);
 
 }
 
-void simulate(){
+void simulateAndWeigh(){
 	// This method simulate a step in the particle.
 	// 666 Generalize simulation. Now is for robot's case
 
@@ -61,23 +70,31 @@ void simulate(){
 	float robotOri = robotData.b*2*PI;
 	
 	// Calc orientation.
-	robotOri = robotOri + movement.y + hash(gl_FragCoord.xy)*doubleSigmaOri - doubleSigmaOri/2;
+	robotOri = robotOri + movement.y + snoise(gl_FragCoord.xy)*doubleSigmaOri - doubleSigmaOri/2;
 	robotOri = mod(robotOri, 2*PI);
 	
 	// Calc position
-	float dist = movement.x + hash(gl_FragCoord.xy)*doubleSigmaForward - doubleSigmaForward/2;
+	float dist = movement.x + snoise(gl_FragCoord.xy)*doubleSigmaForward - doubleSigmaForward/2;
 	
 	robotPos.x += cos(robotOri)*dist;
 	robotPos.y += sin(robotOri)*dist;
 	
 	robotPos = mod(robotPos, WORLD_SIZE);
 
-	
+	// sense
+	vec4 z;
+	for (int i = 0; i < 4; i++) {
+		float dist = sqrt(pow(robotPos.x - LAND_MARKS[i].x, 2) + pow(robotPos.y - LAND_MARKS[i].y, 2));
+		dist += gauss(0.0, 0.2);
+		z[i] = dist;
+	}
+
+
 	// calculus of weigh
 	float prob = 1.0;
 	for (int i = 0; i < 4; i++) {
 		float dist = sqrt(pow(robotPos.x - LAND_MARKS[i][0], 2) + pow(robotPos.y - LAND_MARKS[i][1], 2));
-		prob *= gaussian(dist, mNoises.sense, _measurement[i]);
+		prob *= gaussian(dist, z[i], measurementReal[i]);
 	}
 
 	// Store into texture
@@ -89,6 +106,7 @@ void resample(){
 
 
 }
+
 
 //------------------------------------------------
 // ---------------- Noise ------------------------
@@ -153,4 +171,13 @@ float snoise(vec2 v)
   g.x  = a0.x  * x0.x  + h.x  * x0.y;
   g.yz = a0.yz * x12.xz + h.yz * x12.yw;
   return 130.0 * dot(m, g);
+}
+
+float gauss(float _m, float _sigma){	// Aproximation of "squared" gauss
+	return _m + snoise(gl_FragCoord.xy)*_sigma*2 - _sigma;
+}
+
+float gaussian(float _nu, float _sigma, float _x){
+	return exp(-(pow(_nu - _x, 2)) / (pow(_sigma,2)) / 2.0) / sqrt(2.0 * 3.1416 * (pow(_sigma, 2)));
+	
 }
