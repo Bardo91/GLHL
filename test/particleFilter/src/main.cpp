@@ -104,6 +104,6 @@ void particleFilterGPU() {
 
 	for (unsigned i = 0; i < 10; i++) {
 		std::array<double, 4> measure = robot.sense();
-		pfGPU.step(vec4f(float(measure[0]), float(measure[1]), float(measure[2]), float(measure[4])));
+		pfGPU.step(vec4f(float(measure[0]), float(measure[1]), float(measure[2]), float(measure[3])));
 	}
 }

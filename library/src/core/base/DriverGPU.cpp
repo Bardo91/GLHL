@@ -171,15 +171,15 @@ namespace GLHL{
 	}
 
 	void DriverGPU::setUniform(GLint _location, vec2i _vec){
-		glUniform2iv(_location, _vec.size(), _vec);
+		glUniform2i(_location, _vec[0], _vec[1]);
 	}
 
 	void DriverGPU::setUniform(GLint _location, vec3i _vec){
-		glUniform3iv(_location, _vec.size(), _vec);
+		glUniform3i(_location, _vec[0], _vec[1], _vec[2]);
 	}
 
 	void DriverGPU::setUniform(GLint _location, vec4i _vec){
-		glUniform4iv(_location, _vec.size(), _vec);
+		glUniform4i(_location, _vec[0], _vec[1], _vec[2], _vec[3]);
 	}
 
 	void DriverGPU::setUniform(GLint _location, GLfloat _value){
@@ -187,15 +187,15 @@ namespace GLHL{
 	}
 
 	void DriverGPU::setUniform(GLint _location, vec2f _vec){
-		glUniform2fv(_location, _vec.size(), _vec);
+		glUniform2f(_location, _vec[0], _vec[1]);
 	}
 
 	void DriverGPU::setUniform(GLint _location, vec3f _vec){
-		glUniform3fv(_location, _vec.size(), _vec);
+		glUniform3f(_location, _vec[0], _vec[1], _vec[2]);
 	}
 
 	void DriverGPU::setUniform(GLint _location, vec4f _vec){
-		glUniform4fv(_location, _vec.size(), _vec);
+		glUniform4f(_location, _vec[0], _vec[1], _vec[2], _vec[3]);
 	}
 
 	void DriverGPU::setUniform(GLint _location, mat2f _mat){

@@ -56,8 +56,8 @@ void main() {
 void initParticles(){
 	// This functions initialize data on framebuffer
 
-	//gl_FragColor = vec4(snoise(gl_FragCoord.xy*gSeed.x), snoise(gl_FragCoord.xy*gSeed.y), snoise(gl_FragCoord.xy*gSeed.z), 1.0);
-	gl_FragColor = vec4(snoise(gl_FragCoord.xy), snoise(gl_FragCoord.xy), gSeed.z, 1.0);
+	gl_FragColor = vec4(snoise(gl_FragCoord.xy*gSeed.x), snoise(gl_FragCoord.xy*gSeed.y), snoise(gl_FragCoord.xy*gSeed.z), 1.0);
+	//gl_FragColor = vec4(snoise(gl_FragCoord.xy), snoise(gl_FragCoord.xy), gSeed.z, 1.0);
 }
 
 void simulateAndWeigh(){
