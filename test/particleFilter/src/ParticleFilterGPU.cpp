@@ -55,7 +55,27 @@ void ParticleFilterGPU::step(vec4f _sense) {
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
 
+	mStoreTexture.bind();
+	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, mStoreTexture.width(), mStoreTexture.height());
+
 	// Resample
+	// Read pixels, find max weigh, send to shader and resample
+	GLfloat * pixels = new GLfloat[40 * 25 * 4];
+	glReadPixels(0, 0, 40, 25, GL_RGBA, GL_FLOAT, pixels);
+
+	GLfloat maxWeigh = 0.0f;
+	for (int i = 3; i < 40 * 25 * 4; i = i + 4){
+		if (pixels[i] > maxWeigh)
+			maxWeigh = pixels[i];
+	}
+	
+	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
+
+	GLuint nuParticles = driver->getUniformLocation(mProgram, "nuParticles");
+	driver->setUniform(nuParticles, 40 * 25);
+	GLuint maxWeighLoc = driver->getUniformLocation(mProgram, "maxWeigh");
+	driver->setUniform(maxWeighLoc, maxWeigh);
+
 	driver->setUniform(stateLoc, 2);
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
@@ -63,8 +83,7 @@ void ParticleFilterGPU::step(vec4f _sense) {
 
 	glFlush();
 
-	mStoreTexture.bind();
-	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, mStoreTexture.width(), mStoreTexture.height());
+	
 
 	glFinish();
 }
