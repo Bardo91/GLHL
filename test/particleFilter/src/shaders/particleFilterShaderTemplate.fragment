@@ -12,8 +12,8 @@ const vec2 LAND_MARKS[4] = vec2[4](	vec2(20.0, 20.0),
 									vec2(20.0, 80.0),
 									vec2(80.0, 20.0));
 
-const float doubleSigmaOri = 0.1;
-const float doubleSigmaForward = 0.2;
+const float sigmaOri = 0.05;
+const float sigmaForward = 0.1;
 
 uniform int nuParticles;
 uniform vec3 gSeed;
@@ -67,15 +67,15 @@ void simulateAndWeigh(){
 
 	vec4 robotData = texture2D(lastSimulation, texCoord);
 	
-	vec2 robotPos = vec2(robotData.r*WORLD_SIZE, robotData.g*WORLD_SIZE);
+	vec2 robotPos = robotData.rg*WORLD_SIZE;
 	float robotOri = robotData.b*2*PI;
 	
 	// Calc orientation.
-	robotOri = robotOri + movement.y + snoise(gl_FragCoord.xy)*doubleSigmaOri - doubleSigmaOri/2;
+	robotOri = robotOri + movement.y + snoise(gl_FragCoord.xy)*sigmaOri*2 - sigmaOri;
 	robotOri = mod(robotOri, 2*PI);
 	
 	// Calc position
-	float dist = movement.x + snoise(gl_FragCoord.xy)*doubleSigmaForward - doubleSigmaForward/2;
+	float dist = movement.x + snoise(gl_FragCoord.xy)*sigmaForward*2 - sigmaForward;
 	
 	robotPos.x += cos(robotOri)*dist;
 	robotPos.y += sin(robotOri)*dist;
@@ -95,11 +95,11 @@ void simulateAndWeigh(){
 	float prob = 1.0;
 	for (int i = 0; i < 4; i++) {
 		float dist = sqrt(pow(robotPos.x - LAND_MARKS[i][0], 2) + pow(robotPos.y - LAND_MARKS[i][1], 2));
-		prob *= gaussian(dist, z[i], measurementReal[i]);
+		prob *= gaussian(dist, 5.0, measurementReal[i]);
 	}
 
 	// Store into texture
-	gl_FragColor = vec4(robotPos/WORLD_SIZE, robotOri/2/PI, prob+1.0);
+	gl_FragColor = vec4(robotPos/WORLD_SIZE, robotOri/2/PI, prob);
 
 }
 

@@ -39,7 +39,7 @@ void ParticleFilterGPU::step(vec4f _sense) {
 
 	// Update simulation parameters.
 	GLuint movLoc = driver->getUniformLocation(mProgram, "movement");
-	driver->setUniform(movLoc, vec2f(0.1f, 0.05f));
+	driver->setUniform(movLoc, vec2f(0.1f, 5.0f));
 	
 	// Load previous state and attach it to an uniform.
 	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
