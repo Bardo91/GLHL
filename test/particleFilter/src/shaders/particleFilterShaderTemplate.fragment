@@ -115,17 +115,21 @@ void resample(){
 	vec4 robotData = texture2D(lastSimulation, texCoord);
 
 	beta += snoise(gl_FragCoord.xy*gSeed.x) * 2.0 * maxWeigh;
+	int counter = 0;
 	while (beta > robotData.a) {
 		beta -= robotData.a;
 		index = int(mod(index + 1, nuParticles));
 		int row = index / 40;
 		int col = int(mod(index, 40));
 		robotData = texture2D(lastSimulation, vec2(row, col));
+		counter++;
+		if (counter > 12000)
+			break;
 	}
 	
 
 
-	gl_FragColor = robotData;
+	gl_FragColor = vec4(robotData.rgb, 1.0);
 }
 
 
