@@ -196,7 +196,7 @@ float snoise(vec2 v) {
 }
 
 float gauss(float _m, float _sigma){	// Aproximation of "squared" gauss
-	return _m + snoise(gl_FragCoord.xy)*_sigma*2 - _sigma;
+	return _m + abs(snoise(gl_FragCoord.xy))*_sigma*2 - _sigma;
 }
 
 float gaussian(float _nu, float _sigma, float _x){
