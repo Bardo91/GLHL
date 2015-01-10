@@ -110,11 +110,11 @@ void simulateAndWeigh(){
 
 void resample(){
 	float beta = 0.0;
-	int index = int(nuParticles*snoise(gl_FragCoord.xy*gSeed.y));
+	int index = int(abs(nuParticles*snoise(gl_FragCoord.xy*gSeed.y)));
 
 	vec4 robotData = texture2D(lastSimulation, texCoord);
 
-	beta += snoise(gl_FragCoord.xy*gSeed.x) * 2.0 * maxWeigh;
+	beta += abs(snoise(gl_FragCoord.xy*gSeed.x) * 2.0 * maxWeigh);
 	int counter = 0;
 	while (beta > robotData.a) {
 		beta -= robotData.a;
