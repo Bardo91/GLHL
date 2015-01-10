@@ -100,10 +100,11 @@ void particleFilterGPU() {
 	robot.setNoise(0.05, 0.05, 5.0);
 
 	// 666 TODO Relative path to vertex shader?
-	ParticleFilterGPU pfGPU(1000, "../../src/shaders/particleFilterShaderTemplate.fragment");
+	ParticleFilterGPU pfGPU(10000, "../../src/shaders/particleFilterShaderTemplate.fragment");
 
 	for (unsigned i = 0; i < 10; i++) {
 		std::array<double, 4> measure = robot.sense();
+		std::cout << "Real particle: " << robot.position()[0] << " ," << robot.position()[1] << " ," << robot.position()[2] << std::endl;
 		pfGPU.step(vec4f(float(measure[0]), float(measure[1]), float(measure[2]), float(measure[3])));
 	}
 }

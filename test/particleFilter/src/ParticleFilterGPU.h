@@ -39,6 +39,7 @@ private:
 	GLHL::FrameBuffer mFBO;
 	GLHL::Texture mComputeTexture, mStoreTexture;
 
+	unsigned mNuParticles;
 	bool currentTexture;
 
 	GLuint mSeed;

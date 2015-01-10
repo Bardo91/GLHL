@@ -10,19 +10,20 @@
 #include "ParticleFilterGPU.h"
 
 #include <ctime>
+#include <iostream>
 
 using namespace GLHL;
 
 //---------------------------------------------------------------------------------------------------------------------
 ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particleShaderPath) :
-						mComputeTexture(40, 25, eTexType::eRGBA32F),
-						mStoreTexture(40, 25, eTexType::eRGBA32F),
+						mComputeTexture(_nuParticles, 1, eTexType::eRGBA32F),
+						mStoreTexture(_nuParticles, 1, eTexType::eRGBA32F),
 						mVertexShaderDummy(eShaderType::eVertexShader,"../../src/shaders/particle.vertex"),
 						mFragmentShader(eShaderType::eFragmentShader, _particleShaderPath) {
 
-	_nuParticles;
+	mNuParticles = _nuParticles;
 
-	glViewport(0, 0, 40, 25);
+	glViewport(0, 0, _nuParticles, 1);
 	initFBO();
 	
 	initProgram();
@@ -60,11 +61,11 @@ void ParticleFilterGPU::step(vec4f _sense) {
 
 	// Resample
 	// Read pixels, find max weigh, send to shader and resample
-	GLfloat * pixels = new GLfloat[40 * 25 * 4];
-	glReadPixels(0, 0, 40, 25, GL_RGBA, GL_FLOAT, pixels);
+	GLfloat * pixels = new GLfloat[mNuParticles * 4];
+	glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixels);
 
 	GLfloat maxWeigh = 0.0f;
-	for (int i = 3; i < 40 * 25 * 4; i = i + 4){
+	for (unsigned i = 3; i < mNuParticles * 4; i = i + 4){
 		if (pixels[i] > maxWeigh)
 			maxWeigh = pixels[i];
 	}
@@ -72,7 +73,7 @@ void ParticleFilterGPU::step(vec4f _sense) {
 	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
 
 	GLuint nuParticles = driver->getUniformLocation(mProgram, "nuParticles");
-	driver->setUniform(nuParticles, 40 * 25);
+	driver->setUniform(nuParticles, mNuParticles);
 	GLuint maxWeighLoc = driver->getUniformLocation(mProgram, "maxWeigh");
 	driver->setUniform(maxWeighLoc, maxWeigh);
 
@@ -82,10 +83,24 @@ void ParticleFilterGPU::step(vec4f _sense) {
 
 
 	glFlush();
-
-	
+	glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixels);	
 
 	glFinish();
+
+	// Calc Particle
+	float x = 0.0f, y = 0.0f, ori = 0.0f;
+
+	for (unsigned i = 0; i < mNuParticles; i++){
+		x	+= pixels[4 * i + 0];
+		y	+= pixels[4 * i + 1];
+		ori	+= pixels[4 * i + 2];
+	}
+	
+	x	*= 100.0f/mNuParticles;
+	y	*= 100.0f/mNuParticles;
+	ori *= 3.141596f*2/mNuParticles;
+
+	std::cout << "Estimated particle: " << x << ", " << y << ", " << ori << std::endl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

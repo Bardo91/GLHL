@@ -119,9 +119,7 @@ void resample(){
 	while (beta > robotData.a) {
 		beta -= robotData.a;
 		index = int(mod(index + 1, nuParticles));
-		int row = index / 40;
-		int col = int(mod(index, 40));
-		robotData = texture2D(lastSimulation, vec2(row, col));
+		robotData = texture2D(lastSimulation, vec2(index, 1));
 		counter++;
 		if (counter > 12000)
 			break;
