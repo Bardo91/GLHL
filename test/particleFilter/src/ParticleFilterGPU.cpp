@@ -73,7 +73,7 @@ void ParticleFilterGPU::step(vec4f _sense) {
 	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
 
 	GLuint nuParticles = driver->getUniformLocation(mProgram, "nuParticles");
-	driver->setUniform(nuParticles, mNuParticles);
+	driver->setUniform(nuParticles, int(mNuParticles));
 	GLuint maxWeighLoc = driver->getUniformLocation(mProgram, "maxWeigh");
 	driver->setUniform(maxWeighLoc, maxWeigh);
 

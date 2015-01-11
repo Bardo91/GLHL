@@ -107,5 +107,6 @@ void particleFilterGPU() {
 		std::array<double, 4> measure = robot.sense();
 		std::cout << "Real particle: " << robot << std::endl;
 		pfGPU.step(vec4f(float(measure[0]), float(measure[1]), float(measure[2]), float(measure[3])));
+		std::cout << "--------------------------------------------------------------------------------------" << std::endl;
 	}
 }
