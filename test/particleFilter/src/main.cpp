@@ -105,7 +105,7 @@ void particleFilterGPU() {
 	for (unsigned i = 0; i < 10; i++) {
 		robot.move(0.1, 5.0);
 		std::array<double, 4> measure = robot.sense();
-		std::cout << "Real particle: " << robot.position()[0] << " ," << robot.position()[1] << " ," << robot.position()[2] << std::endl;
+		std::cout << "Real particle: " << robot << std::endl;
 		pfGPU.step(vec4f(float(measure[0]), float(measure[1]), float(measure[2]), float(measure[3])));
 	}
 }

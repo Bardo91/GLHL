@@ -35,6 +35,7 @@ public:
 	const std::array<double, 4> sense();
 	void move(const double & _turn, const double & _forward);
 
+	friend std::ostream& operator<<(std::ostream& _os, const Robot & _me);
 	std::array<double, 3> position() const;
 
 public:

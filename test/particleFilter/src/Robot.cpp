@@ -39,6 +39,13 @@ void Robot::move(const double & _turn, const double & _forward) {
 	mPosition.y = fmod(mPosition.y, WORLD_SIZE);
 
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+std::ostream& operator<<(std::ostream& _os, const Robot & _me){
+	_os << "[ " << _me.position()[0] << ", " << _me.position()[1] << ", " << _me.position()[2] << " ]";
+	return _os;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 std::array<double, 3> Robot::position() const{
 	std::array<double, 3> pos = { mPosition.x, mPosition.y, mPosition.ori };
