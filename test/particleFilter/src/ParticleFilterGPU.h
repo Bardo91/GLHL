@@ -27,7 +27,8 @@ public:
 	void step(GLHL::vec4f _sense);
 
 private:
-	void swapFBO();
+	void simulateAndWeigh(GLHL::vec4f _sense);
+	void resample();
 
 private:
 	void initFBO();

@@ -34,6 +34,34 @@ ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particl
 
 //---------------------------------------------------------------------------------------------------------------------
 void ParticleFilterGPU::step(vec4f _sense) {
+	
+	simulateAndWeigh(_sense);
+
+	// Calc Particle
+	float x = 0.0f, y = 0.0f, ori = 0.0f;
+
+	glFlush();
+
+	GLfloat * pixels = new GLfloat[mNuParticles * 4];
+	glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixels);
+
+	glFinish();
+
+	for (unsigned i = 0; i < mNuParticles; i++){
+		x	+= pixels[4 * i + 0];
+		y	+= pixels[4 * i + 1];
+		ori	+= pixels[4 * i + 2];
+	}
+	
+	x	*= 100.0f/mNuParticles;
+	y	*= 100.0f/mNuParticles;
+	ori *= 3.141596f*2/mNuParticles;
+
+	std::cout << "Estimated particle: " << x << ", " << y << ", " << ori << std::endl;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ParticleFilterGPU::simulateAndWeigh(vec4f _sense) {
 	DriverGPU *driver = DriverGPU::get();
 
 	mProgram.use();
@@ -41,7 +69,7 @@ void ParticleFilterGPU::step(vec4f _sense) {
 	// Update simulation parameters.
 	GLuint movLoc = driver->getUniformLocation(mProgram, "movement");
 	driver->setUniform(movLoc, vec2f(0.1f, 5.0f));
-	
+
 	// Load previous state and attach it to an uniform.
 	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
 
@@ -59,7 +87,14 @@ void ParticleFilterGPU::step(vec4f _sense) {
 	mStoreTexture.bind();
 	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, mStoreTexture.width(), mStoreTexture.height());
 
-	// Resample
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ParticleFilterGPU::resample(){
+	DriverGPU *driver = DriverGPU::get();
+
+	GLuint stateLoc = driver->getUniformLocation(mProgram, "gState");
+
 	// Read pixels, find max weigh, send to shader and resample
 	GLfloat * pixels = new GLfloat[mNuParticles * 4];
 	glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixels);
@@ -69,7 +104,7 @@ void ParticleFilterGPU::step(vec4f _sense) {
 		if (pixels[i] > maxWeigh)
 			maxWeigh = pixels[i];
 	}
-	
+
 	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
 
 	GLuint nuParticles = driver->getUniformLocation(mProgram, "nuParticles");
@@ -80,31 +115,6 @@ void ParticleFilterGPU::step(vec4f _sense) {
 	driver->setUniform(stateLoc, 2);
 	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
 								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
-
-
-	glFlush();
-	glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixels);	
-
-	glFinish();
-
-	// Calc Particle
-	float x = 0.0f, y = 0.0f, ori = 0.0f;
-
-	for (unsigned i = 0; i < mNuParticles; i++){
-		x	+= pixels[4 * i + 0];
-		y	+= pixels[4 * i + 1];
-		ori	+= pixels[4 * i + 2];
-	}
-	
-	x	*= 100.0f/mNuParticles;
-	y	*= 100.0f/mNuParticles;
-	ori *= 3.141596f*2/mNuParticles;
-
-	std::cout << "Estimated particle: " << x << ", " << y << ", " << ori << std::endl;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ParticleFilterGPU::swapFBO() {
 
 }
 
