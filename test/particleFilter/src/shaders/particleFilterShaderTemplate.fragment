@@ -97,10 +97,10 @@ void simulateAndWeigh(){
 
 
 	// calculus of weigh
-	float prob = 1.0;
+	float prob = 0.0;
 	for (int i = 0; i < 4; i++) {
 		float dist = sqrt(pow(robotPos.x - LAND_MARKS[i].x, 2) + pow(robotPos.y - LAND_MARKS[i].y, 2));
-		prob *= gaussian(dist, noise.sense, measurementReal[i]);
+		prob += gaussian(dist, noise.sense, measurementReal[i]);
 	}
 
 	// Store into texture

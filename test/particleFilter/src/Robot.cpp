@@ -37,6 +37,12 @@ void Robot::move(const double & _turn, const double & _forward) {
 	mPosition.y += sin(mPosition.ori)*dist;
 	mPosition.x = fmod(mPosition.x, WORLD_SIZE);
 	mPosition.y = fmod(mPosition.y, WORLD_SIZE);
+	if (mPosition.x < 0)
+		mPosition.x += WORLD_SIZE;
+	if (mPosition.y < 0)
+		mPosition.y += WORLD_SIZE;
+	if (mPosition.ori < 0)
+		mPosition.ori += 2 * 3.1416;
 
 }
 

@@ -14,6 +14,13 @@
 
 using namespace GLHL;
 
+struct data{
+	float x = 0.0f, y = 0.0f, ori = 0.0f, w = 0.0f;
+	data() = default;
+	data(float _x, float _y, float _ori, float _w){ x = _x; y = _y; ori = _ori; w = _w; };
+	void set(float _x, float _y, float _ori, float _w){ x = _x; y = _y; ori = _ori; w = _w; };
+};
+
 //---------------------------------------------------------------------------------------------------------------------
 ParticleFilterGPU::ParticleFilterGPU(unsigned _nuParticles, std::string _particleShaderPath) :
 						mComputeTexture(_nuParticles, 1, eTexType::eRGBA32F),
@@ -37,27 +44,10 @@ void ParticleFilterGPU::step(vec4f _sense) {
 	
 	simulateAndWeigh(_sense);
 
-	// Calc Particle
-	float x = 0.0f, y = 0.0f, ori = 0.0f;
-
-	glFlush();
-
-	GLfloat * pixels = new GLfloat[mNuParticles * 4];
-	glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixels);
+	resample();
 
 	glFinish();
-
-	for (unsigned i = 0; i < mNuParticles; i++){
-		x	+= pixels[4 * i + 0];
-		y	+= pixels[4 * i + 1];
-		ori	+= pixels[4 * i + 2];
-	}
 	
-	x	*= 100.0f/mNuParticles;
-	y	*= 100.0f/mNuParticles;
-	ori *= 3.141596f*2/mNuParticles;
-
-	std::cout << "Estimated particle: " << x << ", " << y << ", " << ori << std::endl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,10 +81,6 @@ void ParticleFilterGPU::simulateAndWeigh(vec4f _sense) {
 
 //---------------------------------------------------------------------------------------------------------------------
 void ParticleFilterGPU::resample(){
-	DriverGPU *driver = DriverGPU::get();
-
-	GLuint stateLoc = driver->getUniformLocation(mProgram, "gState");
-
 	// Read pixels, find max weigh, send to shader and resample
 	GLfloat * pixels = new GLfloat[mNuParticles * 4];
 	glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixels);
@@ -105,17 +91,55 @@ void ParticleFilterGPU::resample(){
 			maxWeigh = pixels[i];
 	}
 
-	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
 
-	GLuint nuParticles = driver->getUniformLocation(mProgram, "nuParticles");
-	driver->setUniform(nuParticles, int(mNuParticles));
-	GLuint maxWeighLoc = driver->getUniformLocation(mProgram, "maxWeigh");
-	driver->setUniform(maxWeighLoc, maxWeigh);
+	// Resample
+	GLfloat * pixelsNew = new GLfloat[mNuParticles * 4];
+	float beta = 0.0f;
+	int index = int(float(rand()) / RAND_MAX * mNuParticles);
 
-	driver->setUniform(stateLoc, 2);
-	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
-								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
+	beta += float(rand()) / RAND_MAX * 2.0f * maxWeigh;
 
+	for (unsigned i = 0; i < mNuParticles; i++) {
+		beta += float(rand()) / RAND_MAX * 2.0f * maxWeigh;
+		while (beta > pixels[index*4 + 3]) {
+			beta -= pixels[index * 4 + 3];
+			index = (index + 1) % mNuParticles;
+		}
+
+		pixelsNew[i * 4 + 0] = pixels[index*4 + 0];
+		pixelsNew[i * 4 + 1] = pixels[index*4 + 1];
+		pixelsNew[i * 4 + 2] = pixels[index*4 + 2];
+		pixelsNew[i * 4 + 3] = pixels[index*4 + 3];
+	}
+
+	//DriverGPU *driver = DriverGPU::get();
+	//GLuint stateLoc = driver->getUniformLocation(mProgram, "gState");
+	//mStoreTexture.attachToUniform(mProgram, "lastSimulation");
+	//
+	//GLuint nuParticles = driver->getUniformLocation(mProgram, "nuParticles");
+	//driver->setUniform(nuParticles, int(mNuParticles));
+	//GLuint maxWeighLoc = driver->getUniformLocation(mProgram, "maxWeigh");
+	//driver->setUniform(maxWeighLoc, maxWeigh);
+	//
+	//driver->setUniform(stateLoc, 2);
+	//driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+	//							std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
+	//
+
+
+	// Calc Particle
+	float x = 0.0f, y = 0.0f, ori = 0.0f;
+	for (unsigned i = 0; i < mNuParticles; i++){
+		x +=	pixelsNew[4 * i + 0];
+		y +=	pixelsNew[4 * i + 1];
+		ori +=	pixelsNew[4 * i + 2];
+	}
+
+	x *= 100.0f / mNuParticles;
+	y *= 100.0f / mNuParticles;
+	ori *= 3.141596f * 2 / mNuParticles;
+
+	std::cout << "Estimated particle: " << x << ", " << y << ", " << ori << std::endl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
