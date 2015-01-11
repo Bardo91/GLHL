@@ -76,30 +76,29 @@ void simulateAndWeigh(){
 	float robotOri = robotData.b*2*PI;
 	
 	// Calc orientation.
-	robotOri = robotOri + movement.y + gauss(0.0, noise.turn);
+	robotOri = robotOri + movement.y;// +gauss(0.0, noise.turn);
+	
+	if (robotOri < 0)
+		robotOri += 2 * PI;
 	robotOri = mod(robotOri, 2*PI);
 	
 	// Calc position
-	float dist = movement.x + gauss(0.0, noise.forward);
+	float dist = movement.x;// +gauss(0.0, noise.forward);
 	
 	robotPos.x += cos(robotOri)*dist;
 	robotPos.y += sin(robotOri)*dist;
 	
+	if (robotPos.x < 0)
+		robotPos.x += WORLD_SIZE;
+	if (robotPos.y < 0)
+		robotPos.y += WORLD_SIZE;
+
 	robotPos = mod(robotPos, WORLD_SIZE);
-
-	// sense
-	vec4 z;
-	for (int i = 0; i < 4; i++) {
-		float dist = sqrt(pow(robotPos.x - LAND_MARKS[i].x, 2) + pow(robotPos.y - LAND_MARKS[i].y, 2));
-		dist += gauss(0.0, noise.sense);
-		z[i] = dist;
-	}
-
 
 	// calculus of weigh
 	float prob = 0.0;
 	for (int i = 0; i < 4; i++) {
-		float dist = sqrt(pow(robotPos.x - LAND_MARKS[i].x, 2) + pow(robotPos.y - LAND_MARKS[i].y, 2));
+		float dist = sqrt(pow(robotPos.x - LAND_MARKS[i].x, 2) + pow(robotPos.y - LAND_MARKS[i].y, 2));// + gauss(0.0, noise.sense);
 		prob += gaussian(dist, noise.sense, measurementReal[i]);
 	}
 
