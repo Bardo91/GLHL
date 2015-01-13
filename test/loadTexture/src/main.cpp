@@ -7,6 +7,8 @@
 #include <src/core/glsl/ShaderProgram.h>
 #include <src/core/glsl/Shader.h>
 
+#include <src/core/utils/time/time.h>
+
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -54,12 +56,17 @@ int main(void){
 }
 
 void drawImage(ShaderProgram _program) {
+	STime *sTime = STime::get();
+
 	glViewport(0, 0, 640, 480);
 
 	//glClear(GL_COLOR_BUFFER_BIT);
+	double t0 = sTime->getTime();
 	Texture texture1("./Tulips.jpg");
 	Texture texture2("./Koala.jpg");
 	Texture texture3("./Penguins.jpg");
+	double t1 = sTime->getTime();
+
 	DriverGPU *driver = DriverGPU::get();
 
 	texture1.attachToUniform(_program, "texture1");
@@ -70,11 +77,15 @@ void drawImage(ShaderProgram _program) {
 
 	_program.use();
 
-	drawQuad();
+	double t2 = sTime->getTime();
+	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
 
-	glDrawArrays(GL_QUADS, 0, 4);
+	double t3 = sTime->getTime();
 
 	glFinish();
+
+	std::cout << "Load textures time: " << t1 - t0 << "; program use time: " << t3 - t1 << std::endl;
 }
 
 void drawQuad(){
