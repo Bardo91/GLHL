@@ -109,16 +109,16 @@ void simulateAndWeigh(){
 
 void resample(){
 	float beta = 0.0;
-	int index = int(abs(nuParticles*snoise(gl_FragCoord.xy*gSeed.y)));
+	float index = gl_FragCoord.x;//int(abs(nuParticles*snoise(gl_FragCoord.xy*gSeed.y)));
 
-	vec4 robotData = texture2D(lastSimulation, texCoord);
-
+	vec4 robotData = texture2D(lastSimulation, vec2(index / nuParticles, 1));
+	
 	beta += abs(snoise(gl_FragCoord.xy*gSeed.x) * 2.0 * maxWeigh);
 	int counter = 0;
 	while (beta > robotData.a) {
 		beta -= robotData.a;
-		index = int(mod(index + 1, nuParticles));
-		robotData = texture2D(lastSimulation, vec2(index, 1));
+		index = mod(index + 1, nuParticles);
+		robotData = texture2D(lastSimulation, vec2(index / nuParticles, 1));
 		counter++;
 		if (counter > 12000)
 			break;
@@ -126,7 +126,7 @@ void resample(){
 	
 
 
-	gl_FragColor = vec4(robotData.rgb, 1.0);
+	gl_FragColor = vec4(robotData.a, beta, index, counter);
 }
 
 
