@@ -76,14 +76,14 @@ void simulateAndWeigh(){
 	float robotOri = robotData.b*2*PI;
 	
 	// Calc orientation.
-	robotOri = robotOri + movement.y;// +gauss(0.0, noise.turn);
+	robotOri = robotOri + movement.y + gauss(0.0, noise.turn);
 	
 	if (robotOri < 0)
 		robotOri += 2 * PI;
 	robotOri = mod(robotOri, 2*PI);
 	
 	// Calc position
-	float dist = movement.x;// +gauss(0.0, noise.forward);
+	float dist = movement.x + gauss(0.0, noise.forward);
 	
 	robotPos.x += cos(robotOri)*dist;
 	robotPos.y += sin(robotOri)*dist;
