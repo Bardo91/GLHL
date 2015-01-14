@@ -24,6 +24,8 @@ public:
 	void simulate() { move(0.1, 5.0); };
 	void calcWeigh(Particle &_realParticle) { mWeigh = measurementProb(static_cast<ParticleRobot &>(_realParticle).sense()); };
 
+	operator std::array<double, 3>(){ return position(); }
+
 };
 //---------------------------------------------------------------------------------------------------------------------
 using namespace std;
@@ -51,15 +53,15 @@ int main(void){
 
 std::array<double, 3> mediumState(std::vector<ParticleRobot> _particles){
 	std::array<double, 3> position = {0.0, 0.0, 0.0};
-	for (unsigned i = 0; i < 1000; i++){
-		std::array<double, 3> pos = _particles[i].position();
+	for (unsigned i = 0; i < _particles.size(); i++){
+		std::array<double, 3> pos = _particles[i];
 		position[0] += pos[0];
 		position[1] += pos[1];
 		position[2] += pos[2];
 	}
-	position[0] /= 1000;
-	position[1] /= 1000;
-	position[2] /= 1000;
+	position[0] /= _particles.size();
+	position[1] /= _particles.size();
+	position[2] /= _particles.size();
 
 	return position;
 }
