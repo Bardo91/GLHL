@@ -18,19 +18,12 @@
 #include "ParticleFilterCPU.h"
 #include "Robot.h"
 
-class ParticleRobot : public Particle {
+class ParticleRobot : public Particle, public Robot{
 public:
-	ParticleRobot() :mRobot() { mRobot.setNoise(0.05, 0.05, 5.0); };
-	void simulate() { mRobot.move(0.1, 5.0); };
-	void calcWeigh(Particle &_realParticle) { mWeigh = mRobot.measurementProb(static_cast<ParticleRobot &>(_realParticle).sense()); };
+	ParticleRobot() { setNoise(0.05, 0.05, 5.0); };
+	void simulate() { move(0.1, 5.0); };
+	void calcWeigh(Particle &_realParticle) { mWeigh = measurementProb(static_cast<ParticleRobot &>(_realParticle).sense()); };
 
-	std::array<double, 3> position() { return mRobot.position(); };
-
-private:
-	std::array<double, 4> sense() { return mRobot.sense(); };
-	
-private:
-	Robot mRobot;
 };
 //---------------------------------------------------------------------------------------------------------------------
 using namespace std;
@@ -44,9 +37,9 @@ void particleFilterGPU();
 //---------------------------------------------------------------------------------------------------------------------
 int main(void){
 	
-	//particleFilterCPU();
+	particleFilterCPU();
 	
-	particleFilterGPU();
+	//particleFilterGPU();
 
 	std::cout << "Finished" << std::endl;
 	

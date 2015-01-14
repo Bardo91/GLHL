@@ -126,7 +126,7 @@ void resample(){
 	
 
 
-	gl_FragColor = vec4(robotData.a, beta, index / nuParticles, counter);
+	gl_FragColor = robotData;
 }
 
 
