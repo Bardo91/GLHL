@@ -93,41 +93,41 @@ void ParticleFilterGPU::resample(){
 
 
 	// Resample
-	//GLfloat * pixelsNew = new GLfloat[mNuParticles * 4];
-	//float beta = 0.0f;
-	//int index = int(float(rand()) / RAND_MAX * mNuParticles);
-	//
-	//beta += float(rand()) / RAND_MAX * 2.0f * maxWeigh;
-	//
-	//for (unsigned i = 0; i < mNuParticles; i++) {
-	//	beta += float(rand()) / RAND_MAX * 2.0f * maxWeigh;
-	//	while (beta > pixels[index*4 + 3]) {
-	//		beta -= pixels[index * 4 + 3];
-	//		index = (index + 1) % mNuParticles;
-	//	}
-	//
-	//	pixelsNew[i * 4 + 0] = pixels[index*4 + 0];
-	//	pixelsNew[i * 4 + 1] = pixels[index*4 + 1];
-	//	pixelsNew[i * 4 + 2] = pixels[index*4 + 2];
-	//	pixelsNew[i * 4 + 3] = pixels[index*4 + 3];
-	//}
-
-	DriverGPU *driver = DriverGPU::get();
-	GLuint stateLoc = driver->getUniformLocation(mProgram, "gState");
-	mStoreTexture.attachToUniform(mProgram, "lastSimulation");
-	
-	GLuint nuParticles = driver->getUniformLocation(mProgram, "nuParticles");
-	driver->setUniform(nuParticles, int(mNuParticles));
-	GLuint maxWeighLoc = driver->getUniformLocation(mProgram, "maxWeigh");
-	driver->setUniform(maxWeighLoc, maxWeigh);
-	
-	driver->setUniform(stateLoc, 2);
-	driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
-								std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
-	
-
 	GLfloat * pixelsNew = new GLfloat[mNuParticles * 4];
-	glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixelsNew);
+	float beta = 0.0f;
+	int index = int(float(rand()) / RAND_MAX * mNuParticles);
+	
+	beta += float(rand()) / RAND_MAX * 2.0f * maxWeigh;
+	
+	for (unsigned i = 0; i < mNuParticles; i++) {
+		beta += float(rand()) / RAND_MAX * 2.0f * maxWeigh;
+		while (beta > pixels[index*4 + 3]) {
+			beta -= pixels[index * 4 + 3];
+			index = (index + 1) % mNuParticles;
+		}
+	
+		pixelsNew[i * 4 + 0] = pixels[index*4 + 0];
+		pixelsNew[i * 4 + 1] = pixels[index*4 + 1];
+		pixelsNew[i * 4 + 2] = pixels[index*4 + 2];
+		pixelsNew[i * 4 + 3] = pixels[index*4 + 3];
+	}
+
+	//DriverGPU *driver = DriverGPU::get();
+	//GLuint stateLoc = driver->getUniformLocation(mProgram, "gState");
+	//mStoreTexture.attachToUniform(mProgram, "lastSimulation");
+	//
+	//GLuint nuParticles = driver->getUniformLocation(mProgram, "nuParticles");
+	//driver->setUniform(nuParticles, int(mNuParticles));
+	//GLuint maxWeighLoc = driver->getUniformLocation(mProgram, "maxWeigh");
+	//driver->setUniform(maxWeighLoc, maxWeigh);
+	//
+	//driver->setUniform(stateLoc, 2);
+	//driver->drawQuadTextured2f(	std::array < vec2f, 4 > {{vec2f(-1.0f, -1.0f), vec2f(1.0f, -1.0f), vec2f(1.0f, 1.0f), vec2f(-1.0f, 1.0f)}},
+	//							std::array < vec2f, 4 > {{vec2f(0.0f, 0.0f), vec2f(1.0f, 0.0f), vec2f(1.0f, 1.0f), vec2f(0.0f, 1.0f)}});
+	//
+	//
+	//GLfloat * pixelsNew = new GLfloat[mNuParticles * 4];
+	//glReadPixels(0, 0, mNuParticles, 1, GL_RGBA, GL_FLOAT, pixelsNew);
 
 	// Calc Particle
 	float x = 0.0f, y = 0.0f, ori = 0.0f;
