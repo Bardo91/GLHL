@@ -36,7 +36,7 @@ GpuTime SobelGPU::process(unsigned _width, unsigned _height, unsigned char *_ima
 	STime * sTime = STime::get();
 	
 	double t1 = sTime->getTime();
-	Texture texture(_width, _height, eTexType::eRGB, _image);
+	Texture texture(_width, _height, eTexType::eRGB8, _image);
 	double t2 = sTime->getTime();
 	
 	glViewport(0, 0, 1024, 768);

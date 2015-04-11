@@ -40,7 +40,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\programming\GLHL\library\src\core\base\os_dep\win32\glew\lib\Release\Win32;$(SOIL_DIR)\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\programming\GLHL\library\src\core\base\os_dep\win32\glew\lib\Release\Win32;C:\programming\glhl\test\sobelPerformance\prj\vs13\Debug;$(SOIL_DIR)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
