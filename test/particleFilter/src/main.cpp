@@ -12,8 +12,8 @@
 #include <string>
 #include <ctime>
 	
-#include <src/core/base/Context.h>
-#include <src/core/utils/time/time.h>
+#include <core/base/Context.h>
+#include <core/utils/time/time.h>
 
 #include "ParticleFilterGPU.h"
 #include "ParticleFilterCPU.h"
