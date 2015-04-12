@@ -12,7 +12,7 @@
 
 #if defined(_WIN32)
 #include <Windows.h>
-#include "os_dep/win32/glew/glew.h"
+#include "glew.h"
 #include <gl/GL.h>
 #endif
 #if defined(__linux__)

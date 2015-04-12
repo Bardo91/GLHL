@@ -1,6 +1,6 @@
  //// MAIN FILE TO TEST
 
-#include <src/core/utils/time/time.h>
+#include <core/utils/time/time.h>
 #include "SobelCPU.h"
 #include "SobelGPU.h"
 
@@ -14,7 +14,7 @@
 using namespace GLHL;
 using namespace std;
 
-const int REPETITIONS = 1;
+const int REPETITIONS = 50;
 
 map<string, string> parseArgs(int _argc, char** _argv);
 

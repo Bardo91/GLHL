@@ -27,9 +27,6 @@
     <Filter Include="Source Files\core\base\os_dep\win32">
       <UniqueIdentifier>{e6384fdb-389a-4532-87d5-13e8ab7671ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\base\os_dep\win32\glew">
-      <UniqueIdentifier>{ff47e8a1-3f8a-44a5-a8f1-a82316d34134}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\core\base\os_dep\linux">
       <UniqueIdentifier>{11e7ba12-080f-406c-9b55-43df648382a7}</UniqueIdentifier>
     </Filter>
@@ -64,15 +61,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\core\base\os_dep\linux\WindowGLLinux.h">
       <Filter>Source Files\core\base\os_dep\linux</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\glew.h">
-      <Filter>Source Files\core\base\os_dep\win32\glew</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\glxew.h">
-      <Filter>Source Files\core\base\os_dep\win32\glew</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\wglew.h">
-      <Filter>Source Files\core\base\os_dep\win32\glew</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\core\base\os_dep\win32\DirectoryChangesNotifyManager.h">
       <Filter>Source Files\core\base\os_dep\win32</Filter>
@@ -137,7 +125,7 @@
       <Filter>Source Files\core\utils\time</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\base\BufferObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\core\base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\programming\GLHL\library\src\core\base\os_dep\win32\glew\lib\Release\Win32;$(SOIL_DIR)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(GLEW_DIR);$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\programming\GLHL\library\src\core\base\os_dep\win32\glew\lib\Release\Win32;C:\programming\glhl\test\sobelPerformance\prj\vs13\Debug;$(SOIL_DIR)\lib;$(GLEW_DIR)\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,9 +78,6 @@
     <ClInclude Include="..\..\src\core\base\os_dep\linux\WindowGLLinux.h" />
     <ClInclude Include="..\..\src\core\base\os_dep\win32\ContextBaseWin32.h" />
     <ClInclude Include="..\..\src\core\base\os_dep\win32\DirectoryChangesNotifyManager.h" />
-    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\glew.h" />
-    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\glxew.h" />
-    <ClInclude Include="..\..\src\core\base\os_dep\win32\glew\wglew.h" />
     <ClInclude Include="..\..\src\core\base\os_dep\win32\OSHandleWin32.h" />
     <ClInclude Include="..\..\src\core\base\os_dep\win32\WindowGLWin32.h" />
     <ClInclude Include="..\..\src\core\base\Texture.h" />

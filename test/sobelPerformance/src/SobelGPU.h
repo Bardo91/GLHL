@@ -10,12 +10,12 @@
 
 
 
-#include <src/core/base/WindowGL.h>
-#include <src/core/base/DriverGPU.h>
-#include <src/core/base/Texture.h>
-#include <src/core/glsl/ShaderProgram.h>
-#include <src/core/glsl/Shader.h>
-#include <src/core/utils/time/time.h>
+#include <core/base/WindowGL.h>
+#include <core/base/DriverGPU.h>
+#include <core/base/Texture.h>
+#include <core/glsl/ShaderProgram.h>
+#include <core/glsl/Shader.h>
+#include <core/utils/time/time.h>
 
 struct GpuTime{
 	GpuTime(double _transferTime, double _computeTime) : mTransferTime(_transferTime), mComputeTime(_computeTime){};
