@@ -1,13 +1,12 @@
  //// MAIN FILE TO TEST
 
+#include <core/base/WindowGL.h>
+#include <core/base/DriverGPU.h>
+#include <core/base/Texture.h>
+#include <core/glsl/ShaderProgram.h>
+#include <core/glsl/Shader.h>
 
-#include <src/core/base/WindowGL.h>
-#include <src/core/base/DriverGPU.h>
-#include <src/core/base/Texture.h>
-#include <src/core/glsl/ShaderProgram.h>
-#include <src/core/glsl/Shader.h>
-
-#include <src/core/utils/time/time.h>
+#include <core/utils/time/time.h>
 
 #include <fstream>
 #include <string>
@@ -15,7 +14,6 @@
 
 using namespace GLHL;
 using namespace std;
-
 void drawImage(ShaderProgram _program);
 void drawQuad();
 
