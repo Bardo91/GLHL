@@ -53,8 +53,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(GLHL_DIR);$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SOIL_DIR)\lib;C:\programming\GLHL\test\sobelPerformance\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(GLEW_DIR);$(GLHL_DIR)\src;$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(GLEW_DIR)\lib\Release\Win32;$(SOIL_DIR)\lib;C:\programming\GLHL\test\sobelPerformance\prj\vs13\Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(GLEW_DIR);$(GLHL_DIR)\src;$(SOIL_DIR)\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(GLEW_DIR)\lib\Release\Win32;$(SOIL_DIR)\lib;C:\programming\GLHL\test\sobelPerformance\prj\vs13\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -80,6 +84,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>OpenGL32.lib;GLu32.lib;GLHL.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
