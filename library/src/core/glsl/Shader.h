@@ -21,10 +21,19 @@ namespace GLHL{
 	// 666 TODO: safer way with enum class?
 	enum eShaderType { eVertexShader = GL_VERTEX_SHADER, eFragmentShader = GL_FRAGMENT_SHADER };
 
+
+	/** Abstraction of shader code.
+	*/
 	class Shader{
 	public:
+		/** \brief Shader constructor: Create a shader of the given type using a text file.
+		*	@param _type shader type. Using enum eShaderType (Vertex shader or fragment shader).
+		*	@param _shaderPath path to the shader file
+		*/
 		Shader(eShaderType _type, std::string _shaderPath);
 
+		/** \brief getter of the shader's id
+		*/
 		operator GLuint() const{ return mShaderId; };
 
 	private:

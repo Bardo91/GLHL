@@ -28,12 +28,23 @@
 #include <vector>
 
 
-//-------------------------------------------------------------------//
 namespace GLHL{
+	/** DriverGPU class is and abstraction GPU methods using OpenGL. Basically, ensures that the drivers are properly loaded once per thread,
+	*	and gather all method in one class to more class-oriented likely interface. Every method is called as the original method but without
+	*	the initial gl, so for more information visit https://www.opengl.org docs.
+	*
+	*/
+
 	class DriverGPU{	// Only one GPU driver is created
 	public:		// Singleton interface
+		/** \brief static initialization of Drivers.
+		*/
 		static void  init();
+		/** \brief Getting the proper instance of driver in the thread.
+		*/
 		static DriverGPU* get();
+		/** \brief End up with drivers properly.
+		*/
 		static void end();
 
 	protected:			

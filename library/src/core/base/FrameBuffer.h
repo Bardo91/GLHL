@@ -20,24 +20,41 @@ namespace GLHL{
 							eWrite = GL_DRAW_FRAMEBUFFER,
 							eReadWrite = GL_FRAMEBUFFER	};
 
+	/** Abstraction of OpenGL frame buffers. 666 not finished.
+	*/
 	class FrameBuffer{
 	public:
+		/** \brief Frame buffer's constructor
+		*/
 		FrameBuffer();
+
+		/** \brief Frame buffer destructor
+		*/
 		~FrameBuffer();
 
+		/** \brief getter of the FBO id
+		*/
 		operator GLuint() const{ return mBufferId; };
 
+		/** \brief attach a texture to the buffer.
+		*/
 		void attachTexture(const Texture &_tex);
+
+		/** \brief link all attached textures to make GPU to draw on them.
+		*/
 		void linkAttachments();
 		
 		//void detachTexture(const Texture &_tex); 666 TODO: generate errors
 
+		/** \brief bind the buffer as the FBO to be draw on.
+		*/
 		void bind();
+
+		/** \brief un bind the buffer from the draw pipeline.
+		*/
 		void unbind();
 
 	private:
-		
-
 		void checkErrors();
 
 	private:

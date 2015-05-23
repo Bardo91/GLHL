@@ -17,6 +17,8 @@
 
 namespace GLHL{
 	namespace GLHL_WIN32{
+		/** Windows OS window class.
+		*/
 		class WindowGLWin32 {
 		public:
 			WindowGLWin32(std::string _name, int _width, int _height);

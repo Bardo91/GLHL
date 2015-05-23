@@ -21,8 +21,15 @@
 #include <string>
 
 namespace GLHL {
+	/** Class that handle windows without OS dependencies.
+	*/
 	class WindowGL : public WindowGLBase{
 	public:
+		/** \brief Window's constructor. 
+		*	@param _name
+		*	@param _width
+		*	@param _height
+		*/
 		WindowGL(std::string _name, int _width, int _height) : WindowGLBase(_name, _width, _height) {};
 
 	};
