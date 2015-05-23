@@ -82,7 +82,7 @@ void drawImage(Texture &_texture, ShaderProgram _program) {
 	glFlush();
 	
 	//fbo.detachTexture(colorTex);
-	//colorTex.saveTexture("result.bmp");
+	colorTex.saveTexture("./result.bmp");
  
 	glFinish();
 

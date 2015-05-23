@@ -122,8 +122,8 @@ namespace GLHL{
 
 		unsigned char *buffer = new unsigned char[mBufferSize];
 
-		unbind();
-		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, mTexType, GL_UNSIGNED_BYTE, buffer);
+
+		DriverGPU::get()->readPixels(0, 0, mWidth, mHeight, mChannelsGL, GL_UNSIGNED_BYTE, buffer);
 		SOIL_save_image(_fileName.c_str(), SOIL_SAVE_TYPE_BMP, mWidth, mHeight, mChannels, buffer);
 	}
 
