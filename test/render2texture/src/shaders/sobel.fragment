@@ -7,6 +7,10 @@ void main (void)
 	//vec4 color = vec4(vTexCoord,0.0,1.0);
 	vec4 color = texture2D(texture, vTexCoord);
 
+	if(color.r < 0.5){
+		color.t = 0.0;
+	}
+
 	gl_FragColor = color;
 }    
 

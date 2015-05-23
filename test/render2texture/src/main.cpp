@@ -44,14 +44,12 @@ int main(void){
 	program.attachShader(sobelShader);
 	program.link();
 
-	while(1){	
-		#if defined(_WIN32)
-		window.peekMessage();
-		drawImage(tulipsTex, program);
-		#endif
+	#if defined(_WIN32)
+	window.peekMessage();
+	drawImage(tulipsTex, program);
+	#endif
 
-		window.swapBuffers();
-	}
+	window.swapBuffers();
 
 	//	delete window; 	Class has no destructor, undefined behaviour
 	delete driver;
