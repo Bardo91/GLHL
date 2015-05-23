@@ -1,0 +1,16 @@
+*.so
+*.suo
+*.sdf
+*.user
+*.opensdf
+*.exe
+*.o
+*~
+*.psess
+*.vsp
+
+*Debug
+*Release
+
+/test/triangle/prj/linux/triangle
+/test/textX11/prj/linux/textX11
