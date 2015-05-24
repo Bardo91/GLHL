@@ -1,7 +1,14 @@
-varying vec2 vTexCoord;
+varying vec2 vTexCoord1;
+varying vec2 vTexCoord2;
+varying vec2 vTexCoord3;
+varying vec2 vTexCoord4;
 
-void main(void)
-{
-	vTexCoord = gl_MultiTexCoord0.xy;
+
+
+void main(void) {
+	vTexCoord1 = gl_MultiTexCoord0.xy - vec2(-0.0015625,-0.002083);
+	vTexCoord2 = gl_MultiTexCoord0.xy - vec2(0.0015625,-0.002083);
+	vTexCoord3 = gl_MultiTexCoord0.xy - vec2(-0.0015625,0.002083);
+	vTexCoord4 = gl_MultiTexCoord0.xy - vec2(0.0015625,0.002083);
 	gl_Position = gl_Vertex;
 }

@@ -10,6 +10,8 @@
 #include <src/core/glsl/Shader.h>
 #include <src/core/types/Types.h>
 
+#include <src/core/utils/time/time.h>
+
 #include <array>
 #include <fstream>
 #include <string>
@@ -46,14 +48,18 @@ int main(void){
 
 	#if defined(_WIN32)
 	window.peekMessage();
+	double t0 = STime::get()->getTime();
 	drawImage(tulipsTex, program);
+	double t1 = STime::get()->getTime();
 	#endif
+
+	std::cout << "Edge detection spent " << t1 - t0 << std::endl;
 
 	window.swapBuffers();
 
 	//	delete window; 	Class has no destructor, undefined behaviour
 	delete driver;
-
+	system("PAUSE");
 	return 0;
 }
 
