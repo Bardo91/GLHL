@@ -1,10 +1,10 @@
 //// MAIN FILE TO TEST
 
 
-#include <src/core/base/WindowGL.h>
-#include <src/core/base/DriverGPU.h>
-#include <src/core/glsl/Shader.h>
-#include <src/core/glsl/ShaderProgram.h>
+#include <glhl/base/WindowGL.h>
+#include <glhl/base/DriverGPU.h>
+#include <glhl/glsl/Shader.h>
+#include <glhl/glsl/ShaderProgram.h>
 
 using namespace GLHL;
 
