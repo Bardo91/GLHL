@@ -15,4 +15,4 @@ endif()
 # Library
 add_executable(testX11 ${TESTX11_SOURCE_FILES})
 target_include_directories(testX11 PUBLIC ../../src)
-target_link_libraries(testX11 glhl)
+target_link_libraries(testX11 LINK_PUBLIC glhl)

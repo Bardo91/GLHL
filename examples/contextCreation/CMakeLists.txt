@@ -15,4 +15,4 @@ endif()
 # Library
 add_executable(contextCreation ${CONTEXTCREATION_SOURCE_FILES})
 target_include_directories(contextCreation PUBLIC ../../src)
-target_link_libraries(contextCreation glhl)
+target_link_libraries(contextCreation LINK_PUBLIC glhl)

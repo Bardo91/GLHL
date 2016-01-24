@@ -1,16 +1,16 @@
  //// MAIN FILE TO TEST
 
 
-#include <src/core/base/WindowGL.h>
-#include <src/core/base/DriverGPU.h>
-#include <src/core/base/Texture.h>
-#include <src/core/base/FrameBuffer.h>
+#include <glhl/base/WindowGL.h>
+#include <glhl/base/DriverGPU.h>
+#include <glhl/base/Texture.h>
+#include <glhl/base/FrameBuffer.h>
 
-#include <src/core/glsl/ShaderProgram.h>
-#include <src/core/glsl/Shader.h>
-#include <src/core/types/Types.h>
+#include <glhl/glsl/ShaderProgram.h>
+#include <glhl/glsl/Shader.h>
+#include <glhl/types/Types.h>
 
-#include <src/core/utils/time/time.h>
+#include <glhl/utils/time/time.h>
 
 #include <array>
 #include <fstream>

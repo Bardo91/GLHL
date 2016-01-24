@@ -15,4 +15,4 @@ endif()
 # Library
 add_executable(particleFilter ${PARTICLEFILTER_SOURCE_FILES})
 target_include_directories(particleFilter PUBLIC ../../src)
-target_link_libraries(particleFilter glhl)
+target_link_libraries(particleFilter LINK_PUBLIC glhl)

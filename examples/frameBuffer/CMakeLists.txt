@@ -15,4 +15,4 @@ endif()
 # Library
 add_executable(frameBuffer ${FRAMEBUFFER_SOURCE_FILES})
 target_include_directories(frameBuffer PUBLIC ../../src)
-target_link_libraries(frameBuffer glhl)
+target_link_libraries(frameBuffer LINK_PUBLIC glhl)

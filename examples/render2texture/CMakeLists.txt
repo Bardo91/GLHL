@@ -15,4 +15,4 @@ endif()
 # Library
 add_executable(render2texture ${RENDER2TEXTURE_SOURCE_FILES})
 target_include_directories(render2texture PUBLIC ../../src)
-target_link_libraries(render2texture glhl)
+target_link_libraries(render2texture LINK_PUBLIC glhl)

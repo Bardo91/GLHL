@@ -1,6 +1,6 @@
  //// MAIN FILE TO TEST
 
-#include <core/utils/time/time.h>
+#include <glhl/utils/time/time.h>
 #include "SobelCPU.h"
 #include "SobelGPU.h"
 

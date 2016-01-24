@@ -219,5 +219,10 @@ void createWindow2(){
 
  
 }
+#else
+
+int main() {
+	std::cout << "This program can only be tested in environment with X system" << std::endl;
+}
 
 #endif	// __linux__

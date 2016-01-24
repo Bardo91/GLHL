@@ -1,12 +1,12 @@
  //// MAIN FILE TO TEST
 
 
-#include <src/core/WindowGL.h>
-#include <src/core/DriverGPU.h>
-#include <src/core/ShaderProgram.h>
-#include <src/core/Shader.h>
-#include <src/core/Texture.h>
-#include <src/core/FrameBuffer.h>
+#include <glhl/base/WindowGL.h>
+#include <glhl/base/DriverGPU.h>
+#include <glhl/glsl/ShaderProgram.h>
+#include <glhl/glsl/Shader.h>
+#include <glhl/base/Texture.h>
+#include <glhl/base/FrameBuffer.h>
 
 
 #include <fstream>
@@ -23,7 +23,7 @@ const unsigned int h = 480;
 unsigned char buf[w * h * 3];
 
 int main(void){
-	WindowGL * window = WindowGL::createWindow(640, 480);
+	WindowGL window("Frame Buffer Test", 640, 480);
 	
 	DriverGPU * driver = DriverGPU::get();
 
@@ -45,11 +45,11 @@ int main(void){
 
 	while(1){	
 		#if defined(_WIN32)
-		window->peekMessage();
+		window.peekMessage();
 		drawImage(tulipsTex, program);
 		#endif
 
-		window->swapBuffers();
+		window.swapBuffers();
 	}
 
 	//	delete window; 	Class has no destructor, undefined behaviour
@@ -66,7 +66,7 @@ void drawImage(const Texture &_texture, ShaderProgram _program) {
 	DriverGPU *driver = DriverGPU::get();
 
 	FrameBuffer frame;
-	Texture resTex(640, 480, eTexType::eRGB);			// 666 create empty texture. Constructor not implemented
+	Texture resTex(640, 480, eTexType::eRGB8);			// 666 create empty texture. Constructor not implemented
 	frame.attachTexture(resTex);
 
 
@@ -75,7 +75,7 @@ void drawImage(const Texture &_texture, ShaderProgram _program) {
 	texLoc = driver->getUniformLocation(_program, "texture");
 	driver->setUniform(texLoc, 0);
 	
-	frame.use();
+	frame.bind();
 	_program.use();
 
 	glBegin(GL_QUADS);

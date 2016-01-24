@@ -15,4 +15,4 @@ endif()
 # Library
 add_executable(loadTexture ${LOADTEXTURES_SOURCE_FILES})
 target_include_directories(loadTexture PUBLIC ../../src)
-target_link_libraries(loadTexture glhl)
+target_link_libraries(loadTexture LINK_PUBLIC glhl)

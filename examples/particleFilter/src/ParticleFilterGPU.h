@@ -12,12 +12,12 @@
 #define _GLHL_TEST_PARTICLE_FILTER_GPU_H_
 
 #include <vector>
-#include <core/base/FrameBuffer.h>
-#include <core/base/Texture.h>
-#include <core/types/Types.h>
+#include <glhl/base/FrameBuffer.h>
+#include <glhl/base/Texture.h>
+#include <glhl/types/Types.h>
 
-#include <core/glsl/Shader.h>
-#include <core/glsl/ShaderProgram.h>
+#include <glhl/glsl/Shader.h>
+#include <glhl/glsl/ShaderProgram.h>
 
 // Particle filter class
 class ParticleFilterGPU {
