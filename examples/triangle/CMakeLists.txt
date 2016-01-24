@@ -1,0 +1,23 @@
+cmake_minimum_required (VERSION 2.6)
+if(POLICY CMP0048)
+cmake_policy(SET CMP0048 OLD)
+endif()
+project(triangle)
+
+# Collect all sources
+file(GLOB_RECURSE TRIANGLE_SOURCE_FILES "src/*.cpp" "src/*.h" "src/*.inl")
+
+# Compiler specific options
+if(CMAKE_COMPILER_IS_GNUCXX)
+    add_definitions(-std=c++11)
+endif()
+
+find_path(GLEW_INCLUDE_DIR GL/glew.h HINTS "C:/glew/include")
+find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s PATH_SUFFIXES lib64 HINTS "C:/glew/lib/Release/x64")
+
+# Library
+add_executable(triangle ${TRIANGLE_SOURCE_FILES})
+target_include_directories(triangle PUBLIC ../../src)
+target_link_libraries(triangle glhl)
+target_link_libraries(triangle ${GLEW_LIBRARY})
+target_link_libraries(triangle OpenGL32 GLu32)
