@@ -19,5 +19,3 @@ find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s HINTS "C:/glew/lib/Rele
 add_executable(triangle ${TRIANGLE_SOURCE_FILES})
 target_include_directories(triangle PUBLIC ../../src)
 target_link_libraries(triangle LINK_PUBLIC glhl)
-target_link_libraries(triangle LINK_PUBLIC ${GLEW_LIBRARY})
-target_link_libraries(triangle LINK_PUBLIC OpenGL32 GLu32)
