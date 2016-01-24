@@ -33,11 +33,10 @@ endif()
 # Find the OpenGL Extension Wrangler Library (GLEW)
 #####find_package(GLEW REQUIRED) TODO: auto find_file
 find_path(GLEW_INCLUDE_DIR GL/glew.h HINTS "C:/glew/include")
-find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s PATH_SUFFIXES lib64 HINTS "C:/glew/lib/Release/x64")
+find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s HINTS "C:/glew/lib/Release/Win32")
 
 find_path(SOIL_INCLUDE_DIR soil.h HINTS "C:/soil")
 find_library(SOIL_LIBRARY NAMES soil HINTS "C:/soil")
-
 
 # Library
 add_library(glhl STATIC ${GLHL_SOURCE_FILES})
@@ -46,3 +45,4 @@ target_include_directories(glhl PUBLIC ${GLEW_INCLUDE_DIR})
 target_include_directories(glhl PUBLIC ${SOIL_INCLUDE_DIR})
 target_link_libraries(glhl ${GLEW_LIBRARY})
 target_link_libraries(glhl ${SOIL_LIBRARY})
+target_link_libraries(glhl opengl32 glu32)

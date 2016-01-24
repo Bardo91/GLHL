@@ -13,7 +13,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 find_path(GLEW_INCLUDE_DIR GL/glew.h HINTS "C:/glew/include")
-find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s PATH_SUFFIXES lib64 HINTS "C:/glew/lib/Release/x64")
+find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s HINTS "C:/glew/lib/Release/Win32")
 
 # Library
 add_executable(triangle ${TRIANGLE_SOURCE_FILES})
