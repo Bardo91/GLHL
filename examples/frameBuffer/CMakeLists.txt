@@ -16,3 +16,5 @@ endif()
 add_executable(frameBuffer ${FRAMEBUFFER_SOURCE_FILES})
 target_include_directories(frameBuffer PUBLIC ../../src)
 target_link_libraries(frameBuffer LINK_PUBLIC glhl)
+
+file(COPY "src/shaders" DESTINATION ${PROJECT_BINARY_DIR})

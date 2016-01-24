@@ -36,8 +36,8 @@ int main(void){
 
 	Texture tulipsTex("./Tulips.jpg");
 
-	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
-	Shader sobelShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
+	Shader vShader(eShaderType::eVertexShader, "shaders/flat.vertex");
+	Shader sobelShader(eShaderType::eFragmentShader, "shaders/sobel.fragment");
 
 	ShaderProgram program;
 

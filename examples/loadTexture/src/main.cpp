@@ -22,8 +22,8 @@ int main(void){
 	
 	DriverGPU * driver = DriverGPU::get();
 
-	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
-	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/flat.fragment");
+	Shader vShader(eShaderType::eVertexShader, "shaders/flat.vertex");
+	Shader fShader(eShaderType::eFragmentShader, "shaders/flat.fragment");
 
 	ShaderProgram program;
 

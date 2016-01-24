@@ -21,8 +21,8 @@ SobelGPU::SobelGPU(unsigned _width, unsigned _height): mWindow("Test Sobel", _wi
 	//Shader vShader(eShaderType::eVertexShader, "../../src/shaders/flat.vertex");
 	//Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobel.fragment");
 
-	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/sobelUp.vertex");
-	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/sobelUp.fragment");
+	Shader vShader(eShaderType::eVertexShader, "shaders/sobelUp.vertex");
+	Shader fShader(eShaderType::eFragmentShader, "shaders/sobelUp.fragment");
 
 	mProgram.attachShader(vShader);
 	mProgram.attachShader(fShader);

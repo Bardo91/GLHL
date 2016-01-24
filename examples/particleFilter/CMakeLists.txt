@@ -16,3 +16,5 @@ endif()
 add_executable(particleFilter ${PARTICLEFILTER_SOURCE_FILES})
 target_include_directories(particleFilter PUBLIC ../../src)
 target_link_libraries(particleFilter LINK_PUBLIC glhl)
+
+file(COPY "src/shaders" DESTINATION ${PROJECT_BINARY_DIR})

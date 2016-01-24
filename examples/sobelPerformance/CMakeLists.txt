@@ -16,3 +16,5 @@ endif()
 add_executable(sobelPerformance ${SOBELPERFORMANCE_SOURCE_FILES})
 target_include_directories(sobelPerformance PUBLIC ../../src)
 target_link_libraries(sobelPerformance LINK_PUBLIC glhl)
+
+file(COPY "src/shaders" DESTINATION ${PROJECT_BINARY_DIR})

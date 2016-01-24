@@ -49,8 +49,8 @@ void openGLThread(bool _draw, GLfloat _red){
 
 	DriverGPU *driver = DriverGPU::get();
 
-	Shader vShader(eShaderType::eVertexShader, "../../src/shaders/vTriangleShader.vertex");
-	Shader fShader(eShaderType::eFragmentShader, "../../src/shaders/fTriangleShader.fragment");
+	Shader vShader(eShaderType::eVertexShader, "shaders/vTriangleShader.vertex");
+	Shader fShader(eShaderType::eFragmentShader, "shaders/fTriangleShader.fragment");
 
 
 	ShaderProgram sProgram;

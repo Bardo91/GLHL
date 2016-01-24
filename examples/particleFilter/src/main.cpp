@@ -101,7 +101,7 @@ void particleFilterGPU() {
 	robot.setNoise(0.05, 0.05, 5.0);
 
 	// 666 TODO Relative path to vertex shader?
-	ParticleFilterGPU pfGPU(1000, "../../src/shaders/particleFilterShaderTemplate.fragment");
+	ParticleFilterGPU pfGPU(1000, "shaders/particleFilterShaderTemplate.fragment");
 	STime *sTime = STime::get();
 	double time = 0.0;
 	for (unsigned i = 0; i < 50; i++) {

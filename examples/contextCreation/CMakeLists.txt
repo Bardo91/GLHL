@@ -16,3 +16,5 @@ endif()
 add_executable(contextCreation ${CONTEXTCREATION_SOURCE_FILES})
 target_include_directories(contextCreation PUBLIC ../../src)
 target_link_libraries(contextCreation LINK_PUBLIC glhl)
+
+file(COPY "src/shaders" DESTINATION ${PROJECT_BINARY_DIR})

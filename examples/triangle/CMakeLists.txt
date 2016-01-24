@@ -19,3 +19,5 @@ find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s HINTS "C:/glew/lib/Rele
 add_executable(triangle ${TRIANGLE_SOURCE_FILES})
 target_include_directories(triangle PUBLIC ../../src)
 target_link_libraries(triangle LINK_PUBLIC glhl)
+
+file(COPY "src/shaders" DESTINATION ${PROJECT_BINARY_DIR})

@@ -16,3 +16,5 @@ endif()
 add_executable(render2texture ${RENDER2TEXTURE_SOURCE_FILES})
 target_include_directories(render2texture PUBLIC ../../src)
 target_link_libraries(render2texture LINK_PUBLIC glhl)
+
+file(COPY "src/shaders" DESTINATION ${PROJECT_BINARY_DIR})
